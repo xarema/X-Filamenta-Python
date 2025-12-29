@@ -1,0 +1,74 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Wizard upload result partial
+Description: Shows validation result for uploaded backup
+
+File: frontend/templates/pages/install/partials/upload.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): 2025-12-28T13:54:00+01:00 | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.4-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+
+- Status: Stable
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+<div class="card shadow-sm mb-3">
+  <div class="card-body text-center">
+    <h5 class="card-title mb-4">{{ t('wizard.backup.title') or 'Restauration de sauvegarde' }}</h5>
+
+    <div class="alert {{ 'alert-success' if ok else 'alert-danger' }} mx-auto" role="alert" style="max-width: 600px;">
+      {% if ok %}
+        <span class="fs-5">✅ {{ t('wizard.backup.ok') or 'Backup valide.' }}</span>
+        {% if state.backup_filename %}
+        <div class="small mt-2 text-muted">📁 {{ state.backup_filename }}</div>
+        {% endif %}
+      {% else %}
+        <span class="fs-5">❌ {{ message or t('wizard.backup.invalid') or 'Backup invalide' }}</span>
+      {% endif %}
+    </div>
+
+    <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+      {% if ok %}
+      <!-- Continuer vers admin_form -->
+      <form method="POST" action="/install/step"  >
+        <input type="hidden" name="step" value="admin_form" />
+        <button class="btn btn-primary btn-lg px-4" type="submit">
+          {{ t('wizard.continue') or 'Continuer' }} →
+        </button>
+      </form>
+      <!-- Retirer le backup -->
+      <form method="POST" action="/install/step"  >
+        <input type="hidden" name="step" value="remove_backup" />
+        <button class="btn btn-outline-danger btn-lg px-4" type="submit">
+          {{ t('wizard.backup.remove') or 'Retirer le backup' }}
+        </button>
+      </form>
+      {% else %}
+      <!-- Réessayer -->
+      <form method="POST" action="/install/step"  >
+        <input type="hidden" name="step" value="upload_form" />
+        <button class="btn btn-warning btn-lg px-4" type="submit">
+          {{ t('wizard.retry') or 'Réessayer' }}
+        </button>
+      </form>
+      <!-- Continuer sans backup -->
+      <form method="POST" action="/install/step"  >
+        <input type="hidden" name="step" value="admin_form" />
+        <button class="btn btn-outline-secondary btn-lg px-4" type="submit">
+          {{ t('wizard.skip_backup') or 'Continuer sans backup' }}
+        </button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</div>

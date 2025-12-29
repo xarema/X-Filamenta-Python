@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 📚 PLAN D'ORGANISATION DE LA DOCUMENTATION">
+    <title>📚 PLAN D'ORGANISATION DE LA DOCUMENTATION - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="plan-dorganisation-de-la-documentation">📚 PLAN D'ORGANISATION DE LA DOCUMENTATION</h1>
+<p><strong>Date</strong> : 2025-12-28T23:00:00+01:00</p>
+<h2 id="structure-cible">🎯 STRUCTURE CIBLE</h2>
+<div class="highlight"><pre><span></span><code>docs/
+├── README.md                          # Index principal
+├── 00_START_HERE.md                   # Entry point (NOUVEAU)
+├── CHANGELOG.md                       # (LIEN depuis racine)
+│
+├── guides/
+│   ├── README.md                      # Index des guides
+│   ├── 01_QUICKSTART.md               # Démarrage rapide (fusionné)
+│   ├── 02_INSTALLATION.md             # Installation détaillée
+│   ├── 03_CONFIGURATION.md            # Configuration
+│   └── 04_DEVELOPMENT.md              # Guide développement
+│
+├── features/
+│   ├── README.md                      # Index des fonctionnalités (NOUVEAU)
+│   ├── authentication.md              # Auth, 2FA, CSRF
+│   ├── wizard-installation.md         # Wizard d&#39;installation
+│   ├── internationalization.md        # i18n multilingue
+│   └── database.md                    # Support multi-BD
+│
+├── deployment/
+│   ├── README.md                      # Index déploiement
+│   ├── 01_CPANEL.md                   # cPanel
+│   ├── 02_VPS_LINUX.md                # VPS/Linux
+│   ├── 03_DOCKER.md                   # Docker
+│   └── 04_LOCAL_DEVELOPMENT.md        # Développement local
+│
+├── architecture/
+│   ├── README.md                      # Index architecture
+│   ├── overview.md                    # Vue d&#39;ensemble (fusionné)
+│   ├── frontend.md                    # Frontend (HTMX + Bootstrap)
+│   ├── backend.md                     # Backend (Flask)
+│   ├── database.md                    # Base de données
+│   └── wsgi_multidb.md                # WSGI et multi-BD
+│
+├── api/
+│   ├── README.md                      # Index API
+│   ├── endpoints.md                   # Endpoints disponibles
+│   ├── authentication.md              # API Auth
+│   └── errors.md                      # Codes d&#39;erreur
+│
+├── security/
+│   ├── README.md                      # Index sécurité (NOUVEAU)
+│   ├── best-practices.md              # Bonnes pratiques
+│   ├── csrf-protection.md             # Protection CSRF
+│   ├── 2fa.md                         # Authentification 2FA
+│   └── secrets-management.md          # Gestion des secrets
+│
+├── contributing/
+│   ├── README.md                      # Index contribution (NOUVEAU)
+│   ├── code-standards.md              # Standards de code
+│   ├── testing.md                     # Tests
+│   └── release-process.md             # Processus de release
+│
+├── troubleshooting/
+│   ├── README.md                      # Index troubleshooting (NOUVEAU)
+│   ├── common-issues.md               # Problèmes courants
+│   └── faq.md                         # FAQ (NOUVEAU)
+│
+├── screenshots/
+│   └── [images organisées par section]
+│
+└── REFERENCE.md                       # Référence complète (NOUVEAU)
+</code></pre></div>
+
+<h2 id="fichiers-a-fusionnerarchiver">📋 FICHIERS À FUSIONNER/ARCHIVER</h2>
+<h3 id="fusionner-dans-features">Fusionner dans <code>features/</code>:</h3>
+<ul>
+<li>❌ <code>FEATURES_COMPLETE.md</code> → <code>features/README.md</code></li>
+<li>❌ <code>FEATURES_INVENTORY.md</code> → <code>features/README.md</code></li>
+<li>❌ <code>FEATURES_QUICK.md</code> → <code>features/README.md</code></li>
+<li>❌ <code>FEATURES_QUICK_OVERVIEW.md</code> → <code>features/README.md</code></li>
+<li>❌ <code>WIZARD_ADDITION.md</code> → <code>features/wizard-installation.md</code></li>
+<li>❌ <code>WIZARD_DOCUMENTATION.md</code> → <code>features/wizard-installation.md</code></li>
+</ul>
+<h3 id="fusionner-dans-deployment">Fusionner dans <code>deployment/</code>:</h3>
+<ul>
+<li>❌ <code>DEPLOYMENT.md</code> → <code>deployment/README.md</code></li>
+<li>❌ <code>DEPLOYMENT_CPANEL.md</code> → <code>deployment/01_CPANEL.md</code></li>
+<li>❌ <code>DEPLOYMENT_VPS.md</code> → <code>deployment/02_VPS_LINUX.md</code></li>
+<li>❌ <code>DEPLOYMENT_DOCKER.md</code> → <code>deployment/03_DOCKER.md</code></li>
+</ul>
+<h3 id="fusionner-dans-architecture">Fusionner dans <code>architecture/</code>:</h3>
+<ul>
+<li>❌ <code>DATABASE.md</code> → <code>architecture/database.md</code></li>
+<li>❌ <code>WSGI_AND_MULTIDB_ADAPTATION.md</code> → <code>architecture/wsgi_multidb.md</code></li>
+</ul>
+<h3 id="archiver-dans-docsarchives">Archiver dans <code>docs/archives/</code>:</h3>
+<ul>
+<li>❌ <code>RC_RELEASE_NOTES.md</code> → <code>archives/RC_RELEASE_NOTES.md</code></li>
+<li>❌ <code>CHANGELOG_GUIDE.md</code> → <code>archives/CHANGELOG_GUIDE.md</code></li>
+<li>❌ Tous les fichiers <code>reports/</code> → <code>archives/reports/</code></li>
+<li>❌ Tous les fichiers <code>sessions/</code> → <code>archives/sessions/</code></li>
+</ul>
+<h3 id="supprimer">Supprimer:</h3>
+<ul>
+<li>❌ <code>UI_UX_QUICKSTART.md</code> (à intégrer dans guides)</li>
+<li>❌ <code>UI_UX_STACK.md</code> (à intégrer dans architecture)</li>
+</ul>
+<h2 id="implementation">🚀 IMPLÉMENTATION</h2>
+<ol>
+<li>✅ Créer structure de dossiers</li>
+<li>✅ Créer fichiers README de chaque section</li>
+<li>✅ Créer fichiers contenu unifiés</li>
+<li>✅ Créer entry point <code>00_START_HERE.md</code></li>
+<li>✅ Créer <code>REFERENCE.md</code> complet</li>
+<li>✅ Archiver fichiers obsolètes</li>
+<li>✅ Mettre à jour tous les liens</li>
+<li>✅ Mettre à jour README racine</li>
+</ol>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

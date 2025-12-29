@@ -1,0 +1,138 @@
+# ============================================================================
+# .gitignore — X-Filamenta-Python
+# ============================================================================
+# Prevents accidental commits of unwanted files and directories
+# Update this file when adding new development tools or build artifacts
+# ============================================================================
+
+# Python — Virtual Environments, Package Artifacts, Caches
+# ============================================================================
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+
+# Node.js — Package Manager & Dependencies
+# ============================================================================
+node_modules/
+npm-debug.log*
+npm-error.log*
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# IDE & Editor Configuration
+# ============================================================================
+.idea/
+.vscode/
+.vscode-settings.json
+*.iml
+*.sublime-project
+*.sublime-workspace
+.netbeans/
+
+# Operating System Files
+# ============================================================================
+.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Environment Variables & Secrets (NEVER commit .env)
+# ============================================================================
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Database & Instance Files
+# ============================================================================
+instance/
+instance/*.db
+!instance/.gitkeep
+migrations/versions/
+*.sqlite
+*.sqlite3
+
+# Development & Debug Artifacts
+# ============================================================================
+*.log
+app_debug.log
+server_log.log
+test_output.txt
+test_schema_output.txt
+test_access.py
+test_create_schema*.py
+test_schema*.py
+test_wizard*.py
+output.txt
+check_db.py
+# Fichiers de test temporaires à la racine
+test_*.py
+test_*.txt
+# Screenshots temporaires
+.SCREENSHOTS/
+Screenshot*.png
+*.tmp
+*.temp
+
+# Development Scripts & Testing Artifacts
+# ============================================================================
+# Note: .dev_scripts/ is intentionally NOT ignored to preserve dev tools
+#       All files in .dev_scripts/ will be tracked in git for team sharing
+# .dev_scripts/ — TRACKED (contains shared dev scripts, test tools)
+# However, large outputs/logs inside can be ignored:
+.dev_scripts/**/*.log
+.dev_scripts/**/*.tmp
+.dev_scripts/**/output/
+
+# Git History & Maintenance
+# ============================================================================
+.python-version
+.shellcommands
+
+# Analysis & Reporting (Generated, should be in git for history)
+# ============================================================================
+# Note: Analysis_reports/ is intentionally listed but NOT ignored
+#       to preserve audit trail and investigation history
+# Uncomment if you want to exclude these reports:
+# Analysis_reports/
+
+# Jupyter & Interactive Notebooks
+# ============================================================================
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Generic Caches
+# ============================================================================
+.cache/
+*.cache
+
+# OS-Specific Artifacts
+# ============================================================================
+.AppleDouble/
+.LSOverride/
+._*
+
+# ============================================================================
+# Keep any repo-critical files:
+# .gitkeep in empty directories
+# .env.example as template
+# ============================================================================

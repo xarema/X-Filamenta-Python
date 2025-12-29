@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - PLAN DE CORRECTION COMPLET - 2025-12-28 17:50">
+    <title>PLAN DE CORRECTION COMPLET - 2025-12-28 17:50 - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="plan-de-correction-complet-2025-12-28-1750">PLAN DE CORRECTION COMPLET - 2025-12-28 17:50</h1>
+<h2 id="problemes-identifies-par-lutilisateur">PROBLÈMES IDENTIFIÉS (PAR L'UTILISATEUR)</h2>
+<ol>
+<li>❌ Prérequis PIP skip mais affiché</li>
+<li>❌ Script sécuritaire ? À vérifier</li>
+<li>❌ Message erreur page DB: "wizard.db.error" (clé i18n)</li>
+<li>❌ Messages champs vides en anglais</li>
+<li>❌ Boutons l'un sous l'autre (doivent être sur même ligne)</li>
+<li>❌ Backup validé mais fichier.tar.gz vide</li>
+<li>❌ Variables vides dans templates (texte direct au lieu de i18n)</li>
+<li>❌ Page done: pas de confirmation tables backup installées</li>
+<li>❌ /install/verify-db = 404</li>
+</ol>
+<h2 id="actions-a-prendre-dans-lordre">ACTIONS À PRENDRE (DANS L'ORDRE)</h2>
+<h3 id="1-creer-fichier-de-langue-fr-complet">1. CRÉER FICHIER DE LANGUE FR COMPLET</h3>
+<ul>
+<li>backend/src/translations/fr.json</li>
+<li>Toutes les clés wizard.* utilisées dans templates</li>
+<li>Pas de texte en dur dans templates</li>
+</ul>
+<h3 id="2-corriger-route-installverify-db-404">2. CORRIGER ROUTE /install/verify-db (404)</h3>
+<ul>
+<li>Vérifier que route est bien enregistrée</li>
+<li>Vérifier before_request ne bloque pas</li>
+</ul>
+<h3 id="3-corriger-messages-erreur-db">3. CORRIGER MESSAGES ERREUR DB</h3>
+<ul>
+<li>db_form.html: utiliser clés i18n</li>
+<li>db_test.html: utiliser clés i18n</li>
+<li>admin_form.html: validation champs</li>
+</ul>
+<h3 id="4-corriger-boutons-meme-ligne">4. CORRIGER BOUTONS (MÊME LIGNE)</h3>
+<ul>
+<li>done.html: flexbox ou inline-block</li>
+</ul>
+<h3 id="5-corriger-validation-backup">5. CORRIGER VALIDATION BACKUP</h3>
+<ul>
+<li>Vérifier que fichier n'est pas vide</li>
+<li>Afficher taille fichier</li>
+<li>Vérifier contenu (tar.gz doit avoir fichiers)</li>
+</ul>
+<h3 id="6-corriger-page-done">6. CORRIGER PAGE DONE</h3>
+<ul>
+<li>Afficher si backup restauré</li>
+<li>Afficher tables du backup</li>
+<li>Afficher nombre enregistrements restaurés</li>
+</ul>
+<h3 id="7-retirer-pip-des-prerequis">7. RETIRER PIP DES PRÉREQUIS</h3>
+<ul>
+<li>requirements.html: ne pas afficher pip</li>
+</ul>
+<h3 id="8-audit-securite">8. AUDIT SÉCURITÉ</h3>
+<ul>
+<li>Validation inputs</li>
+<li>Pas de SQL injection</li>
+<li>Pas de path traversal</li>
+<li>CSRF tokens</li>
+</ul>
+<h2 id="fichiers-a-modifier">FICHIERS À MODIFIER</h2>
+<ol>
+<li>backend/src/translations/fr.json (CRÉER)</li>
+<li>backend/src/routes/install.py (verify-db)</li>
+<li>frontend/templates/pages/install/partials/db_form.html</li>
+<li>frontend/templates/pages/install/partials/db_test.html</li>
+<li>frontend/templates/pages/install/partials/admin_form.html</li>
+<li>frontend/templates/pages/install/partials/done.html</li>
+<li>frontend/templates/pages/install/partials/requirements.html</li>
+<li>backend/src/services/install_service.py (backup validation)</li>
+</ol>
+<h2 id="regles-a-suivre">RÈGLES À SUIVRE</h2>
+<p>✅ Lire .github/copilot-instructions.md AVANT toute modif<br />
+✅ Lire .github/ROUTE_CHANGE_RULES.md AVANT modif routes<br />
+✅ Utiliser UNIQUEMENT clés i18n (pas texte direct)<br />
+✅ Tester en DEV puis PROD<br />
+✅ Ne PAS refaire erreurs précédentes<br />
+✅ Suivre le plan étape par étape</p>
+<h2 id="debut-des-corrections">DÉBUT DES CORRECTIONS</h2>
+<p>Date: 2025-12-28 17:50</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

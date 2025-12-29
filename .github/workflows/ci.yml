@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - run: python -m venv .venv
+      - run: ./.venv/bin/pip install -r requirements.txt -r requirements-dev.txt
+
+      - run: ./.venv/bin/ruff check .
+      - run: ./.venv/bin/ruff format --check .
+      - run: ./.venv/bin/mypy backend/src
+      - run: ./.venv/bin/pytest
+
+      - run: ./.venv/bin/pip-audit
+        continue-on-error: true
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - run: npm ci
+      - run: npm run -s fmt -- --check
+      - run: npm run -s lint

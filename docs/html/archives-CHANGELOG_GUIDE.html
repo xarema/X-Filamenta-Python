@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Guide Rapide — CHANGELOG">
+    <title>Guide Rapide — CHANGELOG - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="guide-rapide-changelog">Guide Rapide — CHANGELOG</h1>
+<p><strong>Projet:</strong> X-Filamenta-Python<br />
+<strong>Standard:</strong> Keep a Changelog + Semantic Versioning</p>
+<hr />
+<h2 id="quand-mettre-a-jour-le-changelog">📋 Quand Mettre à Jour le CHANGELOG ?</h2>
+<p><strong>TOUJOURS</strong> lors de :</p>
+<ul>
+<li>✅ Nouvelle fonctionnalité</li>
+<li>✅ Correction de bug</li>
+<li>✅ Changement de comportement</li>
+<li>✅ Suppression de fonctionnalité</li>
+<li>✅ Correctif de sécurité</li>
+<li>✅ Bump de version</li>
+</ul>
+<hr />
+<h2 id="categories-disponibles">🏷️ Catégories Disponibles</h2>
+<table>
+<thead>
+<tr>
+<th>Catégorie</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Added</code></td>
+<td>Nouvelles fonctionnalités</td>
+</tr>
+<tr>
+<td><code>Changed</code></td>
+<td>Changements dans fonctionnalités existantes</td>
+</tr>
+<tr>
+<td><code>Deprecated</code></td>
+<td>Fonctionnalités bientôt supprimées</td>
+</tr>
+<tr>
+<td><code>Removed</code></td>
+<td>Fonctionnalités supprimées</td>
+</tr>
+<tr>
+<td><code>Fixed</code></td>
+<td>Corrections de bugs</td>
+</tr>
+<tr>
+<td><code>Security</code></td>
+<td>Vulnérabilités corrigées</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="format-dentree">✍️ Format d'Entrée</h2>
+<div class="highlight"><pre><span></span><code><span class="gu">### &lt;Catégorie&gt;</span>
+
+<span class="k">-</span><span class="w"> </span>Description concise du changement (#issue)
+<span class="k">-</span><span class="w"> </span>Autre changement avec contexte
+</code></pre></div>
+
+<p><strong>Exemples :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="gu">### Added</span>
+
+<span class="k">-</span><span class="w"> </span>User authentication with JWT tokens (#42)
+<span class="k">-</span><span class="w"> </span>Export to PDF feature for reports
+
+<span class="gu">### Fixed</span>
+
+<span class="k">-</span><span class="w"> </span>Fix pagination bug when results &lt; page size (#38)
+<span class="k">-</span><span class="w"> </span>Correct timezone handling in date filters
+
+<span class="gu">### Changed</span>
+
+<span class="k">-</span><span class="w"> </span><span class="gs">**BREAKING:**</span> Renamed <span class="sb">`/api/users`</span> to <span class="sb">`/api/v2/users`</span>
+  Migration: Update all API calls to use new endpoint
+</code></pre></div>
+
+<hr />
+<h2 id="workflow-de-developpement">🔄 Workflow de Développement</h2>
+<h3 id="en-developpement">En Développement</h3>
+<p>Ajouter dans la section <code>[Unreleased]</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="gu">## [Unreleased]</span>
+
+<span class="gu">### Added</span>
+
+<span class="k">-</span><span class="w"> </span>Ma nouvelle feature
+
+<span class="gu">### Fixed</span>
+
+<span class="k">-</span><span class="w"> </span>Mon bug fix
+</code></pre></div>
+
+<h3 id="a-la-release">À la Release</h3>
+<ol>
+<li>Déplacer contenu <code>[Unreleased]</code> vers nouvelle version</li>
+<li>Créer section avec version et date :</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="gu">## [0.2.0] - 2025-12-28</span>
+
+<span class="gu">### Added</span>
+
+<span class="k">-</span><span class="w"> </span>Ma nouvelle feature
+
+<span class="gu">### Fixed</span>
+
+<span class="k">-</span><span class="w"> </span>Mon bug fix
+</code></pre></div>
+
+<ol start="3">
+<li>Créer section <code>[Unreleased]</code> vide</li>
+<li>Mettre à jour versions :<br />
+   - <code>pyproject.toml</code><br />
+   - <code>package.json</code><br />
+   - File headers</li>
+<li>Commit : <code>chore: release v0.2.0</code></li>
+</ol>
+<hr />
+<h2 id="breaking-changes">⚠️ Breaking Changes</h2>
+<p><strong>Format obligatoire :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="gu">### Changed</span>
+
+<span class="k">-</span><span class="w"> </span><span class="gs">**BREAKING:**</span> Description du changement
+  Migration: Étapes pour migrer
+  Impact: Qui est affecté
+</code></pre></div>
+
+<p><strong>Règles :</strong></p>
+<ul>
+<li>✅ Préfixe <code>**BREAKING:**</code> en gras</li>
+<li>✅ Guide de migration</li>
+<li>✅ Bump MAJOR version (sauf pre-1.0.0)</li>
+</ul>
+<hr />
+<h2 id="security-fixes">🔒 Security Fixes</h2>
+<p><strong>Format obligatoire :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="gu">### Security</span>
+
+<span class="k">-</span><span class="w"> </span>Fix &lt;description&gt; [SECURITY] (CVE-XXXX-YYYY)
+  Affects: v0.1.0 to v0.2.3
+  Severity: HIGH/MEDIUM/LOW
+</code></pre></div>
+
+<p><strong>Règles :</strong></p>
+<ul>
+<li>✅ Tag <code>[SECURITY]</code></li>
+<li>✅ CVE si applicable</li>
+<li>✅ Versions affectées</li>
+<li>✅ Niveau de sévérité</li>
+</ul>
+<hr />
+<h2 id="a-eviter">❌ À Éviter</h2>
+<ul>
+<li>❌ Temps passé : "Add feature" → ✅ "Added feature"</li>
+<li>❌ Refactoring interne (sauf impact utilisateur)</li>
+<li>❌ Duplication de commits git</li>
+<li>❌ Catégories vides dans le CHANGELOG</li>
+<li>❌ Oublier de mettre à jour avant release</li>
+</ul>
+<hr />
+<h2 id="template-rapide">🎯 Template Rapide</h2>
+<p>Copier-coller dans <code>CHANGELOG.md</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="gu">## [Unreleased]</span>
+
+<span class="gu">### Added</span>
+
+-
+
+<span class="gu">### Changed</span>
+
+-
+
+<span class="gu">### Fixed</span>
+
+-
+
+<span class="gu">### Security</span>
+
+-
+</code></pre></div>
+
+<hr />
+<h2 id="liens-utiles">📚 Liens Utiles</h2>
+<ul>
+<li><a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a></li>
+<li><a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a></li>
+<li>Règles complètes : <code>.github/copilot-instructions.md</code> (Section 15)</li>
+</ul>
+<hr />
+<p><strong>Rappel :</strong> Le CHANGELOG est pour les <strong>utilisateurs</strong>, pas pour les développeurs.<br />
+Focalisez sur l'<strong>impact</strong> et la <strong>clarté</strong>, pas sur les détails techniques.</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Déploiement avec Docker — X-Filamenta-Python">
+    <title>Déploiement avec Docker — X-Filamenta-Python - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="deploiement-avec-docker-x-filamenta-python">Déploiement avec Docker — X-Filamenta-Python</h1>
+<h2 id="prerequis">📋 Prérequis</h2>
+<ul>
+<li><strong>Docker</strong> 20.10+</li>
+<li><strong>Docker Compose</strong> 2.0+</li>
+<li><strong>Port 80 et 443</strong> disponibles (ou NAT/reverse proxy)</li>
+<li><strong>10 GB d'espace disque</strong> minimum</li>
+</ul>
+<hr />
+<h2 id="installation-rapide">🚀 Installation rapide</h2>
+<h3 id="1-cloner-le-depot">1. Cloner le dépôt</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/xarema/X-Filamenta-Python.git
+<span class="nb">cd</span><span class="w"> </span>X-Filamenta-Python
+</code></pre></div>
+
+<h3 id="2-configurer-lenvironnement">2. Configurer l'environnement</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Copier le fichier d&#39;exemple</span>
+cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+
+<span class="c1"># Éditer la configuration</span>
+nano<span class="w"> </span>.env
+</code></pre></div>
+
+<p><strong>Configuration minimale pour Docker</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Flask</span>
+<span class="nv">FLASK_ENV</span><span class="o">=</span>docker
+<span class="nv">FLASK_SECRET_KEY</span><span class="o">=</span>your-very-long-random-secret-key-here-change-me
+
+<span class="c1"># Database (MySQL par défaut)</span>
+<span class="nv">DB_TYPE</span><span class="o">=</span>mysql
+<span class="nv">DB_USER</span><span class="o">=</span>filamenta
+<span class="nv">DB_PASSWORD</span><span class="o">=</span>your-strong-password
+<span class="nv">DB_HOST</span><span class="o">=</span>db
+<span class="nv">DB_NAME</span><span class="o">=</span>filamenta_db
+
+<span class="c1"># MySQL</span>
+<span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>root-password-change-me
+
+<span class="c1"># Security</span>
+<span class="nv">SECURE_SSL_REDIRECT</span><span class="o">=</span>True
+<span class="nv">PREFERRED_URL_SCHEME</span><span class="o">=</span>https
+</code></pre></div>
+
+<h3 id="3-demarrer-les-conteneurs">3. Démarrer les conteneurs</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Démarrer en arrière-plan</span>
+docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+
+<span class="c1"># Ou en mode foreground (pour voir les logs)</span>
+docker-compose<span class="w"> </span>up
+
+<span class="c1"># Vérifier le statut</span>
+docker-compose<span class="w"> </span>ps
+</code></pre></div>
+
+<h3 id="4-initialiser-la-base-de-donnees">4. Initialiser la base de données</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Exécuter les migrations (si disponibles)</span>
+docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from backend.src.app import create_app, db; \</span>
+<span class="s2">                                    app = create_app(); \</span>
+<span class="s2">                                    with app.app_context(): \</span>
+<span class="s2">                                        db.create_all(); \</span>
+<span class="s2">                                        print(&#39;Database initialized!&#39;)&quot;</span>
+</code></pre></div>
+
+<h3 id="5-acceder-a-lapplication">5. Accéder à l'application</h3>
+<div class="highlight"><pre><span></span><code>https://your-domain.com
+http://localhost:8000 (local, sans SSL)
+</code></pre></div>
+
+<hr />
+<h2 id="configuration-avancee">🔧 Configuration avancée</h2>
+<h3 id="utiliser-postgresql-au-lieu-de-mysql">Utiliser PostgreSQL au lieu de MySQL</h3>
+<p>Modifier <code>docker-compose.yml</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:15-alpine</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">filamenta_db</span>
+<span class="w">      </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">filamenta</span>
+<span class="w">      </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${DB_PASSWORD}</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres-data:/var/lib/postgresql/data</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">postgres-data</span><span class="p">:</span>
+</code></pre></div>
+
+<p>Mettre à jour <code>.env</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="nv">DB_TYPE</span><span class="o">=</span>postgresql
+<span class="nv">DB_USER</span><span class="o">=</span>filamenta
+<span class="nv">DB_PASSWORD</span><span class="o">=</span>your-password
+<span class="nv">DB_HOST</span><span class="o">=</span>db
+<span class="nv">DB_NAME</span><span class="o">=</span>filamenta_db
+<span class="nv">DB_PORT</span><span class="o">=</span><span class="m">5432</span>
+</code></pre></div>
+
+<h3 id="ajouter-redis-pour-le-caching">Ajouter Redis pour le caching</h3>
+<p>Décommenter dans <code>docker-compose.yml</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">redis</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis:7-alpine</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;6379:6379&quot;</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">filamenta-network</span>
+</code></pre></div>
+
+<p>Puis dans l'application Flask :</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask_caching</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cache</span>
+
+<span class="n">cache</span> <span class="o">=</span> <span class="n">Cache</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;CACHE_TYPE&#39;</span><span class="p">:</span> <span class="s1">&#39;redis&#39;</span><span class="p">,</span> <span class="s1">&#39;CACHE_REDIS_URL&#39;</span><span class="p">:</span> <span class="s1">&#39;redis://redis:6379/0&#39;</span><span class="p">})</span>
+</code></pre></div>
+
+<h3 id="configurer-https-avec-lets-encrypt">Configurer HTTPS avec Let's Encrypt</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Créer les répertoires</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>certbot/conf<span class="w"> </span>certbot/www
+
+<span class="c1"># Générer le certificat</span>
+docker-compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>certbot<span class="w"> </span>certonly<span class="w"> </span>--webroot<span class="w"> </span>-w<span class="w"> </span>/var/www/certbot<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span>your-domain.com<span class="w"> </span>-d<span class="w"> </span>www.your-domain.com<span class="w"> </span>--email<span class="w"> </span>your-email@example.com
+
+<span class="c1"># Editer nginx.conf avec votre domaine</span>
+nano<span class="w"> </span>nginx.conf
+
+<span class="c1"># Redémarrer Nginx</span>
+docker-compose<span class="w"> </span>restart<span class="w"> </span>nginx
+
+<span class="c1"># Vérifier le certificat</span>
+docker-compose<span class="w"> </span>logs<span class="w"> </span>certbot
+</code></pre></div>
+
+<hr />
+<h2 id="gestion-des-conteneurs">📊 Gestion des conteneurs</h2>
+<h3 id="voir-les-logs">Voir les logs</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Tous les logs</span>
+docker-compose<span class="w"> </span>logs<span class="w"> </span>-f
+
+<span class="c1"># Logs spécifiques</span>
+docker-compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>web
+docker-compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>db
+docker-compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>nginx
+</code></pre></div>
+
+<h3 id="executer-des-commandes-dans-un-conteneur">Exécuter des commandes dans un conteneur</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Shell interactif</span>
+docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>bash
+
+<span class="c1"># Commande directe</span>
+docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;Hello&#39;)&quot;</span>
+
+<span class="c1"># Accès à MySQL</span>
+docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>db<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>filamenta<span class="w"> </span>-p<span class="w"> </span>filamenta_db
+</code></pre></div>
+
+<h3 id="redemarrer-les-services">Redémarrer les services</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Tous les services</span>
+docker-compose<span class="w"> </span>restart
+
+<span class="c1"># Service spécifique</span>
+docker-compose<span class="w"> </span>restart<span class="w"> </span>web
+docker-compose<span class="w"> </span>restart<span class="w"> </span>db
+
+<span class="c1"># Recharger la configuration</span>
+docker-compose<span class="w"> </span>restart<span class="w"> </span>nginx
+</code></pre></div>
+
+<h3 id="arreter-les-services">Arrêter les services</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Arrêt gracieux</span>
+docker-compose<span class="w"> </span>stop
+
+<span class="c1"># Arrêt forcé</span>
+docker-compose<span class="w"> </span><span class="nb">kill</span>
+
+<span class="c1"># Arrêt et suppression des conteneurs</span>
+docker-compose<span class="w"> </span>down
+
+<span class="c1"># Arrêt avec suppression des volumes</span>
+docker-compose<span class="w"> </span>down<span class="w"> </span>-v
+</code></pre></div>
+
+<hr />
+<h2 id="gestion-des-donnees">📦 Gestion des données</h2>
+<h3 id="backup-de-la-base-de-donnees">Backup de la base de données</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># MySQL</span>
+docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>db<span class="w"> </span>mysqldump<span class="w"> </span>-u<span class="w"> </span>filamenta<span class="w"> </span>-p<span class="w"> </span>filamenta_db<span class="w"> </span>&gt;<span class="w"> </span>backup.sql
+
+<span class="c1"># PostgreSQL</span>
+docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>db<span class="w"> </span>pg_dump<span class="w"> </span>-U<span class="w"> </span>filamenta<span class="w"> </span>filamenta_db<span class="w"> </span>&gt;<span class="w"> </span>backup.sql
+</code></pre></div>
+
+<h3 id="restore-dune-sauvegarde">Restore d'une sauvegarde</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># MySQL</span>
+docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>db<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>filamenta<span class="w"> </span>-p<span class="w"> </span>filamenta_db<span class="w"> </span>&lt;<span class="w"> </span>backup.sql
+
+<span class="c1"># PostgreSQL</span>
+docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>db<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>filamenta<span class="w"> </span>filamenta_db<span class="w"> </span>&lt;<span class="w"> </span>backup.sql
+</code></pre></div>
+
+<h3 id="volumes-persistants">Volumes persistants</h3>
+<p>Les données sont sauvegardées dans :</p>
+<ul>
+<li><code>mysql-data</code> volume (pour MySQL)</li>
+<li><code>postgres-data</code> volume (pour PostgreSQL)</li>
+</ul>
+<p>Pour voir les volumes :</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>ls
+docker<span class="w"> </span>volume<span class="w"> </span>inspect<span class="w"> </span>filamenta_mysql-data
+</code></pre></div>
+
+<hr />
+<h2 id="deploiement-en-production">🚀 Déploiement en production</h2>
+<h3 id="1-utiliser-un-registre-docker-prive">1. Utiliser un registre Docker privé</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Construire l&#39;image</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>registry.example.com/filamenta:latest<span class="w"> </span>.
+
+<span class="c1"># Pousser l&#39;image</span>
+docker<span class="w"> </span>push<span class="w"> </span>registry.example.com/filamenta:latest
+
+<span class="c1"># Utiliser dans docker-compose.yml</span>
+services:
+<span class="w">  </span>web:
+<span class="w">    </span>image:<span class="w"> </span>registry.example.com/filamenta:latest
+</code></pre></div>
+
+<h3 id="2-configurer-le-reverse-proxy-nginx-en-dehors-de-docker">2. Configurer le reverse proxy (Nginx en dehors de Docker)</h3>
+<div class="highlight"><pre><span></span><code><span class="k">upstream</span><span class="w"> </span><span class="s">filamenta</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">server</span><span class="w"> </span><span class="n">localhost</span><span class="p">:</span><span class="mi">8000</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">443</span><span class="w"> </span><span class="s">ssl</span><span class="w"> </span><span class="s">http2</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">your-domain.com</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">ssl_certificate</span><span class="w"> </span><span class="s">/etc/letsencrypt/live/your-domain.com/fullchain.pem</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">ssl_certificate_key</span><span class="w"> </span><span class="s">/etc/letsencrypt/live/your-domain.com/privkey.pem</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://filamenta</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$host</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Real-IP</span><span class="w"> </span><span class="nv">$remote_addr</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-For</span><span class="w"> </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-Proto</span><span class="w"> </span><span class="nv">$scheme</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="3-mettre-a-jour-lapplication">3. Mettre à jour l'application</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Pousser les changements</span>
+git<span class="w"> </span>push
+
+<span class="c1"># Tirer la dernière version</span>
+git<span class="w"> </span>pull
+
+<span class="c1"># Reconstruire et redémarrer</span>
+docker-compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--build
+</code></pre></div>
+
+<hr />
+<h2 id="securite">🔒 Sécurité</h2>
+<h3 id="generer-une-cle-secrete">Générer une clé secrète</h3>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import secrets; print(secrets.token_hex(32))&quot;</span>
+</code></pre></div>
+
+<h3 id="limiter-lacces-aux-ports">Limiter l'accès aux ports</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ne pas exposer les ports de la BD au monde</span>
+<span class="c1"># docker-compose.yml : Ne pas publier les ports de `db`</span>
+
+<span class="c1"># Utiliser un firewall</span>
+sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">80</span>/tcp
+sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">443</span>/tcp
+sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">22</span>/tcp
+sudo<span class="w"> </span>ufw<span class="w"> </span><span class="nb">enable</span>
+</code></pre></div>
+
+<h3 id="audit-de-securite">Audit de sécurité</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Vérifier les images pour les CVE</span>
+docker<span class="w"> </span>scan<span class="w"> </span>filamenta:latest
+
+<span class="c1"># Vérifier les logs</span>
+docker-compose<span class="w"> </span>logs<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>error
+docker-compose<span class="w"> </span>logs<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>warning
+</code></pre></div>
+
+<hr />
+<h2 id="troubleshooting">🆘 Troubleshooting</h2>
+<h3 id="conteneur-qui-crash">Conteneur qui crash</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Voir les logs</span>
+docker-compose<span class="w"> </span>logs<span class="w"> </span>web
+
+<span class="c1"># Redémarrer</span>
+docker-compose<span class="w"> </span>restart<span class="w"> </span>web
+
+<span class="c1"># Reconstruire</span>
+docker-compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--build
+</code></pre></div>
+
+<h3 id="erreur-de-connexion-a-la-base-de-donnees">Erreur de connexion à la base de données</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Vérifier que la BD est prête</span>
+docker-compose<span class="w"> </span>logs<span class="w"> </span>db
+
+<span class="c1"># Vérifier la connectivité</span>
+docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>mysql<span class="w"> </span>-h<span class="w"> </span>db<span class="w"> </span>-u<span class="w"> </span>filamenta<span class="w"> </span>-p<span class="w"> </span>filamenta_db
+
+<span class="c1"># Réinitialiser la BD</span>
+docker-compose<span class="w"> </span>down<span class="w"> </span>-v
+docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from backend.src.app import create_app, db; \</span>
+<span class="s2">                                    app = create_app(); \</span>
+<span class="s2">                                    with app.app_context(): \</span>
+<span class="s2">                                        db.create_all()&quot;</span>
+</code></pre></div>
+
+<h3 id="port-deja-utilise">Port déjà utilisé</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Changer le port dans docker-compose.yml</span>
+<span class="c1"># ports:</span>
+<span class="c1">#   - &quot;9000:8000&quot;  # au lieu de 8000:8000</span>
+
+<span class="c1"># Ou libérer le port</span>
+lsof<span class="w"> </span>-i<span class="w"> </span>:8000
+<span class="nb">kill</span><span class="w"> </span>-9<span class="w"> </span>&lt;PID&gt;
+</code></pre></div>
+
+<h3 id="probleme-de-permissions">Problème de permissions</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Vérifier les permissions</span>
+docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>ls<span class="w"> </span>-la
+
+<span class="c1"># Reconstruire (le Dockerfile crée un utilisateur `appuser`)</span>
+docker-compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--build
+</code></pre></div>
+
+<hr />
+<h2 id="performance-et-scaling">📊 Performance et scaling</h2>
+<h3 id="augmenter-les-workers-gunicorn">Augmenter les workers Gunicorn</h3>
+<p>Modifier <code>Dockerfile</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;gunicorn&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--workers&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--timeout&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;60&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;backend.wsgi:app&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<h3 id="ajouter-un-load-balancer">Ajouter un load balancer</h3>
+<p>Utiliser Nginx ou HAProxy devant les conteneurs :</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">web1</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">filamenta-network</span>
+
+<span class="w">  </span><span class="nt">web2</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">filamenta-network</span>
+
+<span class="w">  </span><span class="nt">nginx</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:alpine</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;443:443&quot;</span>
+<span class="w">    </span><span class="nt">upstream</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web1:8000</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">web2:8000</span>
+</code></pre></div>
+
+<hr />
+<h2 id="checklist-de-deploiement-docker">📝 Checklist de déploiement Docker</h2>
+<ul>
+<li>[ ] Docker et Docker Compose installés</li>
+<li>[ ] Dépôt cloné</li>
+<li>[ ] <code>.env</code> configuré avec SECRET_KEY</li>
+<li>[ ] Conteneurs démarrés (<code>docker-compose up -d</code>)</li>
+<li>[ ] Base de données initialisée</li>
+<li>[ ] Application accessible sur le port 8000</li>
+<li>[ ] Nginx configuré avec domaine</li>
+<li>[ ] Certificat SSL installé (Let's Encrypt)</li>
+<li>[ ] HTTPS fonctionnel</li>
+<li>[ ] Logs vérifiés pour les erreurs</li>
+<li>[ ] Backup de la BD configuré</li>
+<li>[ ] Monitoring en place</li>
+</ul>
+<hr />
+<h2 id="ressources">🔗 Ressources</h2>
+<ul>
+<li><a href="https://docs.docker.com/">Docker Documentation</a></li>
+<li><a href="https://docs.docker.com/compose/">Docker Compose Documentation</a></li>
+<li><a href="https://docs.gunicorn.org/en/stable/deploy.html">Gunicorn Docker Best Practices</a></li>
+<li><a href="https://hub.docker.com/_/nginx">NGINX in Docker</a></li>
+<li><a href="https://hub.docker.com/_/mysql">MySQL in Docker</a></li>
+<li><a href="https://hub.docker.com/_/postgres">PostgreSQL in Docker</a></li>
+</ul>
+<hr />
+<p><strong>Docker simplifie le déploiement ! Commencez par les étapes rapides.</strong> 🐳🚀</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

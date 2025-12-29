@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🌍 Internationalisation (i18n)">
+    <title>🌍 Internationalisation (i18n) - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="internationalisation-i18n">🌍 Internationalisation (i18n)</h1>
+<p><strong>Support de plusieurs langues avec fallback automatique.</strong></p>
+<hr />
+<h2 id="vue-densemble">🎯 Vue d'ensemble</h2>
+<p>L'application supporte <strong>2 langues</strong> avec système de traduction complet :</p>
+<ul>
+<li>🇺🇸 <strong>Anglais (EN)</strong> — Défaut système</li>
+<li>🇫🇷 <strong>Français (FR)</strong> — Maintenu</li>
+</ul>
+<h3 id="selection-de-langue">Sélection de langue</h3>
+<ul>
+<li><strong>Installation</strong> : Choix explicite lors du wizard</li>
+<li><strong>Utilisateur</strong> : Peut changer dans les paramètres</li>
+<li><strong>Fallback</strong> : EN si traduction manquante</li>
+</ul>
+<hr />
+<h2 id="structure-des-traductions">📁 Structure des traductions</h2>
+<div class="highlight"><pre><span></span><code>backend/src/i18n/
+├── en.json      # Traductions anglais (complet)
+├── fr.json      # Traductions français (complet)
+└── README.md    # Guide des traductions
+</code></pre></div>
+
+<h3 id="format-json">Format JSON</h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;wizard&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;step&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Step&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;welcome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Welcome&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;authentication&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;login&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Log in&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Password&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="utilisation-en-code">💻 Utilisation en code</h2>
+<h3 id="backend-pythonjinja2">Backend (Python/Jinja2)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Récupérer traduction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.utils.i18n</span><span class="w"> </span><span class="kn">import</span> <span class="n">t</span>
+
+<span class="n">message</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="s1">&#39;wizard.welcome&#39;</span><span class="p">)</span>  <span class="c1"># &quot;Bienvenue&quot; en FR, &quot;Welcome&quot; en EN</span>
+</code></pre></div>
+
+<p>Dans les templates Jinja2 :</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{ t(&#39;wizard.welcome&#39;) }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ t(&#39;wizard.description&#39;) or &#39;Fallback text&#39; }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h3 id="frontend-htmljavascript">Frontend (HTML/JavaScript)</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>{{ t(&#39;button.submit&#39;) }}<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">hx-post</span><span class="o">=</span><span class="s">&quot;/endpoint&quot;</span> 
+     <span class="na">hx-prompt</span><span class="o">=</span><span class="s">&quot;{{ t(&#39;prompt.confirm&#39;) }}&quot;</span><span class="p">&gt;</span>
+  Click me
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="selection-de-langue_1">🔄 Sélection de langue</h2>
+<h3 id="endpoint">Endpoint</h3>
+<p><strong>GET /lang/{code}?start={0|1}</strong></p>
+<ul>
+<li><code>code</code> : <code>en</code> ou <code>fr</code></li>
+<li><code>start</code> : Si 1, lance le wizard</li>
+</ul>
+<h3 id="exemple">Exemple</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/lang/fr?start=1&quot;</span><span class="p">&gt;</span>Français<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/lang/en&quot;</span><span class="p">&gt;</span>English<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h3 id="stockage">Stockage</h3>
+<ul>
+<li>Session : <code>session['lang'] = 'fr'</code></li>
+<li>Persiste durant la session</li>
+<li>Utilisateur peut changer depuis les paramètres</li>
+</ul>
+<hr />
+<h2 id="ajouter-une-nouvelle-langue">➕ Ajouter une nouvelle langue</h2>
+<h3 id="etape-1-creer-le-fichier">Étape 1 : Créer le fichier</h3>
+<p>Copier <code>backend/src/i18n/en.json</code> → <code>backend/src/i18n/xx.json</code> (xx = code langue)</p>
+<h3 id="etape-2-traduire">Étape 2 : Traduire</h3>
+<p>Remplacer toutes les valeurs par les traductions</p>
+<h3 id="etape-3-tester">Étape 3 : Tester</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Dans un script test</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.services.i18n_service</span><span class="w"> </span><span class="kn">import</span> <span class="n">I18nService</span>
+<span class="n">service</span> <span class="o">=</span> <span class="n">I18nService</span><span class="p">(</span><span class="n">default_lang</span><span class="o">=</span><span class="s1">&#39;xx&#39;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">service</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wizard.welcome&#39;</span><span class="p">,</span> <span class="s1">&#39;xx&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;...&quot;</span> <span class="c1"># Traduction</span>
+</code></pre></div>
+
+<h3 id="etape-4-activer">Étape 4 : Activer</h3>
+<p>Ajouter dans <code>backend/src/routes/lang.py</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="n">SUPPORTED_LANGUAGES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;en&#39;</span><span class="p">,</span> <span class="s1">&#39;fr&#39;</span><span class="p">,</span> <span class="s1">&#39;xx&#39;</span><span class="p">]</span>
+</code></pre></div>
+
+<hr />
+<h2 id="verification-des-traductions">🔍 Vérification des traductions</h2>
+<h3 id="scripts-de-test">Scripts de test</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Vérifier que toutes les clés sont traduites</span>
+python<span class="w"> </span>scripts/check_i18n_completeness.py
+
+<span class="c1"># Lister les traductions manquantes</span>
+python<span class="w"> </span>scripts/list_missing_i18n.py
+</code></pre></div>
+
+<h3 id="fallback">Fallback</h3>
+<ul>
+<li>Clé manquante en FR → Utilise EN</li>
+<li>Clé manquante dans les deux → Affiche clé brute (dev) ou texte par défaut</li>
+</ul>
+<hr />
+<h2 id="best-practices">🏆 Best practices</h2>
+<p>✅ <strong>Faire :</strong><br />
+- Utiliser des clés hiérarchisées (<code>wizard.step.welcome</code>)<br />
+- Regrouper par domaine (<code>auth.*, wizard.*, error.*</code>)<br />
+- Laisser des valeurs par défaut (<code>t('key') or 'Default text'</code>)</p>
+<p>❌ <strong>Éviter :</strong><br />
+- Traductions concaténées en code<br />
+- Interpolation de variables dans JSON (pas supporté)<br />
+- Pluriels complexes (pas de système pluriel)</p>
+<hr />
+<h2 id="ressources">📚 Ressources</h2>
+<ul>
+<li><strong>Architecture</strong> → <a href="../architecture/frontend.md">../architecture/frontend.md</a></li>
+<li><strong>Guides</strong> → <a href="../guides/README.md">../guides/README.md</a></li>
+</ul>
+<hr />
+<p><strong>→ Consultez <code>backend/src/i18n/en.json</code> pour voir toutes les traductions disponibles.</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

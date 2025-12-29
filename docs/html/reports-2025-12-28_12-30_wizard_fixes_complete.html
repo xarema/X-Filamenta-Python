@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - ✅ WIZARD - CORRECTIONS APPLIQUÉES">
+    <title>✅ WIZARD - CORRECTIONS APPLIQUÉES - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="wizard-corrections-appliquees">✅ WIZARD - CORRECTIONS APPLIQUÉES</h1>
+<p><strong>Date:</strong> 2025-12-28T12:30:00+00:00<br />
+<strong>Statut:</strong> ✅ <strong>CORRECTIONS COMPLÈTES</strong></p>
+<hr />
+<h2 id="problemes-identifies-et-corriges">🔧 PROBLÈMES IDENTIFIÉS ET CORRIGÉS</h2>
+<h3 id="1-fil-dariane-non-cliquable">1. Fil d'Ariane non cliquable ✅</h3>
+<p><strong>Problème:</strong> Les boutons du breadcrumb cliquaient mais ne renvoyaient pas les données précédentes.</p>
+<p><strong>Correction:</strong> Dans <code>_wizard_content.html</code>, ajout des champs hidden pour préserver le state:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;welcome_shown&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;1&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;requirements_checked&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;1&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;db_uri&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;{{ state.get(&#39;db_uri&#39;, &#39;&#39;) }}&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;admin_username&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;{{ state.get(&#39;admin_username&#39;, &#39;&#39;) }}&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;admin_email&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;{{ state.get(&#39;admin_email&#39;, &#39;&#39;) }}&quot;</span> <span class="p">/&gt;</span>
+</code></pre></div>
+
+<h3 id="2-boutons-cote-a-cote">2. Boutons côte à côte ✅</h3>
+<p><strong>Problème:</strong> Boutons "Restaurer" et "Continuer" affichés verticalement.</p>
+<p><strong>Correction:</strong> Déjà implémenté avec <code>d-flex</code> dans les templates (db_test.html, upload.html).</p>
+<h3 id="3-pas-derreur-affichee-a-la-finalisation">3. Pas d'erreur affichée à la finalisation ✅</h3>
+<p><strong>Problème:</strong> Erreur 500 sans message détaillé au clic sur "Finaliser".</p>
+<p><strong>Corrections:</strong><br />
+- Changement de template de <code>error.html</code> (page complète) à <code>partials/error.html</code> (partial HTMX)<br />
+- Changement de template de <code>done.html</code> à <code>partials/done.html</code> pour cohérence HTMX<br />
+- Amélioration du handler <code>finalize</code> pour afficher les erreurs détaillées:<br />
+<code>python
+  errors_list = []
+  # ... accumulation des erreurs ...
+  error_details = " | ".join(errors_list)
+  return render_template("pages/install/partials/error.html", error=error_details)</code></p>
+<h3 id="4-installation-non-terminee-table-users-manquante">4. Installation non terminée - Table users manquante ✅</h3>
+<p><strong>Problème:</strong> Erreur <code>no such table: users</code> lors de la finalisation.</p>
+<p><strong>Cause:</strong> <code>create_schema</code> ne créait pas les tables correctement.</p>
+<p><strong>Corrections appliquées:</strong><br />
+- Correction de <code>create_schema</code> pour utiliser <code>db.metadata</code> (qui contient tous les modèles enregistrés)<br />
+- Imports explicites de tous les modèles (User, UserPreferences, Content, AdminHistory)<br />
+- Vérification que les tables sont créées avec <code>inspector.get_table_names()</code><br />
+- Ajout de messages détaillés si erreur</p>
+<hr />
+<h2 id="fichiers-modifies">📋 FICHIERS MODIFIÉS</h2>
+<h3 id="backend">Backend</h3>
+<ol>
+<li>
+<p><strong><code>backend/src/routes/install.py</code></strong><br />
+   - Handler <code>finalize</code>: Changed to return partials au lieu de pages complètes<br />
+   - Added error details avec <code>|</code> separator<br />
+   - Vérification du state complet avant finalisation</p>
+</li>
+<li>
+<p><strong><code>backend/src/services/install_service.py</code></strong><br />
+   - Methode <code>create_schema</code>: Fixed to use <code>db.metadata</code><br />
+   - Ajout de vérification que tables sont créées<br />
+   - Messages détaillés en cas d'erreur</p>
+</li>
+</ol>
+<h3 id="frontend">Frontend</h3>
+<ol>
+<li>
+<p><strong><code>frontend/templates/pages/install/partials/_wizard_content.html</code></strong><br />
+   - Breadcrumb: Added hidden fields pour préserver le state complet</p>
+</li>
+<li>
+<p><strong><code>frontend/templates/pages/install/partials/error.html</code></strong> (NEW)<br />
+   - Template partial pour afficher les erreurs avec détails</p>
+</li>
+<li>
+<p><strong><code>frontend/templates/pages/install/partials/done.html</code></strong> (NEW)<br />
+   - Template partial pour afficher le succès de l'installation</p>
+</li>
+</ol>
+<hr />
+<h2 id="commandes-de-test-manuel">🧪 COMMANDES DE TEST MANUEL</h2>
+<h3 id="demarrer-le-serveur-nettoye">Démarrer le serveur nettoyé</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd </span><span class="n">D</span><span class="p">:\</span><span class="n">xarema</span><span class="p">\</span><span class="n">X-Filamenta-Python</span>
+<span class="nb">Remove-Item</span> <span class="n">instance</span><span class="p">\</span><span class="n">installed</span><span class="p">.</span><span class="n">flag</span> <span class="n">-Force</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+<span class="nb">Remove-Item</span> <span class="n">instance</span><span class="p">\*.</span><span class="n">db</span> <span class="n">-Force</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+<span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+<span class="n">python</span> <span class="n">run</span><span class="p">.</span><span class="n">py</span>
+</code></pre></div>
+
+<h3 id="tester-dans-le-navigateur">Tester dans le navigateur</h3>
+<ol>
+<li>Ouvrir: http://localhost:5000/</li>
+<li>Sélectionner langue (FR ou EN)</li>
+<li>Cliquer "Continuer"</li>
+<li>Tester chaque étape:<br />
+   - Bienvenue<br />
+   - Prérequis<br />
+   - Base de données (Test connexion → OK)<br />
+   - Compte administrateur<br />
+   - Résumé<br />
+   - Finaliser (doit afficher succès ou erreur détaillée)</li>
+</ol>
+<h3 id="verifications-finales">Vérifications finales</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Base de données créée?</span>
+<span class="nb">Test-Path</span> <span class="n">instance</span><span class="p">\</span><span class="n">x-filamenta_python</span><span class="p">.</span><span class="n">db</span>
+
+<span class="c"># Flag d&#39;installation?</span>
+<span class="nb">Test-Path</span> <span class="n">instance</span><span class="p">\</span><span class="n">installed</span><span class="p">.</span><span class="n">flag</span>
+
+<span class="c"># Tables créées?</span>
+<span class="n">sqlite3</span> <span class="n">instance</span><span class="p">\</span><span class="n">x-filamenta_python</span><span class="p">.</span><span class="n">db</span> <span class="s2">&quot;.tables&quot;</span>
+
+<span class="c"># Admin créé?</span>
+<span class="n">sqlite3</span> <span class="n">instance</span><span class="p">\</span><span class="n">x-filamenta_python</span><span class="p">.</span><span class="n">db</span> <span class="s2">&quot;SELECT username FROM users;&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="etat-actuel">✅ ÉTAT ACTUEL</h2>
+<p>Le wizard a les corrections suivantes:</p>
+<ol>
+<li>✅ <strong>Breadcrumb cliquable</strong> - Préserve le state complet</li>
+<li>✅ <strong>Boutons côte à côte</strong> - Déjà implémenté avec flexbox</li>
+<li>✅ <strong>Messages d'erreur détaillés</strong> - Affichés dans la page</li>
+<li>✅ <strong>Création des tables</strong> - <code>db.metadata</code> crée tous les modèles</li>
+<li>✅ <strong>Finalisation correcte</strong> - Retourne partial au lieu de page complète</li>
+</ol>
+<hr />
+<h2 id="prochaines-etapes">🚀 PROCHAINES ÉTAPES</h2>
+<ol>
+<li><strong>Test manuel complet</strong> du wizard en navigateur</li>
+<li><strong>Vérification</strong> que les tables se créent correctement</li>
+<li><strong>Test du login</strong> après installation</li>
+<li><strong>Documentation</strong> des problèmes résolus</li>
+</ol>
+<hr />
+<p><strong>Toutes les corrections sont appliquées ! Le wizard devrait fonctionner maintenant ! 🎉</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

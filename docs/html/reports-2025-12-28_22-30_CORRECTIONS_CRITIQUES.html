@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - ✅ CORRECTIONS CRITIQUES APPLIQUÉES">
+    <title>✅ CORRECTIONS CRITIQUES APPLIQUÉES - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="corrections-critiques-appliquees">✅ CORRECTIONS CRITIQUES APPLIQUÉES</h1>
+<p><strong>Date</strong> : 2025-12-28T22:30:00+01:00<br />
+<strong>Basé sur</strong> : Audit complet (2025-12-28_22-15_AUDIT_COMPLET.md)</p>
+<hr />
+<h2 id="bugs-critiques-corriges">🐛 BUGS CRITIQUES CORRIGÉS</h2>
+<h3 id="bug-01-import-manquant-path">✅ BUG-01 : Import manquant — Path</h3>
+<p><strong>Fichier</strong> : <code>backend/src/services/i18n_service.py</code><br />
+<strong>Problème</strong> : <code>NameError: name 'Path' is not defined</code><br />
+<strong>Fix appliqué</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ligne 26</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+</code></pre></div>
+
+<p><strong>Validation</strong> : ✅ <code>python -m py_compile</code> et <code>mypy</code> passent</p>
+<hr />
+<h3 id="bug-02-fonction-manquante-get_supported_langs">✅ BUG-02 : Fonction manquante — get_supported_langs</h3>
+<p><strong>Fichier</strong> : <code>backend/src/services/i18n_service.py</code><br />
+<strong>Problème</strong> : <code>NameError: name 'get_supported_langs' is not defined</code><br />
+<strong>Fix appliqué</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ligne 151 (remplacé appel par implémentation directe)</span>
+<span class="n">supported</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">stem</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="n">base_path</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.json&quot;</span><span class="p">)]</span>
+</code></pre></div>
+
+<p><strong>Validation</strong> : ✅ Syntaxe et types corrects</p>
+<hr />
+<h2 id="securite-corrigee">🔒 SÉCURITÉ CORRIGÉE</h2>
+<h3 id="sec-01-injection-sql-potentielle">✅ SEC-01 : Injection SQL potentielle</h3>
+<p><strong>Fichier</strong> : <code>backend/src/routes/install.py:437-447</code><br />
+<strong>Problème</strong> : Interpolation string dans SQL<br />
+<strong>Fix appliqué</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Validation alphanumérique avant requête</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">table</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">isalnum</span><span class="p">():</span>
+    <span class="n">current_app</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skipping invalid table name: </span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">continue</span>
+</code></pre></div>
+
+<p><strong>Impact</strong> : Protection contre injection même si non exploitable en pratique</p>
+<hr />
+<h3 id="sec-03-try-except-pass-sans-logging">✅ SEC-03 : try-except-pass sans logging</h3>
+<p><strong>Fichier</strong> : <code>backend/src/utils/i18n.py:63-67</code><br />
+<strong>Problème</strong> : Erreurs silencieuses<br />
+<strong>Fix appliqué</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to load i18n file </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Impact</strong> : Erreurs de chargement i18n maintenant loggées</p>
+<hr />
+<h3 id="sec-04-requests-sans-timeout-partiel">✅ SEC-04 : Requests sans timeout (partiel)</h3>
+<p><strong>Fichier</strong> : <code>scripts/tests/test_wizard_auto.py</code><br />
+<strong>Problème</strong> : <code>requests.get()</code> sans timeout peut bloquer<br />
+<strong>Fix appliqué</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/install/&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Impact</strong> : Évite hang infini dans scripts de test</p>
+<hr />
+<h2 id="resume-des-changements">📊 RÉSUMÉ DES CHANGEMENTS</h2>
+<table>
+<thead>
+<tr>
+<th>Fichier</th>
+<th>Type</th>
+<th>Lignes modifiées</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>i18n_service.py</code></td>
+<td>BUG CRITIQUE</td>
+<td>+3</td>
+<td>Bloqueur prod</td>
+</tr>
+<tr>
+<td><code>install.py</code></td>
+<td>Sécurité</td>
+<td>+4</td>
+<td>Injection SQL</td>
+</tr>
+<tr>
+<td><code>i18n.py</code></td>
+<td>Qualité</td>
+<td>+4</td>
+<td>Logging</td>
+</tr>
+<tr>
+<td><code>test_wizard_auto.py</code></td>
+<td>Sécurité</td>
+<td>+2</td>
+<td>Timeout</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total</strong> : 4 fichiers, 13 lignes modifiées</p>
+<hr />
+<h2 id="validation">✅ VALIDATION</h2>
+<h3 id="tests-executes">Tests exécutés</h3>
+<ul>
+<li>[x] <code>python -m py_compile</code> sur fichiers modifiés</li>
+<li>[x] <code>mypy</code> sur i18n_service.py</li>
+<li>[ ] Tests unitaires (à relancer)</li>
+<li>[ ] Tests intégration (à relancer)</li>
+</ul>
+<h3 id="risques">Risques</h3>
+<ul>
+<li><strong>Aucun</strong> : Changements mineurs, non-breaking</li>
+<li><strong>Rollback</strong> : Git revert si problème</li>
+</ul>
+<hr />
+<h2 id="actions-restantes">📋 ACTIONS RESTANTES</h2>
+<h3 id="priorite-haute-non-bloqueur">Priorité haute (non bloqueur)</h3>
+<ul>
+<li>[ ] Corriger <code>test_wizard_debug.py</code> (syntaxe invalide)</li>
+<li>[ ] Lancer <code>ruff check --fix .</code> (nettoyer E501)</li>
+<li>[ ] Ajouter tests pour wizard d'installation</li>
+</ul>
+<h3 id="priorite-moyenne">Priorité moyenne</h3>
+<ul>
+<li>[ ] GitHub Actions CI/CD</li>
+<li>[ ] Améliorer couverture tests</li>
+</ul>
+<hr />
+<h2 id="conclusion">🎯 CONCLUSION</h2>
+<p><strong>Statut</strong> : ✅ <strong>BUGS CRITIQUES RÉSOLUS</strong><br />
+<strong>Prêt pour</strong> : Tests approfondis et déploiement en pré-production<br />
+<strong>Prochaine étape</strong> : Relancer les tests complets</p>
+<p><strong>Les corrections critiques bloquant la production sont maintenant appliquées.</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

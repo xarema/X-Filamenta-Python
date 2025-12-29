@@ -1,0 +1,78 @@
+/*
+ * Main CSS - Styles globaux de l'application
+ * Utilise Bootstrap 5 + variables custom
+ */
+
+/* Import des variables */
+@import './tokens/variables.css';
+
+/* Styles de base */
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  color: var(--dark-color);
+  background-color: var(--light-color);
+}
+
+/* Utilitaires */
+.shadow-custom {
+  box-shadow: var(--shadow-md);
+}
+
+.transition-base {
+  transition: all var(--transition-base);
+}
+
+/* Ajustements pour le wizard */
+.wizard-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+.wizard-step {
+  background: var(--white-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* Formulaires */
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Boutons */
+.btn {
+  transition: all var(--transition-fast);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Cards */
+.card {
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .wizard-container {
+    padding: var(--spacing-md);
+  }
+
+  .wizard-step {
+    padding: var(--spacing-lg);
+  }
+}
+

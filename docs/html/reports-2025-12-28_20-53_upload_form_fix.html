@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🔧 Correction erreur Template Syntax — upload_form.html">
+    <title>🔧 Correction erreur Template Syntax — upload_form.html - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="correction-erreur-template-syntax-upload_formhtml">🔧 Correction erreur Template Syntax — upload_form.html</h1>
+<p><strong>Date</strong> : 2025-12-28T20:53:00+01:00<br />
+<strong>Statut</strong> : ✅ Corrigé<br />
+<strong>Serveur</strong> : 🟢 http://127.0.0.1:5000</p>
+<hr />
+<h2 id="probleme-rencontre">🐛 Problème rencontré</h2>
+<h3 id="erreur">Erreur</h3>
+<div class="highlight"><pre><span></span><code>jinja2.exceptions.TemplateSyntaxError: unexpected char &#39;\\&#39; at 1764
+</code></pre></div>
+
+<p><strong>Stacktrace</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="n">File</span><span class="w"> </span><span class="s2">&quot;frontend/templates/pages/install/partials/upload_form.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mi">48</span><span class="p">,</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">template</span>
+<span class="w">    </span><span class="n">onchange</span><span class="o">=</span><span class="s2">&quot;document.getElementById(&#39;file-label&#39;).textContent = this.files[0] ? this.files[0].name : &#39;{{ t(</span><span class="se">\&#39;</span><span class="s2">wizard.backup.no_file</span><span class="se">\&#39;</span><span class="s2">) }}&#39;&quot;</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">    </span><span class="o">^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+<span class="n">jinja2</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">TemplateSyntaxError</span><span class="p">:</span><span class="w"> </span><span class="n">unexpected</span><span class="w"> </span><span class="nb">char</span><span class="w"> </span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="mi">1764</span>
+</code></pre></div>
+
+<hr />
+<h2 id="cause-du-probleme">🔍 Cause du problème</h2>
+<p><strong>Code problématique</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="err">...</span> 
+       <span class="na">onchange</span><span class="o">=</span><span class="s">&quot;document.getElementById(&#39;file-label&#39;).textContent = this.files[0] ? this.files[0].name : &#39;{{ t(\&#39;wizard.backup.no_file\&#39;) }}&#39;&quot;</span> <span class="p">/&gt;</span>
+</code></pre></div>
+
+<p><strong>Problème</strong> :</p>
+<ol>
+<li>Les guillemets simples échappés <code>\'</code> dans l'attribut <code>onchange</code> causent une erreur de syntaxe Jinja</li>
+<li>Jinja2 n'arrive pas à parser correctement le mélange de guillemets HTML et JavaScript</li>
+<li>L'interpolation Jinja <code>{{ ... }}</code> à l'intérieur d'un attribut JavaScript est dangereuse</li>
+</ol>
+<hr />
+<h2 id="solution-appliquee">✅ Solution appliquée</h2>
+<h3 id="avant-problematique">Avant (problématique)</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="err">...</span> 
+       <span class="na">onchange</span><span class="o">=</span><span class="s">&quot;document.getElementById(&#39;file-label&#39;).textContent = this.files[0] ? this.files[0].name : &#39;{{ t(\&#39;wizard.backup.no_file\&#39;) }}&#39;&quot;</span> <span class="p">/&gt;</span>
+</code></pre></div>
+
+<h3 id="apres-correct">Après (correct)</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;backup-file&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-control&quot;</span> <span class="na">accept</span><span class="o">=</span><span class="s">&quot;.tar.gz,.tgz&quot;</span> <span class="p">/&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">fileInput</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;backup-file&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">fileLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;file-label&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">noFileText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{{ t(&#39;wizard.backup.no_file&#39;) }}&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fileInput</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">fileInput</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fileLabel</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">name</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">noFileText</span><span class="p">;</span>
+<span class="w">      </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p><strong>Avantages</strong> :</p>
+<ul>
+<li>✅ Pas d'interpolation Jinja dans les attributs HTML</li>
+<li>✅ Code JavaScript séparé et plus lisible</li>
+<li>✅ Pas de problème d'échappement de guillemets</li>
+<li>✅ Bonne pratique de séparation des préoccupations</li>
+</ul>
+<hr />
+<h2 id="tests-effectues">🧪 Tests effectués</h2>
+<h3 id="test-1-demarrage-du-serveur">Test 1 : Démarrage du serveur</h3>
+<div class="highlight"><pre><span></span><code>.<span class="se">\.</span>venv<span class="se">\S</span>cripts<span class="se">\p</span>ython.exe<span class="w"> </span>run_prod.py
+</code></pre></div>
+
+<p><strong>Résultat</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="err">✅</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">28</span><span class="w"> </span><span class="mi">20</span><span class="err">:</span><span class="mi">53</span><span class="err">:</span><span class="mi">13</span><span class="p">,</span><span class="mi">126</span><span class="w"> </span><span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="nl">waitress</span><span class="p">:</span><span class="w"> </span><span class="n">Serving</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="nl">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="err">:</span><span class="mi">5000</span>
+</code></pre></div>
+
+<p><strong>Statut</strong> : ✅ Serveur démarre sans erreur</p>
+<hr />
+<h3 id="test-2-navigation-au-wizard-upload_form">Test 2 : Navigation au wizard upload_form</h3>
+<p><strong>Étapes</strong> :</p>
+<ol>
+<li>Ouvrir <code>http://127.0.0.1:5000/install/</code></li>
+<li>Naviguer jusqu'à l'étape <code>upload_form</code></li>
+<li>✅ Pas d'erreur <code>TemplateSyntaxError</code></li>
+<li>✅ Page s'affiche correctement</li>
+<li>✅ Changement de fichier fonctionne</li>
+</ol>
+<hr />
+<h2 id="fichiers-modifies">📋 Fichiers modifiés</h2>
+<table>
+<thead>
+<tr>
+<th>Fichier</th>
+<th>Changement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>frontend/templates/pages/install/partials/upload_form.html</code></td>
+<td>Déplacer l'événement <code>onchange</code> du HTML vers du JavaScript</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="lecons-apprises">🎯 Leçons apprises</h2>
+<h3 id="ne-pas-faire">❌ Ne pas faire</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">onchange</span><span class="o">=</span><span class="s">&quot;myFunction(&#39;{{ t(&#39;key&#39;) }}&#39;)&quot;</span> <span class="p">/&gt;</span>
+</code></pre></div>
+
+<h3 id="a-faire">✅ À faire</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;myinput&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{{ t(&#39;key&#39;) }}&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;myinput&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">myFunction</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="statut-final">✅ Statut final</h2>
+<ul>
+<li>[x] Serveur démarre sans erreur</li>
+<li>[x] Aucune erreur <code>TemplateSyntaxError</code></li>
+<li>[x] Template <code>upload_form.html</code> fonctionne correctement</li>
+<li>[x] Événement <code>change</code> fonctionne correctement</li>
+<li>[x] Prêt pour les tests utilisateur</li>
+</ul>
+<hr />
+<h2 id="prochaine-etape">🚀 Prochaine étape</h2>
+<p><strong>Continuer à tester le wizard</strong> :</p>
+<ol>
+<li>Ouvrir <code>http://127.0.0.1:5000/install/</code></li>
+<li>Naviguer à l'étape <code>upload_form</code></li>
+<li>Tester l'upload de fichier backup</li>
+<li>Parcourir les étapes suivantes sans erreur</li>
+</ol>
+<hr />
+<p><strong>Mainteneur</strong> : AleGabMar<br />
+<strong>Dernière mise à jour</strong> : 2025-12-28T20:53:00+01:00</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

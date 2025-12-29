@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Phase 02 — Nettoyage Exécution — AVANT Suppression">
+    <title>Phase 02 — Nettoyage Exécution — AVANT Suppression - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="phase-02-nettoyage-execution-avant-suppression">Phase 02 — Nettoyage Exécution — AVANT Suppression</h1>
+<p><strong>Date :</strong> 2025-12-28 17:20 UTC+1<br />
+<strong>Approbations Utilisateur :</strong><br />
+- Q1 : OUI — Supprimer 8 test_<em>.py scripts<br />
+- Q2 : OUI — Supprimer 4 fichiers logs<br />
+- Q3 : À CLARIFIER → Décision : Supprimer run.py (legacy)<br />
+- Q4 : OUI — Nettoyer instance/</em>.db sauf main</p>
+<hr />
+<h2 id="fichiers-a-supprimer-13-total">📋 FICHIERS À SUPPRIMER (13 total)</h2>
+<h3 id="scripts-test-8-files-a-supprimer">Scripts Test (8 files) ✅ À SUPPRIMER</h3>
+<div class="highlight"><pre><span></span><code><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">xarema</span><span class="err">\</span><span class="n">X</span><span class="o">-</span><span class="n">Filamenta</span><span class="o">-</span><span class="n">Python</span><span class="err">\</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">test_wizard_auto_complete</span><span class="p">.</span><span class="n">py</span><span class="w">      </span><span class="o">[</span><span class="n">SUPPRIMER</span><span class="o">]</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">test_wizard_http</span><span class="p">.</span><span class="n">py</span><span class="w">               </span><span class="o">[</span><span class="n">SUPPRIMER</span><span class="o">]</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">test_wizard_simple</span><span class="p">.</span><span class="n">py</span><span class="w">             </span><span class="o">[</span><span class="n">SUPPRIMER</span><span class="o">]</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">test_access</span><span class="p">.</span><span class="n">py</span><span class="w">                    </span><span class="o">[</span><span class="n">SUPPRIMER</span><span class="o">]</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">test_create_schema</span><span class="p">.</span><span class="n">py</span><span class="w">             </span><span class="o">[</span><span class="n">SUPPRIMER</span><span class="o">]</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">test_create_schema_debug</span><span class="p">.</span><span class="n">py</span><span class="w">       </span><span class="o">[</span><span class="n">SUPPRIMER</span><span class="o">]</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">test_schema_in_context</span><span class="p">.</span><span class="n">py</span><span class="w">         </span><span class="o">[</span><span class="n">SUPPRIMER</span><span class="o">]</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">test_schema2</span><span class="p">.</span><span class="n">py</span><span class="w">                   </span><span class="o">[</span><span class="n">SUPPRIMER</span><span class="o">]</span>
+</code></pre></div>
+
+<h3 id="fichiers-logs-4-files-a-supprimer">Fichiers Logs (4 files) ✅ À SUPPRIMER</h3>
+<div class="highlight"><pre><span></span><code><span class="err">├──</span><span class="w"> </span><span class="n">app_debug</span><span class="p">.</span><span class="nf">log</span><span class="w">                     </span><span class="o">[</span><span class="n">SUPPRIMER</span><span class="o">]</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">server_log</span><span class="p">.</span><span class="n">txt</span><span class="w">                    </span><span class="o">[</span><span class="n">SUPPRIMER</span><span class="o">]</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">test_output</span><span class="p">.</span><span class="n">txt</span><span class="w">                   </span><span class="o">[</span><span class="n">SUPPRIMER</span><span class="o">]</span>
+<span class="err">├──</span><span class="w"> </span><span class="k">output</span><span class="p">.</span><span class="n">txt</span><span class="w">                        </span><span class="o">[</span><span class="n">SUPPRIMER</span><span class="o">]</span>
+</code></pre></div>
+
+<h3 id="script-dev-1-file-a-supprimer-q3-clarification">Script Dev (1 file) ✅ À SUPPRIMER (Q3 clarification)</h3>
+<div class="highlight"><pre><span></span><code>├── run.py                            [SUPPRIMER - legacy dev]
+</code></pre></div>
+
+<h3 id="analyse-q3-runpy">Analyse Q3 - run.py</h3>
+<p><strong>Contenu :</strong> Script de démarrage Flask dev (debug=True, port 5000)</p>
+<p><strong>Comparaison :</strong><br />
+- <code>run.py</code> : Flask dev server (debug mode) - LEGACY<br />
+- <code>run_prod.py</code> : Waitress WSGI (production) - COURANT<br />
+- <code>makefile</code> : Commands (fmt, lint, test) - COURANT</p>
+<p><strong>Décision :</strong> Supprimer (c'est du legacy, on utilise run_prod.py)</p>
+<hr />
+<h2 id="fichiers-a-garder">📁 FICHIERS À GARDER</h2>
+<div class="highlight"><pre><span></span><code>✅ GARDER:
+├── run_prod.py               (production WSGI)
+├── run_prod.ps1              (Windows production script)
+├── makefile                  (build/dev commands)
+├── check_db.py               (À vérifier - possiblement utile)
+└── backend/tests/test_*.py   (Tests réels - GARDER)
+
+⚠️ CHECK: check_db.py
+└── À clarifier si c&#39;est un utilitaire nécessaire
+</code></pre></div>
+
+<hr />
+<h2 id="plan-suppression">✅ PLAN SUPPRESSION</h2>
+<ol>
+<li>✅ Supprimer 8 test_*.py scripts (racine)</li>
+<li>✅ Supprimer 4 logs (racine)</li>
+<li>✅ Supprimer run.py (legacy dev)</li>
+<li>⏳ Demander confirmation check_db.py</li>
+<li>✅ Vérifier instance/*.db</li>
+<li>✅ Git status avant/après</li>
+<li>✅ Tests + linting</li>
+<li>✅ Rapport final</li>
+</ol>
+<hr />
+<p><strong>Prêt à procéder ? Répondez OUI ou demandez clarification sur check_db.py.</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

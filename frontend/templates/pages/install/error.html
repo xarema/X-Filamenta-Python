@@ -1,0 +1,51 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Wizard error page
+Description: Shows error message with details
+
+File: frontend/templates/pages/install/error.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): 2025-12-28T03:30:00+00:00 | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.3-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+<div class="card shadow-sm mb-3 border-danger">
+  <div class="card-body text-center">
+    <h5 class="card-title text-danger mb-4">
+      ❌ {{ t('wizard.error_title') or 'Erreur d\'installation' }}
+    </h5>
+
+    <div class="alert alert-danger mx-auto" role="alert" style="max-width: 600px;">
+      <strong>{{ t('wizard.error_details') or 'Détails de l\'erreur' }}:</strong>
+      <p class="mb-0 mt-2">{{ error or t('wizard.error_body') or 'Une erreur est survenue.' }}</p>
+    </div>
+
+    <div class="small text-muted mb-4">
+      {{ t('wizard.error_hint') or 'Merci de corriger et réessayer.' }}
+    </div>
+
+    <div class="d-flex flex-wrap gap-3 justify-content-center">
+      <form hx-post="/install/step" hx-target="#wizard-container" hx-swap="innerHTML">
+        <input type="hidden" name="step" value="summary" />
+        <button type="submit" class="btn btn-primary btn-lg px-4">
+          {{ t('wizard.retry') or 'Réessayer' }}
+        </button>
+      </form>
+      <a class="btn btn-outline-secondary btn-lg px-4" href="/install/">
+        {{ t('wizard.back_wizard') or 'Retour au début' }}
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<!--
+Purpose: Pagination component
+Description: Reusable pagination controls with Bootstrap styling
+
+File: frontend/templates/components/pagination.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Public
+
+Usage:
+  {% include "components/pagination.html" with context %}
+  Where context should have: total_pages, current_page, url_base
+-->
+
+{% if total_pages > 1 %}
+<nav aria-label="Pagination" class="mt-4">
+  <ul class="pagination justify-content-center">
+    <!-- Previous Button -->
+    {% if current_page > 1 %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="{{ url_base }}?page={{ current_page - 1 }}"
+        hx-get="{{ url_base }}?page={{ current_page - 1 }}"
+        hx-target="#content-list"
+        hx-push-url="true"
+      >
+        ← Précédent
+      </a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <span class="page-link">← Précédent</span>
+    </li>
+    {% endif %}
+
+    <!-- Page Numbers -->
+    {% for page_num in range(1, total_pages + 1) %} {% if page_num == current_page %}
+    <li class="page-item active" aria-current="page">
+      <span class="page-link"> {{ page_num }} </span>
+    </li>
+    {% else %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="{{ url_base }}?page={{ page_num }}"
+        hx-get="{{ url_base }}?page={{ page_num }}"
+        hx-target="#content-list"
+        hx-push-url="true"
+      >
+        {{ page_num }}
+      </a>
+    </li>
+    {% endif %} {% endfor %}
+
+    <!-- Next Button -->
+    {% if current_page < total_pages %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="{{ url_base }}?page={{ current_page + 1 }}"
+        hx-get="{{ url_base }}?page={{ current_page + 1 }}"
+        hx-target="#content-list"
+        hx-push-url="true"
+      >
+        Suivant →
+      </a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <span class="page-link">Suivant →</span>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}

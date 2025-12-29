@@ -1,0 +1,241 @@
+"""
+------------------------------------------------------------------------------
+Purpose: Application configuration management
+Description: Loads and provides configuration for different environments
+             (development, testing, production). Supports multiple database
+             backends (SQLite, MySQL, PostgreSQL) and deployment targets
+             (cPanel, VPS, Docker).
+
+File: backend/src/config.py | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Public
+
+Notes:
+- Load from environment variables when possible
+- Supports SQLite, MySQL, PostgreSQL
+- Git history is the source of truth for authorship and change tracking.
+------------------------------------------------------------------------------
+"""
+
+import os
+from pathlib import Path
+
+# Load environment variables from .env file
+try:
+    from dotenv import load_dotenv
+
+    env_path = Path(__file__).parent.parent.parent / ".env"
+    if env_path.exists():
+        load_dotenv(env_path)
+except ImportError:
+    pass  # dotenv not installed, env vars must be set manually
+
+
+def _build_database_uri() -> str:
+    """
+    Build database URI based on environment variables.
+
+    Supports:
+    - SQLite (default for development)
+    - MySQL: MySQL://user:password@host:port/dbname
+    - PostgreSQL: postgresql://user:password@host:port/dbname
+
+    Returns:
+        str: Database URI string
+    """
+    # If explicit URI is set, use it
+    if db_uri := os.getenv("SQLALCHEMY_DATABASE_URI"):
+        return db_uri
+
+    # Build from individual components
+    db_type = os.getenv("DB_TYPE", "sqlite").lower()
+
+    if db_type == "mysql":
+        db_user = os.getenv("DB_USER", "filamenta")
+        db_password = os.getenv("DB_PASSWORD", "")
+        db_host = os.getenv("DB_HOST", "localhost")
+        db_port = os.getenv("DB_PORT", "3306")
+        db_name = os.getenv("DB_NAME", "filamenta")
+
+        if db_password:
+            return (
+                f"mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+            )
+        return f"mysql+pymysql://{db_user}@{db_host}:{db_port}/{db_name}"
+
+    elif db_type == "postgresql":
+        db_user = os.getenv("DB_USER", "filamenta")
+        db_password = os.getenv("DB_PASSWORD", "")
+        db_host = os.getenv("DB_HOST", "localhost")
+        db_port = os.getenv("DB_PORT", "5432")
+        db_name = os.getenv("DB_NAME", "filamenta")
+
+        if db_password:
+            return f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+        return f"postgresql://{db_user}@{db_host}:{db_port}/{db_name}"
+
+    # Default: SQLite
+    base_dir = Path(__file__).parent.parent.parent
+    instance_dir = base_dir / "instance"
+    instance_dir.mkdir(exist_ok=True)
+    # Utiliser le même nom par défaut que le wizard
+    db_path = instance_dir / "x-filamenta_python.db"
+    return f"sqlite:///{db_path}"
+
+
+class Config:
+    """Base configuration for all environments."""
+
+    # Project root
+    BASE_DIR = Path(__file__).parent.parent.parent
+
+    # Flask
+    SECRET_KEY = os.getenv(
+        "FLASK_SECRET_KEY", "dev-key-change-in-production-immediately"
+    )
+    DEBUG = os.getenv("FLASK_DEBUG", "False").lower() in ("true", "1", "yes")
+
+    # Database
+    SQLALCHEMY_DATABASE_URI = _build_database_uri()
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_ECHO = os.getenv("SQLALCHEMY_ECHO", "False").lower() in (
+        "true",
+        "1",
+        "yes",
+    )
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        "pool_pre_ping": True,  # Verify connections before using
+        "pool_recycle": 3600,  # Recycle connections after 1 hour
+    }
+
+    # Flask-specific
+    JSON_SORT_KEYS = False
+    _url_scheme_env = os.getenv("PREFERRED_URL_SCHEME", "http")
+    PREFERRED_URL_SCHEME = "https" if _url_scheme_env == "https" else "http"
+
+    # Session configuration
+    SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = "Lax"
+    PERMANENT_SESSION_LIFETIME = 3600  # 1 hour
+
+    # Security headers (for production)
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "False").lower() in (
+        "true",
+        "1",
+        "yes",
+    )
+
+    # Deployment-specific
+    DEPLOYMENT_TARGET = os.getenv(
+        "DEPLOYMENT_TARGET", "development"
+    )  # development, cpanel, vps, docker
+
+
+class DevelopmentConfig(Config):
+    """Development environment configuration."""
+
+    DEBUG = True
+    SQLALCHEMY_ECHO = True
+    PREFERRED_URL_SCHEME = "http"
+    SECURE_SSL_REDIRECT = False
+    DEPLOYMENT_TARGET = "development"
+
+
+class TestingConfig(Config):
+    """Testing environment configuration."""
+
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
+    WTF_CSRF_ENABLED = False
+    DEPLOYMENT_TARGET = "testing"
+
+
+class ProductionConfig(Config):
+    """Production environment configuration (generic)."""
+
+    DEBUG = False
+    SQLALCHEMY_ECHO = False
+    DEPLOYMENT_TARGET = "production"
+
+    # Ensure critical variables are set
+    @staticmethod
+    def validate_production_config() -> None:
+        """Validate that all required production variables are set."""
+        required_vars = ["FLASK_SECRET_KEY"]
+        missing = [var for var in required_vars if not os.getenv(var)]
+
+        if missing:
+            raise ValueError(f"Production configuration missing: {', '.join(missing)}")
+
+
+class CPanelConfig(ProductionConfig):
+    """cPanel-specific configuration."""
+
+    DEPLOYMENT_TARGET = "cpanel"
+    # cPanel typically runs under public_html
+    # Application subpath set via environment
+    APPLICATION_ROOT = os.getenv("APPLICATION_ROOT", "/filamenta")
+
+
+class VPSConfig(ProductionConfig):
+    """VPS/Linux-specific configuration."""
+
+    DEPLOYMENT_TARGET = "vps"
+
+
+class DockerConfig(ProductionConfig):
+    """Docker-specific configuration."""
+
+    DEPLOYMENT_TARGET = "docker"
+
+
+def get_config(env: str | None = None) -> Config:
+    """
+    Get configuration object based on environment.
+
+    Args:
+        env: Environment name or deployment target
+             (development, testing, production, cpanel, vps, docker).
+             Defaults to FLASK_ENV environment variable or 'development'.
+
+    Returns:
+        Config: Configuration object for the specified environment.
+
+    Raises:
+        ValueError: If production config is invalid
+    """
+    env = env or os.getenv("FLASK_ENV", "development").lower()
+
+    configs = {
+        "development": DevelopmentConfig,
+        "testing": TestingConfig,
+        "production": ProductionConfig,
+        "cpanel": CPanelConfig,
+        "vps": VPSConfig,
+        "docker": DockerConfig,
+    }
+
+    config_class = configs.get(env, DevelopmentConfig)
+    config = config_class()
+
+    # Validate production config
+    if env in ("production", "cpanel", "vps", "docker"):
+        # Call static method for validation (mypy requires explicit annotation)
+        ProductionConfig.validate_production_config()
+
+    return config

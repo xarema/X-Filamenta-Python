@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 📁 RÉORGANISATION PROJET - X-Filamenta-Python">
+    <title>📁 RÉORGANISATION PROJET - X-Filamenta-Python - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="reorganisation-projet-x-filamenta-python">📁 RÉORGANISATION PROJET - X-Filamenta-Python</h1>
+<p><strong>Date:</strong> 2025-12-27<br />
+<strong>Action:</strong> Nettoyage et organisation structure projet</p>
+<hr />
+<h2 id="objectif">🎯 OBJECTIF</h2>
+<p>Organiser le projet pour une meilleure maintenabilité et clarté en déplaçant les fichiers de documentation/session/tests dans des dossiers appropriés.</p>
+<hr />
+<h2 id="changements-effectues">📋 CHANGEMENTS EFFECTUÉS</h2>
+<h3 id="1-dossiers-crees">1. Dossiers Créés</h3>
+<div class="highlight"><pre><span></span><code>docs/
+├── sessions/          # Rapports de sessions de développement
+├── reports/           # Rapports techniques et fixes
+
+scripts/
+└── tests/             # Scripts de test manuels/rapides
+</code></pre></div>
+
+<h3 id="2-fichiers-deplaces">2. Fichiers Déplacés</h3>
+<h4 id="session-reports-docssessions">Session Reports → <code>docs/sessions/</code></h4>
+<ul>
+<li>✅ <code>PHASE4_100_PERCENT_COMPLETE.md</code></li>
+<li>✅ <code>PHASE4_CSRF_COMPLETE.md</code></li>
+<li>✅ <code>PHASE4_USER_2FA_COMPLETE.md</code></li>
+<li>✅ <code>SESSION_COMPLETE_2025-12-27.md</code></li>
+<li>✅ <code>SESSION_COMPLETE_FINALE.md</code></li>
+<li>✅ <code>SESSION_FINALE_COMPLETE.md</code></li>
+<li>✅ <code>SESSION_MARATHON_FINALE.md</code></li>
+<li>✅ <code>SESSION_README.md</code></li>
+<li>✅ <code>RESUME_SESSION_2025-12-27.md</code></li>
+</ul>
+<h4 id="technical-reports-docsreports">Technical Reports → <code>docs/reports/</code></h4>
+<ul>
+<li>✅ <code>FIX_REDIRECT_LOOP.md</code></li>
+<li>✅ <code>REDIRECT_FIX_SUMMARY.md</code></li>
+<li>✅ <code>DATABASE_FIX_COMPLETE.md</code></li>
+<li>✅ <code>GIT_COMMIT_SUMMARY.md</code></li>
+</ul>
+<h4 id="test-scripts-scriptstests">Test Scripts → <code>scripts/tests/</code></h4>
+<ul>
+<li>✅ <code>test_2fa_quick.py</code></li>
+<li>✅ <code>test_auth_quick.py</code></li>
+<li>✅ <code>test_output.txt</code></li>
+<li>✅ <code>test_results.txt</code></li>
+</ul>
+<h4 id="utility-scripts-scripts">Utility Scripts → <code>scripts/</code></h4>
+<ul>
+<li>✅ <code>apply_user_migration.py</code></li>
+<li>✅ <code>mark_installed.py</code></li>
+</ul>
+<hr />
+<h2 id="structure-finale">📂 STRUCTURE FINALE</h2>
+<div class="highlight"><pre><span></span><code><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">xarema</span><span class="err">\</span><span class="n">X</span><span class="o">-</span><span class="n">Filamenta</span><span class="o">-</span><span class="n">Python</span><span class="o">/</span>
+<span class="err">│</span>
+<span class="err">├──</span><span class="w"> </span><span class="err">📄</span><span class="w"> </span><span class="n">README</span><span class="p">.</span><span class="n">md</span><span class="w">                     </span><span class="err">#</span><span class="w"> </span><span class="n">Documentation</span><span class="w"> </span><span class="n">principale</span>
+<span class="err">├──</span><span class="w"> </span><span class="err">📄</span><span class="w"> </span><span class="n">CHANGELOG</span><span class="p">.</span><span class="n">md</span><span class="w">                  </span><span class="err">#</span><span class="w"> </span><span class="n">Historique</span><span class="w"> </span><span class="n">changements</span>
+<span class="err">├──</span><span class="w"> </span><span class="err">📄</span><span class="w"> </span><span class="n">LICENSE</span><span class="w">                       </span><span class="err">#</span><span class="w"> </span><span class="n">License</span><span class="w"> </span><span class="n">AGPL</span><span class="o">-</span><span class="mf">3.0</span>
+<span class="err">├──</span><span class="w"> </span><span class="err">📄</span><span class="w"> </span><span class="n">pyproject</span><span class="p">.</span><span class="n">toml</span><span class="w">                </span><span class="err">#</span><span class="w"> </span><span class="n">Config</span><span class="w"> </span><span class="n">Python</span>
+<span class="err">├──</span><span class="w"> </span><span class="err">📄</span><span class="w"> </span><span class="n">requirements</span><span class="p">.</span><span class="n">txt</span><span class="w">              </span><span class="err">#</span><span class="w"> </span><span class="n">Dépendances</span>
+<span class="err">├──</span><span class="w"> </span><span class="err">📄</span><span class="w"> </span><span class="n">run</span><span class="p">.</span><span class="n">py</span><span class="w">                        </span><span class="err">#</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="n">d</span><span class="s1">&#39;entrée app</span>
+<span class="s1">│</span>
+<span class="s1">├── 📁 backend/                      # Code backend Python</span>
+<span class="s1">│   ├── __init__.py</span>
+<span class="s1">│   ├── wsgi.py</span>
+<span class="s1">│   └── src/</span>
+<span class="s1">│       ├── app.py                   # Application Flask factory</span>
+<span class="s1">│       ├── config.py                # Configuration</span>
+<span class="s1">│       ├── extensions.py            # Extensions (DB, limiter)</span>
+<span class="s1">│       ├── decorators.py            # Decorators (@require_admin, @csrf_protect)</span>
+<span class="s1">│       │</span>
+<span class="s1">│       ├── models/                  # Modèles SQLAlchemy</span>
+<span class="s1">│       │   ├── user.py             # User model (2FA, roles, locking)</span>
+<span class="s1">│       │   ├── admin_history.py    # Audit trail</span>
+<span class="s1">│       │   ├── content.py          # Content model</span>
+<span class="s1">│       │   └── preferences.py      # UserPreferences</span>
+<span class="s1">│       │</span>
+<span class="s1">│       ├── routes/                  # Blueprints Flask</span>
+<span class="s1">│       │   ├── auth.py             # Login/logout</span>
+<span class="s1">│       │   ├── auth_2fa.py         # 2FA setup/verify/disable</span>
+<span class="s1">│       │   ├── admin.py            # Dashboard admin</span>
+<span class="s1">│       │   ├── admin_users.py      # API CRUD users</span>
+<span class="s1">│       │   ├── pages.py            # Pages statiques</span>
+<span class="s1">│       │   ├── api.py              # API REST</span>
+<span class="s1">│       │   ├── main.py             # Routes principales</span>
+<span class="s1">│       │   ├── install.py          # Wizard installation</span>
+<span class="s1">│       │   └── lang.py             # I18n</span>
+<span class="s1">│       │</span>
+<span class="s1">│       ├── services/                # Services métier</span>
+<span class="s1">│       │   ├── user_service.py     # Gestion users</span>
+<span class="s1">│       │   ├── totp_service.py     # Service 2FA TOTP</span>
+<span class="s1">│       │   ├── csrf_service.py     # Protection CSRF</span>
+<span class="s1">│       │   ├── rate_limiter.py     # Rate limiting</span>
+<span class="s1">│       │   ├── content_service.py  # Gestion contenus</span>
+<span class="s1">│       │   ├── preferences_service.py</span>
+<span class="s1">│       │   ├── install_service.py</span>
+<span class="s1">│       │   └── i18n_service.py</span>
+<span class="s1">│       │</span>
+<span class="s1">│       ├── utils/                   # Utilitaires</span>
+<span class="s1">│       └── i18n/                    # Traductions</span>
+<span class="s1">│</span>
+<span class="s1">├── 📁 frontend/                     # Templates &amp; assets</span>
+<span class="s1">│   ├── templates/</span>
+<span class="s1">│   │   ├── base.html</span>
+<span class="s1">│   │   ├── auth/                   # Login, 2FA</span>
+<span class="s1">│   │   ├── admin/                  # Dashboard admin</span>
+<span class="s1">│   │   ├── dashboard/              # Dashboard membre</span>
+<span class="s1">│   │   └── install/                # Wizard</span>
+<span class="s1">│   │</span>
+<span class="s1">│   ├── static/</span>
+<span class="s1">│   │   ├── css/</span>
+<span class="s1">│   │   ├── js/</span>
+<span class="s1">│   │   └── img/</span>
+<span class="s1">│   │</span>
+<span class="s1">│   └── css/</span>
+<span class="s1">│       └── tokens/                 # Design tokens</span>
+<span class="s1">│</span>
+<span class="s1">├── 📁 tests/                        # Tests pytest</span>
+<span class="s1">│   ├── backend/tests/</span>
+<span class="s1">│   │   ├── conftest.py</span>
+<span class="s1">│   │   ├── test_totp.py            # 14 tests</span>
+<span class="s1">│   │   ├── test_user_2fa.py        # 12 tests</span>
+<span class="s1">│   │   ├── test_rate_limiting.py   # 5 tests</span>
+<span class="s1">│   │   ├── test_admin.py           # 9 tests</span>
+<span class="s1">│   │   └── test_routes.py          # 10 tests</span>
+<span class="s1">│</span>
+<span class="s1">├── 📁 scripts/                      # Scripts utilitaires</span>
+<span class="s1">│   ├── create_admin.py             # Créer admin</span>
+<span class="s1">│   ├── init_db.py                  # Init DB</span>
+<span class="s1">│   ├── seed_db.py                  # Seed data</span>
+<span class="s1">│   ├── apply_user_migration.py     # Migration user ✅ DÉPLACÉ</span>
+<span class="s1">│   ├── mark_installed.py           # Marquer installé ✅ DÉPLACÉ</span>
+<span class="s1">│   │</span>
+<span class="s1">│   └── tests/                       # Scripts test manuels ✅ NOUVEAU</span>
+<span class="s1">│       ├── test_2fa_quick.py</span>
+<span class="s1">│       ├── test_auth_quick.py</span>
+<span class="s1">│       ├── test_output.txt</span>
+<span class="s1">│       └── test_results.txt</span>
+<span class="s1">│</span>
+<span class="s1">├── 📁 docs/                         # Documentation</span>
+<span class="s1">│   ├── README.md</span>
+<span class="s1">│   ├── CHANGELOG_GUIDE.md</span>
+<span class="s1">│   ├── DATABASE.md</span>
+<span class="s1">│   ├── UI_UX_STACK.md</span>
+<span class="s1">│   ├── FEATURES_INVENTORY.md       # ✅ NOUVEAU - Inventaire complet</span>
+<span class="s1">│   │</span>
+<span class="s1">│   ├── sessions/                    # ✅ NOUVEAU - Rapports sessions</span>
+<span class="s1">│   │   ├── PHASE4_100_PERCENT_COMPLETE.md</span>
+<span class="s1">│   │   ├── PHASE4_CSRF_COMPLETE.md</span>
+<span class="s1">│   │   ├── PHASE4_USER_2FA_COMPLETE.md</span>
+<span class="s1">│   │   ├── SESSION_COMPLETE_2025-12-27.md</span>
+<span class="s1">│   │   ├── SESSION_COMPLETE_FINALE.md</span>
+<span class="s1">│   │   ├── SESSION_FINALE_COMPLETE.md</span>
+<span class="s1">│   │   ├── SESSION_MARATHON_FINALE.md</span>
+<span class="s1">│   │   ├── SESSION_README.md</span>
+<span class="s1">│   │   └── RESUME_SESSION_2025-12-27.md</span>
+<span class="s1">│   │</span>
+<span class="s1">│   ├── reports/                     # ✅ NOUVEAU - Rapports techniques</span>
+<span class="s1">│   │   ├── FIX_REDIRECT_LOOP.md</span>
+<span class="s1">│   │   ├── REDIRECT_FIX_SUMMARY.md</span>
+<span class="s1">│   │   ├── DATABASE_FIX_COMPLETE.md</span>
+<span class="s1">│   │   └── GIT_COMMIT_SUMMARY.md</span>
+<span class="s1">│   │</span>
+<span class="s1">│   ├── api/</span>
+<span class="s1">│   ├── architecture/</span>
+<span class="s1">│   ├── deployment/</span>
+<span class="s1">│   ├── guides/</span>
+<span class="s1">│   └── technical/</span>
+<span class="s1">│</span>
+<span class="s1">├── 📁 migrations/                   # Alembic migrations</span>
+<span class="s1">│   ├── versions/</span>
+<span class="s1">│   │   └── 002_add_user_2fa_fields.py</span>
+<span class="s1">│   ├── env.py</span>
+<span class="s1">│   └── script.py.mako</span>
+<span class="s1">│</span>
+<span class="s1">├── 📁 instance/                     # Instance-specific files</span>
+<span class="s1">│   └── app.db                      # SQLite database</span>
+<span class="s1">│</span>
+<span class="s1">├── 📁 Analysis_reports/             # Rapports d&#39;</span><span class="n">analyse</span>
+<span class="err">├──</span><span class="w"> </span><span class="err">📁</span><span class="w"> </span><span class="n">config</span><span class="o">/</span><span class="w">                       </span><span class="err">#</span><span class="w"> </span><span class="n">Configuration</span><span class="w"> </span><span class="n">files</span>
+<span class="err">├──</span><span class="w"> </span><span class="err">📁</span><span class="w"> </span><span class="p">.</span><span class="n">roadmap</span><span class="o">/</span><span class="w">                     </span><span class="err">#</span><span class="w"> </span><span class="n">Roadmap</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">planning</span>
+<span class="err">│</span>
+<span class="err">└──</span><span class="w"> </span><span class="err">📁</span><span class="w"> </span><span class="p">.</span><span class="n">venv</span><span class="o">/</span><span class="w">                        </span><span class="err">#</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">environment</span>
+</code></pre></div>
+
+<hr />
+<h2 id="benefices">📊 BÉNÉFICES</h2>
+<h3 id="avant">Avant</h3>
+<ul>
+<li>❌ 15+ fichiers MD à la racine</li>
+<li>❌ Scripts test mélangés</li>
+<li>❌ Rapports difficiles à trouver</li>
+<li>❌ Structure confuse</li>
+</ul>
+<h3 id="apres">Après</h3>
+<ul>
+<li>✅ Racine propre</li>
+<li>✅ Documentation organisée</li>
+<li>✅ Scripts groupés logiquement</li>
+<li>✅ Navigation facile</li>
+<li>✅ Séparation claire sessions/reports/tests</li>
+</ul>
+<hr />
+<h2 id="fichiers-racine-restants">🎯 FICHIERS RACINE (RESTANTS)</h2>
+<p><strong>Configuration:</strong><br />
+- <code>pyproject.toml</code> - Config Python/Poetry<br />
+- <code>requirements.txt</code> - Dépendances<br />
+- <code>requirements-dev.txt</code> - Dépendances dev<br />
+- <code>.env.example</code> - Template env vars<br />
+- <code>alembic.ini</code> - Config Alembic<br />
+- <code>docker-compose.yml</code> - Docker<br />
+- <code>Dockerfile</code> - Image Docker<br />
+- <code>nginx.conf</code> - Config Nginx<br />
+- <code>makefile</code> - Commandes Make</p>
+<p><strong>Documentation principale:</strong><br />
+- <code>README.md</code> - README principal<br />
+- <code>CHANGELOG.md</code> - Historique versions<br />
+- <code>LICENSE</code> - License AGPL-3.0</p>
+<p><strong>Entrypoint:</strong><br />
+- <code>run.py</code> - Point d'entrée Flask</p>
+<p><strong>Config éditeurs:</strong><br />
+- <code>.editorconfig</code><br />
+- <code>.prettierrc.json</code><br />
+- <code>.stylelintrc.cjs</code><br />
+- <code>eslint.config.js</code><br />
+- <code>.gitignore</code><br />
+- <code>.gitattributes</code></p>
+<p><strong>Package:</strong><br />
+- <code>package.json</code> - Dependencies npm<br />
+- <code>package-lock.json</code></p>
+<hr />
+<h2 id="commandes-post-reorganisation">📝 COMMANDES POST-RÉORGANISATION</h2>
+<h3 id="lancer-lapplication">Lancer l'application</h3>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>run.py
+</code></pre></div>
+
+<h3 id="tests">Tests</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Tests pytest</span>
+pytest
+
+<span class="c1"># Test rapide 2FA</span>
+python<span class="w"> </span>scripts/tests/test_2fa_quick.py
+
+<span class="c1"># Test rapide auth</span>
+python<span class="w"> </span>scripts/tests/test_auth_quick.py
+</code></pre></div>
+
+<h3 id="scripts-utilitaires">Scripts utilitaires</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Migration user</span>
+python<span class="w"> </span>scripts/apply_user_migration.py
+
+<span class="c1"># Créer admin</span>
+python<span class="w"> </span>scripts/create_admin.py
+
+<span class="c1"># Init DB</span>
+python<span class="w"> </span>scripts/init_db.py
+</code></pre></div>
+
+<h3 id="documentation">Documentation</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Voir inventaire complet</span>
+cat<span class="w"> </span>docs/FEATURES_INVENTORY.md
+
+<span class="c1"># Sessions de dev</span>
+ls<span class="w"> </span>docs/sessions/
+
+<span class="c1"># Rapports techniques</span>
+ls<span class="w"> </span>docs/reports/
+</code></pre></div>
+
+<hr />
+<h2 id="validation">✅ VALIDATION</h2>
+<h3 id="dossiers-crees">Dossiers créés</h3>
+<ul>
+<li>[x] <code>docs/sessions/</code></li>
+<li>[x] <code>docs/reports/</code></li>
+<li>[x] <code>scripts/tests/</code></li>
+</ul>
+<h3 id="fichiers-deplaces">Fichiers déplacés</h3>
+<ul>
+<li>[x] 9 fichiers session → <code>docs/sessions/</code></li>
+<li>[x] 4 fichiers reports → <code>docs/reports/</code></li>
+<li>[x] 4 fichiers tests → <code>scripts/tests/</code></li>
+<li>[x] 2 scripts → <code>scripts/</code></li>
+</ul>
+<h3 id="documents-crees">Documents créés</h3>
+<ul>
+<li>[x] <code>docs/FEATURES_INVENTORY.md</code> - Inventaire complet fonctionnalités</li>
+<li>[x] <code>docs/PROJECT_REORGANIZATION.md</code> - Ce fichier</li>
+</ul>
+<h3 id="tests_1">Tests</h3>
+<ul>
+<li>[x] Application démarre correctement</li>
+<li>[x] Routes fonctionnent</li>
+<li>[x] Tests pytest passent</li>
+<li>[x] Scripts accessibles</li>
+</ul>
+<hr />
+<h2 id="resultat">🎊 RÉSULTAT</h2>
+<p><strong>Structure projet:</strong> ✅ <strong>ORGANISÉE ET PROPRE</strong></p>
+<p><strong>Navigation:</strong> ✅ <strong>FACILE ET INTUITIVE</strong></p>
+<p><strong>Documentation:</strong> ✅ <strong>CENTRALISÉE</strong></p>
+<p><strong>Maintenabilité:</strong> ✅ <strong>AMÉLIORÉE</strong></p>
+<hr />
+<p><strong>Action complétée:</strong> 2025-12-27<br />
+<strong>Fichiers déplacés:</strong> 19<br />
+<strong>Dossiers créés:</strong> 3<br />
+<strong>Documents ajoutés:</strong> 2<br />
+<strong>Status:</strong> ✅ <strong>RÉORGANISATION TERMINÉE</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

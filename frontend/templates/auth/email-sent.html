@@ -1,0 +1,55 @@
+{% extends "layouts/base.html" %}
+{% endblock %}
+</div>
+  </div>
+    </div>
+      </div>
+        </div>
+          </p>
+            </a>
+              {{ t('auth.email_sent.resend_link') or 'Renvoyer' }}
+            <a href="{{ url_for('auth.send_verification') }}" class="text-decoration-none">
+            {{ t('auth.email_sent.resend') or 'Vous n\'avez pas reçu l\'email ?' }}
+          <p class="small text-muted">
+          <!-- Resend Option -->
+
+          </p>
+            </a>
+              {{ t('auth.email_sent.back_dashboard') or 'Retour au tableau de bord' }}
+            <a href="{{ url_for('pages.dashboard') }}" class="btn btn-primary btn-sm">
+          <p class="mb-3">
+          <!-- Actions -->
+
+          <hr class="my-4" />
+          <!-- Divider -->
+
+          </p>
+            {{ t('auth.email_sent.instructions') or 'Cliquez sur le lien dans l\'email pour vérifier votre adresse email. Le lien expire dans 24 heures.' }}
+          <p class="small text-muted mb-4">
+          <!-- Instructions -->
+
+          <p class="h6 mb-4 text-primary fw-bold">{{ email }}</p>
+          <!-- Email Display -->
+
+          </p>
+            {{ t('auth.email_sent.message') or 'Un email de vérification a été envoyé à:' }}
+          <p class="text-muted mb-4">
+          <!-- Message -->
+
+          <h1 class="h3 mb-3 fw-bold">{{ t('auth.email_sent.heading') or 'Vérifiez votre email' }}</h1>
+          <!-- Title -->
+
+          </div>
+            <i class="bi bi-envelope-check text-success" style="font-size: 3rem;"></i>
+          <div class="mb-4">
+          <!-- Icon -->
+        <div class="card-body text-center p-5">
+      <div class="card border-0 shadow-sm">
+    <div class="col-md-6">
+  <div class="row justify-content-center">
+<div class="container py-5">
+{% block content %}
+
+{% block title %}{{ t('auth.email_sent.title') or 'Vérifier votre email' }} - {{ t('app.name') }}{% endblock %}
+
+

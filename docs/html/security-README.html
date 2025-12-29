@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🔒 Sécurité — X-Filamenta-Python">
+    <title>🔒 Sécurité — X-Filamenta-Python - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="securite-x-filamenta-python">🔒 Sécurité — X-Filamenta-Python</h1>
+<p><strong>Guides de sécurité et bonnes pratiques.</strong></p>
+<hr />
+<h2 id="sections-principales">🎯 Sections principales</h2>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Sujet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="best-practices.md">best-practices.md</a></td>
+<td>Bonnes pratiques générales</td>
+</tr>
+<tr>
+<td><a href="csrf-protection.md">csrf-protection.md</a></td>
+<td>Protection contre CSRF</td>
+</tr>
+<tr>
+<td><a href="2fa.md">2fa.md</a></td>
+<td>Authentification 2FA (TOTP)</td>
+</tr>
+<tr>
+<td><a href="secrets-management.md">secrets-management.md</a></td>
+<td>Gestion des secrets</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="securite-integree">🔐 Sécurité intégrée</h2>
+<h3 id="fonctionnalites-de-securite">✅ Fonctionnalités de sécurité</h3>
+<ul>
+<li><strong>Session sécurisées</strong> : Flask sessions avec secret key</li>
+<li><strong>Authentification</strong> : Login + password hashing (bcrypt)</li>
+<li><strong>2FA TOTP</strong> : Authentification multi-facteurs</li>
+<li><strong>CSRF Protection</strong> : Tokens sur tous les formulaires</li>
+<li><strong>Rate Limiting</strong> : Protection contre les attaques par force brute</li>
+<li><strong>Headers de sécurité</strong> : CSP, X-Frame-Options, X-Content-Type-Options, Strict-Transport-Security</li>
+<li><strong>Validation inputs</strong> : Sanitization de tous les inputs</li>
+<li><strong>Parameterized Queries</strong> : Pas de SQL injection (SQLAlchemy ORM)</li>
+<li><strong>Logging sécurisé</strong> : Pas de données sensibles loggées</li>
+</ul>
+<hr />
+<h2 id="pour-les-developpeurs">🧑‍💻 Pour les développeurs</h2>
+<ol>
+<li><strong>Lire</strong> : <a href="best-practices.md">best-practices.md</a></li>
+<li><strong>Lire</strong> : <a href="csrf-protection.md">csrf-protection.md</a></li>
+<li><strong>Lire</strong> : <a href="2fa.md">2fa.md</a></li>
+<li><strong>Lire</strong> : <a href="secrets-management.md">secrets-management.md</a></li>
+<li><strong>Implémenter</strong> : Suivre les guidelines dans votre code</li>
+</ol>
+<hr />
+<h2 id="pour-les-auditeursops">🔍 Pour les auditeurs/ops</h2>
+<p><strong>Checklist de sécurité</strong> :</p>
+<ul>
+<li>[ ] Vérifier les headers HTTP (HTTPS, CSP, etc.)</li>
+<li>[ ] Vérifier les sessions (secret key, httponly, secure flags)</li>
+<li>[ ] Vérifier 2FA (TOTP, backup codes)</li>
+<li>[ ] Vérifier CSRF protection (tokens valides)</li>
+<li>[ ] Vérifier rate limiting (pas accessible sans limite)</li>
+<li>[ ] Vérifier logs (pas de données sensibles)</li>
+<li>[ ] Vérifier secrets (.env, pas hardcodés)</li>
+</ul>
+<hr />
+<h2 id="documentation-supplementaire">📚 Documentation supplémentaire</h2>
+<ul>
+<li><strong>Features</strong> → <a href="../features/authentication.md">../features/authentication.md</a></li>
+<li><strong>Architecture</strong> → <a href="../architecture/backend.md">../architecture/backend.md</a></li>
+<li><strong>Déploiement</strong> → <a href="../deployment/README.md">../deployment/README.md</a></li>
+</ul>
+<hr />
+<p><strong>→ Consultez les guides détaillés pour chaque aspect de la sécurité.</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

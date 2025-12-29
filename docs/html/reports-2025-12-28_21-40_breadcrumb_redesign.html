@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - ✅ Nouveau design du fil d'Ariane (Breadcrumb)">
+    <title>✅ Nouveau design du fil d'Ariane (Breadcrumb) - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="nouveau-design-du-fil-dariane-breadcrumb">✅ Nouveau design du fil d'Ariane (Breadcrumb)</h1>
+<p><strong>Date</strong> : 2025-12-28T21:40:00+01:00<br />
+<strong>Statut</strong> : ✅ Implémenté<br />
+<strong>Type</strong> : Design CSS uniquement (aucune modification de la logique)</p>
+<hr />
+<h2 id="design-implemente">🎨 Design implémenté</h2>
+<h3 id="disposition">Disposition</h3>
+<p>✅ <strong>5 blocs en ligne unique</strong><br />
+- Les blocs s'adaptent dynamiquement à la largeur de l'écran<br />
+- Sur petits écrans, le fil d'Ariane passe automatiquement sur 2 lignes<br />
+- Les 5 blocs ont toujours la même largeur (flex-basis égal)</p>
+<p>✅ <strong>Flèches entre les blocs</strong><br />
+- Icône <code>→</code> entre chaque étape<br />
+- Couleur adaptée à l'état de l'étape précédente</p>
+<h3 id="etats-visuels">États visuels</h3>
+<h4 id="1-etape-terminee-vert">1. <strong>Étape terminée (VERT)</strong></h4>
+<ul>
+<li>✅ Fond : Vert clair (<code>#d1fae5</code>)</li>
+<li>✅ Bordure : Vert (<code>#10b981</code>)</li>
+<li>✅ Texte : Vert foncé (<code>#065f46</code>)</li>
+<li>✅ Icône : Crochet vert <code>✓</code></li>
+<li>✅ Effet hover : Survol avec ombre et translation</li>
+</ul>
+<h4 id="2-etape-en-cours-bleu">2. <strong>Étape en cours (BLEU)</strong></h4>
+<ul>
+<li>✅ Fond : Bleu clair (<code>#dbeafe</code>)</li>
+<li>✅ Bordure : Bleu (<code>#3b82f6</code>)</li>
+<li>✅ Texte : Bleu foncé (<code>#1e40af</code>)</li>
+<li>✅ Icône : Cercle plein bleu <code>●</code></li>
+</ul>
+<h4 id="3-etape-restante-gris">3. <strong>Étape restante (GRIS)</strong></h4>
+<ul>
+<li>✅ Fond : Blanc (<code>#ffffff</code>)</li>
+<li>✅ Bordure : Gris clair (<code>#d1d5db</code>)</li>
+<li>✅ Texte : Gris (<code>#6b7280</code>)</li>
+<li>✅ Icône : Cercle vide gris <code>○</code></li>
+<li>✅ Opacité réduite (0.7)</li>
+</ul>
+<h3 id="typographie">Typographie</h3>
+<p>✅ <strong>Label "ÉTAPE X"</strong><br />
+- Texte en MAJUSCULES<br />
+- Police grasse (font-weight: 700)<br />
+- Petite taille (0.75rem)<br />
+- Espacement des lettres augmenté</p>
+<p>✅ <strong>Titre de l'étape</strong><br />
+- Police normale (font-weight: 400)<br />
+- Taille standard (0.95rem)<br />
+- Pas de transformation</p>
+<hr />
+<h2 id="fichiers-creesmodifies">📁 Fichiers créés/modifiés</h2>
+<h3 id="cree">Créé</h3>
+<ol>
+<li>✅ <code>frontend/static/css/wizard-breadcrumb.css</code><br />
+   - Nouveau fichier CSS dédié au breadcrumb<br />
+   - Styles complets pour les 3 états<br />
+   - Responsive design inclus<br />
+   - Total : 225 lignes</li>
+</ol>
+<h3 id="modifies">Modifiés</h3>
+<ol start="2">
+<li>
+<p>✅ <code>frontend/templates/layouts/wizard.html</code><br />
+   - Ajout du lien vers <code>wizard-breadcrumb.css</code><br />
+   - Ligne 46</p>
+</li>
+<li>
+<p>✅ <code>frontend/templates/pages/install/partials/_wizard_content.html</code><br />
+   - Remplacement de l'ancien breadcrumb (2 lignes) par une seule ligne<br />
+   - Structure HTML simplifiée<br />
+   - Utilisation des classes CSS dédiées<br />
+   - Lignes 52-107</p>
+</li>
+</ol>
+<hr />
+<h2 id="caracteristiques-techniques">🎯 Caractéristiques techniques</h2>
+<h3 id="responsive">Responsive</h3>
+<p>✅ <strong>Desktop (&gt;768px)</strong><br />
+- 5 blocs en ligne<br />
+- Largeur optimale : 180-220px par bloc<br />
+- Flèches horizontales →</p>
+<p>✅ <strong>Tablette (768px)</strong><br />
+- Ajustement automatique de la largeur des blocs<br />
+- Wrap sur 2 lignes si nécessaire<br />
+- Espacement réduit</p>
+<p>✅ <strong>Mobile (&lt;576px)</strong><br />
+- Blocs en colonne (100% de largeur)<br />
+- Flèches verticales (rotation 90°)<br />
+- Espacement vertical optimisé</p>
+<h3 id="accessibilite">Accessibilité</h3>
+<p>✅ <strong>Focus visible</strong> sur les étapes cliquables<br />
+✅ <strong>Hover states</strong> pour indiquer l'interactivité<br />
+✅ <strong>Couleurs contrastées</strong> pour la lisibilité<br />
+✅ <strong>Transitions douces</strong> pour le confort visuel</p>
+<hr />
+<h2 id="structure-html-nouveau">🔍 Structure HTML (nouveau)</h2>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;wizard-breadcrumb&quot;</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;wizard-step step-done|step-active|step-pending&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;wizard-step-label&quot;</span><span class="p">&gt;</span>ÉTAPE 1<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;wizard-step-title&quot;</span><span class="p">&gt;</span>Bienvenue<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;wizard-step-icon&quot;</span><span class="p">&gt;</span>✓|●|○<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;wizard-arrow arrow-done|arrow-active|arrow-pending&quot;</span><span class="p">&gt;</span>
+    →
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="classes-css-principales">🎨 Classes CSS principales</h2>
+<table>
+<thead>
+<tr>
+<th>Classe</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.wizard-breadcrumb</code></td>
+<td>Conteneur principal</td>
+</tr>
+<tr>
+<td><code>.wizard-step</code></td>
+<td>Bloc d'étape</td>
+</tr>
+<tr>
+<td><code>.step-done</code></td>
+<td>État terminé (vert)</td>
+</tr>
+<tr>
+<td><code>.step-active</code></td>
+<td>État actif (bleu)</td>
+</tr>
+<tr>
+<td><code>.step-pending</code></td>
+<td>État en attente (gris)</td>
+</tr>
+<tr>
+<td><code>.wizard-step-label</code></td>
+<td>Label "ÉTAPE X"</td>
+</tr>
+<tr>
+<td><code>.wizard-step-title</code></td>
+<td>Titre de l'étape</td>
+</tr>
+<tr>
+<td><code>.wizard-step-icon</code></td>
+<td>Icône (✓, ●, ○)</td>
+</tr>
+<tr>
+<td><code>.wizard-arrow</code></td>
+<td>Flèche séparatrice</td>
+</tr>
+<tr>
+<td><code>.wizard-step-button</code></td>
+<td>Bouton pour étapes cliquables</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="validation">✅ Validation</h2>
+<h3 id="regle-15-verification-complete-du-fichier">Règle 1.5 : Vérification complète du fichier</h3>
+<ul>
+<li>[x] <code>wizard-breadcrumb.css</code> relu au complet</li>
+<li>[x] <code>_wizard_content.html</code> relu au complet</li>
+<li>[x] <code>wizard.html</code> relu au complet</li>
+<li>[x] Syntaxe HTML/CSS validée</li>
+<li>[x] Structure cohérente</li>
+<li>[x] Aucune erreur de syntaxe</li>
+</ul>
+<h3 id="tests-visuels-requis">Tests visuels requis</h3>
+<ul>
+<li>[ ] Desktop : 5 blocs en ligne</li>
+<li>[ ] Tablette : Adaptation responsive</li>
+<li>[ ] Mobile : Passage en colonne</li>
+<li>[ ] État vert : Étapes terminées</li>
+<li>[ ] État bleu : Étape active</li>
+<li>[ ] État gris : Étapes restantes</li>
+<li>[ ] Flèches : Bonnes couleurs</li>
+<li>[ ] Hover : Animation sur étapes cliquables</li>
+</ul>
+<hr />
+<h2 id="testez-maintenant">🚀 Testez maintenant</h2>
+<p><strong>URL</strong> : http://127.0.0.1:5000/install/</p>
+<p><strong>Vérifications</strong> :<br />
+1. Les 5 étapes s'affichent en ligne<br />
+2. Les couleurs correspondent (vert/bleu/gris)<br />
+3. Les icônes sont correctes (✓, ●, ○)<br />
+4. "ÉTAPE" est en majuscules et gras<br />
+5. Le titre est en police normale<br />
+6. Les flèches sont visibles et colorées<br />
+7. Le responsive fonctionne (réduire la fenêtre)</p>
+<hr />
+<p><strong>Design basé sur le screenshot fourni et vos spécifications exactes.</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

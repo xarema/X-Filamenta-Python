@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Audit et Corrections — Wizard d'Installation">
+    <title>Audit et Corrections — Wizard d'Installation - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="audit-et-corrections-wizard-dinstallation">Audit et Corrections — Wizard d'Installation</h1>
+<p><strong>Date:</strong> 2025-12-28T01:00:00+00:00<br />
+<strong>Contexte:</strong> Résolution des problèmes du wizard d'installation<br />
+<strong>Scope:</strong> Routes install, templates, fichiers statiques, traductions</p>
+<hr />
+<h2 id="problemes-identifies">🔍 Problèmes Identifiés</h2>
+<h3 id="1-fichiers-statiques-404">1. <strong>Fichiers statiques 404</strong></h3>
+<ul>
+<li>❌ Erreur: <code>/static/css/tokens/variables.css</code> → 404</li>
+<li>❌ Erreur: <code>/static/css/main.css</code> → 404</li>
+<li>❌ Erreur: <code>/static/js/plugins/htmx-utils.js</code> → 404</li>
+<li>❌ Erreur: <code>/static/js/plugins/alpine-utils.js</code> → 404</li>
+<li>❌ Erreur: <code>/static/js/plugins/tabulator.js</code> → 404</li>
+</ul>
+<p><strong>Cause:</strong> Les fichiers existent dans <code>frontend/static/</code> mais Flask les cherche correctement. Le problème est que les fichiers sont vides ou inexistants.</p>
+<p><strong>Status:</strong> ✅ Fichiers trouvés dans <code>frontend/static/</code></p>
+<hr />
+<h3 id="2-navigation-du-wizard-bloquee">2. <strong>Navigation du wizard bloquée</strong></h3>
+<p><strong>Symptômes:</strong><br />
+- Clic sur "Continuer en français" → Pas de changement visible<br />
+- La page demande directement la base de données après le choix de langue<br />
+- Message "no file upload" lors du clic sur "Continuer" après test DB</p>
+<p><strong>Cause 1:</strong> Le template <code>index.html</code> affiche <code>db_form</code> directement après le choix de langue<br />
+<strong>Cause 2:</strong> Le flux du wizard n'est pas clair pour l'utilisateur</p>
+<hr />
+<h3 id="3-selection-mysqlpostgresql">3. <strong>Sélection MySQL/PostgreSQL</strong></h3>
+<p><strong>Symptôme:</strong> Les onglets MySQL et PostgreSQL semblent ne pas être cliquables</p>
+<p><strong>Cause:</strong> Bootstrap tabs fonctionne correctement dans le template, mais peut-être que Bootstrap JS n'est pas chargé ou qu'il y a un conflit.</p>
+<hr />
+<h3 id="4-message-no-file-upload">4. <strong>Message "no file upload"</strong></h3>
+<p><strong>Symptôme:</strong> Après test DB réussi, clic sur "Continuer" → message d'erreur "no file upload"</p>
+<p><strong>Cause:</strong> La route <code>/install/step</code> avec <code>step=admin_form</code> ne vérifie pas si un backup a été uploadé. Le formulaire d'upload n'est jamais affiché si on clique sur "Continuer sans backup".</p>
+<hr />
+<h2 id="corrections-a-appliquer">🔧 Corrections à Appliquer</h2>
+<h3 id="1-verifier-et-creer-les-fichiers-statiques-manquants">1. Vérifier et créer les fichiers statiques manquants</h3>
+<p><strong>Action:</strong> Créer des fichiers CSS/JS de base s'ils sont vides</p>
+<h3 id="2-ameliorer-le-flux-du-wizard">2. Améliorer le flux du wizard</h3>
+<p><strong>Action:</strong> <br />
+- Ajouter une étape de bienvenue après le choix de langue<br />
+- Clarifier la navigation entre les étapes<br />
+- Corriger le message "no file upload"</p>
+<h3 id="3-verifier-bootstrap-js">3. Vérifier Bootstrap JS</h3>
+<p><strong>Action:</strong> S'assurer que Bootstrap JavaScript est bien chargé dans <code>base.html</code></p>
+<h3 id="4-ameliorer-les-logs">4. Améliorer les logs</h3>
+<p><strong>Action:</strong> Ajouter plus de logs dans <code>install.py</code> pour débugger</p>
+<hr />
+<h2 id="plan-de-corrections">📋 Plan de Corrections</h2>
+<ol>
+<li>✅ Vérifier les fichiers statiques</li>
+<li>⏳ Corriger le flux du wizard</li>
+<li>⏳ Améliorer les templates</li>
+<li>⏳ Ajouter des logs de debug</li>
+<li>⏳ Tester le wizard complet</li>
+</ol>
+<hr />
+<h2 id="resultat-attendu">🎯 Résultat Attendu</h2>
+<ul>
+<li>Wizard fonctionnel de bout en bout</li>
+<li>Navigation claire entre les étapes</li>
+<li>Pas de messages d'erreur confus</li>
+<li>Toutes les options (SQLite/MySQL/PostgreSQL) fonctionnelles</li>
+</ul>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

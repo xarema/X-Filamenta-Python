@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🔧 FIX : Dépendances Manquantes - Flask-Limiter">
+    <title>🔧 FIX : Dépendances Manquantes - Flask-Limiter - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="fix-dependances-manquantes-flask-limiter">🔧 FIX : Dépendances Manquantes - Flask-Limiter</h1>
+<p><strong>Date:</strong> 2025-12-27<br />
+<strong>Problème:</strong> ModuleNotFoundError: No module named 'flask_limiter'<br />
+<strong>Status:</strong> ✅ <strong>RÉSOLU</strong></p>
+<hr />
+<h2 id="probleme">❌ PROBLÈME</h2>
+<h3 id="erreur">Erreur</h3>
+<div class="highlight"><pre><span></span><code><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;D:\xarema\X-Filamenta-Python</span><span class="se">\r</span><span class="s2">un.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">10</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">()</span>
+  <span class="n">File</span> <span class="s2">&quot;D:\xarema\X-Filamenta-Python</span><span class="se">\b</span><span class="s2">ackend\src</span><span class="se">\a</span><span class="s2">pp.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">91</span><span class="p">,</span> <span class="ow">in</span> <span class="n">create_app</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.services.rate_limiter</span><span class="w"> </span><span class="kn">import</span> <span class="n">limiter</span>
+  <span class="n">File</span> <span class="s2">&quot;D:\xarema\X-Filamenta-Python</span><span class="se">\b</span><span class="s2">ackend\src\services</span><span class="se">\r</span><span class="s2">ate_limiter.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">30</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">flask_limiter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Limiter</span>
+<span class="ne">ModuleNotFoundError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="s1">&#39;flask_limiter&#39;</span>
+</code></pre></div>
+
+<h3 id="cause">Cause</h3>
+<p><strong>Dépendances 2FA et rate limiting non installées dans le venv:</strong><br />
+- <code>flask-limiter</code> (rate limiting)<br />
+- <code>pyotp</code> (2FA TOTP)<br />
+- <code>qrcode</code> (QR codes)<br />
+- <code>pillow</code> (images)</p>
+<p>Ces dépendances sont listées dans <code>requirements.txt</code> mais n'étaient pas installées dans l'environnement virtuel.</p>
+<hr />
+<h2 id="solution">✅ SOLUTION</h2>
+<h3 id="commande-executee">Commande Exécutée</h3>
+<div class="highlight"><pre><span></span><code><span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">flask-limiter</span> <span class="n">pyotp</span> <span class="n">qrcode</span> <span class="n">pillow</span>
+</code></pre></div>
+
+<h3 id="dependances-installees">Dépendances Installées</h3>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Version</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>flask-limiter</strong></td>
+<td>4.1.1</td>
+<td>Rate limiting multi-niveaux</td>
+</tr>
+<tr>
+<td><strong>pyotp</strong></td>
+<td>2.9.0</td>
+<td>2FA TOTP (RFC 6238)</td>
+</tr>
+<tr>
+<td><strong>qrcode</strong></td>
+<td>8.2</td>
+<td>Génération QR codes</td>
+</tr>
+<tr>
+<td><strong>pillow</strong></td>
+<td>12.0.0</td>
+<td>Traitement images</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dependances-additionnelles-auto-installees">Dépendances Additionnelles (Auto-installées)</h3>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Version</th>
+<th>Rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>limits</code></td>
+<td>5.6.0</td>
+<td>Backend rate limiting</td>
+</tr>
+<tr>
+<td><code>ordered-set</code></td>
+<td>4.1.0</td>
+<td>Structures de données</td>
+</tr>
+<tr>
+<td><code>deprecated</code></td>
+<td>1.3.1</td>
+<td>Gestion dépréciation</td>
+</tr>
+<tr>
+<td><code>wrapt</code></td>
+<td>2.0.1</td>
+<td>Décorateurs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="verification">🔍 VÉRIFICATION</h2>
+<h3 id="avant">Avant</h3>
+<div class="highlight"><pre><span></span><code>❌ ModuleNotFoundError: flask_limiter
+❌ Application ne démarre pas
+</code></pre></div>
+
+<h3 id="apres">Après</h3>
+<div class="highlight"><pre><span></span><code>✅ Tous les modules importés
+✅ Application démarre correctement
+✅ Rate limiting opérationnel
+✅ 2FA TOTP opérationnel
+</code></pre></div>
+
+<hr />
+<h2 id="recommandations">📋 RECOMMANDATIONS</h2>
+<h3 id="pour-eviter-ce-probleme">Pour Éviter ce Problème</h3>
+<p><strong>1. Toujours installer requirements.txt après clone:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># Activer venv</span>
+<span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">activate</span>
+
+<span class="c"># Installer toutes les dépendances</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">-r</span> <span class="n">requirements</span><span class="p">.</span><span class="n">txt</span>
+</code></pre></div>
+
+<p><strong>2. Vérifier requirements.txt est complet:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="n">requirements</span><span class="p">.</span><span class="n">txt</span><span class="w"> </span><span class="n">doit</span><span class="w"> </span><span class="nl">contenir</span><span class="p">:</span>
+<span class="n">flask</span><span class="o">-</span><span class="n">limiter</span><span class="o">&gt;=</span><span class="mf">3.5.0</span>
+<span class="n">pyotp</span><span class="o">&gt;=</span><span class="mf">2.9.0</span>
+<span class="n">qrcode</span><span class="o">[</span><span class="n">pil</span><span class="o">]&gt;=</span><span class="mf">7.4.0</span>
+<span class="n">pillow</span><span class="o">&gt;=</span><span class="mf">10.0.0</span>
+</code></pre></div>
+
+<p><strong>3. Utiliser requirements-dev.txt pour dev:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">pip</span> <span class="n">install</span> <span class="n">-r</span> <span class="n">requirements</span><span class="p">.</span><span class="n">txt</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">-r</span> <span class="n">requirements-dev</span><span class="p">.</span><span class="n">txt</span>
+</code></pre></div>
+
+<hr />
+<h2 id="contenu-requirementstxt">📦 CONTENU requirements.txt</h2>
+<h3 id="actuel-verifie">Actuel (Vérifié)</h3>
+<div class="highlight"><pre><span></span><code><span class="n">flask</span><span class="o">&gt;=</span><span class="mf">3.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mf">4.0</span>
+<span class="n">flask</span><span class="o">-</span><span class="n">sqlalchemy</span><span class="o">&gt;=</span><span class="mf">3.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mf">4.0</span>
+<span class="n">python</span><span class="o">-</span><span class="n">dotenv</span><span class="o">&gt;=</span><span class="mf">1.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mf">2.0</span>
+<span class="n">Flask</span><span class="o">-</span><span class="n">WTF</span><span class="o">==</span><span class="mf">1.2.1</span>
+
+<span class="err">#</span><span class="w"> </span><span class="mi">2</span><span class="n">FA</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Security</span>
+<span class="n">pyotp</span><span class="o">&gt;=</span><span class="mf">2.9.0</span><span class="w">              </span><span class="err">✅</span><span class="w"> </span><span class="n">PRÉSENT</span>
+<span class="n">qrcode</span><span class="o">[</span><span class="n">pil</span><span class="o">]&gt;=</span><span class="mf">7.4.0</span><span class="w">        </span><span class="err">✅</span><span class="w"> </span><span class="n">PRÉSENT</span>
+<span class="n">pillow</span><span class="o">&gt;=</span><span class="mf">10.0.0</span><span class="w">            </span><span class="err">✅</span><span class="w"> </span><span class="n">PRÉSENT</span>
+<span class="n">flask</span><span class="o">-</span><span class="n">limiter</span><span class="o">&gt;=</span><span class="mf">3.5.0</span><span class="w">      </span><span class="err">✅</span><span class="w"> </span><span class="n">PRÉSENT</span>
+
+<span class="err">#</span><span class="w"> </span><span class="k">Database</span><span class="w"> </span><span class="n">drivers</span>
+<span class="n">PyMySQL</span><span class="o">&gt;=</span><span class="mf">1.1</span><span class="p">,</span><span class="o">&lt;</span><span class="mf">2.0</span>
+<span class="n">psycopg2</span><span class="o">-</span><span class="nc">binary</span><span class="o">&gt;=</span><span class="mf">2.9</span><span class="p">,</span><span class="o">&lt;</span><span class="mf">3.0</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">WSGI</span><span class="w"> </span><span class="n">servers</span>
+<span class="n">gunicorn</span><span class="o">&gt;=</span><span class="mf">21.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mf">22.0</span>
+</code></pre></div>
+
+<p><strong>Status:</strong> ✅ Tous les packages nécessaires sont listés</p>
+<hr />
+<h2 id="prochaines-etapes">🚀 PROCHAINES ÉTAPES</h2>
+<h3 id="installation-complete-propre">Installation Complète Propre</h3>
+<p>Si besoin de réinstaller complètement :</p>
+<div class="highlight"><pre><span></span><code><span class="c"># 1. Supprimer venv existant</span>
+<span class="nb">Remove-Item</span> <span class="n">-Recurse</span> <span class="n">-Force</span> <span class="p">.</span><span class="n">venv</span>
+
+<span class="c"># 2. Créer nouveau venv</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">venv</span> <span class="p">.</span><span class="n">venv</span>
+
+<span class="c"># 3. Activer venv</span>
+<span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">activate</span>
+
+<span class="c"># 4. Upgrade pip</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
+
+<span class="c"># 5. Installer toutes dépendances</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">-r</span> <span class="n">requirements</span><span class="p">.</span><span class="n">txt</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">-r</span> <span class="n">requirements-dev</span><span class="p">.</span><span class="n">txt</span>
+
+<span class="c"># 6. Vérifier installation</span>
+<span class="n">pip</span> <span class="n">list</span>
+</code></pre></div>
+
+<h3 id="verifier-versions">Vérifier Versions</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Lister packages installés</span>
+<span class="n">pip</span> <span class="n">list</span>
+
+<span class="c"># Vérifier package spécifique</span>
+<span class="n">pip</span> <span class="n">show</span> <span class="n">flask-limiter</span>
+</code></pre></div>
+
+<hr />
+<h2 id="versions-installees">📊 VERSIONS INSTALLÉES</h2>
+<h3 id="core-flask">Core Flask</h3>
+<ul>
+<li><code>flask</code> : 3.1.2 ✅</li>
+<li><code>flask-sqlalchemy</code> : (déjà installé) ✅</li>
+<li><code>Flask-WTF</code> : (déjà installé) ✅</li>
+</ul>
+<h3 id="2fa-securite-nouvellement-installes">2FA / Sécurité (NOUVELLEMENT INSTALLÉS)</h3>
+<ul>
+<li><code>flask-limiter</code> : 4.1.1 ✅</li>
+<li><code>pyotp</code> : 2.9.0 ✅</li>
+<li><code>qrcode</code> : 8.2 ✅</li>
+<li><code>pillow</code> : 12.0.0 ✅</li>
+</ul>
+<h3 id="dependances-transverses">Dépendances Transverses</h3>
+<ul>
+<li><code>limits</code> : 5.6.0 ✅</li>
+<li><code>ordered-set</code> : 4.1.0 ✅</li>
+<li><code>deprecated</code> : 1.3.1 ✅</li>
+<li><code>wrapt</code> : 2.0.1 ✅</li>
+</ul>
+<hr />
+<h2 id="resolution">✅ RÉSOLUTION</h2>
+<h3 id="probleme_1">Problème</h3>
+<p>❌ <code>ModuleNotFoundError: flask_limiter</code></p>
+<h3 id="solution_1">Solution</h3>
+<p>✅ Installation des dépendances manquantes</p>
+<h3 id="commande">Commande</h3>
+<div class="highlight"><pre><span></span><code><span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">flask-limiter</span> <span class="n">pyotp</span> <span class="n">qrcode</span> <span class="n">pillow</span>
+</code></pre></div>
+
+<h3 id="resultat">Résultat</h3>
+<p>✅ <strong>Application démarre correctement</strong><br />
+✅ <strong>Rate limiting opérationnel</strong><br />
+✅ <strong>2FA TOTP opérationnel</strong><br />
+✅ <strong>Tous modules importés</strong>  </p>
+<hr />
+<h2 id="notes">📝 NOTES</h2>
+<h3 id="pourquoi-ce-probleme">Pourquoi ce Problème ?</h3>
+<p>Les dépendances 2FA et rate limiting ont été ajoutées durant la Phase 4 mais n'ont pas été installées automatiquement dans votre venv existant.</p>
+<p><strong>Solution permanente:</strong><br />
+- ✅ <code>requirements.txt</code> est à jour<br />
+- ✅ Dépendances maintenant installées<br />
+- ✅ Application opérationnelle</p>
+<h3 id="compatibilite">Compatibilité</h3>
+<p>Toutes les versions installées sont compatibles :<br />
+- Python 3.12 ✅<br />
+- Windows ✅<br />
+- Flask 3.x ✅</p>
+<hr />
+<p><strong>Problème résolu:</strong> 2025-12-27<br />
+<strong>Dépendances installées:</strong> 8 packages<br />
+<strong>Status:</strong> ✅ <strong>APPLICATION OPÉRATIONNELLE</strong></p>
+<hr />
+<p><strong>Vous pouvez maintenant lancer l'application avec:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="n">run</span><span class="p">.</span><span class="n">py</span>
+</code></pre></div>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

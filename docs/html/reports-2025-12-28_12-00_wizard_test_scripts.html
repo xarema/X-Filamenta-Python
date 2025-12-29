@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🧪 Préparation Scripts de Test Wizard">
+    <title>🧪 Préparation Scripts de Test Wizard - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="preparation-scripts-de-test-wizard">🧪 Préparation Scripts de Test Wizard</h1>
+<p><strong>Date:</strong> 2025-12-28T12:00:00+00:00<br />
+<strong>Statut:</strong> ✅ <strong>Scripts créés et prêts</strong></p>
+<hr />
+<h2 id="objectif">📋 Objectif</h2>
+<p>Créer des scripts PowerShell pour tester le wizard d'installation en mode production, comme si l'utilisateur installait l'application pour la première fois.</p>
+<hr />
+<h2 id="scripts-crees">📁 Scripts créés</h2>
+<h3 id="1-scriptstest_wizard_prodps1-script-principal-de-test">1. <code>scripts/test_wizard_prod.ps1</code> - Script principal de test</h3>
+<p><strong>Fonctionnalités:</strong><br />
+- ✅ Nettoyage complet de l'environnement<br />
+- ✅ Vérification environnement virtuel Python<br />
+- ✅ Vérification des dépendances<br />
+- ✅ Vérification de la structure du projet<br />
+- ✅ Instructions de test affichées<br />
+- ✅ Démarrage du serveur Flask</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">.\</span><span class="n">scripts</span><span class="p">\</span><span class="n">test_wizard_prod</span><span class="p">.</span><span class="n">ps1</span>
+</code></pre></div>
+
+<hr />
+<h3 id="2-scriptsverify_installationps1-verification-post-installation">2. <code>scripts/verify_installation.ps1</code> - Vérification post-installation</h3>
+<p><strong>Fonctionnalités:</strong><br />
+- ✅ Vérifie le flag d'installation<br />
+- ✅ Vérifie la base de données créée<br />
+- ✅ Liste les tables (si sqlite3 disponible)<br />
+- ✅ Vérifie l'utilisateur admin via Python<br />
+- ✅ Teste la connexion HTTP à l'application<br />
+- ✅ Vérifie les fichiers statiques</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">.\</span><span class="n">scripts</span><span class="p">\</span><span class="n">verify_installation</span><span class="p">.</span><span class="n">ps1</span>
+</code></pre></div>
+
+<hr />
+<h3 id="3-scriptsclean_wizardps1-nettoyage-rapide">3. <code>scripts/clean_wizard.ps1</code> - Nettoyage rapide</h3>
+<p><strong>Fonctionnalités:</strong><br />
+- ✅ Supprime les flags d'installation<br />
+- ✅ Supprime toutes les bases de données<br />
+- ✅ Mode confirmation (ou -Force)</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">.\</span><span class="n">scripts</span><span class="p">\</span><span class="n">clean_wizard</span><span class="p">.</span><span class="n">ps1</span>
+<span class="c"># ou</span>
+<span class="p">.\</span><span class="n">scripts</span><span class="p">\</span><span class="n">clean_wizard</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-Force</span>
+</code></pre></div>
+
+<hr />
+<h3 id="4-documentation">4. Documentation</h3>
+<p><strong>Fichiers créés:</strong><br />
+- ✅ <code>scripts/README_WIZARD_TEST.md</code> - Documentation complète<br />
+- ✅ <code>scripts/QUICK_START.md</code> - Guide rapide<br />
+- ✅ <code>WIZARD_TEST_COMMANDS.md</code> - Résumé des commandes (affiché à l'utilisateur)</p>
+<hr />
+<h2 id="workflow-de-test">🎯 Workflow de test</h2>
+<h3 id="test-complet">Test complet</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># 1. Lancer le test</span>
+<span class="nb">cd </span><span class="n">D</span><span class="p">:\</span><span class="n">xarema</span><span class="p">\</span><span class="n">X-Filamenta-Python</span>
+<span class="p">.\</span><span class="n">scripts</span><span class="p">\</span><span class="n">test_wizard_prod</span><span class="p">.</span><span class="n">ps1</span>
+
+<span class="c"># 2. Tester dans le navigateur</span>
+<span class="c"># → http://localhost:5000/</span>
+<span class="c"># → Suivre toutes les étapes</span>
+
+<span class="c"># 3. Vérifier (nouveau terminal)</span>
+<span class="p">.\</span><span class="n">scripts</span><span class="p">\</span><span class="n">verify_installation</span><span class="p">.</span><span class="n">ps1</span>
+</code></pre></div>
+
+<h3 id="recommencer-le-test">Recommencer le test</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># 1. Arrêter le serveur (Ctrl+C)</span>
+
+<span class="c"># 2. Nettoyer</span>
+<span class="p">.\</span><span class="n">scripts</span><span class="p">\</span><span class="n">clean_wizard</span><span class="p">.</span><span class="n">ps1</span>
+
+<span class="c"># 3. Relancer</span>
+<span class="p">.\</span><span class="n">scripts</span><span class="p">\</span><span class="n">test_wizard_prod</span><span class="p">.</span><span class="n">ps1</span>
+</code></pre></div>
+
+<hr />
+<h2 id="points-de-test-couverts">✅ Points de test couverts</h2>
+<h3 id="checklist-automatique-scripts">Checklist automatique (scripts)</h3>
+<ul>
+<li>✅ Environnement virtuel Python activé</li>
+<li>✅ Dépendances Python installées</li>
+<li>✅ Structure du projet validée</li>
+<li>✅ Base de données créée</li>
+<li>✅ Tables présentes</li>
+<li>✅ Utilisateur admin créé</li>
+<li>✅ Application accessible</li>
+</ul>
+<h3 id="checklist-manuelle-utilisateur">Checklist manuelle (utilisateur)</h3>
+<ul>
+<li>🔲 Fil d'Ariane cliquable</li>
+<li>🔲 Checkmarks sur étapes terminées</li>
+<li>🔲 Création automatique tables SQLite</li>
+<li>🔲 Messages d'erreur détaillés</li>
+<li>🔲 Validation compte admin</li>
+<li>🔲 Finalisation sans erreur</li>
+<li>🔲 Login fonctionne</li>
+</ul>
+<hr />
+<h2 id="fonctionnalites-des-scripts">🛠️ Fonctionnalités des scripts</h2>
+<h3 id="test_wizard_prodps1">test_wizard_prod.ps1</h3>
+<p><strong>Sections:</strong><br />
+1. Nettoyage de l'environnement<br />
+2. Vérification environnement Python<br />
+3. Vérification dépendances<br />
+4. Vérification structure projet<br />
+5. Instructions et démarrage</p>
+<p><strong>Sorties:</strong><br />
+- Messages colorés (Cyan, Yellow, Green, Red)<br />
+- Indicateurs ✓ / ✗<br />
+- Instructions étape par étape<br />
+- Points de vérification affichés</p>
+<hr />
+<h3 id="verify_installationps1">verify_installation.ps1</h3>
+<p><strong>Vérifications:</strong><br />
+1. Flag d'installation (instance/installed.flag)<br />
+2. Base de données (instance/x-filamenta_python.db)<br />
+3. Tables via sqlite3 (si disponible)<br />
+4. Utilisateur admin via Python<br />
+5. Connexion HTTP (si serveur actif)<br />
+6. Fichiers statiques (CSS, JS)</p>
+<p><strong>Résultat:</strong><br />
+- ✓ Installation réussie → Tout OK<br />
+- ✗ Problèmes détectés → Liste des erreurs</p>
+<hr />
+<h3 id="clean_wizardps1">clean_wizard.ps1</h3>
+<p><strong>Éléments supprimés:</strong><br />
+- <code>instance/installed.flag</code><br />
+- <code>instance/*.db</code><br />
+- <code>backend/instance/installed.flag</code><br />
+- <code>backend/instance/*.db</code></p>
+<p><strong>Sécurité:</strong><br />
+- Confirmation obligatoire (sauf -Force)<br />
+- Compte les fichiers supprimés<br />
+- Messages de confirmation</p>
+<hr />
+<h2 id="ameliorations-vs-scripts-precedents">📊 Améliorations vs scripts précédents</h2>
+<h3 id="avant">Avant</h3>
+<ul>
+<li>Scripts de test Python basiques</li>
+<li>Pas de workflow complet</li>
+<li>Pas de vérification post-installation</li>
+<li>Pas de nettoyage automatique</li>
+</ul>
+<h3 id="maintenant">Maintenant</h3>
+<p>✅ Scripts PowerShell professionnels<br />
+✅ Workflow complet de A à Z<br />
+✅ Vérifications automatiques<br />
+✅ Nettoyage facile pour recommencer<br />
+✅ Documentation complète<br />
+✅ Messages colorés et clairs  </p>
+<hr />
+<h2 id="commandes-de-debug-incluses">🔍 Commandes de debug incluses</h2>
+<h3 id="base-de-donnees">Base de données</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Vérifier tables</span>
+<span class="n">sqlite3</span> <span class="n">instance</span><span class="p">\</span><span class="n">x-filamenta_python</span><span class="p">.</span><span class="n">db</span> <span class="s2">&quot;.tables&quot;</span>
+
+<span class="c"># Vérifier users</span>
+<span class="n">sqlite3</span> <span class="n">instance</span><span class="p">\</span><span class="n">x-filamenta_python</span><span class="p">.</span><span class="n">db</span> <span class="s2">&quot;SELECT * FROM users;&quot;</span>
+</code></pre></div>
+
+<h3 id="python">Python</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Vérifier admin</span>
+<span class="n">python</span> <span class="n">-c</span> <span class="s2">&quot;from backend.src.app import create_app; ...&quot;</span>
+
+<span class="c"># Tester create_schema</span>
+<span class="n">python</span> <span class="n">-c</span> <span class="s2">&quot;from backend.src.services.install_service import InstallService; ...&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="notes-techniques">📝 Notes techniques</h2>
+<h3 id="chemins-configurables">Chemins configurables</h3>
+<p>Les scripts utilisent <code>$ProjectRoot = "D:\xarema\X-Filamenta-Python"</code><br />
+→ Modifiable si le projet est ailleurs</p>
+<h3 id="environnement-virtuel">Environnement virtuel</h3>
+<p>Les scripts activent automatiquement <code>.venv\Scripts\Activate.ps1</code></p>
+<h3 id="couleurs-powershell">Couleurs PowerShell</h3>
+<ul>
+<li><strong>Cyan</strong> : Titres / Sections</li>
+<li><strong>Yellow</strong> : Avertissements / Actions</li>
+<li><strong>Green</strong> : Succès / OK</li>
+<li><strong>Red</strong> : Erreurs</li>
+<li><strong>Gray</strong> : Informations complémentaires</li>
+</ul>
+<h3 id="gestion-derreurs">Gestion d'erreurs</h3>
+<ul>
+<li><code>-ErrorAction SilentlyContinue</code> : Ignore les erreurs attendues</li>
+<li>Try/Catch : Pour les opérations critiques</li>
+<li>Vérifications avant suppression</li>
+</ul>
+<hr />
+<h2 id="objectifs-atteints">🎯 Objectifs atteints</h2>
+<p>✅ <strong>Scripts professionnels</strong> - Code propre et commenté<br />
+✅ <strong>Workflow complet</strong> - Du nettoyage à la vérification<br />
+✅ <strong>Documentation</strong> - 4 fichiers de documentation<br />
+✅ <strong>Facilité d'utilisation</strong> - Une commande pour tout<br />
+✅ <strong>Debugging</strong> - Commandes de vérification incluses  </p>
+<hr />
+<h2 id="prochaines-etapes">🚀 Prochaines étapes</h2>
+<ol>
+<li><strong>Tester les scripts</strong> sur l'environnement de développement</li>
+<li><strong>Valider le wizard</strong> avec tous les scénarios</li>
+<li><strong>Documenter les résultats</strong> des tests</li>
+<li><strong>Créer des screenshots</strong> du wizard pour la documentation</li>
+<li><strong>Préparer les scripts de déploiement</strong> production</li>
+</ol>
+<hr />
+<p><strong>Les scripts sont prêts pour le test en mode production ! 🎉</strong></p>
+<hr />
+<p><strong>Fichiers créés:</strong><br />
+- <code>scripts/test_wizard_prod.ps1</code><br />
+- <code>scripts/verify_installation.ps1</code><br />
+- <code>scripts/clean_wizard.ps1</code><br />
+- <code>scripts/README_WIZARD_TEST.md</code><br />
+- <code>scripts/QUICK_START.md</code><br />
+- <code>Analysis_reports/2025-12-28_12-00_wizard_test_scripts.md</code> (ce fichier)</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

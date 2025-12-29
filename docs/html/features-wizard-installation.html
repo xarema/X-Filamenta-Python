@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🧙 Installation Wizard">
+    <title>🧙 Installation Wizard - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="installation-wizard">🧙 Installation Wizard</h1>
+<p><strong>Assistant d'installation multi-étapes pour configurer l'application.</strong></p>
+<hr />
+<h2 id="vue-densemble">🎯 Vue d'ensemble</h2>
+<p>Le wizard d'installation guide les utilisateurs à travers les étapes essentielles :</p>
+<ol>
+<li>✅ Sélection de langue</li>
+<li>✅ Vérification des prérequis système</li>
+<li>✅ Configuration de la base de données</li>
+<li>✅ (Optionnel) Restauration de backup</li>
+<li>✅ Création du compte administrateur</li>
+<li>✅ Résumé et finalisation</li>
+</ol>
+<hr />
+<h2 id="flux-dinstallation">📋 Flux d'installation</h2>
+<h3 id="etape-1-selection-de-langue">Étape 1 : Sélection de langue</h3>
+<p><strong>URL :</strong> <code>GET /install/</code></p>
+<p><strong>Actions :</strong><br />
+- Affiche deux drapeaux : 🇺🇸 EN | 🇫🇷 FR<br />
+- Sélection de la langue de l'installation<br />
+- Sauvegarde en session</p>
+<p><strong>Sortie :</strong> Redirection vers Étape 2 (Prérequis)</p>
+<hr />
+<h3 id="etape-2-verification-des-prerequis">Étape 2 : Vérification des prérequis</h3>
+<p><strong>URL :</strong> <code>GET /install/step?step=requirements</code></p>
+<p><strong>Vérifications :</strong></p>
+<div class="highlight"><pre><span></span><code>✓ Environnement
+  - OS (Linux/Windows/macOS)
+  - Architecture (x64/arm64)
+  - Python version (3.12+)
+
+✓ Outils système
+  - Git
+  - Pip
+  - Virtual environment
+
+⚠ Clients BD (optionnel si SQLite)
+  - MySQL client
+  - PostgreSQL client
+</code></pre></div>
+
+<p><strong>Statuts :</strong><br />
+- 🟢 Vert : Présent et OK<br />
+- 🟡 Jaune : Optionnel ou avertissement<br />
+- 🔴 Rouge : Manquant (bloquant)</p>
+<p><strong>Sortie :</strong> Bouton "Continuer" → Étape 3 (Base de données)</p>
+<hr />
+<h3 id="etape-3-configuration-base-de-donnees">Étape 3 : Configuration base de données</h3>
+<p><strong>URL :</strong> <code>GET /install/step?step=db_form</code></p>
+<p><strong>Options (Onglets) :</strong></p>
+<h4 id="sqlite-developpementleger">SQLite (Développement/léger)</h4>
+<div class="highlight"><pre><span></span><code>Fichier BD : [app.db________________]
+</code></pre></div>
+
+<ul>
+<li>Défaut : <code>app.db</code></li>
+<li>Stocké dans <code>instance/</code></li>
+<li>Idéal pour : Dev local, tests, petites installations</li>
+</ul>
+<h4 id="mysql-production">MySQL (Production)</h4>
+<div class="highlight"><pre><span></span><code><span class="k">Host</span><span class="w"> </span><span class="err">:</span><span class="w">        </span><span class="o">[</span><span class="n">localhost____</span><span class="o">]</span>
+<span class="n">Port</span><span class="w"> </span><span class="err">:</span><span class="w">        </span><span class="o">[</span><span class="n">3306___</span><span class="o">]</span>
+<span class="n">Nom</span><span class="w"> </span><span class="n">BD</span><span class="w"> </span><span class="err">:</span><span class="w">      </span><span class="o">[</span><span class="n">filamenta____________</span><span class="o">]</span>
+<span class="n">Utilisateur</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="o">[</span><span class="n">root__</span><span class="o">]</span>
+<span class="n">Mot</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="nl">passe</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="n">••••••</span><span class="o">]</span>
+</code></pre></div>
+
+<ul>
+<li>Driver : <code>pymysql</code></li>
+<li>Min : MySQL 5.7 ou MariaDB 10.2</li>
+</ul>
+<h4 id="postgresql-production">PostgreSQL (Production)</h4>
+<div class="highlight"><pre><span></span><code><span class="k">Host</span><span class="w"> </span><span class="err">:</span><span class="w">        </span><span class="o">[</span><span class="n">localhost____</span><span class="o">]</span>
+<span class="n">Port</span><span class="w"> </span><span class="err">:</span><span class="w">        </span><span class="o">[</span><span class="n">5432___</span><span class="o">]</span>
+<span class="n">Nom</span><span class="w"> </span><span class="n">BD</span><span class="w"> </span><span class="err">:</span><span class="w">      </span><span class="o">[</span><span class="n">filamenta____________</span><span class="o">]</span>
+<span class="n">Utilisateur</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="o">[</span><span class="n">postgres__</span><span class="o">]</span>
+<span class="n">Mot</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="nl">passe</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="n">••••••</span><span class="o">]</span>
+</code></pre></div>
+
+<ul>
+<li>Driver : <code>psycopg2</code></li>
+<li>Min : PostgreSQL 11</li>
+</ul>
+<p><strong>Après sélection :</strong> Bouton "Tester la connexion" → Étape 4 (Test BD)</p>
+<hr />
+<h3 id="etape-4-test-de-connexion">Étape 4 : Test de connexion</h3>
+<p><strong>URL :</strong> <code>POST /install/step?step=db_test</code></p>
+<p><strong>Vérifications :</strong><br />
+- 🟢 Serveur accessible<br />
+- 🟢 BD existe (ou créable)<br />
+- 🟢 Permissions utilisateur OK</p>
+<p><strong>Résultat :</strong><br />
+- ✅ Succès → Continuer<br />
+- ❌ Erreur → Modifier configuration → Retester</p>
+<p><strong>Sortie :</strong> Étape 5 (Restauration backup - optionnel)</p>
+<hr />
+<h3 id="etape-5-restauration-backup-optionnel">Étape 5 : Restauration backup (optionnel)</h3>
+<p><strong>URL :</strong> <code>GET /install/step?step=upload_form</code></p>
+<p><strong>Options :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="err">①</span><span class="w"> </span><span class="n">Continuer</span><span class="w"> </span><span class="n">sans</span><span class="w"> </span><span class="n">backup</span>
+<span class="w">   </span><span class="err">→</span><span class="w"> </span><span class="n">Passer</span><span class="w"> </span><span class="err">à</span><span class="w"> </span><span class="err">é</span><span class="n">tape</span><span class="w"> </span><span class="n">suivante</span>
+<span class="w">   </span><span class="err">→</span><span class="w"> </span><span class="n">BD</span><span class="w"> </span><span class="n">créée</span><span class="w"> </span><span class="n">vide</span>
+
+<span class="err">②</span><span class="w"> </span><span class="n">Restaurer</span><span class="w"> </span><span class="n">un</span><span class="w"> </span><span class="n">backup</span><span class="w"> </span><span class="p">(</span><span class="n">fichier</span><span class="w"> </span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span><span class="p">)</span>
+<span class="w">   </span><span class="err">→</span><span class="w"> </span><span class="n">Upload</span><span class="w"> </span><span class="n">fichier</span>
+<span class="w">   </span><span class="err">→</span><span class="w"> </span><span class="n">Validation</span><span class="w"> </span><span class="n">et</span><span class="w"> </span><span class="n">extraction</span>
+<span class="w">   </span><span class="err">→</span><span class="w"> </span><span class="n">Restauration</span><span class="w"> </span><span class="n">des</span><span class="w"> </span><span class="n">tables</span>
+</code></pre></div>
+
+<p><strong>Format backup :</strong> <code>.tar.gz</code> avec :</p>
+<div class="highlight"><pre><span></span><code><span class="k">-</span> db_backup.sql (dump complet)
+<span class="k">-</span> metadata.json (infos backup)
+</code></pre></div>
+
+<p><strong>Sortie :</strong> Étape 6 (Compte administrateur)</p>
+<hr />
+<h3 id="etape-6-compte-administrateur">Étape 6 : Compte administrateur</h3>
+<p><strong>URL :</strong> <code>GET /install/step?step=admin_form</code></p>
+<p><strong>Champs :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">Nom</span><span class="w"> </span><span class="n">d</span><span class="err">&#39;</span><span class="n">utilisateur</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="o">[</span><span class="n">admin_______________</span><span class="o">]</span>
+<span class="n">Email</span><span class="w"> </span><span class="err">:</span><span class="w">            </span><span class="o">[</span><span class="n">admin@example.com____</span><span class="o">]</span>
+<span class="n">Mot</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">passe</span><span class="w"> </span><span class="err">:</span><span class="w">     </span><span class="o">[</span><span class="n">••••••</span><span class="o">]</span>
+<span class="n">Confirmer</span><span class="w"> </span><span class="err">:</span><span class="w">        </span><span class="o">[</span><span class="n">••••••</span><span class="o">]</span>
+</code></pre></div>
+
+<p><strong>Validation :</strong><br />
+- Username : 3-50 chars, alphanumériques + _ -<br />
+- Email : Format valide<br />
+- Password : Min 8 chars, complexité recommandée<br />
+- Confirmation : Identique au password</p>
+<p><strong>Sortie :</strong> Bouton "Finaliser" → Étape 7 (Résumé)</p>
+<hr />
+<h3 id="etape-7-resume-finalisation">Étape 7 : Résumé &amp; Finalisation</h3>
+<p><strong>URL :</strong> <code>GET /install/step?step=summary</code></p>
+<p><strong>Affichage :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="err">✓</span><span class="w"> </span><span class="n">Langue</span><span class="w"> </span><span class="err">:</span><span class="w">            </span><span class="n">Français</span>
+<span class="err">✓</span><span class="w"> </span><span class="n">Prérequis</span><span class="w"> </span><span class="err">:</span><span class="w">        </span><span class="n">Vérifiés</span>
+<span class="err">✓</span><span class="w"> </span><span class="n">BD</span><span class="w"> </span><span class="err">:</span><span class="w">               </span><span class="n">MySQL</span><span class="w"> </span><span class="p">(</span><span class="nl">localhost</span><span class="p">:</span><span class="mi">3306</span><span class="o">/</span><span class="n">filamenta</span><span class="p">)</span>
+<span class="err">✓</span><span class="w"> </span><span class="k">Backup</span><span class="w"> </span><span class="err">:</span><span class="w">          </span><span class="n">Restauré</span><span class="w"> </span><span class="p">(</span><span class="n">ou</span><span class="w"> </span><span class="ss">&quot;Aucun&quot;</span><span class="p">)</span>
+<span class="err">✓</span><span class="w"> </span><span class="k">Admin</span><span class="w"> </span><span class="err">:</span><span class="w">           </span><span class="k">admin</span><span class="nv">@example</span><span class="p">.</span><span class="n">com</span>
+</code></pre></div>
+
+<p><strong>Actions :</strong><br />
+- "Corriger" : Retour aux étapes précédentes<br />
+- "Finaliser" : Lance la création/initialisation</p>
+<p><strong>Sortie :</strong> POST /install/finalize → Étape 8 (Complet)</p>
+<hr />
+<h3 id="etape-8-installation-terminee">Étape 8 : Installation terminée</h3>
+<p><strong>URL :</strong> <code>GET /install/done</code></p>
+<p><strong>Affichage :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="err">✅</span><span class="w"> </span><span class="n">Installation</span><span class="w"> </span><span class="n">terminée</span><span class="w"> </span><span class="n">avec</span><span class="w"> </span><span class="n">succès</span><span class="w"> </span><span class="o">!</span>
+
+<span class="err">✓</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">données</span><span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="n">Créée</span><span class="w"> </span><span class="n">et</span><span class="w"> </span><span class="n">initialisée</span>
+<span class="err">✓</span><span class="w"> </span><span class="n">Tables</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="n">Créées</span>
+<span class="err">✓</span><span class="w"> </span><span class="n">Admin</span><span class="w"> </span><span class="n">créé</span><span class="w">       </span><span class="o">:</span><span class="w"> </span><span class="n">Oui</span>
+<span class="err">✓</span><span class="w"> </span><span class="n">Marqueur</span><span class="w">         </span><span class="o">:</span><span class="w"> </span><span class="n">Enregistré</span>
+
+<span class="err">⚠️</span><span class="w"> </span><span class="n">Action</span><span class="w"> </span><span class="n">requise</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Redémarrer</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="n">serveur</span>
+</code></pre></div>
+
+<p><strong>Boutons :</strong><br />
+- "Se connecter" → <code>/auth/login</code><br />
+- "Vérifier la BD" → <code>/install/verify-db</code> (debug)</p>
+<hr />
+<h2 id="redirection-automatique">🔄 Redirection automatique</h2>
+<p><strong>Si l'application n'est pas installée :</strong><br />
+- <code>GET /</code> → Redirection vers <code>/install/</code><br />
+- Toute autre route → Redirection vers <code>/install/</code><br />
+- Sauf : <code>/auth/</code> (pour login si besoin)</p>
+<p><strong>Si l'application est installée :</strong><br />
+- <code>GET /install/</code> → Redirection vers <code>/</code> (ou dashboard)</p>
+<hr />
+<h2 id="etat-de-linstallation">💾 État de l'installation</h2>
+<p><strong>Marqueur :</strong> <code>instance/installed.flag</code></p>
+<ul>
+<li>Créé à la fin du wizard</li>
+<li>Contient : timestamp et version</li>
+<li>Utilisé pour détecter si installé</li>
+</ul>
+<p><strong>Variables sauvegardées :</strong><br />
+- <code>.env</code> : <code>SQLALCHEMY_DATABASE_URI</code> (persiste après redémarrage)<br />
+- <code>session</code> : <code>wizard_state</code> (tempor aire durant wizard)</p>
+<hr />
+<h2 id="securite-du-wizard">🔒 Sécurité du wizard</h2>
+<p>✅ <strong>CSRF protection</strong> : Tokens sur tous les POST<br />
+✅ <strong>Rate limiting</strong> : Pas d'attaques par brute-force<br />
+✅ <strong>Validation stricte</strong> : Inputs validés et sanitizés<br />
+✅ <strong>Pas de credentials loggés</strong> : Sauf debug intentionnel<br />
+✅ <strong>BD sécurisée</strong> : Pas d'expositions via erreurs<br />
+✅ <strong>Session sécurisée</strong> : HttpOnly, Secure, SameSite  </p>
+<hr />
+<h2 id="tester-le-wizard">🧪 Tester le wizard</h2>
+<h3 id="mode-developpement">Mode développement</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Supprimer le marqueur d&#39;installation</span>
+rm<span class="w"> </span>instance/installed.flag
+
+<span class="c1"># Redémarrer</span>
+python<span class="w"> </span>run_prod.py
+
+<span class="c1"># Accéder à http://127.0.0.1:5000</span>
+<span class="c1"># → Redirection automatique vers /install/</span>
+</code></pre></div>
+
+<h3 id="mode-production">Mode production</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Le wizard s&#39;affiche uniquement si not installed.flag existe</span>
+<span class="c1"># Pour réinitialiser :</span>
+rm<span class="w"> </span>instance/installed.flag
+systemctl<span class="w"> </span>restart<span class="w"> </span>filamenta<span class="w">  </span><span class="c1"># ou sudo service filamenta restart</span>
+</code></pre></div>
+
+<hr />
+<h2 id="ressources">📚 Ressources</h2>
+<ul>
+<li><strong>Guides de déploiement</strong> → <a href="../deployment/README.md">../deployment/README.md</a></li>
+<li><strong>Architecture BD</strong> → <a href="database.md">database.md</a></li>
+<li><strong>Sécurité</strong> → <a href="../security/README.md">../security/README.md</a></li>
+</ul>
+<hr />
+<p><strong>→ Consultez les guides de déploiement pour intégrer le wizard dans votre environnement.</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

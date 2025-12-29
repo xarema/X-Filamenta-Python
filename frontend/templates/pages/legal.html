@@ -1,0 +1,43 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Legal page
+Description: Displays licensing and attribution information.
+
+File: frontend/templates/pages/legal.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+{% extends 'layouts/base.html' %} {% block title %}{{ t('legal.title') }}{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <h1 class="h3 mb-3">{{ t('legal.title') }}</h1>
+  <p class="text-muted">{{ t('legal.description') }}</p>
+  <ul class="text-muted small">
+    <li>{{ t('legal.author') }} : AleGabMar</li>
+    <li>
+      {{ t('legal.license') }} :
+      <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank"
+        >AGPL-3.0-or-later</a
+      >
+    </li>
+    <li>
+      {{ t('legal.source') }} :
+      <a href="https://github.com/xarema/X-Filamenta-Python" target="_blank">GitHub</a>
+    </li>
+  </ul>
+</div>
+{% endblock %}

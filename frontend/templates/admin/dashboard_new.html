@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard Admin - X-Filamenta{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-5">
+                <i class="bi bi-speedometer2"></i> Dashboard Administrateur
+            </h1>
+            <p class="text-muted">Vue d'ensemble et statistiques de l'application</p>
+        </div>
+    </div>
+
+    <!-- Stats Cards Row 1 -->
+    <div class="row g-3 mb-4">
+        <!-- Total Users -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="text-muted mb-2">Utilisateurs Total</h6>
+                            <h2 class="mb-0">{{ stats.total_users }}</h2>
+                        </div>
+                        <div class="text-primary" style="font-size: 2rem;">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                    </div>
+                    <small class="text-success">
+                        <i class="bi bi-check-circle"></i>
+                        {{ stats.active_users }} actifs
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Users -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="text-muted mb-2">Administrateurs</h6>
+                            <h2 class="mb-0">{{ stats.admin_users }}</h2>
+                        </div>
+                        <div class="text-danger" style="font-size: 2rem;">
+                            <i class="bi bi-shield-fill-check"></i>
+                        </div>
+                    </div>
+                    <small class="text-muted">
+                        Accès privilégié
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2FA Users -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="text-muted mb-2">2FA Activé</h6>
+                            <h2 class="mb-0">{{ stats.users_2fa }}</h2>
+                        </div>
+                        <div class="text-success" style="font-size: 2rem;">
+                            <i class="bi bi-shield-lock-fill"></i>
+                        </div>
+                    </div>
+                    <small class="text-muted">
+                        {% if stats.total_users > 0 %}
+                        {{ ((stats.users_2fa / stats.total_users) * 100)|round|int }}% des users
+                        {% endif %}
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Logins -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="text-muted mb-2">Connexions 24h</h6>
+                            <h2 class="mb-0">{{ stats.recent_logins_24h }}</h2>
+                        </div>
+                        <div class="text-info" style="font-size: 2rem;">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
+                    </div>
+                    <small class="text-muted">
+                        Dernières 24 heures
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards Row 2 -->
+    <div class="row g-3 mb-4">
+        <!-- Content Items -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="text-muted mb-2">Contenus</h6>
+                            <h2 class="mb-0">{{ stats.content_items }}</h2>
+                        </div>
+                        <div class="text-warning" style="font-size: 2rem;">
+                            <i class="bi bi-file-earmark-text-fill"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="row">
+        <!-- Quick Actions -->
+        <div class="col-lg-8 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 py-3">
+                    <h5 class="mb-0">
+                        <i class="bi bi-lightning-fill text-warning"></i> Actions Rapides
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <!-- Manage Users -->
+                        <div class="col-md-6">
+                            <a href="{{ url_for('admin.users') }}" class="text-decoration-none">
+                                <div class="d-flex align-items-center p-3 bg-light rounded hover-shadow">
+                                    <div class="flex-shrink-0">
+                                        <i class="bi bi-people fs-2 text-primary"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="mb-0 text-dark">Gérer Utilisateurs</h6>
+                                        <small class="text-muted">CRUD users, 2FA, rôles</small>
+                                    </div>
+                                    <i class="bi bi-arrow-right text-muted"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Manage Content -->
+                        <div class="col-md-6">
+                            <a href="{{ url_for('admin.content') }}" class="text-decoration-none">
+                                <div class="d-flex align-items-center p-3 bg-light rounded hover-shadow">
+                                    <div class="flex-shrink-0">
+                                        <i class="bi bi-file-text fs-2 text-info"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="mb-0 text-dark">Gérer Contenus</h6>
+                                        <small class="text-muted">Articles, pages, médias</small>
+                                    </div>
+                                    <i class="bi bi-arrow-right text-muted"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Settings -->
+                        <div class="col-md-6">
+                            <a href="{{ url_for('admin.settings') }}" class="text-decoration-none">
+                                <div class="d-flex align-items-center p-3 bg-light rounded hover-shadow">
+                                    <div class="flex-shrink-0">
+                                        <i class="bi bi-gear fs-2 text-secondary"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="mb-0 text-dark">Paramètres</h6>
+                                        <small class="text-muted">Configuration globale</small>
+                                    </div>
+                                    <i class="bi bi-arrow-right text-muted"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- View Site -->
+                        <div class="col-md-6">
+                            <a href="{{ url_for('main.index') }}" class="text-decoration-none">
+                                <div class="d-flex align-items-center p-3 bg-light rounded hover-shadow">
+                                    <div class="flex-shrink-0">
+                                        <i class="bi bi-eye fs-2 text-success"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="mb-0 text-dark">Voir le Site</h6>
+                                        <small class="text-muted">Vue utilisateur</small>
+                                    </div>
+                                    <i class="bi bi-arrow-right text-muted"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Admin Actions -->
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 py-3">
+                    <h5 class="mb-0">
+                        <i class="bi bi-clock-history text-info"></i> Activité Récente
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    {% if recent_actions %}
+                    <div class="list-group list-group-flush">
+                        {% for action in recent_actions %}
+                        <div class="list-group-item border-0">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1 small">{{ action.action }}</h6>
+                                <small class="text-muted">
+                                    {{ action.timestamp.strftime('%H:%M') if action.timestamp else '' }}
+                                </small>
+                            </div>
+                            <small class="text-muted">
+                                {% if action.target_type %}
+                                {{ action.target_type }}#{{ action.target_id }}
+                                {% endif %}
+                            </small>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="p-4 text-center text-muted">
+                        <i class="bi bi-inbox fs-1"></i>
+                        <p class="mb-0">Aucune activité récente</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hover-shadow {
+    transition: box-shadow 0.3s ease;
+}
+.hover-shadow:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+}
+</style>
+{% endblock %}
+

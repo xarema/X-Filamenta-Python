@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - ✨ Fonctionnalités — X-Filamenta-Python">
+    <title>✨ Fonctionnalités — X-Filamenta-Python - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="fonctionnalites-x-filamenta-python">✨ Fonctionnalités — X-Filamenta-Python</h1>
+<p><strong>Inventaire complet des fonctionnalités et guides détaillés.</strong></p>
+<hr />
+<h2 id="vue-densemble">🎯 Vue d'ensemble</h2>
+<p>X-Filamenta-Python est une application web complète avec :</p>
+<table>
+<thead>
+<tr>
+<th>Fonctionnalité</th>
+<th>Statut</th>
+<th>Guide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🔐 <strong>Authentification</strong></td>
+<td>✅ Stable</td>
+<td><a href="authentication.md">authentication.md</a></td>
+</tr>
+<tr>
+<td>🔑 <strong>Authentification 2FA (TOTP)</strong></td>
+<td>✅ Stable</td>
+<td><a href="authentication.md#2fa">authentication.md</a></td>
+</tr>
+<tr>
+<td>🛡️ <strong>Protection CSRF</strong></td>
+<td>✅ Stable</td>
+<td><a href="authentication.md#csrf">authentication.md</a></td>
+</tr>
+<tr>
+<td>🧙 <strong>Installation Wizard</strong></td>
+<td>✅ Stable</td>
+<td><a href="wizard-installation.md">wizard-installation.md</a></td>
+</tr>
+<tr>
+<td>🌍 <strong>Internationalisation (i18n)</strong></td>
+<td>✅ Stable</td>
+<td><a href="internationalization.md">internationalization.md</a></td>
+</tr>
+<tr>
+<td>💾 <strong>Support Multi-BD</strong></td>
+<td>✅ Stable</td>
+<td><a href="database.md">database.md</a></td>
+</tr>
+<tr>
+<td>📱 <strong>HTMX Integration</strong></td>
+<td>✅ Stable</td>
+<td><a href="../architecture/frontend.md">../architecture/frontend.md</a></td>
+</tr>
+<tr>
+<td>🎨 <strong>Bootstrap 5 UI</strong></td>
+<td>✅ Stable</td>
+<td><a href="../architecture/frontend.md">../architecture/frontend.md</a></td>
+</tr>
+<tr>
+<td>⚡ <strong>Rate Limiting</strong></td>
+<td>✅ Stable</td>
+<td><a href="../architecture/backend.md">../architecture/backend.md</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="guides-detailles">📖 Guides détaillés</h2>
+<h3 id="1-authentification-2fa">1. Authentification &amp; 2FA</h3>
+<p>→ <strong><a href="authentication.md">authentication.md</a></strong></p>
+<ul>
+<li>Système de login avec JWT/Session</li>
+<li>Authentification 2FA (TOTP)</li>
+<li>Backup codes</li>
+<li>Gestion des sessions</li>
+<li>Protection CSRF</li>
+</ul>
+<h3 id="2-installation-wizard">2. Installation Wizard</h3>
+<p>→ <strong><a href="wizard-installation.md">wizard-installation.md</a></strong></p>
+<ul>
+<li>Configuration multi-plateforme</li>
+<li>Sélection de BD (SQLite/MySQL/PostgreSQL)</li>
+<li>Création de compte admin</li>
+<li>Restauration de backup</li>
+<li>Validation de configuration</li>
+</ul>
+<h3 id="3-internationalisation">3. Internationalisation</h3>
+<p>→ <strong><a href="internationalization.md">internationalization.md</a></strong></p>
+<ul>
+<li>Langues supportées (EN, FR)</li>
+<li>Système de traduction (i18n)</li>
+<li>Sélection de langue par utilisateur</li>
+<li>Fallback et défaut (EN)</li>
+<li>Extension pour nouvelles langues</li>
+</ul>
+<h3 id="4-base-de-donnees">4. Base de données</h3>
+<p>→ <strong><a href="database.md">database.md</a></strong></p>
+<ul>
+<li>Support SQLite (développement)</li>
+<li>Support MySQL (production)</li>
+<li>Support PostgreSQL (production)</li>
+<li>Migrations Alembic</li>
+<li>Backup et restauration</li>
+</ul>
+<hr />
+<h2 id="flux-utilisateur-complet">🔄 Flux utilisateur complet</h2>
+<ol>
+<li><strong>Visite initiale</strong> → Redirection vers installation wizard</li>
+<li><strong>Wizard</strong> :<br />
+   - Sélection de langue<br />
+   - Vérification des prérequis<br />
+   - Configuration de la BD<br />
+   - Création du compte admin<br />
+   - (Optionnel) Restauration de backup</li>
+<li><strong>Installation complète</strong> → Redirection vers login</li>
+<li><strong>Login</strong> → Authentification standard ou 2FA</li>
+<li><strong>Dashboard</strong> → Accès aux fonctionnalités</li>
+</ol>
+<hr />
+<h2 id="checklist-de-completude">✅ Checklist de complétude</h2>
+<ul>
+<li>[x] Authentification (login/logout/session)</li>
+<li>[x] 2FA TOTP avec backup codes</li>
+<li>[x] Protection CSRF sur tous les formulaires</li>
+<li>[x] Installation wizard multi-étapes</li>
+<li>[x] Support de 3 BDs (SQLite, MySQL, PostgreSQL)</li>
+<li>[x] Internationalisation (EN, FR)</li>
+<li>[x] Rate limiting sur endpoints sensibles</li>
+<li>[x] Gestion des erreurs complète</li>
+<li>[x] Logging structuré</li>
+<li>[x] Headers de sécurité (CSP, X-Frame-Options, etc.)</li>
+</ul>
+<hr />
+<h2 id="utilisation-par-role">🎯 Utilisation par rôle</h2>
+<h3 id="administrateur">👤 Administrateur</h3>
+<ul>
+<li>Configuration de l'application</li>
+<li>Gestion des utilisateurs</li>
+<li>Historique des actions admin</li>
+<li>Paramètres de sécurité</li>
+</ul>
+<h3 id="utilisateur-standard">👥 Utilisateur standard</h3>
+<ul>
+<li>Login sécurisé (2FA optionnel)</li>
+<li>Gestion de profil</li>
+<li>Utilisation de l'application</li>
+</ul>
+<h3 id="developpeur">🔧 Développeur</h3>
+<ul>
+<li>API interne</li>
+<li>Webhooks (futur)</li>
+<li>Extensions</li>
+</ul>
+<hr />
+<h2 id="ressources-supplementaires">📚 Ressources supplémentaires</h2>
+<ul>
+<li><strong>Architecture</strong> → <a href="../architecture/overview.md">../architecture/overview.md</a></li>
+<li><strong>Sécurité</strong> → <a href="../security/README.md">../security/README.md</a></li>
+<li><strong>Déploiement</strong> → <a href="../deployment/README.md">../deployment/README.md</a></li>
+<li><strong>Tests</strong> → <a href="../contributing/testing.md">../contributing/testing.md</a></li>
+</ul>
+<hr />
+<p><strong>→ Consultez les guides détaillés pour chaque fonctionnalité.</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

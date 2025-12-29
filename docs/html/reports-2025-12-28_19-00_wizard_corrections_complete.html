@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Rapport de Corrections Wizard — Session 2025-12-28 19:00">
+    <title>Rapport de Corrections Wizard — Session 2025-12-28 19:00 - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="rapport-de-corrections-wizard-session-2025-12-28-1900">Rapport de Corrections Wizard — Session 2025-12-28 19:00</h1>
+<p><strong>Date :</strong> 2025-12-28<br />
+<strong>Heure :</strong> 19:00<br />
+<strong>Contexte :</strong> Corrections complètes du wizard suite aux screenshots utilisateur</p>
+<hr />
+<h2 id="objectif">🎯 Objectif</h2>
+<p>Corriger tous les problèmes identifiés dans les screenshots du dossier <code>.SCREENSHOTS/</code> :<br />
+- Boutons dupliqués en bas du wizard<br />
+- Traductions manquantes (variables vides)<br />
+- Design du fil d'Ariane incorrect (wrapping)<br />
+- Non-respect des normes de conception utilisateur</p>
+<hr />
+<h2 id="problemes-identifies">📋 Problèmes Identifiés</h2>
+<h3 id="1-boutons-fantomes-critique">1. Boutons Fantômes (CRITIQUE)</h3>
+<p><strong>Fichier :</strong> <code>frontend/templates/pages/install/partials/_wizard_content.html</code><br />
+<strong>Lignes :</strong> 167-170<br />
+<strong>Problème :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;d-flex justify-content-between&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="p">&gt;</span>{{ t(&#39;wizard.previous&#39;) or &#39;Précédent&#39; }}<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-success&quot;</span><span class="p">&gt;</span>{{ t(&#39;wizard.continue&#39;) or &#39;Continuer&#39; }}<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>Ces boutons s'affichaient <strong>en plus</strong> des boutons de chaque partial (welcome.html, requirements.html, etc.), créant une duplication.</p>
+<p><strong>Impact :</strong> Confusion UX, design incohérent</p>
+<h3 id="2-traductions-manquantes-critique">2. Traductions Manquantes (CRITIQUE)</h3>
+<p><strong>Fichiers :</strong> <code>backend/src/i18n/fr.json</code>, <code>backend/src/i18n/en.json</code><br />
+<strong>Clés manquantes :</strong><br />
+- <code>wizard.previous</code><br />
+- <code>wizard.step</code><br />
+- <code>wizard.install_summary</code><br />
+- <code>wizard.install_marker</code><br />
+- <code>wizard.done.database</code><br />
+- <code>wizard.done.tables_created</code><br />
+- <code>wizard.done.backup_restored</code><br />
+- <code>wizard.done.admin_account</code><br />
+- <code>wizard.done.username</code><br />
+- <code>wizard.done.email</code><br />
+- <code>wizard.done.done_next</code><br />
+- <code>wizard.done.done_hint</code><br />
+- <code>wizard.done.goto_login</code><br />
+- <code>wizard.done.view_db</code><br />
+- <code>wizard.backup.size</code></p>
+<p><strong>Impact :</strong> Textes vides ou fallback dans l'interface</p>
+<h3 id="3-design-fil-dariane-majeur">3. Design Fil d'Ariane (MAJEUR)</h3>
+<p><strong>Fichier :</strong> <code>frontend/templates/pages/install/partials/_wizard_content.html</code><br />
+<strong>Problème :</strong> Fil d'Ariane avec <code>flex-wrap</code> → nombre de lignes variable selon largeur écran<br />
+<strong>Requis utilisateur :</strong> Exactement 2 lignes (3 étapes ligne 1, 2 étapes ligne 2)</p>
+<p><strong>Impact :</strong> Design incohérent, ne respecte pas les spécifications</p>
+<h3 id="4-validation-html-mineur">4. Validation HTML (MINEUR)</h3>
+<p><strong>Problème :</strong> Utilisation de <code>&lt;div&gt;</code> dans <code>&lt;button&gt;</code> (HTML invalide)<br />
+<strong>Impact :</strong> Warnings validation HTML</p>
+<hr />
+<h2 id="corrections-appliquees">✅ Corrections Appliquées</h2>
+<h3 id="1-suppression-boutons-fantomes">1. Suppression Boutons Fantômes</h3>
+<p><strong>Action :</strong> Suppression complète des lignes 167-170 de <code>_wizard_content.html</code></p>
+<p><strong>Fichier modifié :</strong> <code>frontend/templates/pages/install/partials/_wizard_content.html</code></p>
+<p><strong>Résultat :</strong> Chaque partial gère ses propres boutons, plus de duplication</p>
+<hr />
+<h3 id="2-ajout-traductions-completes">2. Ajout Traductions Complètes</h3>
+<h4 id="fichier-backendsrci18nfrjson">Fichier : <code>backend/src/i18n/fr.json</code></h4>
+<p><strong>Ajouts :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;wizard&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;previous&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Précédent&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;step&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Étape&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;install_summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Résumé de l&#39;installation&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;install_marker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Marqueur d&#39;installation&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;done&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;database&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Base de données configurée&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;tables_created&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tables créées&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;backup_restored&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sauvegarde restaurée&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;admin_account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Compte administrateur créé&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nom d&#39;utilisateur&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Email&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;done_next&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Étapes suivantes&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;done_hint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Vous pouvez maintenant vous connecter...&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;goto_login&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Se connecter&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;view_db&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Vérifier la base de données&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;backup&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Taille&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="fichier-backendsrci18nenjson">Fichier : <code>backend/src/i18n/en.json</code></h4>
+<p><strong>Ajouts :</strong> (équivalents anglais de toutes les clés ci-dessus)</p>
+<p><strong>Résultat :</strong> Toutes les variables wizard ont maintenant des traductions FR/EN</p>
+<hr />
+<h3 id="3-refonte-design-fil-dariane">3. Refonte Design Fil d'Ariane</h3>
+<p><strong>Fichier :</strong> <code>frontend/templates/pages/install/partials/_wizard_content.html</code></p>
+<p><strong>Ancien design :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;d-flex flex-wrap justify-content-center gap-2&quot;</span><span class="p">&gt;</span>
+  {% for s in steps %}
+
+  {% endfor %}
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p><strong>Nouveau design :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;d-flex flex-column gap-2&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;max-width: 900px;&quot;</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;d-flex justify-content-center gap-2&quot;</span><span class="p">&gt;</span>
+    {% for s in steps[:3] %}
+
+    {% endfor %}
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;d-flex justify-content-center gap-2&quot;</span><span class="p">&gt;</span>
+    {% for s in steps[3:] %}
+
+    {% endfor %}
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p><strong>Changements clés :</strong><br />
+- <code>flex-column</code> au lieu de <code>flex-wrap</code><br />
+- Deux boucles séparées (<code>steps[:3]</code> et <code>steps[3:]</code>)<br />
+- Index corrigé pour 2ème ligne (<code>loop.index + 3</code>)<br />
+- Largeur max fixe (900px)<br />
+- Étapes prennent <code>flex-grow-1</code> avec <code>max-width: 280px</code></p>
+<p><strong>Résultat :</strong> Fil d'Ariane toujours sur exactement 2 lignes</p>
+<hr />
+<h3 id="4-correction-validation-html">4. Correction Validation HTML</h3>
+<p><strong>Problème :</strong> <code>&lt;div&gt;</code> dans <code>&lt;button&gt;</code> invalide</p>
+<p><strong>Correction :</strong> Remplacement de tous les <code>&lt;div&gt;</code> par <code>&lt;span class="d-block"&gt;</code></p>
+<p><strong>Exemple :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span>Texte<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+
+<span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;d-block text-center&quot;</span><span class="p">&gt;</span>Texte<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p><strong>Résultat :</strong> HTML valide, aucun warning</p>
+<hr />
+<h2 id="fichier-centralise-cree">📁 Fichier Centralisé Créé</h2>
+<h3 id="githubread_before_any_changemd"><code>.github/READ_BEFORE_ANY_CHANGE.md</code></h3>
+<p><strong>Objectif :</strong> Centraliser TOUTES les règles du projet</p>
+<p><strong>Contenu :</strong><br />
+- Processus obligatoire avant modification<br />
+- Règles critiques (traductions, design, routes, code)<br />
+- Workflow modification complet<br />
+- Historique erreurs à éviter<br />
+- Tests obligatoires<br />
+- Commandes essentielles<br />
+- Checklist finale</p>
+<p><strong>Usage :</strong> À lire <strong>OBLIGATOIREMENT</strong> avant toute modification du projet</p>
+<hr />
+<h2 id="tests-recommandes">🧪 Tests Recommandés</h2>
+<h3 id="tests-manuels-a-faire-par-lutilisateur">Tests Manuels (à faire par l'utilisateur)</h3>
+<ol>
+<li>✅ Kill tous les serveurs</li>
+<li>✅ Lancer serveur prod</li>
+<li>✅ Accéder à <code>http://127.0.0.1:5000/install/</code></li>
+<li>✅ Vérifier fil d'Ariane sur 2 lignes</li>
+<li>✅ Vérifier AUCUN bouton dupliqué</li>
+<li>✅ Vérifier toutes traductions affichées</li>
+<li>✅ Compléter wizard jusqu'à la fin</li>
+<li>✅ Vérifier page "done" complète</li>
+</ol>
+<h3 id="tests-automatiques">Tests Automatiques</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Lint</span>
+<span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">ruff</span><span class="p">.</span><span class="n">exe</span> <span class="n">check</span> <span class="p">.</span>
+
+<span class="c"># Format</span>
+<span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">ruff</span><span class="p">.</span><span class="n">exe</span> <span class="n">format</span> <span class="p">-</span><span class="n">-check</span> <span class="p">.</span>
+
+<span class="c"># Type checking</span>
+<span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">mypy</span><span class="p">.</span><span class="n">exe</span> <span class="n">backend</span><span class="p">/</span><span class="n">src</span>
+</code></pre></div>
+
+<hr />
+<h2 id="resume-changements">📊 Résumé Changements</h2>
+<table>
+<thead>
+<tr>
+<th>Fichier</th>
+<th>Lignes Modifiées</th>
+<th>Type Modification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_wizard_content.html</code></td>
+<td>~150 lignes</td>
+<td>Suppression boutons + Refonte breadcrumb + Fix HTML</td>
+</tr>
+<tr>
+<td><code>fr.json</code></td>
+<td>+15 clés</td>
+<td>Ajout traductions</td>
+</tr>
+<tr>
+<td><code>en.json</code></td>
+<td>+15 clés</td>
+<td>Ajout traductions</td>
+</tr>
+<tr>
+<td><code>READ_BEFORE_ANY_CHANGE.md</code></td>
+<td>+200 lignes</td>
+<td>Création fichier règles</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total :</strong> 4 fichiers modifiés, ~380 lignes affectées</p>
+<hr />
+<h2 id="resultats-attendus">🎯 Résultats Attendus</h2>
+<h3 id="uxui">UX/UI</h3>
+<ul>
+<li>✅ Fil d'Ariane fixe sur 2 lignes (responsive)</li>
+<li>✅ Aucun bouton dupliqué</li>
+<li>✅ Toutes traductions FR/EN complètes</li>
+<li>✅ Design cohérent et conforme spécifications</li>
+</ul>
+<h3 id="technique">Technique</h3>
+<ul>
+<li>✅ HTML valide</li>
+<li>✅ Pas de warnings lint</li>
+<li>✅ Code maintenable (séparation concerns)</li>
+</ul>
+<h3 id="processus">Processus</h3>
+<ul>
+<li>✅ Documentation centralisée</li>
+<li>✅ Règles claires pour futures modifications</li>
+<li>✅ Historique erreurs documenté</li>
+</ul>
+<hr />
+<h2 id="prochaines-etapes">🔄 Prochaines Étapes</h2>
+<ol>
+<li>Utilisateur teste en mode prod</li>
+<li>Si OK → Commit des changements</li>
+<li>Mise à jour CHANGELOG.md</li>
+<li>Screenshots de validation</li>
+<li>Fermeture issue</li>
+</ol>
+<hr />
+<h2 id="notes">📝 Notes</h2>
+<ul>
+<li>Aucune route modifiée (pas de risque régression)</li>
+<li>Changements purement UI/traductions</li>
+<li>Pas de changement logique métier</li>
+<li>Compatible avec code existant</li>
+</ul>
+<hr />
+<p><strong>Auteur :</strong> GitHub Copilot<br />
+<strong>Validation :</strong> En attente utilisateur<br />
+<strong>Status :</strong> Prêt pour tests</p>
+<hr />
+<h2 id="references">🔗 Références</h2>
+<ul>
+<li>Screenshots : <code>.SCREENSHOTS/Screenshot 2025-12-28 185*.png</code></li>
+<li>Règles projet : <code>.github/copilot-instructions.md</code></li>
+<li>Préférences user : <code>.github/USER_PREFERENCES.md</code></li>
+<li>Routes : <code>.github/ROUTE_CHANGE_RULES.md</code></li>
+<li>Règles centralisées : <code>.github/READ_BEFORE_ANY_CHANGE.md</code></li>
+</ul>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

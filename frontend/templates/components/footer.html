@@ -1,0 +1,73 @@
+<!--
+Purpose: Footer component
+Description: Application footer with legal info and links
+
+File: frontend/templates/components/footer.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Public
+
+Notes:
+- Jinja2 reusable component
+- Bootstrap 5 footer styling
+- Copyright and legal attribution (AGPL-3.0)
+- Links to social and documentation
+-->
+
+Metadata:
+- Status: Draft
+- Classification: Public
+-->
+
+<footer class="bg-light border-top mt-5 py-4">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Main Info -->
+      <div class="col-md-6 mb-3 mb-md-0">
+        <p class="text-muted mb-1"><strong>X-Filamenta-Python</strong> v0.0.1-Alpha</p>
+        <p class="text-muted small mb-0">
+          © 2025 AleGabMar. Licensed under
+          <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank">
+            AGPL-3.0-or-later
+          </a>
+          — <a href="/legal" class="text-muted text-decoration-none">Legal/About</a>
+        </p>
+      </div>
+
+      <!-- Links -->
+      <div class="col-md-6 text-md-end">
+        <ul class="list-unstyled mb-0">
+          <li class="d-inline me-3">
+            <a href="/about" class="text-muted text-decoration-none small">À Propos</a>
+          </li>
+          <li class="d-inline me-3">
+            <a href="/contact" class="text-muted text-decoration-none small">Contact</a>
+          </li>
+          <li class="d-inline me-3">
+            <a href="/legal" class="text-muted text-decoration-none small">Légal</a>
+          </li>
+          <li class="d-inline">
+            <a
+              href="https://github.com/xarema/X-Filamenta-Python"
+              target="_blank"
+              class="text-muted text-decoration-none small"
+            >
+              GitHub
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

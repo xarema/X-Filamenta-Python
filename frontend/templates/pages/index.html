@@ -1,0 +1,61 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Homepage template
+Description: Main landing page for X-Filamenta-Python
+
+File: frontend/templates/pages/index.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Public
+
+Notes:
+- Jinja2 template
+- Bootstrap 5 layout
+- Public page (no authentication required)
+------------------------------------------------------------------------------
+-->
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+{% extends "layouts/base.html" %} {% block title %}{{ t('pages.index.hero_title') }} -
+{{ t('app.name') }}{% endblock %} {% block content %}
+<div class="container py-5">
+  <div class="row align-items-center">
+    <div class="col-lg-6">
+      <h1 class="display-4 fw-bold text-primary mb-3">
+        {{ t('pages.index.hero_title') }}
+      </h1>
+      <p class="lead text-muted mb-4">{{ t('pages.index.hero_subtitle') }}</p>
+      <div class="d-flex gap-3">
+        <a class="btn btn-primary btn-lg" href="/install"
+          >{{ t('pages.index.cta_primary') }}</a
+        >
+        <a class="btn btn-outline-primary btn-lg" href="/features"
+          >{{ t('pages.index.cta_secondary') }}</a
+        >
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <img src="/static/images/landing-hero.svg" alt="Hero" class="img-fluid" />
+    </div>
+  </div>
+</div>
+{% endblock %}

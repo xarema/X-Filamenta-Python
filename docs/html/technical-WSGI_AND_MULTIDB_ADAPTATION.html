@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Adaptation WSGI et Multi-BD — X-Filamenta-Python">
+    <title>Adaptation WSGI et Multi-BD — X-Filamenta-Python - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="adaptation-wsgi-et-multi-bd-x-filamenta-python">Adaptation WSGI et Multi-BD — X-Filamenta-Python</h1>
+<p>Ce document résume les adaptations effectuées pour rendre X-Filamenta-Python compatible avec :</p>
+<ul>
+<li>✅ <strong>WSGI servers</strong> (Gunicorn, uWSGI) pour cPanel, VPS, Docker</li>
+<li>✅ <strong>Plusieurs bases de données</strong> (SQLite, MySQL, PostgreSQL)</li>
+<li>✅ <strong>Multiples environnements de déploiement</strong> (dev, cPanel, VPS, Docker, production)</li>
+</ul>
+<hr />
+<h2 id="modifications-principales">📋 Modifications principales</h2>
+<h3 id="1-configuration-multi-bd-backendsrcconfigpy">1. Configuration multi-BD (<code>backend/src/config.py</code>)</h3>
+<p><strong>Avant :</strong></p>
+<ul>
+<li>Seul SQLite supporté en développement</li>
+<li>Pas de configuration pour production</li>
+<li>Configuration fixe, non flexible</li>
+</ul>
+<p><strong>Après :</strong></p>
+<ul>
+<li>Support complet de SQLite, MySQL et PostgreSQL</li>
+<li>Classe <code>Config</code> de base avec configuration commune</li>
+<li>Classes spécialisées pour chaque environnement :</li>
+<li><code>DevelopmentConfig</code> — SQLite, debug activé</li>
+<li><code>TestingConfig</code> — SQLite en mémoire</li>
+<li><code>ProductionConfig</code> — Configuration générique</li>
+<li><code>CPanelConfig</code> — Configuration cPanel-spécifique</li>
+<li><code>VPSConfig</code> — Configuration VPS-spécifique</li>
+<li><code>DockerConfig</code> — Configuration Docker-spécifique</li>
+</ul>
+<p><strong>Fonction <code>_build_database_uri()</code> :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Construit automatiquement l&#39;URI de BD basé sur les variables d&#39;env:</span>
+<span class="c1"># 1. SQLALCHEMY_DATABASE_URI si défini (override)</span>
+<span class="c1"># 2. DB_TYPE + DB_USER/PASSWORD/HOST/NAME si défini</span>
+<span class="c1"># 3. SQLite par défaut</span>
+
+<span class="c1"># Exemples supportés:</span>
+<span class="c1"># SQLite:      sqlite:///./app.db</span>
+<span class="c1"># MySQL:       mysql+pymysql://user:pass@host:3306/dbname</span>
+<span class="c1"># PostgreSQL:  postgresql://user:pass@host:5432/dbname</span>
+</code></pre></div>
+
+<p><strong>Configuration améliorée :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Pool de connexion pour production</span>
+<span class="n">SQLALCHEMY_ENGINE_OPTIONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;pool_pre_ping&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>      <span class="c1"># Vérifier connexions avant utilisation</span>
+    <span class="s1">&#39;pool_recycle&#39;</span><span class="p">:</span> <span class="mi">3600</span><span class="p">,</span>       <span class="c1"># Recycler connexions après 1h</span>
+<span class="p">}</span>
+
+<span class="c1"># Headers de sécurité</span>
+<span class="n">SECURE_HSTS_SECONDS</span> <span class="o">=</span> <span class="mi">31536000</span>
+<span class="n">SECURE_SSL_REDIRECT</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">(</span><span class="n">en</span> <span class="n">production</span><span class="p">)</span>
+
+<span class="c1"># Déploiement</span>
+<span class="n">DEPLOYMENT_TARGET</span> <span class="o">=</span> <span class="s1">&#39;cpanel&#39;</span><span class="o">|</span><span class="s1">&#39;vps&#39;</span><span class="o">|</span><span class="s1">&#39;docker&#39;</span><span class="o">|</span><span class="s1">&#39;production&#39;</span>
+</code></pre></div>
+
+<hr />
+<h3 id="2-fichier-wsgi-backendwsgipy">2. Fichier WSGI (<code>backend/wsgi.py</code>)</h3>
+<p><strong>Nouveau fichier créé spécialement pour WSGI.</strong></p>
+<p><strong>Caractéristiques :</strong></p>
+<ul>
+<li>Point d'entrée standard WSGI pour tous les serveurs</li>
+<li>Compatible avec Gunicorn, uWSGI, cPanel</li>
+<li>Charge automatiquement le fichier <code>.env</code></li>
+<li>Initialise Flask avec la configuration appropriée</li>
+</ul>
+<p><strong>Usage :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Gunicorn</span>
+gunicorn<span class="w"> </span>backend.wsgi:app
+
+<span class="c1"># uWSGI</span>
+uwsgi<span class="w"> </span>--http<span class="w"> </span>:5000<span class="w"> </span>--wsgi-file<span class="w"> </span>backend/wsgi.py<span class="w"> </span>--callable<span class="w"> </span>app
+
+<span class="c1"># cPanel Setup Python App</span>
+<span class="c1"># -&gt; Application startup file: backend/wsgi.py</span>
+<span class="c1"># -&gt; Application entry point: app</span>
+</code></pre></div>
+
+<hr />
+<h3 id="3-application-factory-amelioree-backendsrcapppy">3. Application Factory améliorée (<code>backend/src/app.py</code>)</h3>
+<p><strong>Avant :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_app</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Flask</span><span class="p">:</span>
+    <span class="c1"># Charge depuis os.getenv()</span>
+    <span class="c1"># Config fixe</span>
+</code></pre></div>
+
+<p><strong>Après :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_app</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Flask</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:</span>
+<span class="sd">        config: Configuration object (optionnel)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">get_config</span><span class="p">()</span>  <span class="c1"># Charge depuis FLASK_ENV</span>
+
+    <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>  <span class="c1"># Utilise le config object</span>
+    <span class="c1"># ...</span>
+</code></pre></div>
+
+<p><strong>Avantages :</strong></p>
+<ul>
+<li>Flexibilité complète pour WSGI servers</li>
+<li>Configuration par objet Python (meilleure pratique Flask)</li>
+<li>Testable et reproductible</li>
+</ul>
+<hr />
+<h3 id="4-dependances-bd-requirementstxt">4. Dépendances BD (<code>requirements.txt</code>)</h3>
+<p><strong>Ajoutées :</strong></p>
+<div class="highlight"><pre><span></span><code>PyMySQL&gt;=1.1,&lt;2.0        # MySQL driver
+psycopg2-binary&gt;=2.9,&lt;3.0  # PostgreSQL driver
+gunicorn&gt;=21.0,&lt;22.0     # WSGI server
+</code></pre></div>
+
+<p><strong>SQLAlchemy supporte automatiquement :</strong></p>
+<ul>
+<li><code>sqlite://</code> — SQLite (natif)</li>
+<li><code>mysql+pymysql://</code> — MySQL via PyMySQL</li>
+<li><code>postgresql://</code> — PostgreSQL via psycopg2</li>
+</ul>
+<hr />
+<h3 id="5-variables-denvironnement-envexample">5. Variables d'environnement <code>.env.example</code></h3>
+<p><strong>Avant :</strong></p>
+<ul>
+<li>Minimal, SQLite seulement</li>
+<li>Pas de commentaires détaillés</li>
+</ul>
+<p><strong>Après :</strong></p>
+<ul>
+<li>✅ Support complet de tous les types de BD</li>
+<li>✅ Exemples pour cPanel, VPS, Docker</li>
+<li>✅ Commentaires détaillés</li>
+<li>✅ Guide rapide de configuration</li>
+<li>✅ Explications pour chaque variable</li>
+</ul>
+<p><strong>Nouvelles variables :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nv">DB_TYPE</span><span class="o">=</span>mysql<span class="p">|</span>postgresql<span class="p">|</span>sqlite
+DB_USER,<span class="w"> </span>DB_PASSWORD,<span class="w"> </span>DB_HOST,<span class="w"> </span>DB_NAME,<span class="w"> </span>DB_PORT
+SQLALCHEMY_DATABASE_URI<span class="w">  </span><span class="c1"># Override explicite</span>
+<span class="nv">DEPLOYMENT_TARGET</span><span class="o">=</span>cpanel<span class="p">|</span>vps<span class="p">|</span>docker<span class="p">|</span>production
+<span class="nv">APPLICATION_ROOT</span><span class="o">=</span>/filamenta<span class="w">  </span><span class="c1"># Pour cPanel</span>
+<span class="nv">SECURE_SSL_REDIRECT</span><span class="o">=</span>True<span class="p">|</span>False
+<span class="nv">PREFERRED_URL_SCHEME</span><span class="o">=</span>http<span class="p">|</span>https
+</code></pre></div>
+
+<hr />
+<h3 id="6-documentation-de-deploiement">6. Documentation de déploiement</h3>
+<p><strong>Fichiers créés :</strong></p>
+<table>
+<thead>
+<tr>
+<th>Fichier</th>
+<th>Contenu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DEPLOYMENT.md</code></td>
+<td>Guide général, comparaison des plateformes</td>
+</tr>
+<tr>
+<td><code>DEPLOYMENT_CPANEL.md</code></td>
+<td>Instructions complètes pour cPanel + WSGI</td>
+</tr>
+<tr>
+<td><code>DEPLOYMENT_VPS.md</code></td>
+<td>Instructions pour VPS Linux (Gunicorn + Nginx)</td>
+</tr>
+<tr>
+<td><code>DEPLOYMENT_DOCKER.md</code></td>
+<td>Instructions Docker Compose</td>
+</tr>
+<tr>
+<td><code>WSGI_AND_MULTIDB_ADAPTATION.md</code></td>
+<td>Ce fichier</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="7-configuration-docker">7. Configuration Docker</h3>
+<p><strong>Fichiers créés :</strong></p>
+<table>
+<thead>
+<tr>
+<th>Fichier</th>
+<th>Contenu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Dockerfile</code></td>
+<td>Image Python 3.12 + Gunicorn</td>
+</tr>
+<tr>
+<td><code>docker-compose.yml</code></td>
+<td>Services : web, MySQL, Nginx, Certbot</td>
+</tr>
+<tr>
+<td><code>nginx.conf</code></td>
+<td>Configuration Nginx avec SSL, rate limiting</td>
+</tr>
+<tr>
+<td><code>.dockerignore</code></td>
+<td>Fichiers à ignorer lors du build</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Avantages Docker :</strong></p>
+<ul>
+<li>Même image = dev, test, production (reproductibilité)</li>
+<li>Facile de changer de BD (MySQL/PostgreSQL)</li>
+<li>Support multi-base de données natif</li>
+<li>Scaling horizontal simple</li>
+<li>CI/CD automatisé</li>
+</ul>
+<hr />
+<h3 id="8-scripts-de-deploiement">8. Scripts de déploiement</h3>
+<p><strong>Fichier créé :</strong></p>
+<ul>
+<li><code>scripts/init_db.py</code> — Initialisation de BD pour tous les environnements</li>
+</ul>
+<p><strong>Commandes disponibles :</strong></p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>scripts/init_db.py<span class="w"> </span>init<span class="w">      </span><span class="c1"># Initialiser BD</span>
+python<span class="w"> </span>scripts/init_db.py<span class="w"> </span>reset<span class="w">     </span><span class="c1"># Réinitialiser BD</span>
+python<span class="w"> </span>scripts/init_db.py<span class="w"> </span>drop<span class="w">      </span><span class="c1"># Supprimer tables</span>
+python<span class="w"> </span>scripts/init_db.py<span class="w"> </span>create<span class="w">    </span><span class="c1"># Créer tables seulement</span>
+python<span class="w"> </span>scripts/init_db.py<span class="w"> </span>seed<span class="w">      </span><span class="c1"># Seed data (à implémenter)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="architecture-wsgi">🔄 Architecture WSGI</h2>
+<h3 id="flux-dexecution">Flux d'exécution</h3>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────┐
+│  Serveur web (nginx / Apache)                               │
+└────────────────────┬────────────────────────────────────────┘
+                     │ HTTP reverse proxy
+                     ↓
+┌─────────────────────────────────────────────────────────────┐
+│  WSGI Server (Gunicorn / uWSGI / cPanel)                    │
+│  ├─ Charge backend/wsgi.py                                  │
+│  ├─ Crée app = Flask instance                               │
+│  └─ Transmet requêtes HTTP                                  │
+└────────────────────┬────────────────────────────────────────┘
+                     │ Interface WSGI standard
+                     ↓
+┌─────────────────────────────────────────────────────────────┐
+│  Application Flask (backend/src/app.py)                     │
+│  ├─ create_app(config) initialise                           │
+│  ├─ Routes, modèles, logique métier                         │
+│  └─ SQLAlchemy ORM                                          │
+└────────────────────┬────────────────────────────────────────┘
+                     │ Requêtes SQL
+                     ↓
+┌─────────────────────────────────────────────────────────────┐
+│  Base de données (SQLite / MySQL / PostgreSQL)              │
+│  ├─ Données utilisateur                                     │
+│  ├─ Configuration de l&#39;app                                  │
+│  └─ Logs et métriques (optionnel)                           │
+└─────────────────────────────────────────────────────────────┘
+</code></pre></div>
+
+<hr />
+<h2 id="support-des-bases-de-donnees">📊 Support des bases de données</h2>
+<h3 id="sqlite-developpement">SQLite (Développement)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Configuration</span>
+<span class="nv">DB_TYPE</span><span class="o">=</span>sqlite
+
+<span class="c1"># URI générée automatiquement</span>
+sqlite:///./instance/app.db
+
+<span class="c1"># Avantages</span>
+✅<span class="w"> </span>Zéro<span class="w"> </span>configuration
+✅<span class="w"> </span>Pas<span class="w"> </span>de<span class="w"> </span>serveur<span class="w"> </span>externe
+✅<span class="w"> </span>Fichier<span class="w"> </span>unique
+
+<span class="c1"># Inconvénients</span>
+❌<span class="w"> </span>Pas<span class="w"> </span>multi-utilisateur<span class="w"> </span>en<span class="w"> </span>production
+❌<span class="w"> </span>Performance<span class="w"> </span>limitée
+❌<span class="w"> </span>Pas<span class="w"> </span>de<span class="w"> </span>scaling
+</code></pre></div>
+
+<h3 id="mysql-recommande-pour-production">MySQL (Recommandé pour production)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Configuration</span>
+<span class="nv">DB_TYPE</span><span class="o">=</span>mysql
+<span class="nv">DB_USER</span><span class="o">=</span>filamenta
+<span class="nv">DB_PASSWORD</span><span class="o">=</span>secret
+<span class="nv">DB_HOST</span><span class="o">=</span>localhost
+<span class="nv">DB_NAME</span><span class="o">=</span>filamenta_db
+<span class="nv">DB_PORT</span><span class="o">=</span><span class="m">3306</span>
+
+<span class="c1"># URI générée automatiquement</span>
+mysql+pymysql://filamenta:secret@localhost:3306/filamenta_db
+
+<span class="c1"># Avantages</span>
+✅<span class="w"> </span>Compatible<span class="w"> </span>cPanel
+✅<span class="w"> </span>Multi-utilisateur
+✅<span class="w"> </span>Bonne<span class="w"> </span>performance
+✅<span class="w"> </span>Scaling<span class="w"> </span>possible
+
+<span class="c1"># Inconvénients</span>
+⚠️<span class="w"> </span>Installation<span class="w"> </span>supplémentaire
+⚠️<span class="w"> </span>Maintenance<span class="w"> </span>requise
+</code></pre></div>
+
+<h3 id="postgresql-advanced">PostgreSQL (Advanced)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Configuration</span>
+<span class="nv">DB_TYPE</span><span class="o">=</span>postgresql
+<span class="nv">DB_USER</span><span class="o">=</span>filamenta
+<span class="nv">DB_PASSWORD</span><span class="o">=</span>secret
+<span class="nv">DB_HOST</span><span class="o">=</span>localhost
+<span class="nv">DB_NAME</span><span class="o">=</span>filamenta_db
+<span class="nv">DB_PORT</span><span class="o">=</span><span class="m">5432</span>
+
+<span class="c1"># URI générée automatiquement</span>
+postgresql://filamenta:secret@localhost:5432/filamenta_db
+
+<span class="c1"># Avantages</span>
+✅<span class="w"> </span>Plus<span class="w"> </span>robuste<span class="w"> </span>que<span class="w"> </span>MySQL
+✅<span class="w"> </span>Meilleures<span class="w"> </span>fonctionnalités
+✅<span class="w"> </span>Performance<span class="w"> </span>très<span class="w"> </span>bonne
+✅<span class="w"> </span>JSON<span class="w"> </span>natif
+
+<span class="c1"># Inconvénients</span>
+⚠️<span class="w"> </span>Pas<span class="w"> </span>disponible<span class="w"> </span>sur<span class="w"> </span>tous<span class="w"> </span>les<span class="w"> </span>cPanel
+⚠️<span class="w"> </span>Plus<span class="w"> </span>complexe
+</code></pre></div>
+
+<hr />
+<h2 id="flux-de-deploiement-par-plateforme">🎯 Flux de déploiement par plateforme</h2>
+<h3 id="cpanel-wsgi-via-cpanel-setup-python-app">cPanel (WSGI via cPanel Setup Python App)</h3>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">SSH</span><span class="w"> </span><span class="n">vers</span><span class="w"> </span><span class="n">cPanel</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Cloner</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="n">dépôt</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Créer</span><span class="w"> </span><span class="n">venv</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">installer</span><span class="w"> </span><span class="n">dépendances</span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">Copier</span><span class="w"> </span><span class="mf">.</span><span class="n">env</span><span class="w"> </span><span class="n">et</span><span class="w"> </span><span class="n">configurer</span><span class="w"> </span><span class="n">MySQL</span>
+<span class="mf">5.</span><span class="w"> </span><span class="n">Créer</span><span class="w"> </span><span class="nb">tab</span><span class="n">les</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">scripts</span><span class="o">/</span><span class="n">init_db</span><span class="mf">.</span><span class="n">py</span><span class="w"> </span><span class="n">init</span>
+<span class="mf">6.</span><span class="w"> </span><span class="n">cPanel</span><span class="w"> </span><span class="n">Setup</span><span class="w"> </span><span class="n">Python</span><span class="w"> </span><span class="n">App</span><span class="w"> </span><span class="p">:</span>
+<span class="w">   </span><span class="err">├─</span><span class="w"> </span><span class="n">Python</span><span class="w"> </span><span class="n">version</span><span class="p">:</span><span class="w"> </span><span class="mf">3.12</span>
+<span class="w">   </span><span class="err">├─</span><span class="w"> </span><span class="n">Application</span><span class="w"> </span><span class="n">root</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">filamenta</span>
+<span class="w">   </span><span class="err">├─</span><span class="w"> </span><span class="n">Application</span><span class="w"> </span><span class="n">URL</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="n">filamenta</span>
+<span class="w">   </span><span class="err">├─</span><span class="w"> </span><span class="n">Startup</span><span class="w"> </span><span class="n">file</span><span class="p">:</span><span class="w"> </span><span class="n">backend</span><span class="o">/</span><span class="n">wsgi</span><span class="mf">.</span><span class="n">py</span>
+<span class="w">   </span><span class="err">├─</span><span class="w"> </span><span class="n">Entry</span><span class="w"> </span><span class="n">point</span><span class="p">:</span><span class="w"> </span><span class="n">app</span>
+<span class="mf">7.</span><span class="w"> </span><span class="n">cPanel</span><span class="w"> </span><span class="n">démarre</span><span class="w"> </span><span class="n">automatiquement</span><span class="w"> </span><span class="n">avec</span><span class="w"> </span><span class="n">Gunicorn</span>
+</code></pre></div>
+
+<h3 id="vps-wsgi-via-systemd-nginx">VPS (WSGI via systemd + Nginx)</h3>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">SSH</span><span class="w"> </span><span class="n">vers</span><span class="w"> </span><span class="n">VPS</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Cloner</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="n">dépôt</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Créer</span><span class="w"> </span><span class="n">venv</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">installer</span><span class="w"> </span><span class="n">dépendances</span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">Copier</span><span class="w"> </span><span class="mf">.</span><span class="n">env</span><span class="w"> </span><span class="n">et</span><span class="w"> </span><span class="n">configurer</span><span class="w"> </span><span class="n">MySQL</span><span class="o">/</span><span class="nb">Pos</span><span class="n">tgreSQL</span>
+<span class="mf">5.</span><span class="w"> </span><span class="n">Créer</span><span class="w"> </span><span class="nb">tab</span><span class="n">les</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">scripts</span><span class="o">/</span><span class="n">init_db</span><span class="mf">.</span><span class="n">py</span><span class="w"> </span><span class="n">init</span>
+<span class="mf">6.</span><span class="w"> </span><span class="n">Créer</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="kr">sys</span><span class="n">temd</span>
+<span class="mf">7.</span><span class="w"> </span><span class="kr">sys</span><span class="n">temctl</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">filamenta</span>
+<span class="mf">8.</span><span class="w"> </span><span class="n">Configurer</span><span class="w"> </span><span class="n">Nginx</span><span class="w"> </span><span class="n">reverse</span><span class="w"> </span><span class="n">proxy</span>
+<span class="mf">9.</span><span class="w"> </span><span class="n">SSL</span><span class="w"> </span><span class="kd">Let</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">Encrypt</span>
+</code></pre></div>
+
+<h3 id="docker-wsgi-via-dockerfile">Docker (WSGI via Dockerfile)</h3>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Cloner</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="n">dépôt</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Copier</span><span class="w"> </span><span class="mf">.</span><span class="n">env</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="o">-</span><span class="n">d</span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">exec</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">scripts</span><span class="o">/</span><span class="n">init_db</span><span class="mf">.</span><span class="n">py</span><span class="w"> </span><span class="n">init</span>
+<span class="mf">5.</span><span class="w"> </span><span class="n">Accès</span><span class="w"> </span><span class="n">via</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">your</span><span class="o">-</span><span class="n">domain</span><span class="mf">.</span><span class="n">com</span>
+</code></pre></div>
+
+<hr />
+<h2 id="checklist-dadaptation-wsgi">✅ Checklist d'adaptation WSGI</h2>
+<ul>
+<li>[x] Créer fichier WSGI (<code>backend/wsgi.py</code>)</li>
+<li>[x] Adapter <code>create_app()</code> pour accepter config</li>
+<li>[x] Créer <code>backend/src/config.py</code> avec classes multi-env</li>
+<li>[x] Implémenter <code>_build_database_uri()</code> pour multi-BD</li>
+<li>[x] Ajouter drivers BD (<code>PyMySQL</code>, <code>psycopg2</code>)</li>
+<li>[x] Ajouter <code>gunicorn</code> aux dépendances</li>
+<li>[x] Créer <code>.env.example</code> complet</li>
+<li>[x] Créer Dockerfile</li>
+<li>[x] Créer docker-compose.yml</li>
+<li>[x] Créer nginx.conf</li>
+<li>[x] Créer guide cPanel</li>
+<li>[x] Créer guide VPS</li>
+<li>[x] Créer guide Docker</li>
+<li>[x] Créer script d'initialisation BD</li>
+<li>[x] Tester chaque plateforme</li>
+</ul>
+<hr />
+<h2 id="tests-de-validation">🧪 Tests de validation</h2>
+<h3 id="test-local-development">Test local (development)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># SQLite</span>
+python<span class="w"> </span>-m<span class="w"> </span>backend.src
+
+<span class="c1"># Vérifier port 5000</span>
+curl<span class="w"> </span>http://localhost:5000
+</code></pre></div>
+
+<h3 id="test-wsgi">Test WSGI</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Gunicorn</span>
+gunicorn<span class="w"> </span>--bind<span class="w"> </span><span class="m">127</span>.0.0.1:8000<span class="w"> </span>backend.wsgi:app
+
+<span class="c1"># Vérifier port 8000</span>
+curl<span class="w"> </span>http://localhost:8000
+</code></pre></div>
+
+<h3 id="test-docker">Test Docker</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build et run</span>
+docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+
+<span class="c1"># Vérifier port 8000</span>
+curl<span class="w"> </span>http://localhost:8000
+</code></pre></div>
+
+<h3 id="test-multi-bd">Test multi-BD</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Change DB_TYPE dans .env</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">DB_TYPE</span><span class="o">=</span>mysql
+python<span class="w"> </span>scripts/init_db.py<span class="w"> </span>init
+
+<span class="c1"># Ou PostgreSQL</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">DB_TYPE</span><span class="o">=</span>postgresql
+python<span class="w"> </span>scripts/init_db.py<span class="w"> </span>init
+</code></pre></div>
+
+<hr />
+<h2 id="ressources">📚 Ressources</h2>
+<ul>
+<li><a href="https://peps.python.org/pep-3333/">WSGI PEP-3333</a></li>
+<li><a href="https://docs.gunicorn.org/">Gunicorn Documentation</a></li>
+<li><a href="https://flask.palletsprojects.com/en/latest/deploying/wsgi/">Flask WSGI Guide</a></li>
+<li><a href="https://docs.sqlalchemy.org/en/20/core/engines.html">SQLAlchemy Database Engines</a></li>
+<li><a href="https://docs.cpanel.net/cPanel/Web-Services/Setup-Python-App/">cPanel Python Applications</a></li>
+</ul>
+<hr />
+<h2 id="resume">🎉 Résumé</h2>
+<p>X-Filamenta-Python est maintenant <strong>prêt pour la RC (Release Candidate)</strong> avec support complet pour :</p>
+<p>✅ cPanel (WSGI + MySQL)<br />
+✅ VPS Linux (Gunicorn + Nginx + MySQL/PostgreSQL)<br />
+✅ Docker (Containerization complète)<br />
+✅ SQLite, MySQL, PostgreSQL</p>
+<p>L'application peut être déployée sur n'importe quelle plateforme sans modification du code, juste en configurant les variables d'environnement !</p>
+<p>🚀 <strong>Prêt pour la production !</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

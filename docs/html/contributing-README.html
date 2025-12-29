@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🤝 Contribuer — X-Filamenta-Python">
+    <title>🤝 Contribuer — X-Filamenta-Python - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="contribuer-x-filamenta-python">🤝 Contribuer — X-Filamenta-Python</h1>
+<p><strong>Guide complet pour contribuer au projet.</strong></p>
+<hr />
+<h2 id="sections-principales">📋 Sections principales</h2>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Sujet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="code-standards.md">code-standards.md</a></td>
+<td>Standards de code</td>
+</tr>
+<tr>
+<td><a href="testing.md">testing.md</a></td>
+<td>Testing et couverture</td>
+</tr>
+<tr>
+<td><a href="release-process.md">release-process.md</a></td>
+<td>Processus de release</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="commencer-a-contribuer">🚀 Commencer à contribuer</h2>
+<h3 id="prerequis">Prérequis</h3>
+<ul>
+<li>Python 3.12+</li>
+<li>Node.js 18+</li>
+<li>Git</li>
+<li>Connaissance de Flask, HTMX, Bootstrap</li>
+</ul>
+<h3 id="etapes-initiales">Étapes initiales</h3>
+<ol>
+<li><strong>Fork</strong> le repository</li>
+<li><strong>Clone</strong> votre fork</li>
+<li><strong>Installer</strong> les dépendances :<br />
+<code>bash
+   pip install -r requirements.txt
+   npm install</code></li>
+<li><strong>Créer une branche</strong> :<br />
+<code>bash
+   git checkout -b feature/ma-feature</code></li>
+<li><strong>Développer</strong> en suivant les standards</li>
+<li><strong>Tester</strong> (tests + lint)</li>
+<li><strong>Commit</strong> avec message clair</li>
+<li><strong>Push</strong> et créer une PR</li>
+</ol>
+<hr />
+<h2 id="avant-de-commencer">📖 Avant de commencer</h2>
+<p><strong>Lire obligatoirement</strong> :<br />
+1. <a href="code-standards.md">code-standards.md</a> — Standards de code<br />
+2. <a href="testing.md">testing.md</a> — Comment tester<br />
+3. <a href="../../.github/copilot-instructions.md">../.github/copilot-instructions.md</a> — Règles IA du projet</p>
+<hr />
+<h2 id="types-de-contributions">🎯 Types de contributions</h2>
+<h3 id="signaler-un-bug">🐛 Signaler un bug</h3>
+<p>→ Créer une issue avec :<br />
+- Description claire du bug<br />
+- Étapes pour reproduire<br />
+- Résultat attendu vs actuel<br />
+- Environment (OS, Python version, etc.)</p>
+<h3 id="proposer-une-amelioration">🎨 Proposer une amélioration</h3>
+<p>→ Créer une discussion ou issue avec :<br />
+- Description de l'amélioration<br />
+- Motivation<br />
+- Approche proposée</p>
+<h3 id="ameliorer-la-documentation">📝 Améliorer la documentation</h3>
+<p>→ Éditez directement le fichier markdown et créez une PR</p>
+<h3 id="coder-une-fonctionnalitefix">💻 Coder une fonctionnalité/fix</h3>
+<p>→ Suivez le workflow ci-dessus</p>
+<hr />
+<h2 id="checklist-avant-pr">✅ Checklist avant PR</h2>
+<ul>
+<li>[ ] Code suit les standards (voir <a href="code-standards.md">code-standards.md</a>)</li>
+<li>[ ] Tous les tests passent (<code>pytest</code>)</li>
+<li>[ ] Lint passe (<code>ruff</code>, <code>mypy</code>)</li>
+<li>[ ] Nouveau code a des tests</li>
+<li>[ ] Documentation mise à jour</li>
+<li>[ ] Commit messages clairs et en français</li>
+<li>[ ] Pas de secrets hardcodés</li>
+</ul>
+<hr />
+<h2 id="documentation-supplementaire">📚 Documentation supplémentaire</h2>
+<ul>
+<li><strong>Guides</strong> → <a href="../guides/04_DEVELOPMENT.md">../guides/04_DEVELOPMENT.md</a></li>
+<li><strong>Architecture</strong> → <a href="../architecture/README.md">../architecture/README.md</a></li>
+<li><strong>Sécurité</strong> → <a href="../security/README.md">../security/README.md</a></li>
+</ul>
+<hr />
+<p><strong>Merci de contribuer à X-Filamenta-Python ! 🙏</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

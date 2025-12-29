@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Guide de test du Wizard d'installation">
+    <title>Guide de test du Wizard d'installation - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="guide-de-test-du-wizard-dinstallation">Guide de test du Wizard d'installation</h1>
+<h2 id="prerequis">Prérequis</h2>
+<ol>
+<li>Assurez-vous que le serveur Flask est arrêté</li>
+<li>Supprimez le fichier <code>.installed</code> à la racine du projet (s'il existe)</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nb">Remove-Item</span> <span class="p">.</span><span class="n">installed</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+</code></pre></div>
+
+<h2 id="demarrage-du-serveur">Démarrage du serveur</h2>
+<div class="highlight"><pre><span></span><code><span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+<span class="n">py</span> <span class="n">run</span><span class="p">.</span><span class="n">py</span>
+</code></pre></div>
+
+<p>Le serveur devrait démarrer sur http://localhost:5000/</p>
+<h2 id="etapes-de-test">Étapes de test</h2>
+<h3 id="1-acces-initial">1. Accès initial</h3>
+<ul>
+<li>Ouvrez votre navigateur sur http://localhost:5000/</li>
+<li>✅ Vous devriez être redirigé vers http://localhost:5000/install/</li>
+<li>✅ Vous voyez la page de choix de langue avec drapeaux 🇺🇸 et 🇫🇷</li>
+</ul>
+<h3 id="2-selection-de-la-langue">2. Sélection de la langue</h3>
+<ul>
+<li>Cliquez sur "Continuer en français" (ou "Continue in English")</li>
+<li>✅ Vous voyez la page "Bienvenue" avec le titre "Assistant d'installation"</li>
+<li>✅ Le header ne contient que "X-Filamenta" (pas de navbar)</li>
+<li>✅ Le footer est simplifié avec projet + version + copyright</li>
+</ul>
+<h3 id="3-page-welcome">3. Page Welcome</h3>
+<ul>
+<li>Cliquez sur le bouton "Continuer →"</li>
+<li>✅ Vous voyez la page "Prérequis système"</li>
+<li>✅ Le fil d'Ariane (breadcrumb) s'affiche en haut avec les étapes</li>
+<li>✅ L'étape "Requirements" est active</li>
+</ul>
+<h3 id="4-page-requirements">4. Page Requirements</h3>
+<ul>
+<li>Vérifiez les checkmarks :</li>
+<li>✅ Environnement : ✓ (vert)</li>
+<li>✅ Git : ✓ ou ✗ selon installation</li>
+<li>✅ Python : ✓ (vert)</li>
+<li>✅ Pip : ✓ (vert)</li>
+<li>✅ Database Clients : ✓ ou ⚠ selon installations</li>
+<li>Cliquez sur "Continuer →"</li>
+<li>✅ Vous voyez la page "Base de données"</li>
+</ul>
+<h3 id="5-page-database">5. Page Database</h3>
+<ul>
+<li>✅ Vous voyez 3 onglets : 💾 SQLite, 🐬 MySQL, 🐘 PostgreSQL</li>
+<li>Testez avec SQLite :</li>
+<li>Laissez le nom par défaut "app.db"</li>
+<li>Cliquez sur "Tester la connexion"</li>
+<li>✅ Message de succès apparaît</li>
+<li>✅ Bouton "Continuer" apparaît</li>
+<li>Cliquez sur "Continuer"</li>
+<li>✅ Vous voyez la page "Compte administrateur"</li>
+</ul>
+<h3 id="6-page-admin">6. Page Admin</h3>
+<ul>
+<li>Remplissez le formulaire :</li>
+<li>Username : <code>admin</code></li>
+<li>Email : <code>admin@example.com</code></li>
+<li>Password : <code>Admin123!</code> (minimum 8 caractères, 1 majuscule, 1 symbole)</li>
+<li>Cliquez sur "Créer l'administrateur"</li>
+<li>✅ Vous voyez la page "Résumé"</li>
+</ul>
+<h3 id="7-page-summary">7. Page Summary</h3>
+<ul>
+<li>Vérifiez le résumé :</li>
+<li>✅ Section "Configuration de la base de données"<ul>
+<li>Type : 💾 SQLite</li>
+<li>Fichier : instance/app.db</li>
+<li>URI de connexion : sqlite:///...</li>
+</ul>
+</li>
+<li>✅ Section "Compte administrateur"<ul>
+<li>Username : admin</li>
+<li>Email : admin@example.com</li>
+<li>Password : (masqué pour la sécurité)</li>
+</ul>
+</li>
+<li>Cliquez sur "Finaliser l'installation ✓"</li>
+<li>✅ Vous voyez la page "Installation terminée"</li>
+</ul>
+<h3 id="8-page-done">8. Page Done</h3>
+<ul>
+<li>✅ Icône de succès ✓ en vert</li>
+<li>✅ Message de confirmation</li>
+<li>✅ Bouton "Aller à la connexion →"</li>
+<li>Cliquez sur le bouton</li>
+<li>✅ Vous êtes redirigé vers http://localhost:5000/auth/login</li>
+</ul>
+<h3 id="9-test-de-connexion">9. Test de connexion</h3>
+<ul>
+<li>Sur la page de login :</li>
+<li>Username : <code>admin</code></li>
+<li>Password : <code>Admin123!</code></li>
+<li>Cliquez sur "Se connecter"</li>
+<li>✅ Vous êtes connecté et redirigé vers le dashboard</li>
+</ul>
+<h2 id="tests-additionnels">Tests additionnels</h2>
+<h3 id="test-du-breadcrumb-navigation-arriere">Test du breadcrumb (navigation arrière)</h3>
+<ol>
+<li>Supprimez <code>.installed</code> et recommencez le wizard</li>
+<li>Avancez jusqu'à la page Database</li>
+<li>Cliquez sur "Requirements" dans le breadcrumb</li>
+<li>✅ Vous revenez à la page Requirements</li>
+<li>✅ Vos données précédentes sont conservées</li>
+</ol>
+<h3 id="test-de-changement-de-langue">Test de changement de langue</h3>
+<ol>
+<li>Supprimez <code>.installed</code> et recommencez</li>
+<li>Sélectionnez "Continue in English"</li>
+<li>✅ Toutes les pages sont en anglais</li>
+<li>✅ Breadcrumb : Welcome &gt; Requirements &gt; Database &gt; Admin &gt; Summary</li>
+</ol>
+<h3 id="test-responsive-mobile">Test responsive (mobile)</h3>
+<ol>
+<li>Appuyez sur F12 dans votre navigateur</li>
+<li>Activez le mode responsive (Ctrl+Shift+M)</li>
+<li>Testez sur différentes tailles d'écran</li>
+<li>✅ Le wizard reste lisible et utilisable</li>
+</ol>
+<h2 id="problemes-connus-resolus">Problèmes connus résolus</h2>
+<ul>
+<li>✅ ~~Redirection infinie entre / et /install/~~ → CORRIGÉ</li>
+<li>✅ ~~Bouton "Continuer" ne fonctionne pas~~ → CORRIGÉ</li>
+<li>✅ ~~Drapeaux GB au lieu de US~~ → CORRIGÉ (🇺🇸)</li>
+<li>✅ ~~Pas d'étape Requirements visible~~ → AJOUTÉE</li>
+<li>✅ ~~Summary incomplet~~ → DÉTAILS AJOUTÉS</li>
+<li>✅ ~~Navbar affichée dans wizard~~ → SUPPRIMÉE</li>
+<li>✅ ~~Footer encombré~~ → SIMPLIFIÉ</li>
+</ul>
+<h2 id="en-cas-de-probleme">En cas de problème</h2>
+<h3 id="erreur-modulenotfounderror-no-module-named-flask_limiter">Erreur "ModuleNotFoundError: No module named 'flask_limiter'"</h3>
+<div class="highlight"><pre><span></span><code><span class="n">pip</span> <span class="n">install</span> <span class="n">flask-limiter</span>
+</code></pre></div>
+
+<h3 id="le-wizard-ne-demarre-pas">Le wizard ne démarre pas</h3>
+<ol>
+<li>Vérifiez que <code>.installed</code> est supprimé</li>
+<li>Vérifiez que le serveur Flask est démarré</li>
+<li>Consultez les logs dans le terminal</li>
+</ol>
+<h3 id="la-base-de-donnees-ne-se-cree-pas">La base de données ne se crée pas</h3>
+<ol>
+<li>Vérifiez que le dossier <code>instance/</code> existe</li>
+<li>Vérifiez les permissions d'écriture</li>
+<li>Consultez les logs pour les erreurs SQL</li>
+</ol>
+<h2 id="aide">Aide</h2>
+<p>Si vous rencontrez des problèmes :<br />
+1. Consultez <code>Analysis_reports/2025-12-28_02-30_wizard_redesign.md</code><br />
+2. Vérifiez les logs du serveur Flask<br />
+3. Testez avec un autre navigateur</p>
+<p><strong>Bonne installation ! 🚀</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

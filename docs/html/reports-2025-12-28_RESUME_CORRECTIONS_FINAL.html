@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - RÉSUMÉ DES CORRECTIONS - 2025-12-28 18:10">
+    <title>RÉSUMÉ DES CORRECTIONS - 2025-12-28 18:10 - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="resume-des-corrections-2025-12-28-1810">RÉSUMÉ DES CORRECTIONS - 2025-12-28 18:10</h1>
+<h2 id="corrections-appliquees">CORRECTIONS APPLIQUÉES</h2>
+<h3 id="1-systeme-i18n-complet">1. ✅ SYSTÈME I18N COMPLET</h3>
+<ul>
+<li>Créé <code>backend/src/translations/fr.json</code> avec TOUTES les clés</li>
+<li>Créé <code>backend/src/utils/i18n.py</code> pour charger traductions</li>
+<li>Enregistré fonction <code>t()</code> dans contexte Jinja (<code>app.py</code>)</li>
+<li>Plus de texte en dur dans les templates</li>
+</ul>
+<h3 id="2-pip-retire-des-prerequis-si-skip">2. ✅ PIP RETIRÉ DES PRÉREQUIS SI SKIP</h3>
+<ul>
+<li><code>requirements.html</code>: pip conditionnel (<code>{% if env.pip is defined %}</code>)</li>
+<li>Ne s'affiche que si détecté par le système</li>
+</ul>
+<h3 id="3-route-installverify-db-fixee-404">3. ✅ ROUTE /install/verify-db FIXÉE (404)</h3>
+<ul>
+<li>Modifié <code>block_if_installed()</code> pour permettre verify-db</li>
+<li>Ajout condition <code>if request.endpoint == 'install.verify_db': return None</code></li>
+</ul>
+<h3 id="4-messages-erreur-db-en-francais">4. ✅ MESSAGES ERREUR DB EN FRANÇAIS</h3>
+<ul>
+<li><code>db_form.html</code>: ajouté <code>oninvalid</code> et <code>oninput</code> pour traduire messages HTML5</li>
+<li>Validation champs: "Ce champ est requis" au lieu de "Please fill out this field"</li>
+</ul>
+<h3 id="5-boutons-sur-meme-ligne">5. ✅ BOUTONS SUR MÊME LIGNE</h3>
+<ul>
+<li><code>done.html</code>: utilisé flexbox <code>d-flex flex-wrap justify-content-center gap-3</code></li>
+<li>Boutons côte à côte sur desktop, wrap sur mobile</li>
+</ul>
+<h3 id="6-validation-backup-amelioree">6. ✅ VALIDATION BACKUP AMÉLIORÉE</h3>
+<ul>
+<li><code>install_service.py</code>: vérifie fichier non vide (0 octets)</li>
+<li>Vérifie que tar.gz contient des fichiers</li>
+<li>Vérifie présence .sql ou manifest</li>
+<li>Messages d'erreur précis</li>
+</ul>
+<h3 id="7-page-done-backup-restaure">7. ✅ PAGE DONE: BACKUP RESTAURÉ</h3>
+<ul>
+<li><code>done.html</code>: affiche section backup si <code>state.backup_ok</code></li>
+<li>Montre taille fichier et nom</li>
+<li>Confirmation tables importées</li>
+</ul>
+<h3 id="8-tous-les-templates-traduits">8. ✅ TOUS LES TEMPLATES TRADUITS</h3>
+<ul>
+<li><code>done.html</code>: toutes clés i18n</li>
+<li><code>requirements.html</code>: toutes clés i18n</li>
+<li><code>db_form.html</code>: messages erreur traduits</li>
+<li>Plus aucun texte en dur</li>
+</ul>
+<h2 id="fichiers-modifies">FICHIERS MODIFIÉS</h2>
+<ol>
+<li>backend/src/translations/fr.json (CRÉÉ)</li>
+<li>backend/src/utils/i18n.py (CRÉÉ)</li>
+<li>backend/src/app.py (i18n init)</li>
+<li>backend/src/routes/install.py (verify-db permission)</li>
+<li>backend/src/services/install_service.py (validation backup)</li>
+<li>frontend/templates/pages/install/partials/requirements.html</li>
+<li>frontend/templates/pages/install/partials/db_form.html</li>
+<li>frontend/templates/pages/install/partials/done.html</li>
+</ol>
+<h2 id="securite-audit">SÉCURITÉ (AUDIT)</h2>
+<h3 id="validations-en-place">Validations en place:</h3>
+<p>✅ Inputs sanitized (parameterized queries)<br />
+✅ CSRF tokens (Flask-WTF)<br />
+✅ Password validation (strength check)<br />
+✅ File upload validation (extension, size, content)<br />
+✅ No SQL injection (SQLAlchemy ORM)<br />
+✅ No path traversal (validation extensions)<br />
+✅ Rate limiting (Flask-Limiter)</p>
+<h3 id="points-de-securite-verifies">Points de sécurité vérifiés:</h3>
+<ul>
+<li>Pas de <code>eval()</code> ou <code>exec()</code></li>
+<li>Pas de shell injection</li>
+<li>Pas de secrets en dur</li>
+<li>Validation fichiers backup</li>
+<li>Permissions vérifiées avant écriture</li>
+</ul>
+<h2 id="tests-a-effectuer">TESTS À EFFECTUER</h2>
+<ol>
+<li>Langue sélectionnée → vérifier traductions</li>
+<li>Prérequis → pip ne doit pas apparaître si skip</li>
+<li>DB form → messages erreur en français</li>
+<li>Upload backup vide → doit rejeter</li>
+<li>Done page → boutons sur même ligne</li>
+<li>/install/verify-db → ne doit plus faire 404</li>
+</ol>
+<h2 id="next-demarrer-serveur-et-tester">NEXT: DÉMARRER SERVEUR ET TESTER</h2>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

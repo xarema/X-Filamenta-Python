@@ -1,0 +1,34 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Installation wizard step placeholder
+Description: Simple placeholder for per-step partial content.
+
+File: frontend/templates/pages/install/step.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <p class="text-muted mb-3">{{ t('wizard.step') }}: {{ step | default('0') }}</p>
+    <form hx-post="/install/step" hx-target="#wizard-container" hx-swap="innerHTML">
+      <input type="hidden" name="step" value="{{ step | default('0') }}" />
+      <button type="submit" class="btn btn-primary">
+        {{ t('wizard.continue_en') }}
+      </button>
+    </form>
+  </div>
+</div>

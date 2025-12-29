@@ -1,0 +1,71 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Wizard admin form
+Description: Collect admin credentials with password strength requirement
+
+File: frontend/templates/pages/install/partials/admin_form.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): 2025-12-28T13:51:00+01:00 | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.3-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+
+- Status: Stable
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+<div class="card shadow-sm mb-3">
+  <div class="card-body">
+    <div class="text-center mb-3">
+      <h5 class="card-title mb-2">{{ t('wizard.admin.title') or 'Création du compte administrateur' }}</h5>
+      <p class="text-muted small">{{ t('wizard.admin.subtitle') or 'Identifiants pour vous connecter après installation' }}</p>
+    </div>
+    {% if error %}
+    <div class="alert alert-danger text-center">{{ error }}</div>
+    {% endif %}
+    <form method="POST" action="/install/step"   class="mx-auto" style="max-width: 520px;">
+      <input type="hidden" name="step" value="admin" />
+      <!-- Préserver db_uri de l'étape précédente -->
+      {% if state.db_uri %}
+      <input type="hidden" name="db_uri" value="{{ state.db_uri }}" />
+      {% endif %}
+
+      <div class="mb-3">
+        <label class="form-label">{{ t('wizard.admin.username_label') or 'Nom d\'utilisateur' }}</label>
+        <input
+          class="form-control"
+          type="text"
+          name="admin_username"
+          value="{{ state.admin_username or 'admin' }}"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">{{ t('wizard.admin.email_label') or 'Email' }}</label>
+        <input
+          class="form-control"
+          type="email"
+          name="admin_email"
+          value="{{ state.admin_email or 'admin@example.com' }}"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">{{ t('wizard.admin.password_label') or 'Mot de passe' }}</label>
+        <input class="form-control" type="password" name="admin_password" required />
+        <small class="text-muted">{{ t('wizard.admin.password_help') or 'Min 8, majuscule, chiffre, symbole' }}</small>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary" type="submit">{{ t('wizard.continue') or 'Continuer' }}</button>
+      </div>
+    </form>
+  </div>
+</div>

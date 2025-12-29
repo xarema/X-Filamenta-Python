@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🔧 Corrections — Variables i18n manquantes et nom BD">
+    <title>🔧 Corrections — Variables i18n manquantes et nom BD - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="corrections-variables-i18n-manquantes-et-nom-bd">🔧 Corrections — Variables i18n manquantes et nom BD</h1>
+<p><strong>Date</strong> : 2025-12-28T21:10:00+01:00<br />
+<strong>Statut</strong> : ✅ Corrigé<br />
+<strong>Serveur</strong> : 🟢 http://127.0.0.1:5000</p>
+<hr />
+<h2 id="problemes-identifies-et-corriges">🐛 Problèmes identifiés et corrigés</h2>
+<h3 id="probleme-1-variables-non-traduites-a-letape-3-restauration-de-sauvegarde">Problème 1 : Variables non traduites à l'étape 3 (Restauration de sauvegarde)</h3>
+<p><strong>Symptômes</strong> :<br />
+- Les variables s'affichent avec leurs clés (ex: <code>wizard.backup.upload</code>)<br />
+- Au lieu de la traduction réelle</p>
+<p><strong>Cause</strong> :<br />
+- Les variables manquaient des fichiers JSON de traduction<br />
+- <strong>Erreur de structure</strong> : J'avais créé une <strong>deuxième section <code>db</code></strong> au lieu de fusionner</p>
+<p><strong>Exemple d'erreur JSON</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;backup&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span>
+<span class="nt">&quot;db&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c1">// Première section</span>
+<span class="c1">// ...</span>
+<span class="nt">&quot;db&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;continue_no_backup&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c1">// DEUXIÈME section (ERREUR!)</span>
+</code></pre></div>
+
+<p><strong>Solution appliquée</strong> :<br />
+1. ✅ Ajouter les variables manquantes à <code>wizard.backup</code> :<br />
+   - <code>upload</code> : Label du formulaire de fichier<br />
+   - <code>formats</code> : Description des formats<br />
+   - <code>no_file</code> : Texte quand aucun fichier<br />
+   - <code>upload_button</code> : Texte du bouton</p>
+<ol start="2">
+<li>
+<p>✅ Ajouter <code>continue_no_backup</code> à <code>wizard.db</code> (première section, pas en double)</p>
+</li>
+<li>
+<p>✅ <strong>Supprimer la deuxième section <code>db</code></strong> qui cassait la structure JSON</p>
+</li>
+</ol>
+<p><strong>Fichiers modifiés</strong> :<br />
+- <code>backend/src/i18n/fr.json</code><br />
+- <code>backend/src/i18n/en.json</code><br />
+- <code>backend/src/i18n/es.json</code></p>
+<hr />
+<h3 id="probleme-2-nom-de-bd-affiche-x-filamenta_pythondb-au-lieu-du-nom-specifie">Problème 2 : Nom de BD — Affiche <code>x-filamenta_python.db</code> au lieu du nom spécifié</h3>
+<p><strong>Symptômes</strong> :<br />
+- Vous inscrivez <code>blablabla.db</code> dans le formulaire<br />
+- Mais la BD créée est toujours <code>x-filamenta_python.db</code></p>
+<p><strong>Cause</strong> :<br />
+- <code>app.py</code> force un nom de BD par défaut au démarrage<br />
+- Le wizard crée bien le fichier avec le bon nom, mais <code>app.py</code> écrase le URI</p>
+<p><strong>Solution appliquée</strong> :<br />
+1. ✅ Modifier <code>backend/src/app.py</code> pour utiliser une variable d'environnement<br />
+2. ✅ Modifier <code>backend/src/config.py</code> pour utiliser le même nom par défaut<br />
+3. ✅ Le nom peut maintenant être défini via la variable <code>DB_NAME</code></p>
+<p><strong>Code avant</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="n">db_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">project_root</span><span class="p">,</span> <span class="s2">&quot;instance&quot;</span><span class="p">,</span> <span class="s2">&quot;x-filamenta_python.db&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Code après</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="n">db_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;DB_NAME&quot;</span><span class="p">,</span> <span class="s2">&quot;x-filamenta_python.db&quot;</span><span class="p">)</span>
+<span class="n">db_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">project_root</span><span class="p">,</span> <span class="s2">&quot;instance&quot;</span><span class="p">,</span> <span class="n">db_name</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Fichiers modifiés</strong> :<br />
+- <code>backend/src/app.py</code><br />
+- <code>backend/src/config.py</code></p>
+<hr />
+<h2 id="variables-ajouteescorrigees">✅ Variables ajoutées/corrigées</h2>
+<h3 id="francais-frjson">Français (fr.json)</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;backup&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;upload&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fichier de sauvegarde&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;formats&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Formats acceptés : .tar.gz, .tgz (max 50MB)&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;no_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Aucun fichier sélectionné&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;upload_button&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Restaurer la sauvegarde&quot;</span>
+<span class="p">}</span>
+
+<span class="nt">&quot;db&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;continue_no_backup&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Continuer sans sauvegarde&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="anglais-enjson">Anglais (en.json)</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;backup&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;upload&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Backup file&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;formats&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Supported formats: .tar.gz, .tgz (max 50MB)&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;no_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;No file selected&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;upload_button&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Restore backup&quot;</span>
+<span class="p">}</span>
+
+<span class="nt">&quot;db&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;continue_no_backup&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Continue without backup&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="espagnol-esjson">Espagnol (es.json)</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;backup&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;upload&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Archivo de respaldo&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;formats&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Formatos admitidos: .tar.gz, .tgz (máx. 50MB)&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;no_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ningún archivo seleccionado&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;upload_button&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Restaurar respaldo&quot;</span>
+<span class="p">}</span>
+
+<span class="nt">&quot;db&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;continue_no_backup&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Continuar sin respaldo&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="tests-a-effectuer">🧪 Tests à effectuer</h2>
+<h3 id="test-1-etape-3-restauration-de-sauvegarde">Test 1 : Étape 3 - Restauration de sauvegarde</h3>
+<ol>
+<li>Accédez au wizard <code>http://127.0.0.1:5000/install/</code></li>
+<li>Allez à l'étape 3 (Restauration de sauvegarde)</li>
+<li>✅ <strong>Vérifier</strong> : Aucune variable brute visible</li>
+<li>✅ <strong>Vérifier</strong> : Tous les textes sont traduits</li>
+</ol>
+<h3 id="test-2-nom-de-bd-personnalise">Test 2 : Nom de BD personnalisé</h3>
+<ol>
+<li>Allez à l'étape 2 (Base de données)</li>
+<li><strong>Inscrivez un nom personnalisé</strong> : <code>mon-app.db</code></li>
+<li>Continuez jusqu'à la fin du wizard</li>
+<li><strong>Vérifiez dans <code>instance/</code></strong> : Le fichier créé s'appelle bien <code>mon-app.db</code></li>
+</ol>
+<hr />
+<h2 id="fichiers-modifiescorriges">📋 Fichiers modifiés/corrigés</h2>
+<table>
+<thead>
+<tr>
+<th>Fichier</th>
+<th>Changement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>backend/src/i18n/fr.json</code></td>
+<td>Ajouter variables manquantes + fusionner sections db</td>
+</tr>
+<tr>
+<td><code>backend/src/i18n/en.json</code></td>
+<td>Ajouter variables manquantes + fusionner sections db</td>
+</tr>
+<tr>
+<td><code>backend/src/i18n/es.json</code></td>
+<td>Ajouter variables manquantes + fusionner sections db</td>
+</tr>
+<tr>
+<td><code>backend/src/app.py</code></td>
+<td>Utiliser variable d'environnement pour nom BD</td>
+</tr>
+<tr>
+<td><code>backend/src/config.py</code></td>
+<td>Synchroniser le nom de BD par défaut</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="resultat-attendu">🎯 Résultat attendu</h2>
+<p>✅ <strong>Étape 3 complètement traduite</strong> : Toutes les variables s'affichent correctement<br />
+✅ <strong>Nom de BD respecté</strong> : Chaque utilisateur peut spécifier le nom qu'il veut<br />
+✅ <strong>Structure JSON valide</strong> : Plus de sections en double</p>
+<hr />
+<h2 id="commande-pour-redemarrer">🚀 Commande pour redémarrer</h2>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-Process</span> <span class="n">-Name</span> <span class="n">python</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Path</span> <span class="o">-like</span> <span class="s2">&quot;*\.venv\*&quot;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Stop-Process</span> <span class="n">-Force</span><span class="p">;</span> <span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">run_prod</span><span class="p">.</span><span class="n">py</span>
+</code></pre></div>
+
+<hr />
+<p><strong>Mainteneur</strong> : AleGabMar<br />
+<strong>Dernière mise à jour</strong> : 2025-12-28T21:10:00+01:00</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

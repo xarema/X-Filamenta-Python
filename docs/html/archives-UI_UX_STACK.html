@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Stack UI/UX — X-Filamenta-Python">
+    <title>Stack UI/UX — X-Filamenta-Python - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="stack-uiux-x-filamenta-python">Stack UI/UX — X-Filamenta-Python</h1>
+<p><strong>Version:</strong> 0.0.1-Alpha<br />
+<strong>Date:</strong> 2025-12-27<br />
+<strong>License:</strong> AGPL-3.0-or-later</p>
+<hr />
+<h2 id="resume-executif">📋 Résumé exécutif</h2>
+<p><strong>Stack recommandée :</strong></p>
+<div class="highlight"><pre><span></span><code>Flask + Jinja2 + Bootstrap 5 + CSS Variables (tokens) + Tabulator + jsPDF/autoTable
++ HTMX (interactions) + Alpine.js (UI petits comportements)
+</code></pre></div>
+
+<p><strong>Résultat :</strong> UI simple et pro, thèmes sans casser le layout, tableaux dynamiques, export CSV/PDF.</p>
+<hr />
+<h2 id="objectifs-ui">🎯 Objectifs UI</h2>
+<h3 id="1-app-publique">1. App publique</h3>
+<ul>
+<li>Design simple et clair</li>
+<li>Pages stables (pas de changements constants)</li>
+<li>SEO-friendly (rendu serveur)</li>
+</ul>
+<h3 id="2-espace-utilisateur">2. Espace utilisateur</h3>
+<ul>
+<li>Préférences UI (afficher/masquer texte sur boutons, thème, etc.)</li>
+<li>Interactions fluides sans reload complet</li>
+<li>Responsive et accessible</li>
+</ul>
+<h3 id="3-espace-admin">3. Espace admin</h3>
+<ul>
+<li>UI simple et intuitive</li>
+<li>CRUD complets (utilisateurs, thèmes, contenu)</li>
+<li>DataGrids interactifs (recherche, tri, filtres, pagination)</li>
+</ul>
+<h3 id="4-systeme-de-themes">4. Système de thèmes</h3>
+<ul>
+<li><strong>Changent UNIQUEMENT :</strong> couleurs, textes, style boutons (arrondi/carré)</li>
+<li><strong>NE changent JAMAIS :</strong> disposition, taille des blocs, structure HTML</li>
+<li>Implémentation : CSS Variables (tokens)</li>
+</ul>
+<hr />
+<h2 id="stack-detaillee">🛠️ Stack détaillée</h2>
+<h3 id="1-rendu-composants">1. Rendu &amp; composants</h3>
+<h4 id="flask-jinja2">Flask + Jinja2</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Avantages</span>
+<span class="err">✅</span> <span class="n">Rendu</span> <span class="n">serveur</span> <span class="p">(</span><span class="n">SEO</span><span class="o">-</span><span class="n">friendly</span><span class="p">)</span>
+<span class="err">✅</span> <span class="n">Contexte</span> <span class="n">facile</span> <span class="p">(</span><span class="n">variables</span> <span class="n">disponibles</span> <span class="n">dans</span> <span class="n">templates</span><span class="p">)</span>
+<span class="err">✅</span> <span class="n">Sécurité</span> <span class="n">native</span> <span class="p">(</span><span class="n">escaping</span> <span class="n">HTML</span><span class="p">)</span>
+<span class="err">✅</span> <span class="n">Simple</span> <span class="n">à</span> <span class="n">maintenir</span>
+</code></pre></div>
+
+<p>Exemple :</p>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{% block title %}Default{% endblock %}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;static&#39;, filename=&#39;css/main.css&#39;) }}&quot;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    {% include &quot;components/navbar.html&quot; %} {% block content %}{% endblock %} {% include
+    &quot;components/footer.html&quot; %}
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h4 id="bootstrap-5">Bootstrap 5</h4>
+<div class="highlight"><pre><span></span><code>Avantages :
+✅ Base UI pro et rapide (forms, navbar, tables, modals)
+✅ Grid system responsive
+✅ Composants prêts à l&#39;emploi
+✅ Classe utilities (mt-3, p-2, etc.)
+</code></pre></div>
+
+<p>Installation :</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">link</span>
+  <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css&quot;</span>
+  <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span>
+<span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h4 id="css-variables-design-tokens">CSS Variables (Design Tokens)</h4>
+<div class="highlight"><pre><span></span><code><span class="c">/* frontend/css/tokens/variables.css */</span>
+
+<span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c">/* Couleurs */</span>
+<span class="w">  </span><span class="nv">--color-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#0d6efd</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--color-success</span><span class="p">:</span><span class="w"> </span><span class="mh">#198754</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#212529</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--bg-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#ffffff</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">/* Typographie */</span>
+<span class="w">  </span><span class="nv">--font-family-base</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="n">apple-system</span><span class="p">,</span><span class="w"> </span><span class="n">BlinkMacSystemFont</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Segoe UI&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Roboto</span><span class="o">...</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--font-size-base</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--h1-font-size</span><span class="p">:</span><span class="w"> </span><span class="mf">2.5</span><span class="kt">rem</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">/* Espacement */</span>
+<span class="w">  </span><span class="nv">--spacing-sm</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--spacing-md</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--spacing-lg</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="kt">rem</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">/* Bordures */</span>
+<span class="w">  </span><span class="nv">--border-radius-md</span><span class="p">:</span><span class="w"> </span><span class="mf">0.375</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--border-radius-full</span><span class="p">:</span><span class="w"> </span><span class="mi">9999</span><span class="kt">px</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">/* Transitions */</span>
+<span class="w">  </span><span class="nv">--transition-duration</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="kt">ms</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c">/* Thème sombre (override) */</span>
+<span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;dark&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nv">--color-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#0d6efd</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#f8f9fa</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--bg-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#212529</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Utilisation dans CSS :</p>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">btn-primary</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-primary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--border-radius-md</span><span class="p">);</span>
+<span class="w">  </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="kc">all</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--transition-duration</span><span class="p">)</span><span class="w"> </span><span class="kc">ease-in-out</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">btn-primary</span><span class="p">:</span><span class="nd">hover</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-primary-hover</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h3 id="2-tableaux-dynamiques-datagrid">2. Tableaux dynamiques (DataGrid)</h3>
+<h4 id="tabulator">Tabulator</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// frontend/js/plugins/tabulator.js</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">initTabulator</span><span class="p">(</span><span class="nx">containerId</span><span class="p">,</span><span class="w"> </span><span class="nx">columns</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="nx">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Tabulator</span><span class="p">(</span><span class="sb">`#</span><span class="si">${</span><span class="nx">containerId</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">columns</span><span class="o">:</span><span class="w"> </span><span class="nx">columns</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">layout</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;fitColumns&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">pagination</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;local&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">paginationSize</span><span class="o">:</span><span class="w"> </span><span class="mf">25</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">responsiveLayout</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;collapse&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">movableColumns</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">selectable</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;highlight&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Utilisation :</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;myTable&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ID&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="mf">80</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Nom&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;name&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Email&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">];</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Jean&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;jean@example.com&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Marie&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;marie@example.com&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">];</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">initTabulator</span><span class="p">(</span><span class="s2">&quot;myTable&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">columns</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p><strong>Fonctionnalités :</strong></p>
+<ul>
+<li>✅ Recherche live</li>
+<li>✅ Tri multi-colonnes</li>
+<li>✅ Filtres</li>
+<li>✅ Pagination</li>
+<li>✅ Export CSV/PDF</li>
+<li>✅ Responsive</li>
+</ul>
+<hr />
+<h3 id="3-export-pdf">3. Export PDF</h3>
+<h4 id="jspdf-autotable">jsPDF + autoTable</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// frontend/js/plugins/tabulator.js</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">exportTableToPDF</span><span class="p">(</span><span class="nx">table</span><span class="p">,</span><span class="w"> </span><span class="nx">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;export.pdf&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">jsPDF</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;undefined&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">table</span><span class="p">.</span><span class="nx">getData</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">table</span><span class="p">.</span><span class="nx">getColumns</span><span class="p">().</span><span class="nx">map</span><span class="p">((</span><span class="nx">col</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">col</span><span class="p">.</span><span class="nx">getDefinition</span><span class="p">().</span><span class="nx">title</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">row</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">table</span><span class="p">.</span><span class="nx">getColumns</span><span class="p">().</span><span class="nx">map</span><span class="p">((</span><span class="nx">col</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">row</span><span class="p">[</span><span class="nx">col</span><span class="p">.</span><span class="nx">getField</span><span class="p">()]));</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">jsPDF</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">window</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">doc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">jsPDF</span><span class="p">();</span>
+
+<span class="w">  </span><span class="nx">doc</span><span class="p">.</span><span class="nx">autoTable</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">head</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">columns</span><span class="p">],</span>
+<span class="w">    </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nx">rows</span><span class="p">,</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="nx">doc</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">filename</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Installation :</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<hr />
+<h3 id="4-interactions-htmx">4. Interactions (HTMX)</h3>
+<h4 id="htmx-pour-interactivite-sans-reload">HTMX pour interactivité sans reload</h4>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">button</span> <span class="na">hx-post</span><span class="o">=</span><span class="s">&quot;/api/preferences/show-text&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#feedback&quot;</span> <span class="na">hx-swap</span><span class="o">=</span><span class="s">&quot;innerHTML&quot;</span><span class="p">&gt;</span>
+  Toggle Text
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;feedback&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>Backend (Flask) :</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/api/preferences/&lt;pref&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_preference</span><span class="p">(</span><span class="n">pref</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+    <span class="c1"># Sauvegarder en session/BD</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;p&gt;Préférence </span><span class="si">{</span><span class="n">pref</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&lt;/p&gt;&#39;</span>
+</code></pre></div>
+
+<hr />
+<h3 id="5-petits-comportements-ui-alpinejs">5. Petits comportements UI (Alpine.js)</h3>
+<h4 id="alpine-pour-toggle-dropdown-modal">Alpine pour toggle, dropdown, modal</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// frontend/js/plugins/alpine-utils.js</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">toggleComponent</span><span class="p">(</span><span class="nx">property</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">[</span><span class="nx">property</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">toggle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">this</span><span class="p">[</span><span class="nx">property</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="k">this</span><span class="p">[</span><span class="nx">property</span><span class="p">];</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">dropdownComponent</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">isOpen</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">toggle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">isOpen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">isOpen</span><span class="p">;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Utilisation HTML :</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="o">=</span><span class="s">&quot;toggleComponent(&#39;isOpen&#39;)&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&quot;toggle()&quot;</span><span class="p">&gt;</span>Toggle<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-show</span><span class="o">=</span><span class="s">&quot;isOpen&quot;</span><span class="p">&gt;</span>Contenu caché<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="o">=</span><span class="s">&quot;dropdownComponent()&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&quot;toggle()&quot;</span><span class="p">&gt;</span>Menu<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">x-show</span><span class="o">=</span><span class="s">&quot;isOpen&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Option 1<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Option 2<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="structure-des-fichiers">📁 Structure des fichiers</h2>
+<div class="highlight"><pre><span></span><code><span class="n">frontend</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">css</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">tokens</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">variables</span><span class="o">.</span><span class="n">css</span><span class="w">           </span><span class="err">←</span><span class="w"> </span><span class="n">Design</span><span class="w"> </span><span class="n">tokens</span><span class="w"> </span><span class="p">(</span><span class="n">CSS</span><span class="w"> </span><span class="n">vars</span><span class="p">)</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">main</span><span class="o">.</span><span class="n">css</span><span class="w">                    </span><span class="err">←</span><span class="w"> </span><span class="n">Styles</span><span class="w"> </span><span class="n">principaux</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Bootstrap</span>
+<span class="err">│</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">js</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">plugins</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">tabulator</span><span class="o">.</span><span class="n">js</span><span class="w">            </span><span class="err">←</span><span class="w"> </span><span class="n">DataGrid</span><span class="w"> </span><span class="n">setup</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">alpine</span><span class="o">-</span><span class="n">utils</span><span class="o">.</span><span class="n">js</span><span class="w">         </span><span class="err">←</span><span class="w"> </span><span class="n">Alpine</span><span class="o">.</span><span class="n">js</span><span class="w"> </span><span class="n">helpers</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">htmx</span><span class="o">-</span><span class="n">utils</span><span class="o">.</span><span class="n">js</span><span class="w">           </span><span class="err">←</span><span class="w"> </span><span class="n">HTMX</span><span class="w"> </span><span class="n">config</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">components</span><span class="o">/</span>
+<span class="err">│</span><span class="w">       </span><span class="err">└──</span><span class="w"> </span><span class="p">(</span><span class="n">custom</span><span class="w"> </span><span class="n">JS</span><span class="w"> </span><span class="n">future</span><span class="p">)</span>
+<span class="err">│</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">templates</span><span class="o">/</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">layouts</span><span class="o">/</span>
+<span class="w">    </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">base</span><span class="o">.</span><span class="n">html</span><span class="w">               </span><span class="err">←</span><span class="w"> </span><span class="n">Layout</span><span class="w"> </span><span class="n">principal</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">components</span><span class="o">/</span>
+<span class="w">    </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">navbar</span><span class="o">.</span><span class="n">html</span><span class="w">             </span><span class="err">←</span><span class="w"> </span><span class="n">Navigation</span>
+<span class="w">    </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">footer</span><span class="o">.</span><span class="n">html</span><span class="w">             </span><span class="err">←</span><span class="w"> </span><span class="n">Pied</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">page</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">pages</span><span class="o">/</span>
+<span class="w">    </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">index</span><span class="o">.</span><span class="n">html</span><span class="w">              </span><span class="err">←</span><span class="w"> </span><span class="n">Accueil</span><span class="w"> </span><span class="n">public</span>
+<span class="w">    </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">datagrid</span><span class="o">-</span><span class="n">example</span><span class="o">.</span><span class="n">html</span><span class="w">   </span><span class="err">←</span><span class="w"> </span><span class="n">Exemple</span><span class="w"> </span><span class="n">DataGrid</span>
+<span class="w">    </span><span class="err">└──</span><span class="w"> </span><span class="n">admin</span><span class="o">/</span>
+<span class="w">        </span><span class="err">└──</span><span class="w"> </span><span class="n">dashboard</span><span class="o">.</span><span class="n">html</span><span class="w">          </span><span class="err">←</span><span class="w"> </span><span class="n">Tableau</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">bord</span><span class="w"> </span><span class="n">admin</span>
+</code></pre></div>
+
+<hr />
+<h2 id="themes-css-variables">🎨 Thèmes (CSS Variables)</h2>
+<h3 id="changement-de-theme">Changement de thème</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&quot;toggleTheme()&quot;</span><span class="p">&gt;</span>🌙 Thème<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">toggleTheme</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">html</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">html</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s2">&quot;data-theme&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">newTheme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">theme</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;dark&quot;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;light&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;dark&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">html</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;data-theme&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">newTheme</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&quot;theme&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">newTheme</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h3 id="css-du-theme">CSS du thème</h3>
+<div class="highlight"><pre><span></span><code><span class="c">/* Thème clair (défaut) */</span>
+<span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nv">--color-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#0d6efd</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#212529</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--bg-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#ffffff</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c">/* Thème sombre */</span>
+<span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;dark&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nv">--color-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#0d6efd</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#f8f9fa</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--bg-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#212529</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Points clés :</strong></p>
+<ul>
+<li>✅ SEULES les couleurs changent</li>
+<li>✅ Pas de changement de layout</li>
+<li>✅ Pas de changement de taille des blocs</li>
+<li>✅ Stocké en localStorage (persiste)</li>
+</ul>
+<hr />
+<h2 id="performance">📊 Performance</h2>
+<h3 id="optimisations">Optimisations</h3>
+<ul>
+<li>✅ CSS minimal (variables, utilities Bootstrap)</li>
+<li>✅ JS léger (Alpine, HTMX)</li>
+<li>✅ Tabulator optimisé (pagination 25 rows)</li>
+<li>✅ Debounce sur recherche (300ms)</li>
+<li>✅ Lazy loading images (si applicable)</li>
+</ul>
+<h3 id="limitations-respectees">Limitations respectées</h3>
+<ul>
+<li><strong>Tabulator :</strong> OK jusqu'à ~1000 lignes avec pagination + debounce</li>
+<li><strong>Alpine.js :</strong> OK pour &lt;20 composants interactifs</li>
+<li><strong>CSS :</strong> OK pour ~1000 lignes</li>
+</ul>
+<hr />
+<h2 id="securite-attribution">🔒 Sécurité &amp; Attribution</h2>
+<h3 id="footer-avec-attribution-agpl-30">Footer avec attribution (AGPL-3.0)</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">footer</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;footer&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+    © 2025 <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>AleGabMar<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>. Sous licence
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://www.gnu.org/licenses/agpl-3.0.html&quot;</span><span class="p">&gt;</span> AGPL-3.0-or-later <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#legal&quot;</span> <span class="na">data-toggle</span><span class="o">=</span><span class="s">&quot;modal&quot;</span><span class="p">&gt;</span>Mentions légales<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h3 id="modal-legal">Modal légal</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;modal&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;legal&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h5</span><span class="p">&gt;</span>Auteur: AleGabMar<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Licence: AGPL-3.0-or-later<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://github.com/xarema/X-Filamenta-Python&quot;</span><span class="p">&gt;</span>Code source<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="checklist-implementation">✅ Checklist implémentation</h2>
+<ul>
+<li>[x] CSS Variables (tokens)</li>
+<li>[x] Bootstrap 5 intégré</li>
+<li>[x] Tabulator DataGrid</li>
+<li>[x] HTMX setup</li>
+<li>[x] Alpine.js utils</li>
+<li>[x] Thèmes (light/dark)</li>
+<li>[x] Footer avec attribution</li>
+<li>[x] Templates de base</li>
+<li>[x] Admin dashboard</li>
+<li>[ ] Tests de thème</li>
+<li>[ ] Optimisations performance</li>
+<li>[ ] SEO metadata</li>
+</ul>
+<hr />
+<h2 id="ressources">📚 Ressources</h2>
+<ul>
+<li><a href="https://getbootstrap.com/">Bootstrap 5</a></li>
+<li><a href="https://tabulator.info/">Tabulator</a></li>
+<li><a href="https://htmx.org/">HTMX</a></li>
+<li><a href="https://alpinejs.dev/">Alpine.js</a></li>
+<li><a href="https://github.com/parallax/jsPDF">jsPDF</a></li>
+</ul>
+<hr />
+<h2 id="prochaines-etapes">🚀 Prochaines étapes</h2>
+<ol>
+<li><strong>Développement :</strong> Ajouter routes Flask pour pages</li>
+<li><strong>Thèmes :</strong> Créer variantes de couleurs</li>
+<li><strong>Admin CRUD :</strong> Implémenter endpoints</li>
+<li><strong>Tests :</strong> Vérifier responsive + a11y</li>
+<li><strong>Performance :</strong> Profiler et optimiser</li>
+</ol>
+<hr />
+<p><strong>Stack UI/UX validée et prête pour développement !</strong> 🎉</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

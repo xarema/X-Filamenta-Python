@@ -1,0 +1,10 @@
+node_modules/
+.venv/
+dist/
+build/
+backend/
+pyproject.toml
+package-lock.json
+README.md
+.env.example
+

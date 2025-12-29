@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Development Guides">
+    <title>Development Guides - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <p>"""<br />
+Purpose: Development guides</p>
+<p>File: docs/guides/README.md | Repository: Template-Python<br />
+Created: 2025-12-26<br />
+Last modified (Git): TBD | Commit: TBD</p>
+<p>Distributed by: XAREMA | Coder: AleGabMar<br />
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha</p>
+<p>License: TBD<br />
+SPDX-License-Identifier: NOASSERTION</p>
+<p>Copyright (c) 2025 XAREMA. All rights reserved.</p>
+<p>Metadata:<br />
+- Status: Draft<br />
+- Classification: Public</p>
+<p>Notes:<br />
+- Development and contribution guides here<br />
+- Git history is the source of truth for authorship and change tracking.<br />
+"""</p>
+<h1 id="development-guides">Development Guides</h1>
+<h2 id="getting-started">Getting Started</h2>
+<ol>
+<li>
+<p><strong>Clone the repository</strong><br />
+<code>bash
+   git clone &lt;repo-url&gt;
+   cd Template-Python</code></p>
+</li>
+<li>
+<p><strong>Setup Python environment</strong><br />
+<code>bash
+   python -m venv .venv
+   .venv\Scripts\activate  # Windows
+   # OR
+   source .venv/bin/activate  # macOS/Linux</code></p>
+</li>
+<li>
+<p><strong>Install dependencies</strong><br />
+<code>bash
+   pip install -r requirements.txt
+   pip install -r requirements-dev.txt
+   npm install</code></p>
+</li>
+<li>
+<p><strong>Run development server</strong><br />
+<code>bash
+   make dev
+   # OR
+   python -m backend.src</code></p>
+</li>
+<li>
+<p><strong>Open in browser</strong><br />
+<code>http://localhost:5000</code></p>
+</li>
+</ol>
+<h2 id="writing-code">Writing Code</h2>
+<ul>
+<li>See <a href="../../STRUCTURE.md">STRUCTURE.md</a> for folder organization</li>
+<li>See <a href=".github/copilot-instructions.md">copilot-instructions.md</a> for coding conventions</li>
+<li>Add type hints to new Python code</li>
+<li>Comment non-obvious logic</li>
+<li>Keep functions small and testable</li>
+</ul>
+<h2 id="testing">Testing</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run all tests</span>
+make<span class="w"> </span><span class="nb">test</span>
+
+<span class="c1"># Run specific test</span>
+pytest<span class="w"> </span>backend/tests/unit/test_validators.py<span class="w"> </span>-v
+
+<span class="c1"># With coverage</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>backend/src<span class="w"> </span>backend/tests
+</code></pre></div>
+
+<h2 id="code-quality">Code Quality</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Type checking</span>
+mypy<span class="w"> </span>backend/src
+
+<span class="c1"># Linting</span>
+ruff<span class="w"> </span>check<span class="w"> </span>backend/<span class="w"> </span>frontend/
+
+<span class="c1"># Format code</span>
+ruff<span class="w"> </span>format<span class="w"> </span>backend/<span class="w"> </span>frontend/
+npm<span class="w"> </span>run<span class="w"> </span>format
+</code></pre></div>
+
+<h2 id="database-migrations-if-using-sqlalchemy">Database Migrations (if using SQLAlchemy)</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a migration</span>
+flask<span class="w"> </span>db<span class="w"> </span>migrate<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Description&quot;</span>
+
+<span class="c1"># Apply migrations</span>
+flask<span class="w"> </span>db<span class="w"> </span>upgrade
+</code></pre></div>
+
+<h2 id="deployment">Deployment</h2>
+<p>(Configure as needed)</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="port-5000-already-in-use">Port 5000 already in use</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Change port in .env or use:</span>
+<span class="nv">FLASK_RUN_PORT</span><span class="o">=</span><span class="m">5001</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>backend.src
+</code></pre></div>
+
+<h3 id="module-import-errors">Module import errors</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Make sure you&#39;re in the correct venv and have installed deps:</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</code></pre></div>
+
+<h2 id="contributing">Contributing</h2>
+<p>See <a href="../../CONTRIBUTING.md">CONTRIBUTING.md</a> (create if needed)</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

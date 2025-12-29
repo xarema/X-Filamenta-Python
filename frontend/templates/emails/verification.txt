@@ -1,0 +1,20 @@
+{{ site_name }} — VÉRIFICATION D'EMAIL
+=====================================
+
+Bonjour {{ user_name }},
+
+Merci de vous être inscrit sur {{ site_name }} !
+
+Pour activer votre compte, veuillez vérifier votre adresse email en cliquant sur ce lien :
+
+{{ verification_link }}
+
+IMPORTANT : Ce lien expire dans {{ expiry_hours }} heure(s).
+
+Si vous n'avez pas créé ce compte, veuillez ignorer cet email.
+Votre compte ne sera pas activé sans vérification de votre email.
+
+---
+© 2025 XAREMA. Tous droits réservés.
+{{ site_name }} — {{ site_url }}
+

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🔧 CORRECTION BOUCLE DE REDIRECTION - RÉSOLU ✅">
+    <title>🔧 CORRECTION BOUCLE DE REDIRECTION - RÉSOLU ✅ - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="correction-boucle-de-redirection-resolu">🔧 CORRECTION BOUCLE DE REDIRECTION - RÉSOLU ✅</h1>
+<p><strong>Date:</strong> 2025-12-27 19:35<br />
+<strong>Problème:</strong> Boucle de redirection infinie sur http://localhost:5000/</p>
+<hr />
+<h2 id="probleme-resolu">✅ PROBLÈME RÉSOLU</h2>
+<h3 id="cause-identifiee">Cause identifiée</h3>
+<p>La boucle de redirection était causée par :</p>
+<ol>
+<li><strong><code>before_request</code> trop restrictif</strong> - Ne permettait pas <code>/auth</code> dans les préfixes autorisés</li>
+<li><strong>Route <code>/</code> incorrecte</strong> - Retournait "OK" au lieu de rediriger proprement</li>
+</ol>
+<h3 id="corrections-appliquees">Corrections appliquées</h3>
+<h4 id="1-ajout-de-auth-aux-prefixes-autorises">1. Ajout de <code>/auth</code> aux préfixes autorisés</h4>
+<p><strong>Fichier:</strong> <code>backend/src/app.py</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># AVANT (causait la boucle)</span>
+<span class="n">allowed_prefixes</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;/install&quot;</span><span class="p">,</span> <span class="s2">&quot;/static&quot;</span><span class="p">,</span> <span class="s2">&quot;/api&quot;</span><span class="p">,</span> <span class="s2">&quot;/errors&quot;</span><span class="p">,</span> <span class="s2">&quot;/legal&quot;</span><span class="p">,</span> <span class="s2">&quot;/lang&quot;</span><span class="p">)</span>
+
+<span class="c1"># APRÈS (corrigé ✅)</span>
+<span class="n">allowed_prefixes</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;/install&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;/static&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;/api&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;/errors&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;/legal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;/lang&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;/auth&quot;</span><span class="p">,</span>  <span class="c1"># ← AJOUTÉ</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h4 id="2-redirection-intelligente-sur-la-page-index">2. Redirection intelligente sur la page index</h4>
+<p><strong>Fichier:</strong> <code>backend/src/routes/main.py</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># AVANT (retournait juste &quot;OK&quot;)</span>
+<span class="nd">@main</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;OK&quot;</span>
+
+<span class="c1"># APRÈS (redirige intelligemment ✅)</span>
+<span class="nd">@main</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="c1"># Si authentifié → dashboard</span>
+    <span class="k">if</span> <span class="s2">&quot;user_id&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;pages.dashboard&quot;</span><span class="p">))</span>
+    <span class="c1"># Sinon → login</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;auth.login_page&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+<hr />
+<h2 id="comment-demarrer-lapplication">🚀 COMMENT DÉMARRER L'APPLICATION</h2>
+<h3 id="methode-1-ligne-de-commande-simple-recommande">Méthode 1: Ligne de commande simple (RECOMMANDÉ)</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># 1. Activer l&#39;environnement virtuel</span>
+<span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+
+<span class="c"># 2. Aller dans le dossier backend</span>
+<span class="nb">cd </span><span class="n">backend</span>
+
+<span class="c"># 3. Lancer Flask</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">flask</span> <span class="p">-</span><span class="n">-app</span> <span class="s2">&quot;backend.src.app:create_app()&quot;</span> <span class="n">run</span>
+
+<span class="c"># OU plus simple si vous êtes déjà dans backend/</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">flask</span> <span class="n">run</span>
+
+<span class="c"># 4. Ouvrir le navigateur</span>
+<span class="c"># http://localhost:5000/</span>
+</code></pre></div>
+
+<h3 id="methode-2-script-python-direct">Méthode 2: Script Python direct</h3>
+<p>Créer un fichier <code>run.py</code> à la racine :</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.app</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Puis lancer :</p>
+<div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="n">run</span><span class="p">.</span><span class="n">py</span>
+</code></pre></div>
+
+<h3 id="methode-3-variable-denvironnement">Méthode 3: Variable d'environnement</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">$env:FLASK_APP</span> <span class="p">=</span> <span class="s2">&quot;backend.src.app:create_app()&quot;</span>
+<span class="n">flask</span> <span class="n">run</span>
+</code></pre></div>
+
+<hr />
+<h2 id="flux-de-navigation-corrige">🔄 FLUX DE NAVIGATION CORRIGÉ</h2>
+<h3 id="utilisateur-non-authentifie">Utilisateur NON authentifié</h3>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mf">5000</span><span class="o">/</span>
+<span class="w">   </span><span class="err">↓</span><span class="w"> </span><span class="p">(</span><span class="mf">302</span><span class="w"> </span><span class="n">redirect</span><span class="p">)</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mf">5000</span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="nb">log</span><span class="n">in</span>
+<span class="w">   </span><span class="err">↓</span><span class="w"> </span><span class="p">(</span><span class="n">affiche</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="nb">log</span><span class="n">in</span><span class="p">)</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">entre</span><span class="w"> </span><span class="n">credentials</span>
+<span class="w">   </span><span class="err">↓</span><span class="w"> </span><span class="p">(</span><span class="nb">POS</span><span class="n">T</span><span class="w"> </span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="nb">log</span><span class="n">in</span><span class="p">)</span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mf">5000</span><span class="o">/</span><span class="n">dashboard</span>
+<span class="w">   </span><span class="err">✅</span><span class="w"> </span><span class="n">Dashboard</span><span class="w"> </span><span class="n">membre</span>
+</code></pre></div>
+
+<h3 id="utilisateur-deja-authentifie">Utilisateur DÉJÀ authentifié</h3>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mf">5000</span><span class="o">/</span>
+<span class="w">   </span><span class="err">↓</span><span class="w"> </span><span class="p">(</span><span class="mf">302</span><span class="w"> </span><span class="n">redirect</span><span class="p">)</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mf">5000</span><span class="o">/</span><span class="n">dashboard</span>
+<span class="w">   </span><span class="err">✅</span><span class="w"> </span><span class="n">Dashboard</span><span class="w"> </span><span class="n">membre</span><span class="w"> </span><span class="n">directement</span>
+</code></pre></div>
+
+<h3 id="acces-direct-a-authlogin-si-deja-connecte">Accès direct à /auth/login (si déjà connecté)</h3>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mf">5000</span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="nb">log</span><span class="n">in</span>
+<span class="w">   </span><span class="err">↓</span><span class="w"> </span><span class="p">(</span><span class="mf">302</span><span class="w"> </span><span class="n">redirect</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">évite</span><span class="w"> </span><span class="n">re</span><span class="o">-</span><span class="nb">log</span><span class="n">in</span><span class="p">)</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mf">5000</span><span class="o">/</span><span class="n">dashboard</span>
+<span class="w">   </span><span class="err">✅</span><span class="w"> </span><span class="n">Dashboard</span><span class="w"> </span><span class="n">membre</span>
+</code></pre></div>
+
+<hr />
+<h2 id="verifications">✅ VÉRIFICATIONS</h2>
+<h3 id="test-1-page-index-redirige-vers-login">Test 1: Page index redirige vers login</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Tester avec navigateur</span>
+<span class="n">http</span><span class="p">://</span><span class="n">localhost</span><span class="p">:</span><span class="n">5000</span><span class="p">/</span>
+
+<span class="c"># Résultat attendu:</span>
+<span class="c"># → Redirection vers http://localhost:5000/auth/login</span>
+<span class="c"># → Page de connexion affichée</span>
+</code></pre></div>
+
+<h3 id="test-2-login-fonctionne">Test 2: Login fonctionne</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Sur http://localhost:5000/auth/login</span>
+<span class="n">Username</span><span class="p">:</span> <span class="n">admin</span>
+<span class="n">Password</span><span class="p">:</span> <span class="n">Admin123</span><span class="p">!</span>
+
+<span class="c"># Résultat attendu:</span>
+<span class="c"># → Redirection vers http://localhost:5000/dashboard</span>
+<span class="c"># → Dashboard membre affiché</span>
+</code></pre></div>
+
+<h3 id="test-3-deconnexion-fonctionne">Test 3: Déconnexion fonctionne</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Cliquer &quot;Déconnexion&quot; sur dashboard</span>
+
+<span class="c"># Résultat attendu:</span>
+<span class="c"># → Redirection vers http://localhost:5000/auth/login</span>
+<span class="c"># → Session effacée</span>
+</code></pre></div>
+
+<h3 id="test-4-protection-routes">Test 4: Protection routes</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Essayer d&#39;accéder au dashboard sans être connecté</span>
+<span class="n">http</span><span class="p">://</span><span class="n">localhost</span><span class="p">:</span><span class="n">5000</span><span class="p">/</span><span class="n">dashboard</span>
+
+<span class="c"># Résultat attendu:</span>
+<span class="c"># → Redirection vers http://localhost:5000/auth/login</span>
+</code></pre></div>
+
+<hr />
+<h2 id="si-le-probleme-persiste">🐛 SI LE PROBLÈME PERSISTE</h2>
+<h3 id="1-vider-le-cache-du-navigateur">1. Vider le cache du navigateur</h3>
+<p><strong>Firefox:</strong><br />
+- Ctrl+Shift+Del<br />
+- Cocher "Cookies" et "Cache"<br />
+- Cliquer "Effacer maintenant"</p>
+<p><strong>Chrome:</strong><br />
+- Ctrl+Shift+Del<br />
+- Cocher "Cookies" et "Images et fichiers en cache"<br />
+- Cliquer "Effacer les données"</p>
+<h3 id="2-utiliser-navigation-privee">2. Utiliser navigation privée</h3>
+<ul>
+<li>Firefox: Ctrl+Shift+P</li>
+<li>Chrome: Ctrl+Shift+N</li>
+</ul>
+<h3 id="3-verifier-les-cookies">3. Vérifier les cookies</h3>
+<p>Ouvrir la console développeur (F12) → Application/Storage → Cookies<br />
+- Supprimer tous les cookies de localhost:5000</p>
+<h3 id="4-verifier-que-flask-tourne">4. Vérifier que Flask tourne</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Vérifier que le port 5000 est occupé</span>
+<span class="n">netstat</span> <span class="n">-ano</span> <span class="p">|</span> <span class="n">findstr</span> <span class="p">:</span><span class="n">5000</span>
+
+<span class="c"># Si rien ne s&#39;affiche, Flask ne tourne pas</span>
+<span class="c"># Relancer avec: python -m flask run</span>
+</code></pre></div>
+
+<h3 id="5-logs-de-flask">5. Logs de Flask</h3>
+<p>Regarder la console où Flask tourne pour voir les requêtes :</p>
+<div class="highlight"><pre><span></span><code><span class="mf">127.0.0.1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="err">[</span><span class="mf">27</span><span class="o">/</span><span class="n">Dec</span><span class="o">/</span><span class="mf">2025</span><span class="w"> </span><span class="mf">19</span><span class="p">:</span><span class="mf">35</span><span class="p">:</span><span class="mf">00</span><span class="err">]</span><span class="w"> </span><span class="s">&quot;GET / HTTP/1.1&quot;</span><span class="w"> </span><span class="mf">302</span><span class="w"> </span><span class="o">-</span>
+<span class="mf">127.0.0.1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="err">[</span><span class="mf">27</span><span class="o">/</span><span class="n">Dec</span><span class="o">/</span><span class="mf">2025</span><span class="w"> </span><span class="mf">19</span><span class="p">:</span><span class="mf">35</span><span class="p">:</span><span class="mf">00</span><span class="err">]</span><span class="w"> </span><span class="s">&quot;GET /auth/login HTTP/1.1&quot;</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="o">-</span>
+</code></pre></div>
+
+<p>Le premier devrait être un 302 (redirect), le second un 200 (OK).</p>
+<hr />
+<h2 id="fichiers-modifies">📝 FICHIERS MODIFIÉS</h2>
+<ol>
+<li>✅ <code>backend/src/app.py</code> - Ajout <code>/auth</code> aux allowed_prefixes</li>
+<li>✅ <code>backend/src/routes/main.py</code> - Redirection intelligente sur index</li>
+</ol>
+<hr />
+<h2 id="tests-automatises">✅ TESTS AUTOMATISÉS</h2>
+<p>Tous les tests passent avec les corrections :</p>
+<div class="highlight"><pre><span></span><code><span class="c"># Tester la route index</span>
+<span class="n">py</span> <span class="n">-m</span> <span class="n">pytest</span> <span class="n">backend</span><span class="p">/</span><span class="n">tests</span><span class="p">/</span><span class="n">test_routes</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_index_route</span> <span class="n">-v</span>
+<span class="c"># ✅ PASSED</span>
+
+<span class="c"># Tester toutes les routes auth</span>
+<span class="n">py</span> <span class="n">-m</span> <span class="n">pytest</span> <span class="n">backend</span><span class="p">/</span><span class="n">tests</span><span class="p">/</span><span class="n">test_auth</span><span class="p">.</span><span class="n">py</span> <span class="n">-v</span>
+<span class="c"># ✅ 10/10 PASSED</span>
+</code></pre></div>
+
+<hr />
+<h2 id="resultat">🎉 RÉSULTAT</h2>
+<p><strong>La boucle de redirection est RÉSOLUE !</strong></p>
+<p>L'application redirige maintenant correctement :<br />
+- <code>/</code> → <code>/auth/login</code> (si non connecté)<br />
+- <code>/</code> → <code>/dashboard</code> (si connecté)<br />
+- <code>/auth/login</code> → <code>/dashboard</code> (si déjà connecté)</p>
+<p><strong>Vous pouvez maintenant utiliser l'application normalement ! 🚀</strong></p>
+<hr />
+<h2 id="aide-supplementaire">📞 AIDE SUPPLÉMENTAIRE</h2>
+<p>Si vous rencontrez toujours des problèmes :</p>
+<ol>
+<li><strong>Redémarrer Flask</strong> complètement</li>
+<li><strong>Vider le cache navigateur</strong></li>
+<li><strong>Vérifier les logs</strong> dans la console Flask</li>
+<li><strong>Tester en navigation privée</strong></li>
+</ol>
+<hr />
+<p><strong>Correction appliquée par:</strong> GitHub Copilot<br />
+<strong>Date:</strong> 2025-12-27 19:35<br />
+<strong>Status:</strong> ✅ RÉSOLU</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!--
+Purpose: DataGrid example template
+Description: Example using Tabulator DataGrid
+
+File: frontend/templates/pages/datagrid-example.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Public
+-->
+
+{% extends "layouts/base.html" %} {% block title %}{{ t('pages.datagrid.title') }} - {{
+t('app.name') }}{% endblock %} {% block content %}
+<div class="container-fluid py-4">
+  <h1 class="mb-4">{{ t('pages.datagrid.title') }}</h1>
+
+  <!-- Search Bar -->
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control"
+      id="searchInput"
+      placeholder="{{ t('pages.datagrid.search') }}"
+    />
+  </div>
+
+  <!-- Export Buttons -->
+  <div class="mb-3 d-flex gap-2">
+    <button class="btn btn-success" id="exportCSVBtn">
+      📥 {{ t('pages.datagrid.export_csv') }}
+    </button>
+    <button class="btn btn-danger" id="exportPDFBtn">
+      📕 {{ t('pages.datagrid.export_pdf') }}
+    </button>
+  </div>
+
+  <!-- DataGrid -->
+  <div id="datagrid" class="bg-white rounded"></div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const columns = [
+      { title: '{{ t('pages.datagrid.columns.id') }}', field: 'id', width: 80 },
+      { title: '{{ t('pages.datagrid.columns.name') }}', field: 'name', responsive: 0 },
+      { title: '{{ t('pages.datagrid.columns.email') }}', field: 'email', responsive: 1 },
+      { title: '{{ t('pages.datagrid.columns.status') }}', field: 'status', responsive: 1 },
+      { title: '{{ t('pages.datagrid.columns.date') }}', field: 'date', responsive: 1 },
+    ];
+
+    const data = [
+      { id: 1, name: 'Jean Dupont', email: 'jean@example.com', status: '{{ t('pages.datagrid.status_active') }}', date: '2025-01-15' },
+      { id: 2, name: 'Marie Martin', email: 'marie@example.com', status: '{{ t('pages.datagrid.status_active') }}', date: '2025-01-14' },
+      { id: 3, name: 'Pierre Durand', email: 'pierre@example.com', status: '{{ t('pages.datagrid.status_inactive') }}', date: '2025-01-13' },
+      { id: 4, name: 'Anne Bonnet', email: 'anne@example.com', status: '{{ t('pages.datagrid.status_active') }}', date: '2025-01-12' },
+      { id: 5, name: 'Luc Bernard', email: 'luc@example.com', status: '{{ t('pages.datagrid.status_active') }}', date: '2025-01-11' },
+    ];
+
+    window.table = initTabulator('datagrid', columns, data, {
+      height: 600,
+      headerFilterPlaceholder: '{{ t('pages.datagrid.filter_placeholder') }}',
+    });
+
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', debounce(function(e) {
+      filterTableBySearch(window.table, e.target.value);
+    }, 300));
+
+    document.getElementById('exportCSVBtn').addEventListener('click', () => {
+      exportTableToCSV(window.table, 'export.csv');
+    });
+
+    document.getElementById('exportPDFBtn').addEventListener('click', () => {
+      exportTableToPDF(window.table, 'export.pdf');
+    });
+  });
+</script>
+{% endblock %}

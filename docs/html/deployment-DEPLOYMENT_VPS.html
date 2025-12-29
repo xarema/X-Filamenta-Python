@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Déploiement sur VPS/Linux — X-Filamenta-Python">
+    <title>Déploiement sur VPS/Linux — X-Filamenta-Python - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="deploiement-sur-vpslinux-x-filamenta-python">Déploiement sur VPS/Linux — X-Filamenta-Python</h1>
+<h2 id="prerequis">📋 Prérequis</h2>
+<ul>
+<li><strong>OS</strong> : Ubuntu 20.04 LTS+ / Debian 11+ / CentOS 8+ / Rocky Linux 8+</li>
+<li><strong>Python</strong> : 3.12</li>
+<li><strong>Utilisateur</strong> : Accès sudo ou root</li>
+<li><strong>Ports</strong> : 8000+ disponibles (ou access via reverse proxy)</li>
+<li><strong>Dépendances système</strong> : python3-dev, gcc, make</li>
+</ul>
+<hr />
+<h2 id="installation-etape-par-etape">🚀 Installation étape par étape</h2>
+<h3 id="1-mise-a-jour-du-systeme">1. Mise à jour du système</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu/Debian</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python3.12<span class="w"> </span>python3.12-venv<span class="w"> </span>python3.12-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>git<span class="w"> </span>curl<span class="w"> </span>nginx<span class="w"> </span>supervisor
+
+<span class="c1"># CentOS/Rocky</span>
+sudo<span class="w"> </span>yum<span class="w"> </span>update<span class="w"> </span>-y
+sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python3.12<span class="w"> </span>python3.12-devel<span class="w"> </span>git<span class="w"> </span>curl<span class="w"> </span>nginx<span class="w"> </span>supervisor
+</code></pre></div>
+
+<h3 id="2-creer-un-utilisateur-dedie">2. Créer un utilisateur dédié</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Créer l&#39;utilisateur</span>
+sudo<span class="w"> </span>useradd<span class="w"> </span>-m<span class="w"> </span>-s<span class="w"> </span>/bin/bash<span class="w"> </span>filamenta
+
+<span class="c1"># Donner les permissions sudo (optionnel)</span>
+sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>sudo<span class="w"> </span>filamenta
+
+<span class="c1"># Basculer vers l&#39;utilisateur</span>
+sudo<span class="w"> </span>su<span class="w"> </span>-<span class="w"> </span>filamenta
+</code></pre></div>
+
+<h3 id="3-cloner-le-depot-et-preparer-lapplication">3. Cloner le dépôt et préparer l'application</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Depuis l&#39;utilisateur filamenta</span>
+<span class="nb">cd</span><span class="w"> </span>~
+
+<span class="c1"># Cloner le dépôt</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/xarema/X-Filamenta-Python.git
+<span class="nb">cd</span><span class="w"> </span>X-Filamenta-Python
+
+<span class="c1"># Créer l&#39;environnement virtuel</span>
+python3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+
+<span class="c1"># Activer l&#39;environnement</span>
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+
+<span class="c1"># Installer les dépendances</span>
+pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip<span class="w"> </span>setuptools<span class="w"> </span>wheel
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+pip<span class="w"> </span>install<span class="w"> </span>gunicorn
+</code></pre></div>
+
+<h3 id="4-configurer-les-variables-denvironnement">4. Configurer les variables d'environnement</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Créer le fichier .env</span>
+cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+
+<span class="c1"># Éditer avec votre configuration</span>
+nano<span class="w"> </span>.env
+</code></pre></div>
+
+<p><strong>Exemple de <code>.env</code> pour VPS</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="nv">FLASK_ENV</span><span class="o">=</span>vps
+<span class="nv">FLASK_SECRET_KEY</span><span class="o">=</span>your-very-long-random-secret-key-here
+<span class="nv">FLASK_DEBUG</span><span class="o">=</span>False
+
+<span class="c1"># Database (MySQL recommandé)</span>
+<span class="nv">DB_TYPE</span><span class="o">=</span>mysql
+<span class="nv">DB_USER</span><span class="o">=</span>filamenta_user
+<span class="nv">DB_PASSWORD</span><span class="o">=</span>strong-password-here
+<span class="nv">DB_HOST</span><span class="o">=</span>localhost
+<span class="nv">DB_NAME</span><span class="o">=</span>filamenta_db
+<span class="nv">DB_PORT</span><span class="o">=</span><span class="m">3306</span>
+
+<span class="c1"># Security</span>
+<span class="nv">SECURE_SSL_REDIRECT</span><span class="o">=</span>True
+<span class="nv">PREFERRED_URL_SCHEME</span><span class="o">=</span>https
+
+<span class="c1"># Application</span>
+<span class="nv">APPLICATION_ROOT</span><span class="o">=</span>/
+</code></pre></div>
+
+<h3 id="5-creer-la-base-de-donnees">5. Créer la base de données</h3>
+<h4 id="option-a-mysql">Option A : MySQL</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Se connecter à MySQL</span>
+sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p
+
+<span class="c1"># Créer la base et l&#39;utilisateur</span>
+CREATE<span class="w"> </span>DATABASE<span class="w"> </span>filamenta_db<span class="w"> </span>CHARACTER<span class="w"> </span>SET<span class="w"> </span>utf8mb4<span class="w"> </span>COLLATE<span class="w"> </span>utf8mb4_unicode_ci<span class="p">;</span>
+CREATE<span class="w"> </span>USER<span class="w"> </span><span class="s1">&#39;filamenta_user&#39;</span>@<span class="s1">&#39;localhost&#39;</span><span class="w"> </span>IDENTIFIED<span class="w"> </span>BY<span class="w"> </span><span class="s1">&#39;strong-password-here&#39;</span><span class="p">;</span>
+GRANT<span class="w"> </span>ALL<span class="w"> </span>PRIVILEGES<span class="w"> </span>ON<span class="w"> </span>filamenta_db.*<span class="w"> </span>TO<span class="w"> </span><span class="s1">&#39;filamenta_user&#39;</span>@<span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
+FLUSH<span class="w"> </span>PRIVILEGES<span class="p">;</span>
+EXIT<span class="p">;</span>
+</code></pre></div>
+
+<h4 id="option-b-postgresql">Option B : PostgreSQL</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Se connecter à PostgreSQL</span>
+sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql
+
+<span class="c1"># Créer la base et l&#39;utilisateur</span>
+CREATE<span class="w"> </span>DATABASE<span class="w"> </span>filamenta_db<span class="p">;</span>
+CREATE<span class="w"> </span>USER<span class="w"> </span>filamenta_user<span class="w"> </span>WITH<span class="w"> </span>PASSWORD<span class="w"> </span><span class="s1">&#39;strong-password-here&#39;</span><span class="p">;</span>
+ALTER<span class="w"> </span>ROLE<span class="w"> </span>filamenta_user<span class="w"> </span>SET<span class="w"> </span>client_encoding<span class="w"> </span>TO<span class="w"> </span><span class="s1">&#39;utf8&#39;</span><span class="p">;</span>
+ALTER<span class="w"> </span>ROLE<span class="w"> </span>filamenta_user<span class="w"> </span>SET<span class="w"> </span>default_transaction_isolation<span class="w"> </span>TO<span class="w"> </span><span class="s1">&#39;read committed&#39;</span><span class="p">;</span>
+GRANT<span class="w"> </span>ALL<span class="w"> </span>PRIVILEGES<span class="w"> </span>ON<span class="w"> </span>DATABASE<span class="w"> </span>filamenta_db<span class="w"> </span>TO<span class="w"> </span>filamenta_user<span class="p">;</span>
+<span class="se">\q</span>
+</code></pre></div>
+
+<h3 id="6-initialiser-la-base-de-donnees-de-lapplication">6. Initialiser la base de données de l'application</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># En tant qu&#39;utilisateur filamenta</span>
+<span class="nb">cd</span><span class="w"> </span>~/X-Filamenta-Python
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from backend.src.app import create_app, db; \</span>
+<span class="s2">           from backend.src.config import get_config; \</span>
+<span class="s2">           config = get_config(&#39;vps&#39;); \</span>
+<span class="s2">           app = create_app(config=config); \</span>
+<span class="s2">           with app.app_context(): \</span>
+<span class="s2">               db.create_all(); \</span>
+<span class="s2">               print(&#39;Database initialized!&#39;)&quot;</span>
+</code></pre></div>
+
+<h3 id="7-configurer-gunicorn">7. Configurer Gunicorn</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Créer le répertoire pour les logs</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>~/logs
+
+<span class="c1"># Créer un service systemd pour Gunicorn</span>
+sudo<span class="w"> </span>tee<span class="w"> </span>/etc/systemd/system/filamenta.service<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">[Unit]</span>
+<span class="s">Description=X-Filamenta-Python WSGI Server</span>
+<span class="s">After=network.target</span>
+
+<span class="s">[Service]</span>
+<span class="s">User=filamenta</span>
+<span class="s">WorkingDirectory=/home/filamenta/X-Filamenta-Python</span>
+<span class="s">ExecStart=/home/filamenta/X-Filamenta-Python/venv/bin/gunicorn \</span>
+<span class="s">    --workers 4 \</span>
+<span class="s">    --timeout 60 \</span>
+<span class="s">    --bind unix:/home/filamenta/X-Filamenta-Python/filamenta.sock \</span>
+<span class="s">    --access-logfile /home/filamenta/logs/access.log \</span>
+<span class="s">    --error-logfile /home/filamenta/logs/error.log \</span>
+<span class="s">    backend.wsgi:app</span>
+
+<span class="s">Environment=&quot;FLASK_ENV=vps&quot;</span>
+<span class="s">Environment=&quot;PATH=/home/filamenta/X-Filamenta-Python/venv/bin&quot;</span>
+
+<span class="s">Restart=always</span>
+<span class="s">RestartSec=10</span>
+
+<span class="s">[Install]</span>
+<span class="s">WantedBy=multi-user.target</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Activer et démarrer le service</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>filamenta
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>filamenta
+
+<span class="c1"># Vérifier le statut</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>filamenta
+</code></pre></div>
+
+<h3 id="8-configurer-nginx">8. Configurer Nginx</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Créer la configuration Nginx</span>
+sudo<span class="w"> </span>tee<span class="w"> </span>/etc/nginx/sites-available/filamenta<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">server {</span>
+<span class="s">    listen 80;</span>
+<span class="s">    listen [::]:80;</span>
+<span class="s">    server_name your-domain.com www.your-domain.com;</span>
+
+<span class="s">    # Redirection HTTP vers HTTPS</span>
+<span class="s">    return 301 https://$server_name$request_uri;</span>
+<span class="s">}</span>
+
+<span class="s">server {</span>
+<span class="s">    listen 443 ssl http2;</span>
+<span class="s">    listen [::]:443 ssl http2;</span>
+<span class="s">    server_name your-domain.com www.your-domain.com;</span>
+
+<span class="s">    # Certificat SSL (Let&#39;s Encrypt)</span>
+<span class="s">    ssl_certificate /etc/letsencrypt/live/your-domain.com/fullchain.pem;</span>
+<span class="s">    ssl_certificate_key /etc/letsencrypt/live/your-domain.com/privkey.pem;</span>
+
+<span class="s">    # Configuration SSL sécurisée</span>
+<span class="s">    ssl_protocols TLSv1.2 TLSv1.3;</span>
+<span class="s">    ssl_ciphers HIGH:!aNULL:!MD5;</span>
+<span class="s">    ssl_prefer_server_ciphers on;</span>
+
+<span class="s">    # Logs</span>
+<span class="s">    access_log /var/log/nginx/filamenta_access.log;</span>
+<span class="s">    error_log /var/log/nginx/filamenta_error.log;</span>
+
+<span class="s">    # Limite de taille des uploads</span>
+<span class="s">    client_max_body_size 10M;</span>
+
+<span class="s">    # Proxy vers Gunicorn</span>
+<span class="s">    location / {</span>
+<span class="s">        proxy_pass http://unix:/home/filamenta/X-Filamenta-Python/filamenta.sock;</span>
+<span class="s">        proxy_set_header Host $host;</span>
+<span class="s">        proxy_set_header X-Real-IP $remote_addr;</span>
+<span class="s">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span>
+<span class="s">        proxy_set_header X-Forwarded-Proto $scheme;</span>
+<span class="s">        proxy_redirect off;</span>
+<span class="s">    }</span>
+
+<span class="s">    # Servir les fichiers statiques</span>
+<span class="s">    location /static/ {</span>
+<span class="s">        alias /home/filamenta/X-Filamenta-Python/frontend/static/;</span>
+<span class="s">        expires 30d;</span>
+<span class="s">    }</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Activer le site</span>
+sudo<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/etc/nginx/sites-available/filamenta<span class="w"> </span>/etc/nginx/sites-enabled/
+sudo<span class="w"> </span>nginx<span class="w"> </span>-t
+sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>nginx
+</code></pre></div>
+
+<h3 id="9-configurer-lets-encrypt-ssl-gratuit">9. Configurer Let's Encrypt (SSL gratuit)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Installer Certbot</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>certbot<span class="w"> </span>python3-certbot-nginx
+
+<span class="c1"># Générer le certificat</span>
+sudo<span class="w"> </span>certbot<span class="w"> </span>certonly<span class="w"> </span>--nginx<span class="w"> </span>-d<span class="w"> </span>your-domain.com<span class="w"> </span>-d<span class="w"> </span>www.your-domain.com
+
+<span class="c1"># Auto-renouvellement</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>certbot.timer
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>certbot.timer
+</code></pre></div>
+
+<h3 id="10-configurer-les-logs-et-monitoring">10. Configurer les logs et monitoring</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Créer la structure de logs</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>~/logs
+chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>~/logs
+
+<span class="c1"># Configuration de logrotate</span>
+sudo<span class="w"> </span>tee<span class="w"> </span>/etc/logrotate.d/filamenta<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">/home/filamenta/logs/*.log {</span>
+<span class="s">    daily</span>
+<span class="s">    missingok</span>
+<span class="s">    rotate 14</span>
+<span class="s">    compress</span>
+<span class="s">    delaycompress</span>
+<span class="s">    notifempty</span>
+<span class="s">    create 0640 filamenta filamenta</span>
+<span class="s">    sharedscripts</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+</code></pre></div>
+
+<hr />
+<h2 id="monitoring-et-maintenance">📊 Monitoring et maintenance</h2>
+<h3 id="verifier-letat-de-lapplication">Vérifier l'état de l'application</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Statut Gunicorn</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>filamenta
+
+<span class="c1"># Logs temps réel</span>
+sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>filamenta<span class="w"> </span>-f
+
+<span class="c1"># Logs Nginx</span>
+sudo<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/nginx/filamenta_access.log
+sudo<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/nginx/filamenta_error.log
+</code></pre></div>
+
+<h3 id="redemarrer-lapplication">Redémarrer l'application</h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>filamenta
+sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>nginx
+</code></pre></div>
+
+<h3 id="mettre-a-jour-lapplication">Mettre à jour l'application</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/X-Filamenta-Python
+git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>filamenta
+</code></pre></div>
+
+<hr />
+<h2 id="troubleshooting">🆘 Troubleshooting</h2>
+<h3 id="erreur-de-connexion-socket">Erreur de connexion socket</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Vérifier les permissions du socket</span>
+ls<span class="w"> </span>-la<span class="w"> </span>~/X-Filamenta-Python/filamenta.sock
+
+<span class="c1"># Recréer le socket</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>filamenta
+</code></pre></div>
+
+<h3 id="erreur-base-de-donnees">Erreur base de données</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Vérifier la connexion</span>
+mysql<span class="w"> </span>-u<span class="w"> </span>filamenta_user<span class="w"> </span>-p<span class="w"> </span>filamenta_db
+
+<span class="c1"># Recréer les tables</span>
+<span class="nb">cd</span><span class="w"> </span>~/X-Filamenta-Python
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from backend.src.app import create_app, db; \</span>
+<span class="s2">           app = create_app(); \</span>
+<span class="s2">           with app.app_context(): \</span>
+<span class="s2">               db.drop_all(); \</span>
+<span class="s2">               db.create_all(); \</span>
+<span class="s2">               print(&#39;Database reset!&#39;)&quot;</span>
+</code></pre></div>
+
+<h3 id="nginx-502-bad-gateway">Nginx 502 Bad Gateway</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Vérifier Gunicorn</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>filamenta
+
+<span class="c1"># Redémarrer</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>filamenta
+
+<span class="c1"># Vérifier les logs</span>
+sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>filamenta<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span>
+</code></pre></div>
+
+<hr />
+<h2 id="checklist-de-deploiement">📝 Checklist de déploiement</h2>
+<ul>
+<li>[ ] Système mis à jour</li>
+<li>[ ] Python 3.12 installé</li>
+<li>[ ] Utilisateur <code>filamenta</code> créé</li>
+<li>[ ] Dépôt cloné</li>
+<li>[ ] Environnement virtuel créé</li>
+<li>[ ] Dépendances installées</li>
+<li>[ ] <code>.env</code> configuré avec SECRET_KEY</li>
+<li>[ ] Base de données créée</li>
+<li>[ ] Tables initialisées</li>
+<li>[ ] Service systemd créé et activé</li>
+<li>[ ] Nginx configuré</li>
+<li>[ ] Certificat SSL installé</li>
+<li>[ ] Application accessible via HTTPS</li>
+<li>[ ] Logs configurés</li>
+<li>[ ] Monitoring en place</li>
+</ul>
+<hr />
+<h2 id="ressources">🔗 Ressources</h2>
+<ul>
+<li><a href="https://docs.gunicorn.org/en/latest/deploy.html">Gunicorn Deployment</a></li>
+<li><a href="https://nginx.org/en/docs/">Nginx Configuration</a></li>
+<li><a href="https://certbot.eff.org/">Let's Encrypt/Certbot</a></li>
+<li><a href="https://flask.palletsprojects.com/en/latest/deploying/">Flask Deployment Best Practices</a></li>
+<li><a href="https://freedesktop.org/wiki/Software/systemd/">systemd User Services</a></li>
+</ul>
+<hr />
+<p><strong>Prêt pour le déploiement ? Commence par l'étape 1 !</strong> 🚀</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

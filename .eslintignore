@@ -1,0 +1,10 @@
+node_modules/
+.venv/
+dist/
+build/
+backend/
+.env
+.env.*
+!.env.example
+
+

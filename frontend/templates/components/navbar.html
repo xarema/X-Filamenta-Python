@@ -1,0 +1,154 @@
+<!--
+Purpose: Navigation bar component
+Description: Responsive navbar with links to all pages
+
+File: frontend/templates/components/navbar.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Public
+
+Notes:
+- Jinja2 reusable component
+- Bootstrap 5 navbar styling
+- Language switcher support
+- Conditional user menu (authenticated users)
+-->
+
+Metadata:
+- Status: Draft
+- Classification: Public
+-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold text-primary" href="/"> ✨ {{ t('nav.brand') }} </a>
+
+    <!-- Toggle Button (Mobile) -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navigation Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <!-- Public Links -->
+        <li class="nav-item">
+          <a class="nav-link" href="/">{{ t('nav.home') }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">{{ t('nav.about') }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/features">{{ t('nav.features') }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">{{ t('nav.contact') }}</a>
+        </li>
+
+        <!-- Divider -->
+        <li class="nav-item">
+          <hr class="dropdown-divider" />
+        </li>
+
+        <!-- Admin Link (if admin) -->
+        {% if current_user.is_admin %}
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="adminDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+          >
+            🔧 {{ t('nav.admin') }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+            <li>
+              <a class="dropdown-item" href="/admin/">{{ t('nav.admin_dashboard') }}</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/admin/users"
+                >{{ t('nav.admin_users') }}</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="/admin/settings"
+                >{{ t('nav.admin_settings') }}</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="/admin/content"
+                >{{ t('nav.admin_content') }}</a
+              >
+            </li>
+          </ul>
+        </li>
+        {% endif %}
+
+        <!-- Language Switcher -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="langDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+          >
+            🌐 {{ lang|upper }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
+            <li><a class="dropdown-item" href="/lang/en">English</a></li>
+            <li><a class="dropdown-item" href="/lang/fr">Français</a></li>
+          </ul>
+        </li>
+
+        <!-- User Dropdown -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="userDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+          >
+            👤 {{ current_user.username }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            {% if current_user.is_authenticated %}
+            <li>
+              <a class="dropdown-item" href="/preferences"
+                >{{ t('nav.preferences') }}</a
+              >
+            </li>
+            <li><a class="dropdown-item" href="/profile">{{ t('nav.profile') }}</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="/logout">{{ t('nav.logout') }}</a></li>
+            {% else %}
+            <li><a class="dropdown-item" href="/login">{{ t('nav.login') }}</a></li>
+            <li>
+              <a class="dropdown-item" href="/register">{{ t('nav.register') }}</a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

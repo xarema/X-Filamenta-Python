@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🔧 Problèmes courants & Solutions">
+    <title>🔧 Problèmes courants & Solutions - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="problemes-courants-solutions">🔧 Problèmes courants &amp; Solutions</h1>
+<hr />
+<h2 id="demarrage-installation">🚀 Démarrage &amp; Installation</h2>
+<h3 id="address-already-in-use-port-5000">Address already in use (Port 5000)</h3>
+<p><strong>Erreur :</strong></p>
+<div class="highlight"><pre><span></span><code>OSError: [Errno 48] Address already in use
+</code></pre></div>
+
+<p><strong>Causes possibles :</strong><br />
+- L'application est déjà lancée dans un autre terminal<br />
+- Un autre service utilise le port 5000</p>
+<p><strong>Solutions :</strong></p>
+<p><strong>Option 1 : Trouver et arrêter le processus</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># Windows</span>
+<span class="nb">Get-Process</span> <span class="n">-Name</span> <span class="n">python</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Path</span> <span class="o">-like</span> <span class="s2">&quot;*\.venv\*&quot;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Stop-Process</span> <span class="n">-Force</span>
+
+<span class="c"># Linux/macOS</span>
+<span class="n">lsof</span> <span class="n">-i</span> <span class="p">:</span><span class="n">5000</span>
+<span class="nb">kill </span><span class="p">-</span><span class="n">9</span> <span class="p">&lt;</span><span class="n">PID</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p><strong>Option 2 : Utiliser un autre port</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">FLASK_PORT</span><span class="o">=</span><span class="m">5001</span>
+python<span class="w"> </span>run_prod.py
+<span class="c1"># Accédez à http://127.0.0.1:5001</span>
+</code></pre></div>
+
+<hr />
+<h3 id="importerror-ou-modulenotfounderror">ImportError ou ModuleNotFoundError</h3>
+<p><strong>Erreur :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">ModuleNotFoundError</span><span class="p">:</span><span class="w"> </span><span class="n">No</span><span class="w"> </span><span class="k">module</span><span class="w"> </span><span class="nn">named</span><span class="w"> </span><span class="c">&#39;flask&#39;</span>
+</code></pre></div>
+
+<p><strong>Cause :</strong> Dépendances non installées</p>
+<p><strong>Solution :</strong></p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+npm<span class="w"> </span>install
+</code></pre></div>
+
+<p><strong>Vérifier :</strong> <code>pip list | grep flask</code></p>
+<hr />
+<h3 id="virtual-environment-non-active">Virtual environment non activé</h3>
+<p><strong>Symptôme :</strong> Les commandes <code>pip</code> ou <code>python</code> utilisent la version système</p>
+<p><strong>Solution :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Windows</span>
+.<span class="se">\.</span>venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+
+<span class="c1"># Linux/macOS</span>
+<span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+
+<span class="c1"># Vérifier : le prompt doit montrer (.venv)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="base-de-donnees">💾 Base de données</h2>
+<h3 id="database-connection-refused">Database connection refused</h3>
+<p><strong>Erreur :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nv">sqlalchemy</span>.<span class="nv">exc</span>.<span class="nv">OperationalError</span>:<span class="w"> </span><span class="ss">(</span><span class="nv">pymysql</span>.<span class="nv">err</span>.<span class="nv">OperationalError</span><span class="ss">)</span>
+[<span class="nv">Errno</span><span class="w"> </span><span class="mi">2003</span>]<span class="w"> </span><span class="nv">Can</span><span class="s1">&#39;t connect to MySQL server on &#39;</span><span class="nv">localhost</span>:<span class="mi">3306</span><span class="err">&#39;</span>
+</code></pre></div>
+
+<p><strong>Causes possibles :</strong><br />
+- Serveur BD non lancé<br />
+- Credentials invalides<br />
+- BD n'existe pas</p>
+<p><strong>Solutions :</strong></p>
+<p><strong>Vérifier que le serveur BD est lancé :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># MySQL</span>
+mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w">  </span><span class="c1"># Doit accepter la connexion</span>
+
+<span class="c1"># PostgreSQL</span>
+psql<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w">  </span><span class="c1"># Doit accepter la connexion</span>
+</code></pre></div>
+
+<p><strong>Vérifier les credentials dans .env :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Doit correspondre aux identifiants créés</span>
+<span class="nv">SQLALCHEMY_DATABASE_URI</span><span class="o">=</span>mysql+pymysql://user:password@host:3306/dbname
+</code></pre></div>
+
+<p><strong>Créer la BD si manquante :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- MySQL</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">filamenta</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span><span class="p">;</span>
+
+<span class="c1">-- PostgreSQL</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">filamenta</span><span class="p">;</span>
+</code></pre></div>
+
+<hr />
+<h3 id="no-such-table-users">No such table: users</h3>
+<p><strong>Erreur :</strong></p>
+<div class="highlight"><pre><span></span><code>sqlite3.OperationalError: no such table: users
+</code></pre></div>
+
+<p><strong>Cause :</strong> Les tables n'ont pas été créées (wizard non finalisé)</p>
+<p><strong>Solutions :</strong></p>
+<p><strong>Option 1 : Relancer le wizard</strong></p>
+<div class="highlight"><pre><span></span><code>rm<span class="w"> </span>instance/installed.flag
+python<span class="w"> </span>run_prod.py
+<span class="c1"># Accédez à http://127.0.0.1:5000 et complétez le wizard</span>
+</code></pre></div>
+
+<p><strong>Option 2 : Créer les tables manuellement (dev)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.app</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">db</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tables créées !&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h3 id="database-is-locked-sqlite">Database is locked (SQLite)</h3>
+<p><strong>Erreur :</strong></p>
+<div class="highlight"><pre><span></span><code>sqlite3.OperationalError: database is locked
+</code></pre></div>
+
+<p><strong>Cause :</strong> Autre processus accède à la BD SQLite</p>
+<p><strong>Solutions :</strong></p>
+<ol>
+<li><strong>Attendre</strong> (généralement temporaire)</li>
+<li><strong>Redémarrer l'app :</strong><br />
+   ```bash<br />
+   # Arrêter<br />
+   Ctrl+C</li>
+</ol>
+<p># Attendre 5s<br />
+   sleep 5</p>
+<p># Redémarrer<br />
+   python run_prod.py<br />
+   ```</p>
+<ol start="3">
+<li><strong>Vérifier les processus :</strong><br />
+   ```bash<br />
+   # Windows<br />
+   Get-Process | Where-Object {$_.Handles -gt 100} | Select-Object Name</li>
+</ol>
+<p># Linux<br />
+   lsof instance/app.db<br />
+   ```</p>
+<hr />
+<h2 id="authentification-securite">🔐 Authentification &amp; Sécurité</h2>
+<h3 id="redirect-too-many-times-login-loop">Redirect too many times (Login loop)</h3>
+<p><strong>Erreur :</strong></p>
+<div class="highlight"><pre><span></span><code>ERR_TOO_MANY_REDIRECTS
+This page isn&#39;t working. localhost redirected you too many times.
+</code></pre></div>
+
+<p><strong>Causes possibles :</strong><br />
+- Session invalide<br />
+- Cookies corrompus<br />
+- Redirection mal configurée</p>
+<p><strong>Solutions :</strong></p>
+<ol>
+<li>
+<p><strong>Vider les cookies :</strong><br />
+   - Chrome/Firefox : F12 → Application → Cookies → Supprimer tout<br />
+   - Ou utiliser mode Incognito</p>
+</li>
+<li>
+<p><strong>Vérifier la session :</strong><br />
+<code>python
+   from flask import session
+   print(session)  # Doit contenir 'user_id'</code></p>
+</li>
+<li>
+<p><strong>Vérifier la config :</strong><br />
+   - <code>.env</code> doit contenir : <code>SECRET_KEY=...</code><br />
+   - <code>SESSION_COOKIE_SECURE=False</code> (dev) ou <code>True</code> (prod)</p>
+</li>
+</ol>
+<hr />
+<h3 id="cannot-verify-csrf-token">Cannot verify csrf token</h3>
+<p><strong>Erreur :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">BadRequest</span><span class="o">:</span><span class="w"> </span><span class="mi">400</span><span class="w"> </span><span class="n">Bad</span><span class="w"> </span><span class="n">Request</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">CSRF</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="n">missing</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">invalid</span>
+</code></pre></div>
+
+<p><strong>Causes :</strong><br />
+- Token CSRF manquant dans le formulaire<br />
+- Token expiré</p>
+<p><strong>Solutions :</strong></p>
+<p><strong>Vérifier le formulaire :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
+    {{ csrf_token() }}  
+
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p><strong>Avec HTMX :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">button</span> <span class="na">hx-post</span><span class="o">=</span><span class="s">&quot;/endpoint&quot;</span> 
+        <span class="na">hx-headers</span><span class="o">=</span><span class="s">&#39;{&quot;X-CSRFToken&quot;: &quot;{{ csrf_token() }}&quot;}&#39;</span><span class="p">&gt;</span> 
+    Click
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="frontend">🌍 Frontend</h2>
+<h3 id="static-files-not-loading-cssjs">Static files not loading (CSS/JS)</h3>
+<p><strong>Symptôme :</strong> Page défigurée, CSS manquant, JS non chargé</p>
+<p><strong>Cause :</strong> Fichiers statiques non trouvés</p>
+<p><strong>Solutions :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Vérifier que les fichiers existent</span>
+ls<span class="w"> </span>-la<span class="w"> </span>frontend/static/
+
+<span class="c1"># Vérifier les permissions</span>
+chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">755</span><span class="w"> </span>frontend/static/
+
+<span class="c1"># Vider le cache navigateur</span>
+F12<span class="w"> </span>→<span class="w"> </span>Network<span class="w"> </span>→<span class="w"> </span>Disable<span class="w"> </span>cache<span class="w"> </span>→<span class="w"> </span>Refresh
+</code></pre></div>
+
+<p><strong>En prod :</strong> Configurer Nginx/Apache pour servir les statiques</p>
+<hr />
+<h3 id="htmx-not-working-requests-pending">HTMX not working / requests pending</h3>
+<p><strong>Symptôme :</strong> Boutons HTMX ne répondent pas</p>
+<p><strong>Solutions :</strong></p>
+<ol>
+<li>
+<p><strong>Vérifier HTMX chargé :</strong><br />
+   ```bash<br />
+   # F12 → Console</p>
+<blockquote>
+<p>htmx  # Doit afficher l'objet htmx<br />
+   ```</p>
+</blockquote>
+</li>
+<li>
+<p><strong>Vérifier les endpoints :</strong><br />
+<code>bash
+   # F12 → Network
+   # Vérifier que les requêtes vont aux bons endpoints</code></p>
+</li>
+<li>
+<p><strong>Vérifier les erreurs :</strong><br />
+<code>bash
+   # F12 → Console → Voir les erreurs
+   # F12 → Network → Voir les réponses (4xx, 5xx)</code></p>
+</li>
+</ol>
+<hr />
+<h2 id="logs-debogage">📝 Logs &amp; Débogage</h2>
+<h3 id="voir-les-logs-en-dev">Voir les logs en dev</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Logs Flask</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">FLASK_ENV</span><span class="o">=</span>development
+python<span class="w"> </span>run_prod.py<span class="w">  </span><span class="c1"># Logs plus détaillés</span>
+
+<span class="c1"># Logs application</span>
+tail<span class="w"> </span>-f<span class="w"> </span>instance/logs/app.log<span class="w">  </span><span class="c1"># Si applicable</span>
+</code></pre></div>
+
+<h3 id="activer-le-debug-mode">Activer le debug mode</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Temporaire dans app.py</span>
+<span class="n">app</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Ou via env</span>
+<span class="n">export</span> <span class="n">FLASK_DEBUG</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">python</span> <span class="n">run_prod</span><span class="o">.</span><span class="n">py</span>
+</code></pre></div>
+
+<hr />
+<h2 id="obtenir-de-laide">🆘 Obtenir de l'aide</h2>
+<p>Si votre problème n'est pas listé :</p>
+<ol>
+<li><strong>Vérifier les logs</strong> : Chercher les messages d'erreur</li>
+<li><strong>Reproduire</strong> : Essayer d'identifier les étapes exactes</li>
+<li><strong>Créer une issue</strong> : Sur GitHub avec contexte complet<br />
+   - Description du problème<br />
+   - Étapes pour reproduire<br />
+   - Logs/erreurs<br />
+   - Environment (OS, Python version, etc.)</li>
+</ol>
+<hr />
+<p><strong>→ Consultez <a href="faq.md">faq.md</a> pour les questions générales.</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

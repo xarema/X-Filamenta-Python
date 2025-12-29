@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - ✅ Tests du système i18n amélioré">
+    <title>✅ Tests du système i18n amélioré - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="tests-du-systeme-i18n-ameliore">✅ Tests du système i18n amélioré</h1>
+<p><strong>Date</strong> : 2025-12-28T20:20:00+01:00<br />
+<strong>Serveur</strong> : http://127.0.0.1:5000<br />
+<strong>Statut</strong> : 🟢 Serveur démarré avec succès</p>
+<hr />
+<h2 id="plan-de-tests">🧪 Plan de tests</h2>
+<h3 id="test-1-detection-automatique-de-la-langue-du-navigateur">Test 1 : Détection automatique de la langue du navigateur</h3>
+<p><strong>Objectif</strong> : Vérifier que la langue est détectée automatiquement depuis le header <code>Accept-Language</code></p>
+<p><strong>Étapes</strong> :</p>
+<ol>
+<li>Configurer le navigateur en <strong>français</strong> (Paramètres → Langues)</li>
+<li>Ouvrir <code>http://127.0.0.1:5000/install/</code></li>
+<li>✅ <strong>Résultat attendu</strong> : Wizard en français</li>
+</ol>
+<hr />
+<h3 id="test-2-changement-de-langue-via-langcode">Test 2 : Changement de langue via <code>/lang/&lt;code&gt;</code></h3>
+<p><strong>Objectif</strong> : Vérifier que le changement manuel de langue fonctionne</p>
+<p><strong>Étapes</strong> :</p>
+<ol>
+<li>Aller sur <code>http://127.0.0.1:5000/lang/en?start=1</code></li>
+<li>✅ <strong>Résultat attendu</strong> : Wizard en anglais</li>
+<li>Aller sur <code>http://127.0.0.1:5000/lang/fr?start=1</code></li>
+<li>✅ <strong>Résultat attendu</strong> : Wizard en français</li>
+<li>Aller sur <code>http://127.0.0.1:5000/lang/es?start=1</code></li>
+<li>✅ <strong>Résultat attendu</strong> : Wizard en espagnol</li>
+</ol>
+<hr />
+<h3 id="test-3-toutes-les-etapes-du-wizard">Test 3 : Toutes les étapes du wizard</h3>
+<p><strong>Objectif</strong> : Vérifier qu'aucune variable brute ne s'affiche</p>
+<p><strong>Étapes</strong> :</p>
+<ol>
+<li>Commencer le wizard en anglais</li>
+<li>Parcourir toutes les étapes :<br />
+   - ✅ Langue<br />
+   - ✅ Bienvenue<br />
+   - ✅ Prérequis<br />
+   - ✅ Base de données<br />
+   - ✅ Administrateur<br />
+   - ✅ Résumé<br />
+   - ✅ Terminé</li>
+<li>✅ <strong>Résultat attendu</strong> : Aucun texte comme <code>wizard.title</code> ou <code>wizard.db.test_success</code></li>
+</ol>
+<hr />
+<h3 id="test-4-boutons-de-traduction">Test 4 : Boutons de traduction</h3>
+<p><strong>Objectif</strong> : Vérifier que les boutons problématiques sont maintenant traduits</p>
+<p><strong>Vérifications spécifiques</strong> :</p>
+<ul>
+<li>✅ <code>{{ t('wizard.skip_backup') }}</code> → "Continue without backup" (EN) / "Continuer sans backup" (FR) / "Continuar sin respaldo" (ES)</li>
+<li>✅ <code>{{ t('wizard.restore_backup') }}</code> → "Restore a backup" (EN) / "Restaurer un backup" (FR) / "Restaurar un respaldo" (ES)</li>
+<li>✅ Boutons dans le fil d'Ariane</li>
+<li>✅ Messages d'erreur dans les formulaires</li>
+</ul>
+<hr />
+<h3 id="test-5-langues-disponibles">Test 5 : Langues disponibles</h3>
+<p><strong>Objectif</strong> : Vérifier que le système détecte automatiquement les langues</p>
+<p><strong>Test dans Python</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.utils.i18n</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_available_languages</span>
+
+<span class="n">languages</span> <span class="o">=</span> <span class="n">get_available_languages</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">languages</span><span class="p">)</span>
+<span class="c1"># Résultat attendu : {&#39;en&#39;: &#39;English&#39;, &#39;fr&#39;: &#39;Français&#39;, &#39;es&#39;: &#39;Español&#39;}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="checklist-de-verification">📋 Checklist de vérification</h2>
+<h3 id="avant-les-tests">Avant les tests</h3>
+<ul>
+<li>[x] Serveur démarré sans erreur</li>
+<li>[x] Port 5000 accessible</li>
+<li>[x] Logs affichent "Serving on http://127.0.0.1:5000"</li>
+</ul>
+<h3 id="pendant-les-tests">Pendant les tests</h3>
+<ul>
+<li>[ ] Navigateur en français → Wizard en français</li>
+<li>[ ] Navigateur en anglais → Wizard en anglais</li>
+<li>[ ] Changement de langue via <code>/lang/fr</code> fonctionne</li>
+<li>[ ] Changement de langue via <code>/lang/en</code> fonctionne</li>
+<li>[ ] Changement de langue via <code>/lang/es</code> fonctionne</li>
+<li>[ ] Aucune variable brute visible (ex: <code>wizard.title</code>)</li>
+<li>[ ] Tous les boutons sont traduits</li>
+<li>[ ] Messages d'erreur traduits</li>
+<li>[ ] Fil d'Ariane traduit</li>
+</ul>
+<h3 id="tests-specifiques-wizard">Tests spécifiques wizard</h3>
+<ul>
+<li>[ ] Page langue : texte bilingue correct</li>
+<li>[ ] Page bienvenue : traduction correcte</li>
+<li>[ ] Page prérequis : traduction correcte</li>
+<li>[ ] Page base de données :</li>
+<li>[ ] Label "URI de connexion" traduit</li>
+<li>[ ] Bouton "Tester la connexion" traduit</li>
+<li>[ ] Message succès/erreur traduit</li>
+<li>[ ] Exemples traduits</li>
+<li>[ ] Page admin :</li>
+<li>[ ] Labels traduits</li>
+<li>[ ] Messages d'aide traduits</li>
+<li>[ ] Page résumé : tous les labels traduits</li>
+<li>[ ] Page terminé : messages traduits</li>
+</ul>
+<hr />
+<h2 id="erreurs-a-surveiller">🐛 Erreurs à surveiller</h2>
+<h3 id="erreurs-courantes">Erreurs courantes</h3>
+<ol>
+<li>
+<p><strong>Variable brute affichée</strong> (ex: <code>wizard.title</code>)<br />
+   - <strong>Cause</strong> : Clé manquante dans le fichier de langue<br />
+   - <strong>Solution</strong> : Ajouter la clé manquante dans <code>en.json</code>, <code>fr.json</code>, <code>es.json</code></p>
+</li>
+<li>
+<p><strong>Langue forcée à français</strong><br />
+   - <strong>Cause</strong> : Session pas réinitialisée<br />
+   - <strong>Solution</strong> : Vider les cookies ou aller sur <code>/lang/en?start=1</code></p>
+</li>
+<li>
+<p><strong>Erreur 500 dans le wizard</strong><br />
+   - <strong>Cause</strong> : Fonction <code>t()</code> non disponible dans le contexte<br />
+   - <strong>Solution</strong> : Vérifier que <code>install.py</code> ligne 128-133 passe bien <code>t</code> au contexte</p>
+</li>
+<li>
+<p><strong>Langue du navigateur non détectée</strong><br />
+   - <strong>Cause</strong> : Header <code>Accept-Language</code> vide<br />
+   - <strong>Solution</strong> : Configurer la langue dans les paramètres du navigateur</p>
+</li>
+</ol>
+<hr />
+<h2 id="resultats-attendus">📊 Résultats attendus</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Statut</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Serveur démarre</td>
+<td>✅ OK</td>
+<td>http://127.0.0.1:5000</td>
+</tr>
+<tr>
+<td>Détection navigateur FR</td>
+<td>⏳ À tester</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Détection navigateur EN</td>
+<td>⏳ À tester</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Changement langue <code>/lang/fr</code></td>
+<td>⏳ À tester</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Changement langue <code>/lang/en</code></td>
+<td>⏳ À tester</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Changement langue <code>/lang/es</code></td>
+<td>⏳ À tester</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Wizard complet EN</td>
+<td>⏳ À tester</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Wizard complet FR</td>
+<td>⏳ À tester</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Wizard complet ES</td>
+<td>⏳ À tester</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Aucune variable brute</td>
+<td>⏳ À tester</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Boutons traduits</td>
+<td>⏳ À tester</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="instructions-pour-lutilisateur">🎯 Instructions pour l'utilisateur</h2>
+<h3 id="pour-tester-maintenant">Pour tester maintenant</h3>
+<ol>
+<li><strong>Ouvrir le navigateur</strong> sur <code>http://127.0.0.1:5000/install/</code></li>
+<li><strong>Changer la langue</strong> du navigateur dans les paramètres :<br />
+   - Firefox : <code>Paramètres → Langue → Ajouter une langue</code><br />
+   - Chrome : <code>Paramètres → Langues → Ordre de préférence</code></li>
+<li><strong>Rafraîchir la page</strong> (Ctrl+F5)</li>
+<li><strong>Vérifier</strong> que le wizard s'affiche dans la langue du navigateur</li>
+</ol>
+<h3 id="pour-tester-une-langue-specifique">Pour tester une langue spécifique</h3>
+<ol>
+<li><strong>Français</strong> : <code>http://127.0.0.1:5000/lang/fr?start=1</code></li>
+<li><strong>Anglais</strong> : <code>http://127.0.0.1:5000/lang/en?start=1</code></li>
+<li><strong>Espagnol</strong> : <code>http://127.0.0.1:5000/lang/es?start=1</code></li>
+</ol>
+<h3 id="pour-rapporter-un-probleme">Pour rapporter un problème</h3>
+<p>Si vous voyez une variable brute (ex: <code>wizard.title</code>), notez :</p>
+<ol>
+<li>La page où ça apparaît</li>
+<li>La langue sélectionnée</li>
+<li>Le texte exact affiché</li>
+<li>Capture d'écran dans <code>.SCREENSHOTS/</code></li>
+</ol>
+<hr />
+<h2 id="validation-finale">✅ Validation finale</h2>
+<p>Une fois tous les tests réussis :</p>
+<ul>
+<li>[ ] Aucune variable brute visible</li>
+<li>[ ] Toutes les langues fonctionnent (EN, FR, ES)</li>
+<li>[ ] Détection automatique du navigateur OK</li>
+<li>[ ] Changement de langue manuel OK</li>
+<li>[ ] Wizard complet fonctionnel dans les 3 langues</li>
+</ul>
+<p><strong>Si tous les tests passent</strong> → Le système i18n est <strong>100% opérationnel</strong> ✅</p>
+<hr />
+<p><strong>Prochaine étape</strong> : Ajouter d'autres langues selon les besoins (de, it, pt, ru, zh, ja, ar, etc.)</p>
+<hr />
+<p><strong>Mainteneur</strong> : AleGabMar<br />
+<strong>Dernière mise à jour</strong> : 2025-12-28T20:20:00+01:00</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

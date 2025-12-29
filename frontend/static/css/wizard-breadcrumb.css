@@ -1,0 +1,224 @@
+/*
+------------------------------------------------------------------------------
+Purpose: Wizard breadcrumb styling
+Description: Custom styles for the installation wizard breadcrumb/stepper
+
+File: frontend/static/css/wizard-breadcrumb.css | Repository: X-Filamenta-Python
+Created: 2025-12-28T21:35:00+01:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Stable
+- Classification: Public
+------------------------------------------------------------------------------
+*/
+
+/* Container principal du fil d'Ariane */
+.wizard-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+}
+
+/* Chaque bloc d'étape */
+.wizard-step {
+  flex: 1 1 200px;
+  min-width: 180px;
+  max-width: 220px;
+  text-align: center;
+  padding: 16px 12px;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: block;
+}
+
+/* Étape terminée (VERT) */
+.wizard-step.step-done {
+  background-color: #d1fae5; /* bg-green-100 */
+  border: 2px solid #10b981; /* border-green-500 */
+  color: #065f46; /* text-green-800 */
+}
+
+.wizard-step.step-done:hover {
+  background-color: #a7f3d0; /* bg-green-200 */
+  cursor: pointer;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+}
+
+/* Étape en cours (BLEU) */
+.wizard-step.step-active {
+  background-color: #dbeafe; /* bg-blue-100 */
+  border: 2px solid #3b82f6; /* border-blue-500 */
+  color: #1e40af; /* text-blue-800 */
+}
+
+/* Étape restante (GRIS) */
+.wizard-step.step-pending {
+  background-color: #ffffff;
+  border: 2px solid #d1d5db; /* border-gray-300 */
+  color: #6b7280; /* text-gray-500 */
+  opacity: 0.7;
+}
+
+/* Label "ÉTAPE X" */
+.wizard-step-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+/* Étape terminée - label vert */
+.wizard-step.step-done .wizard-step-label {
+  color: #10b981; /* text-green-500 */
+}
+
+/* Étape active - label bleu */
+.wizard-step.step-active .wizard-step-label {
+  color: #3b82f6; /* text-blue-500 */
+}
+
+/* Étape pending - label gris */
+.wizard-step.step-pending .wizard-step-label {
+  color: #9ca3af; /* text-gray-400 */
+}
+
+/* Titre de l'étape */
+.wizard-step-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+/* Étape terminée - titre vert */
+.wizard-step.step-done .wizard-step-title {
+  color: #065f46; /* text-green-800 */
+}
+
+/* Étape active - titre bleu */
+.wizard-step.step-active .wizard-step-title {
+  color: #1e40af; /* text-blue-800 */
+}
+
+/* Étape pending - titre gris */
+.wizard-step.step-pending .wizard-step-title {
+  color: #6b7280; /* text-gray-500 */
+}
+
+/* Icône */
+.wizard-step-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+}
+
+/* Icône étape terminée - crochet vert */
+.wizard-step.step-done .wizard-step-icon {
+  color: #10b981; /* text-green-500 */
+}
+
+/* Icône étape active - cercle plein bleu */
+.wizard-step.step-active .wizard-step-icon {
+  color: #3b82f6; /* text-blue-500 */
+}
+
+/* Icône étape pending - cercle vide gris */
+.wizard-step.step-pending .wizard-step-icon {
+  color: #9ca3af; /* text-gray-400 */
+}
+
+/* Conteneur de la flèche entre les étapes */
+.wizard-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  padding: 0 8px;
+}
+
+/* Couleur de la flèche selon l'état */
+.wizard-arrow.arrow-done {
+  color: #10b981; /* text-green-500 */
+}
+
+.wizard-arrow.arrow-active {
+  color: #3b82f6; /* text-blue-500 */
+}
+
+.wizard-arrow.arrow-pending {
+  color: #d1d5db; /* text-gray-300 */
+}
+
+/* Responsive: petits écrans */
+@media (max-width: 768px) {
+  .wizard-breadcrumb {
+    gap: 8px;
+  }
+
+  .wizard-step {
+    flex: 1 1 140px;
+    min-width: 140px;
+    padding: 12px 8px;
+  }
+
+  .wizard-step-title {
+    font-size: 0.85rem;
+  }
+
+  .wizard-arrow {
+    font-size: 1.2rem;
+    padding: 0 4px;
+  }
+}
+
+/* Responsive: très petits écrans */
+@media (max-width: 576px) {
+  .wizard-step {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .wizard-arrow {
+    transform: rotate(90deg);
+    padding: 4px 0;
+  }
+}
+
+/* Désactiver le style du bouton pour les étapes cliquables */
+.wizard-step-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+.wizard-step-button:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Phase 4 plan — X-Filamenta-Python (2025-12-27 12:00 UTC)">
+    <title>Phase 4 plan — X-Filamenta-Python (2025-12-27 12:00 UTC) - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="phase-4-plan-x-filamenta-python-2025-12-27-1200-utc">Phase 4 plan — X-Filamenta-Python (2025-12-27 12:00 UTC)</h1>
+<h2 id="contexte-objectif">Contexte / objectif</h2>
+<p>Poursuivre la Phase 4 du roadmap (.roadmap/ROADMAP.md) : finaliser le wizard restore/seed, poser l'auth HTMX avec 2FA optionnel, sécuriser la session, introduire les modèles User/Theme/Content avec migrations et CRUD admin, et préparer le pipeline backup/restore + footer attribution.</p>
+<h2 id="portee">Portée</h2>
+<ul>
+<li>Wizard installation: restore/seed réel (manifest+checksum), progression visuelle, erreurs explicites, retrait du test de padding après couverture.</li>
+<li>Auth HTMX: login/logout, throttling, politique mot de passe forte réutilisée, 2FA TOTP optionnel.</li>
+<li>Session sécurisée: cookies HttpOnly/SameSite, CSRF pour formulaires non-HTMX, rate-limit login/2FA.</li>
+<li>Modèles/migrations: User (roles/langue/theme/totp_secret), Theme, Content; services et routes CRUD admin + templates.</li>
+<li>Backup/restore pipeline: génération backup (manifest+checksum), snapshot pré-restore, dry-run; footer attribution AGPL vérifiée.</li>
+</ul>
+<h2 id="plan-sequence-increments-courts">Plan séquencé (incréments courts)</h2>
+<p>1) Wizard restore/seed<br />
+- Mapper flux existant et compléter logique: lecture manifest, vérif checksum, snapshot avant restore, seed réel.<br />
+- Ajouter états de progression HTMX + erreurs explicites; retirer test de padding une fois la couverture renforcée.<br />
+- Tests: <code>backend/tests/test_install_wizard.py</code> (happy/error), HTMX fragments.</p>
+<p>2) Auth HTMX minimale<br />
+- Créer blueprint auth (<code>backend/src/routes/auth.py</code>), fragments login/logout HTMX, réutiliser validateur mot de passe fort.<br />
+- Throttling sur login, messages erreurs clairs; test client HTMX (<code>backend/tests/test_routes.py</code>).</p>
+<p>3) Session sécurisée<br />
+- Configurer cookies (HttpOnly, SameSite=Lax/Strict selon besoin), CSRF pour formulaires non-HTMX, rate-limit login/2FA.<br />
+- Ajouter décorateurs/middlewares pour vérifier CSRF hors HTMX; tests sécurité (<code>backend/tests/test_services.py</code>).</p>
+<p>4) Modèles + migrations + CRUD admin<br />
+- Créer modèles User/Theme/Content + migrations Alembic; services CRUD; routes admin + templates (listing/edition minimal).<br />
+- Tests repo/service + routes admin, incluant rôles et i18n/theme.</p>
+<p>5) 2FA TOTP optionnel<br />
+- Stocker secret par utilisateur (colonne dédiée, hashing/chiffrement si dispo), activer flux d'activation/validation.<br />
+- Tests: génération secret, validation code, rate-limit.</p>
+<p>6) Backup/restore pipeline + footer<br />
+- Scripts/services de backup (manifest+checksum) et restore avec snapshot pré-restore + dry-run.<br />
+- Vérifier/ajouter attribution AGPL dans footer layout.<br />
+- Tests intégration (backup/restore happy+erreur) et couverture footer.</p>
+<h2 id="decisions-recommandations">Décisions / recommandations</h2>
+<ul>
+<li>Prioriser SQLite pour restore/seed immédiat; ajouter hooks DB vendors plus tard.</li>
+<li>Utiliser HTMX pour feedback progression wizard; éviter JS custom sauf besoin minimal.</li>
+<li>Conserver politique mot de passe forte existante et la partager entre wizard et auth.</li>
+<li>Stockage TOTP: prévoir abstraction pour chiffrement ultérieur; garder secrets hors logs.</li>
+<li>Throttling: limiter login/2FA par IP+user; réessayer après délai.</li>
+</ul>
+<h2 id="risques-mitigations">Risques &amp; mitigations</h2>
+<ul>
+<li>Intégrité backup/restore: exiger manifest+checksum et snapshot pré-restore; logs sans PII.</li>
+<li>Régression wizard: couvrir flux heureux/erreurs avant de retirer tests temporaires.</li>
+<li>Sécurité auth: CSRF hors HTMX, cookies sécurisés, pas de fuite de secrets dans logs.</li>
+<li>Charge future: abstraire I/O backup pour changer de backend (local/S3) sans refonte.</li>
+</ul>
+<h2 id="actions-prochaines-courtes">Actions prochaines (courtes)</h2>
+<ul>
+<li>[ ] Finaliser restore/seed réel + progression/erreurs HTMX; MAJ tests wizard.</li>
+<li>[ ] Ajouter auth HTMX (login/logout) avec throttling; tests client.</li>
+<li>[ ] Configurer cookies + CSRF + rate-limit; tests sécurité.</li>
+<li>[ ] Créer modèles/migrations User/Theme/Content + CRUD admin minimal; tests.</li>
+<li>[ ] Activer TOTP optionnel + tests; renforcer footer attribution.</li>
+<li>[ ] Implémenter backup/restore pipeline + tests intégration.</li>
+</ul>
+<h2 id="commandes-de-verification-proposees">Commandes de vérification proposées</h2>
+<div class="highlight"><pre><span></span><code>ruff<span class="w"> </span>check<span class="w"> </span>.
+ruff<span class="w"> </span>format<span class="w"> </span>--check<span class="w"> </span>.
+mypy<span class="w"> </span>backend/src
+pytest<span class="w"> </span>-q
+npm<span class="w"> </span>run<span class="w"> </span>lint
+npm<span class="w"> </span>run<span class="w"> </span>fmt<span class="w"> </span>--<span class="w"> </span>--check
+</code></pre></div>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

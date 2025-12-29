@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 📚 Documentation X-Filamenta-Python">
+    <title>📚 Documentation X-Filamenta-Python - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="documentation-x-filamenta-python">📚 Documentation X-Filamenta-Python</h1>
+<p>Bienvenue dans la documentation complète de X-Filamenta-Python !</p>
+<hr />
+<h2 id="commencer-ici">🚀 Commencer ici</h2>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Description</th>
+<th>Temps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="RC_RELEASE_NOTES.md">RC_RELEASE_NOTES.md</a></strong></td>
+<td>⭐ Notes de version RC — <strong>Lire en premier</strong></td>
+<td>5 min</td>
+</tr>
+<tr>
+<td><strong><a href="DOCUMENTATION_INDEX.md">DOCUMENTATION_INDEX.md</a></strong></td>
+<td>Index complet de navigation</td>
+<td>3 min</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="structure-de-la-documentation">📁 Structure de la documentation</h2>
+<div class="highlight"><pre><span></span><code>docs/
+├── README.md                          ← Vous êtes ici
+├── RC_RELEASE_NOTES.md               ← Notes de version RC
+├── DOCUMENTATION_INDEX.md             ← Index complet
+├── PROJECT_INIT_SUMMARY.txt          ← Résumé du projet
+│
+├── deployment/                        ← Guides de déploiement
+│   ├── DEPLOYMENT.md                 ← Comparaison des plateformes
+│   ├── DEPLOYMENT_CPANEL.md          ← Guide cPanel (30 min)
+│   ├── DEPLOYMENT_VPS.md             ← Guide VPS/Linux (1h)
+│   └── DEPLOYMENT_DOCKER.md          ← Guide Docker (15 min)
+│
+├── guides/                            ← Guides utilisateur
+│   ├── QUICKSTART.md                 ← Démarrage rapide (5 min)
+│   └── INIT_CHECKLIST.md             ← Checklist d&#39;initialisation
+│
+└── technical/                         ← Documentation technique
+    ├── WSGI_AND_MULTIDB_ADAPTATION.md   ← Architecture WSGI
+    ├── WSGI_MULTIDB_FINAL_SUMMARY.txt   ← Résumé technique
+    └── WSGI_MULTIDB_DELIVERABLES.txt    ← Livrables complets
+</code></pre></div>
+
+<hr />
+<h2 id="navigation-rapide">🎯 Navigation rapide</h2>
+<h3 id="je-veux-deployer-lapplication">Je veux déployer l'application</h3>
+<ol>
+<li><strong>Choisir ma plateforme</strong> → <a href="deployment/DEPLOYMENT.md">deployment/DEPLOYMENT.md</a></li>
+<li><strong>Suivre le guide</strong> :<br />
+   - cPanel ? → <a href="deployment/DEPLOYMENT_CPANEL.md">deployment/DEPLOYMENT_CPANEL.md</a><br />
+   - VPS ? → <a href="deployment/DEPLOYMENT_VPS.md">deployment/DEPLOYMENT_VPS.md</a><br />
+   - Docker ? → <a href="deployment/DEPLOYMENT_DOCKER.md">deployment/DEPLOYMENT_DOCKER.md</a></li>
+</ol>
+<h3 id="je-developpe-en-local">Je développe en local</h3>
+<p>→ Lire <a href="guides/QUICKSTART.md">guides/QUICKSTART.md</a> (5 min)</p>
+<h3 id="je-veux-comprendre-larchitecture">Je veux comprendre l'architecture</h3>
+<p>→ Lire <a href="technical/WSGI_AND_MULTIDB_ADAPTATION.md">technical/WSGI_AND_MULTIDB_ADAPTATION.md</a></p>
+<h3 id="je-cherche-un-document-specifique">Je cherche un document spécifique</h3>
+<p>→ Consulter <a href="DOCUMENTATION_INDEX.md">DOCUMENTATION_INDEX.md</a></p>
+<hr />
+<h2 id="guides-par-categorie">📊 Guides par catégorie</h2>
+<h3 id="deploiement">🚀 Déploiement</h3>
+<table>
+<thead>
+<tr>
+<th>Guide</th>
+<th>Plateforme</th>
+<th>Temps</th>
+<th>Niveau</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="deployment/DEPLOYMENT.md">DEPLOYMENT.md</a></td>
+<td>Comparaison</td>
+<td>10 min</td>
+<td>Tous</td>
+</tr>
+<tr>
+<td><a href="deployment/DEPLOYMENT_CPANEL.md">DEPLOYMENT_CPANEL.md</a></td>
+<td>cPanel</td>
+<td>30 min</td>
+<td>⭐⭐ Facile</td>
+</tr>
+<tr>
+<td><a href="deployment/DEPLOYMENT_VPS.md">DEPLOYMENT_VPS.md</a></td>
+<td>VPS/Linux</td>
+<td>1h</td>
+<td>⭐⭐⭐ Moyen</td>
+</tr>
+<tr>
+<td><a href="deployment/DEPLOYMENT_DOCKER.md">DEPLOYMENT_DOCKER.md</a></td>
+<td>Docker</td>
+<td>15 min</td>
+<td>⭐⭐ Facile</td>
+</tr>
+</tbody>
+</table>
+<h3 id="guides-utilisateur">📖 Guides utilisateur</h3>
+<table>
+<thead>
+<tr>
+<th>Guide</th>
+<th>Description</th>
+<th>Public</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="guides/QUICKSTART.md">guides/QUICKSTART.md</a></td>
+<td>Démarrage rapide local</td>
+<td>Développeurs</td>
+</tr>
+<tr>
+<td><a href="guides/INIT_CHECKLIST.md">guides/INIT_CHECKLIST.md</a></td>
+<td>Checklist initialisation</td>
+<td>Tous</td>
+</tr>
+</tbody>
+</table>
+<h3 id="design-interface">🎨 Design &amp; Interface</h3>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Contenu</th>
+<th>Public</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="UI_UX_STACK.md">UI_UX_STACK.md</a></td>
+<td>Stack UI/UX complète (technique)</td>
+<td>Développeurs</td>
+</tr>
+<tr>
+<td><a href="UI_UX_QUICKSTART.md">UI_UX_QUICKSTART.md</a></td>
+<td>Guide rapide (5 min)</td>
+<td>Tous</td>
+</tr>
+<tr>
+<td><a href="UI_UX_STACK_SUMMARY.txt">UI_UX_STACK_SUMMARY.txt</a></td>
+<td>Résumé exécutif</td>
+<td>Tous</td>
+</tr>
+</tbody>
+</table>
+<h3 id="documentation-technique">🔧 Documentation technique</h3>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Contenu</th>
+<th>Public</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="technical/WSGI_AND_MULTIDB_ADAPTATION.md">technical/WSGI_AND_MULTIDB_ADAPTATION.md</a></td>
+<td>Architecture WSGI détaillée</td>
+<td>Développeurs</td>
+</tr>
+<tr>
+<td><a href="technical/WSGI_MULTIDB_FINAL_SUMMARY.txt">technical/WSGI_MULTIDB_FINAL_SUMMARY.txt</a></td>
+<td>Résumé technique</td>
+<td>DevOps</td>
+</tr>
+<tr>
+<td><a href="technical/WSGI_MULTIDB_DELIVERABLES.txt">technical/WSGI_MULTIDB_DELIVERABLES.txt</a></td>
+<td>Liste des livrables</td>
+<td>Chef de projet</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="par-cas-dusage">🗂️ Par cas d'usage</h2>
+<h3 id="je-veux-deployer-sur-cpanel">📋 Je veux déployer sur cPanel</h3>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="err">[</span><span class="n">RC_RELEASE_NOTES</span><span class="mf">.</span><span class="n">md</span><span class="err">]</span><span class="p">(</span><span class="n">RC_RELEASE_NOTES</span><span class="mf">.</span><span class="n">md</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="mf">5</span><span class="w"> </span><span class="n">min</span><span class="p">)</span>
+<span class="w">   </span><span class="err">↓</span>
+<span class="mf">2.</span><span class="w"> </span><span class="err">[</span><span class="n">deployment</span><span class="o">/</span><span class="n">DEPLOYMENT_CPANEL</span><span class="mf">.</span><span class="n">md</span><span class="err">]</span><span class="p">(</span><span class="n">deployment</span><span class="o">/</span><span class="n">DEPLOYMENT_CPANEL</span><span class="mf">.</span><span class="n">md</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="mf">30</span><span class="w"> </span><span class="n">min</span><span class="p">)</span>
+<span class="w">   </span><span class="err">↓</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Suivre</span><span class="w"> </span><span class="n">les</span><span class="w"> </span><span class="n">instructions</span><span class="w"> </span><span class="n">étape</span><span class="w"> </span><span class="n">par</span><span class="w"> </span><span class="n">étape</span>
+</code></pre></div>
+
+<h3 id="je-veux-deployer-sur-vps">📋 Je veux déployer sur VPS</h3>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="err">[</span><span class="n">deployment</span><span class="o">/</span><span class="n">DEPLOYMENT</span><span class="mf">.</span><span class="n">md</span><span class="err">]</span><span class="p">(</span><span class="n">deployment</span><span class="o">/</span><span class="n">DEPLOYMENT</span><span class="mf">.</span><span class="n">md</span><span class="p">)</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="n">VPS</span><span class="w"> </span><span class="p">(</span><span class="mf">5</span><span class="w"> </span><span class="n">min</span><span class="p">)</span>
+<span class="w">   </span><span class="err">↓</span>
+<span class="mf">2.</span><span class="w"> </span><span class="err">[</span><span class="n">deployment</span><span class="o">/</span><span class="n">DEPLOYMENT_VPS</span><span class="mf">.</span><span class="n">md</span><span class="err">]</span><span class="p">(</span><span class="n">deployment</span><span class="o">/</span><span class="n">DEPLOYMENT_VPS</span><span class="mf">.</span><span class="n">md</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="mf">1</span><span class="n">h</span><span class="p">)</span>
+<span class="w">   </span><span class="err">↓</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Configurer</span><span class="w"> </span><span class="kr">sys</span><span class="n">temd</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Nginx</span>
+</code></pre></div>
+
+<h3 id="je-veux-utiliser-docker">📋 Je veux utiliser Docker</h3>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="err">[</span><span class="n">deployment</span><span class="o">/</span><span class="n">DEPLOYMENT_DOCKER</span><span class="mf">.</span><span class="n">md</span><span class="err">]</span><span class="p">(</span><span class="n">deployment</span><span class="o">/</span><span class="n">DEPLOYMENT_DOCKER</span><span class="mf">.</span><span class="n">md</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="mf">15</span><span class="w"> </span><span class="n">min</span><span class="p">)</span>
+<span class="w">   </span><span class="err">↓</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="o">-</span><span class="n">d</span>
+<span class="w">   </span><span class="err">↓</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Tester</span><span class="w"> </span><span class="n">l</span><span class="err">&#39;</span><span class="n">application</span>
+</code></pre></div>
+
+<h3 id="je-developpe-en-local_1">📋 Je développe en local</h3>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="err">[</span><span class="n">guides</span><span class="o">/</span><span class="n">QUICKSTART</span><span class="mf">.</span><span class="n">md</span><span class="err">]</span><span class="p">(</span><span class="n">guides</span><span class="o">/</span><span class="n">QUICKSTART</span><span class="mf">.</span><span class="n">md</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="mf">5</span><span class="w"> </span><span class="n">min</span><span class="p">)</span>
+<span class="w">   </span><span class="err">↓</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">venv</span><span class="w"> </span><span class="n">venv</span>
+<span class="w">   </span><span class="err">↓</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="n">requirements</span><span class="mf">.</span><span class="n">txt</span>
+<span class="w">   </span><span class="err">↓</span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">backend</span><span class="mf">.</span><span class="n">src</span>
+</code></pre></div>
+
+<hr />
+<h2 id="parcours-recommande">📈 Parcours recommandé</h2>
+<h3 id="nouveau-sur-le-projet">Nouveau sur le projet ?</h3>
+<ol>
+<li><strong><a href="RC_RELEASE_NOTES.md">RC_RELEASE_NOTES.md</a></strong> — Vue d'ensemble (5 min)</li>
+<li><strong><a href="deployment/DEPLOYMENT.md">deployment/DEPLOYMENT.md</a></strong> — Comparaison plateformes (10 min)</li>
+<li><strong>Choisir ta plateforme</strong> et lire le guide correspondant</li>
+<li><strong><a href="guides/INIT_CHECKLIST.md">guides/INIT_CHECKLIST.md</a></strong> — Phases du projet</li>
+</ol>
+<h3 id="developpeur">Développeur ?</h3>
+<ol>
+<li><strong><a href="guides/QUICKSTART.md">guides/QUICKSTART.md</a></strong> — Setup local (5 min)</li>
+<li><strong><a href="technical/WSGI_AND_MULTIDB_ADAPTATION.md">technical/WSGI_AND_MULTIDB_ADAPTATION.md</a></strong> — Architecture (20 min)</li>
+<li>Consulter le code dans <code>backend/src/</code></li>
+</ol>
+<h3 id="devops-admin">DevOps / Admin ?</h3>
+<ol>
+<li><strong><a href="deployment/DEPLOYMENT.md">deployment/DEPLOYMENT.md</a></strong> — Vue d'ensemble (10 min)</li>
+<li><strong>Choisir la plateforme</strong> → Guide spécifique</li>
+<li><strong><a href="technical/WSGI_MULTIDB_FINAL_SUMMARY.txt">technical/WSGI_MULTIDB_FINAL_SUMMARY.txt</a></strong> — Résumé technique</li>
+</ol>
+<hr />
+<h2 id="recherche-par-mot-cle">🔍 Recherche par mot-clé</h2>
+<p><strong>WSGI</strong><br />
+- <a href="technical/WSGI_AND_MULTIDB_ADAPTATION.md">technical/WSGI_AND_MULTIDB_ADAPTATION.md</a><br />
+- <a href="deployment/DEPLOYMENT_CPANEL.md">deployment/DEPLOYMENT_CPANEL.md</a><br />
+- <a href="deployment/DEPLOYMENT_VPS.md">deployment/DEPLOYMENT_VPS.md</a></p>
+<p><strong>Base de données</strong><br />
+- <a href="technical/WSGI_AND_MULTIDB_ADAPTATION.md">technical/WSGI_AND_MULTIDB_ADAPTATION.md</a><br />
+- Toutes les guides de déploiement</p>
+<p><strong>Docker</strong><br />
+- <a href="deployment/DEPLOYMENT_DOCKER.md">deployment/DEPLOYMENT_DOCKER.md</a></p>
+<p><strong>Configuration</strong><br />
+- Tous les guides de déploiement<br />
+- <a href="technical/WSGI_AND_MULTIDB_ADAPTATION.md">technical/WSGI_AND_MULTIDB_ADAPTATION.md</a></p>
+<hr />
+<h2 id="besoin-daide">📞 Besoin d'aide ?</h2>
+<ol>
+<li><strong>Consulte l'index</strong> → <a href="DOCUMENTATION_INDEX.md">DOCUMENTATION_INDEX.md</a></li>
+<li><strong>Vérifie le guide</strong> de ta plateforme</li>
+<li><strong>Ouvre une issue</strong> sur GitHub</li>
+<li><strong>Email</strong> : filamenta@xarema.com</li>
+</ol>
+<hr />
+<h2 id="statistiques">📊 Statistiques</h2>
+<ul>
+<li><strong>Guides de déploiement :</strong> 4</li>
+<li><strong>Guides utilisateur :</strong> 2</li>
+<li><strong>Documentation technique :</strong> 3</li>
+<li><strong>Total pages :</strong> 2500+ lignes</li>
+<li><strong>Couverture :</strong> 4 plateformes (cPanel, VPS, Docker, Local)</li>
+</ul>
+<hr />
+<h2 id="prochaines-etapes">🎯 Prochaines étapes</h2>
+<p>Selon ton objectif :</p>
+<p><strong>Déployer ?</strong> → Va dans <code>deployment/</code> et choisis ta plateforme<br />
+<strong>Développer ?</strong> → Va dans <code>guides/</code> et commence par QUICKSTART<br />
+<strong>Comprendre ?</strong> → Va dans <code>technical/</code> pour l'architecture  </p>
+<hr />
+<p><strong>Bonne lecture !</strong> 📚</p>
+<p>Dernière mise à jour : 2025-12-27</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

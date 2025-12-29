@@ -1,0 +1,92 @@
+{% extends 'layouts/wizard.html' %}
+{% block title %}Vérification Base de Données{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h1 class="text-center mb-4">📊 Vérification de la Base de Données</h1>
+
+  {% if db_connected %}
+  <div class="alert alert-success">
+    <strong>✓ Connexion réussie</strong>
+    <br>
+    <small class="font-monospace">{{ db_uri }}</small>
+  </div>
+
+  <!-- Tables et compteurs -->
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Tables créées ({{ tables|length }})</h5>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Table</th>
+            <th class="text-end">Nb d'enregistrements</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for table in tables %}
+          <tr>
+            <td><code>{{ table }}</code></td>
+            <td class="text-end"><span class="badge bg-secondary">{{ table_counts.get(table, 0) }}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Utilisateurs -->
+  {% if users %}
+  <div class="card mb-4">
+    <div class="card-header bg-success text-white">
+      <h5 class="mb-0">Utilisateurs ({{ users|length }})</h5>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Admin</th>
+            <th>Créé le</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td><code>{{ user.id }}</code></td>
+            <td><strong>{{ user.username }}</strong></td>
+            <td>{{ user.email }}</td>
+            <td>
+              {% if user.is_admin %}
+              <span class="badge bg-warning">Admin</span>
+              {% else %}
+              <span class="badge bg-secondary">User</span>
+              {% endif %}
+            </td>
+            <td><small>{{ user.created_at }}</small></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="text-center">
+    <button onclick="window.close()" class="btn btn-secondary">Fermer</button>
+    <a href="/" class="btn btn-primary">Retour à l'accueil</a>
+  </div>
+
+  {% else %}
+  <div class="alert alert-danger">
+    <h4>❌ Erreur de connexion</h4>
+    <p>{{ error }}</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
+

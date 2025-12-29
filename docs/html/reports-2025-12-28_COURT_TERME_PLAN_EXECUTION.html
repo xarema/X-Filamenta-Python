@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Court Terme — Audit + Plan d'Exécution (Jours 2–3)">
+    <title>Court Terme — Audit + Plan d'Exécution (Jours 2–3) - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="court-terme-audit-plan-dexecution-jours-23">Court Terme — Audit + Plan d'Exécution (Jours 2–3)</h1>
+<p><strong>Date :</strong> 2025-12-28 18:00 UTC+1<br />
+<strong>Scope :</strong> Amélioration sécurité (headers), qualité code (docstrings, type hints), tests<br />
+<strong>Status :</strong> 📋 Planification + Exécution</p>
+<hr />
+<h2 id="objectifs-court-terme">🎯 OBJECTIFS COURT TERME</h2>
+<h3 id="ct-1-security-headers-csp-x-frame-options">CT-1 : Security Headers (CSP, X-Frame-Options)</h3>
+<ul>
+<li>Ajouter Content-Security-Policy</li>
+<li>Ajouter X-Frame-Options: DENY</li>
+<li>Ajouter X-Content-Type-Options: nosniff</li>
+<li>Ajouter Strict-Transport-Security (prod)</li>
+<li>Impact sécurité : <strong>HIGH</strong> ⭐⭐⭐</li>
+</ul>
+<h3 id="ct-2-tests-linting-validation">CT-2 : Tests + Linting Validation</h3>
+<ul>
+<li>Exécuter tests complets (<code>pytest -q</code>)</li>
+<li>Vérifier linting (<code>ruff check .</code>)</li>
+<li>Vérifier type checking (<code>mypy backend/src</code>)</li>
+<li>Améliorer tests existants (couverture +5%)</li>
+<li>Impact qualité : <strong>MEDIUM</strong> ⭐⭐</li>
+</ul>
+<h3 id="ct-3-docstrings-type-hints">CT-3 : Docstrings + Type Hints</h3>
+<ul>
+<li>Ajouter docstrings (20+ fonctions publiques)</li>
+<li>Compléter type hints (signatures)</li>
+<li>Impact maintenabilité : <strong>HIGH</strong> ⭐⭐⭐</li>
+</ul>
+<hr />
+<h2 id="analyse-pre-execution">📊 ANALYSE PRÉ-EXÉCUTION</h2>
+<h3 id="fichiers-a-modifier">Fichiers à Modifier</h3>
+<h4 id="ct-1-security-headers">CT-1 : Security Headers</h4>
+<ul>
+<li><code>backend/src/app.py</code> — Flask app factory (ajouter middleware/headers)</li>
+<li>Alternative : Créer <code>backend/src/middleware.py</code> (clean separation)</li>
+</ul>
+<h4 id="ct-2-tests">CT-2 : Tests</h4>
+<ul>
+<li><code>backend/tests/**/*.py</code> — Exécuter sans modifications</li>
+<li>Vérifier avec ruff + mypy</li>
+</ul>
+<h4 id="ct-3-docstrings-type-hints_1">CT-3 : Docstrings + Type Hints</h4>
+<ul>
+<li><code>backend/src/services/*.py</code> — 8 services (docstrings manquantes)</li>
+<li><code>backend/src/routes/*.py</code> — 10 routes (docstrings inégales)</li>
+<li><code>backend/src/models/*.py</code> — 4 models (type hints partiels)</li>
+</ul>
+<hr />
+<h2 id="ct-1-security-headers-plan-detaille">🔐 CT-1 : SECURITY HEADERS — PLAN DÉTAILLÉ</h2>
+<h3 id="approche-1-recommandee-middleware-separe">Approche 1 (Recommandée) : Middleware Séparé</h3>
+<p><strong>Avantage :</strong> Séparation des concerns, réutilisable, testable</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># backend/src/middleware.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_security_headers</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Security-Policy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;default-src &#39;self&#39;; script-src &#39;self&#39; &#39;unsafe-inline&#39; cdn.jsdelivr.net; style-src &#39;self&#39; &#39;unsafe-inline&#39; cdn.jsdelivr.net; img-src &#39;self&#39; data: https:; font-src &#39;self&#39; cdn.jsdelivr.net; connect-src &#39;self&#39; https://cdn.jsdelivr.net&quot;</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;X-Frame-Options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;DENY&#39;</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;X-Content-Type-Options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nosniff&#39;</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;X-XSS-Protection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1; mode=block&#39;</span>
+    <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ENV&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;production&#39;</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Strict-Transport-Security&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;max-age=31536000; includeSubDomains&#39;</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div>
+
+<p><strong>Intégration dans <code>app.py</code> :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">app</span><span class="o">.</span><span class="n">after_request</span><span class="p">(</span><span class="n">add_security_headers</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="headers-a-ajouter">Headers à Ajouter</h3>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Valeur</th>
+<th>Raison</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSP</td>
+<td>default-src 'self' + whitelist</td>
+<td>XSS protection</td>
+</tr>
+<tr>
+<td>X-Frame-Options</td>
+<td>DENY</td>
+<td>Clickjacking protection</td>
+</tr>
+<tr>
+<td>X-Content-Type-Options</td>
+<td>nosniff</td>
+<td>MIME sniffing prevention</td>
+</tr>
+<tr>
+<td>X-XSS-Protection</td>
+<td>1; mode=block</td>
+<td>XSS legacy browser support</td>
+</tr>
+<tr>
+<td>HSTS</td>
+<td>max-age=31536000 (prod only)</td>
+<td>Force HTTPS</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ct-2-tests-linting-plan-detaille">🧪 CT-2 : TESTS + LINTING — PLAN DÉTAILLÉ</h2>
+<h3 id="commandes-a-executer">Commandes à Exécuter</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Tests</span>
+<span class="n">pytest</span> <span class="n">-q</span> <span class="p">-</span><span class="n">-disable-warnings</span> <span class="p">-</span><span class="n">-maxfail</span><span class="p">=</span><span class="n">1</span> <span class="p">-</span><span class="n">-cov</span><span class="p">=</span><span class="n">backend</span><span class="p">/</span><span class="n">src</span> <span class="p">-</span><span class="n">-cov-report</span><span class="p">=</span><span class="n">term-missing</span>
+
+<span class="c"># Linting</span>
+<span class="n">ruff</span> <span class="n">check</span> <span class="p">.</span> <span class="p">-</span><span class="n">-select</span><span class="p">=</span><span class="n">E</span><span class="p">,</span><span class="n">W</span><span class="p">,</span><span class="n">F</span>
+<span class="n">ruff</span> <span class="n">format</span> <span class="p">-</span><span class="n">-check</span> <span class="p">.</span>
+
+<span class="c"># Type checking</span>
+<span class="n">mypy</span> <span class="n">backend</span><span class="p">/</span><span class="n">src</span>
+
+<span class="c"># Frontend</span>
+<span class="n">npm</span> <span class="n">run</span> <span class="n">lint</span>
+<span class="n">npm</span> <span class="n">run</span> <span class="n">fmt</span> <span class="p">--</span> <span class="p">-</span><span class="n">-check</span>
+</code></pre></div>
+
+<h3 id="amelioration-tests-existants-c3">Amélioration Tests Existants (C3)</h3>
+<p><strong>Stratégie :</strong> Améliorer couverture tests existants (+5%) sans ajouter de nouvelles suites</p>
+<p>Fichiers test à améliorer :<br />
+- <code>test_auth.py</code> — Ajouter edge cases<br />
+- <code>test_csrf.py</code> — Améliorer couverture<br />
+- <code>test_admin.py</code> — Compléter scenarios<br />
+- <code>test_install_wizard.py</code> — Vérifier coverage</p>
+<hr />
+<h2 id="ct-3-docstrings-type-hints-plan-detaille">📝 CT-3 : DOCSTRINGS + TYPE HINTS — PLAN DÉTAILLÉ</h2>
+<h3 id="fichiers-services-a-documenter-8">Fichiers Services à Documenter (8)</h3>
+<div class="highlight"><pre><span></span><code>✅ user_service.py       — 15+ functions (partielles)
+✅ csrf_service.py       — 5 functions (incomplètes)
+✅ totp_service.py       — 10 functions (partielles)
+✅ i18n_service.py       — 3 functions
+✅ content_service.py    — 10 functions
+✅ preferences_service.py — 5 functions
+✅ install_service.py    — 15+ functions
+✅ rate_limiter.py       — 4 functions
+</code></pre></div>
+
+<h3 id="format-docstring-standard">Format Docstring Standard</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">example_function</span><span class="p">(</span><span class="n">param1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">param2</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Brief description (one line).</span>
+
+<span class="sd">    Longer description if needed (optional).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        param1: Description of param1</span>
+<span class="sd">        param2: Description of param2 (default 0)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict with keys &#39;status&#39;, &#39;data&#39;, &#39;error&#39;</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If param1 is empty</span>
+<span class="sd">        InvalidUserError: If user not found</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; result = example_function(&quot;test&quot;, 42)</span>
+<span class="sd">        &gt;&gt;&gt; assert result[&#39;status&#39;] == &#39;success&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Implementation</span>
+</code></pre></div>
+
+<h3 id="type-hints-a-completer">Type Hints à Compléter</h3>
+<p>Fichiers models (type hints partiels) :<br />
+- <code>models/user.py</code> — Attributs SQLAlchemy + methods<br />
+- <code>models/content.py</code> — Attributs + relationships<br />
+- <code>models/preferences.py</code> — Attributs + defaults<br />
+- <code>models/admin_history.py</code> — Attributs JSON</p>
+<hr />
+<h2 id="timeline-execution">⏱️ TIMELINE EXÉCUTION</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Fichiers</th>
+<th>Effort</th>
+<th>Durée</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CT-1 : Security Headers</strong></td>
+<td>2 (app.py + middleware.py)</td>
+<td>S</td>
+<td>1h</td>
+</tr>
+<tr>
+<td><strong>CT-2 : Tests + Linting</strong></td>
+<td>All (exécution)</td>
+<td>M</td>
+<td>1.5h</td>
+</tr>
+<tr>
+<td><strong>CT-3 : Docstrings + Types</strong></td>
+<td>12+ files</td>
+<td>M</td>
+<td>2–3h</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td>—</td>
+<td>M</td>
+<td><strong>4.5–5h</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="verifications-post-execution">✅ VÉRIFICATIONS POST-EXÉCUTION</h2>
+<div class="highlight"><pre><span></span><code><span class="c"># 1. Security headers présents</span>
+<span class="n">grep</span> <span class="n">-r</span> <span class="s2">&quot;Content-Security-Policy&quot;</span> <span class="n">backend</span><span class="p">/</span><span class="n">src</span> <span class="p">-</span><span class="n">-include</span><span class="p">=</span><span class="s2">&quot;*.py&quot;</span>
+
+<span class="c"># 2. Tests passent</span>
+<span class="n">pytest</span> <span class="n">-q</span> <span class="p">-</span><span class="n">-disable-warnings</span>
+
+<span class="c"># 3. Linting OK</span>
+<span class="n">ruff</span> <span class="n">check</span> <span class="p">.</span> <span class="p">-</span><span class="n">-select</span><span class="p">=</span><span class="n">E</span><span class="p">,</span><span class="n">W</span><span class="p">,</span><span class="n">F</span>
+
+<span class="c"># 4. Types OK</span>
+<span class="n">mypy</span> <span class="n">backend</span><span class="p">/</span><span class="n">src</span>
+
+<span class="c"># 5. Docstrings ajoutées</span>
+<span class="n">grep</span> <span class="n">-r</span> <span class="s1">&#39;&quot;&quot;&quot;&#39;</span> <span class="n">backend</span><span class="p">/</span><span class="n">src</span> <span class="p">-</span><span class="n">-include</span><span class="p">=</span><span class="s2">&quot;*.py&quot;</span> <span class="p">|</span> <span class="n">wc</span> <span class="n">-l</span>
+</code></pre></div>
+
+<hr />
+<h2 id="metriques-avantapres">📊 MÉTRIQUES AVANT/APRÈS</h2>
+<h3 id="securite">Sécurité</h3>
+<table>
+<thead>
+<tr>
+<th>Métrique</th>
+<th>Avant</th>
+<th>Après</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Security Headers</td>
+<td>🟡 Absents</td>
+<td>✅ Présents</td>
+</tr>
+<tr>
+<td>CSP Policy</td>
+<td>❌ Non</td>
+<td>✅ Oui</td>
+</tr>
+<tr>
+<td>X-Frame-Options</td>
+<td>❌ Non</td>
+<td>✅ DENY</td>
+</tr>
+<tr>
+<td>HSTS (prod)</td>
+<td>❌ Non</td>
+<td>✅ Oui</td>
+</tr>
+</tbody>
+</table>
+<h3 id="qualite-code">Qualité Code</h3>
+<table>
+<thead>
+<tr>
+<th>Métrique</th>
+<th>Avant</th>
+<th>Après</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docstrings</td>
+<td>🟡 60%</td>
+<td>✅ 90%+</td>
+</tr>
+<tr>
+<td>Type Hints</td>
+<td>🟡 70%</td>
+<td>✅ 90%+</td>
+</tr>
+<tr>
+<td>Tests Coverage</td>
+<td>🟡 40–50%</td>
+<td>✅ 45–55%</td>
+</tr>
+<tr>
+<td>Linting</td>
+<td>🟡 À auditer</td>
+<td>✅ Clean</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="status">🚀 STATUS</h2>
+<p><strong>État :</strong> 📋 Plan prêt → Exécution commence maintenant<br />
+<strong>Prochaine étape :</strong> CT-1 — Ajouter Security Headers</p>
+<hr />
+<p><em>Rapport généré : 2025-12-28 18:00 UTC+1</em></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

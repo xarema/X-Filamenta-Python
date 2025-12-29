@@ -1,0 +1,170 @@
+<!--
+Purpose: Login page template
+Description: User login form with HTMX validation
+
+File: frontend/templates/auth/login.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T14:30:00+00:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Public
+
+Notes:
+- Jinja2 template
+- Bootstrap 5 form styling
+- HTMX validation and submission
+- CSRF protection via hidden field
+-->
+
+Metadata:
+- Status: Draft
+- Classification: Public
+-->
+
+{% extends "layouts/base.html" %}
+
+{% block title %}Connexion - X-Filamenta{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <!-- Login Card -->
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <!-- Header -->
+                    <div class="text-center mb-4">
+                        <h1 class="h3 mb-2">Connexion</h1>
+                        <p class="text-muted small">Entrez vos identifiants pour vous connecter</p>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form id="login-form" hx-post="{{ url_for('auth.login') }}" hx-target="#login-message" hx-swap="innerHTML">
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nom d'utilisateur</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="username"
+                                name="username"
+                                required
+                                autofocus
+                                autocomplete="username"
+                            >
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="password"
+                                name="password"
+                                required
+                                autocomplete="current-password"
+                            >
+                        </div>
+
+                        <!-- Remember me (optional) -->
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                            <label class="form-check-label" for="remember">
+                                Se souvenir de moi
+                            </label>
+                        </div>
+
+                        <!-- Message area (HTMX target) -->
+                        <div id="login-message" class="mb-3"></div>
+
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary w-100">
+                            Se connecter
+                        </button>
+                    </form>
+
+                    <!-- Forgot password link (to be implemented) -->
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-muted small">Mot de passe oublié ?</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Installation link (if not configured) -->
+            <div class="text-center mt-3">
+                <p class="text-muted small">
+                    Première utilisation ?
+                    <a href="{{ url_for('install.install_index') }}">Installer X-Filamenta</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom JS for form handling -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('login-form');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const data = {
+            username: formData.get('username'),
+            password: formData.get('password')
+        };
+
+        fetch('{{ url_for("auth.login") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            const messageDiv = document.getElementById('login-message');
+
+            if (result.success) {
+                messageDiv.innerHTML = `
+                    <div class="alert alert-success" role="alert">
+                        ${result.message}
+                    </div>
+                `;
+
+                // Redirect after short delay
+                setTimeout(() => {
+                    window.location.href = result.redirect;
+                }, 500);
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                        ${result.error || 'Erreur de connexion'}
+                    </div>
+                `;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('login-message').innerHTML = `
+                <div class="alert alert-danger" role="alert">
+                    Une erreur est survenue. Veuillez réessayer.
+                </div>
+            `;
+        });
+    });
+});
+</script>
+{% endblock %}
+

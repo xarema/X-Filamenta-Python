@@ -1,0 +1,151 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Wizard requirements check step
+Description: Displays system requirements with check marks or X marks
+
+File: frontend/templates/pages/install/partials/requirements.html | Repository: X-Filamenta-Python
+Created: 2025-12-28T02:00:00+00:00
+Last modified (Git): 2025-12-28T13:47:00+01:00 | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.3-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+
+- Status: Stable
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+<div class="card shadow-sm mb-3">
+  <div class="card-body">
+    <h5 class="card-title text-center mb-4">{{ t('wizard.requirements.title') or 'System Requirements' }}</h5>
+
+    <div class="list-group mb-4">
+      <!-- Environment -->
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ t('wizard.requirements.environment') or 'Environment' }}</strong>
+          <br />
+          <small class="text-muted">{{ env.os }} / {{ env.arch }}</small>
+        </div>
+        <span class="badge bg-success rounded-pill fs-4">✓</span>
+      </div>
+
+      <!-- Python -->
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>Python (>= 3.10)</strong>
+          <br />
+          <small class="text-muted">
+            {% if env.versions.python %}
+              {{ env.versions.python }}
+              {% if env.python_ok is defined and not env.python_ok %}
+                <span class="text-danger">⚠ Version trop ancienne</span>
+              {% endif %}
+            {% else %}
+              Non détecté
+            {% endif %}
+          </small>
+        </div>
+        {% if env.python %}
+        <span class="badge bg-success rounded-pill fs-4">✓</span>
+        {% else %}
+        <span class="badge bg-danger rounded-pill fs-4">✗</span>
+        {% endif %}
+      </div>
+
+
+      <!-- Git -->
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>Git (>= 2.0)</strong>
+          <br />
+          <small class="text-muted">{{ env.versions.git or 'Non détecté' }}</small>
+        </div>
+        {% if env.git %}
+        <span class="badge bg-success rounded-pill fs-4">✓</span>
+        {% else %}
+        <span class="badge bg-warning rounded-pill fs-4">⚠</span>
+        {% endif %}
+      </div>
+
+      <!-- Flask -->
+      {% if env.versions.flask %}
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>Flask (>= 3.0)</strong>
+          <br />
+          <small class="text-muted">{{ env.versions.flask }}</small>
+        </div>
+        <span class="badge bg-success rounded-pill fs-4">✓</span>
+      </div>
+      {% endif %}
+
+      <!-- SQLAlchemy -->
+      {% if env.versions.sqlalchemy %}
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>SQLAlchemy (>= 2.0)</strong>
+          <br />
+          <small class="text-muted">{{ env.versions.sqlalchemy }}</small>
+        </div>
+        <span class="badge bg-success rounded-pill fs-4">✓</span>
+      </div>
+      {% endif %}
+
+      <!-- Instance permissions -->
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ t('wizard.requirements.instance_perms') or 'Instance folder writable' }}</strong>
+          <br />
+          <small class="text-muted">{{ env.writable_msg }}</small>
+        </div>
+        {% if env.writable %}
+        <span class="badge bg-success rounded-pill fs-4">✓</span>
+        {% else %}
+        <span class="badge bg-danger rounded-pill fs-4">✗</span>
+        {% endif %}
+      </div>
+
+      <!-- Environnement type detection -->
+      {% if env.env_type %}
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ t('wizard.requirements.env_type') or 'Environment Type' }}</strong>
+          <br />
+          <small class="text-muted">
+            {% if env.env_type == 'docker' %}
+              🐳 Docker
+            {% elif env.env_type == 'cpanel' %}
+              🖥️ cPanel (Hébergement mutualisé)
+            {% elif env.env_type == 'vps' %}
+              🖧 VPS/Serveur dédié
+            {% else %}
+              🖥️ {{ env.env_type }}
+            {% endif %}
+          </small>
+        </div>
+        <span class="badge bg-info rounded-pill fs-4">ℹ</span>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="text-center">
+      <form method="POST" action="/install/step">
+        <input type="hidden" name="step" value="db_form" />
+        <input type="hidden" name="requirements_checked" value="1" />
+        <input type="hidden" name="welcome_shown" value="1" />
+        <button class="btn btn-primary btn-lg px-5" type="submit">
+          {{ t('wizard.continue') or 'Continuer' }} →
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+

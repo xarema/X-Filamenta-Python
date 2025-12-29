@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Database Configuration">
+    <title>Database Configuration - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="database-configuration">Database Configuration</h1>
+<p><strong>Project:</strong> X-Filamenta-Python<br />
+<strong>Version:</strong> 0.0.1-Alpha</p>
+<hr />
+<h2 id="vue-densemble">📋 Vue d'ensemble</h2>
+<p>Ce projet supporte plusieurs bases de données grâce à SQLAlchemy:</p>
+<ul>
+<li><strong>SQLite</strong> - Développement local</li>
+<li><strong>PostgreSQL</strong> - Production (recommandé)</li>
+<li><strong>MySQL</strong> - Alternative production</li>
+</ul>
+<hr />
+<h2 id="sqlite-development">🗄️ SQLite (Development)</h2>
+<h3 id="configuration">Configuration</h3>
+<p>Par défaut, l'application utilise SQLite en développement.</p>
+<p><strong>Fichier <code>.env</code>:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nv">DATABASE_URL</span><span class="o">=</span>sqlite:///instance/app.db
+<span class="c1"># ou laisser vide pour utiliser la configuration par défaut</span>
+</code></pre></div>
+
+<h3 id="emplacement">Emplacement</h3>
+<div class="highlight"><pre><span></span><code>X-Filamenta-Python/
+└── instance/
+    └── app.db
+</code></pre></div>
+
+<h3 id="avantages">Avantages</h3>
+<ul>
+<li>✅ Aucune installation requise</li>
+<li>✅ Fichier unique, portable</li>
+<li>✅ Parfait pour développement</li>
+</ul>
+<h3 id="limitations">Limitations</h3>
+<ul>
+<li>⚠️ Pas de concurrent writes</li>
+<li>⚠️ Performances limitées</li>
+<li>⚠️ Pas pour production</li>
+</ul>
+<hr />
+<h2 id="postgresql-production">🐘 PostgreSQL (Production)</h2>
+<h3 id="installation">Installation</h3>
+<p><strong>Ubuntu/Debian:</strong></p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postgresql<span class="w"> </span>postgresql-contrib
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>postgresql
+</code></pre></div>
+
+<p><strong>macOS:</strong></p>
+<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>postgresql
+brew<span class="w"> </span>services<span class="w"> </span>start<span class="w"> </span>postgresql
+</code></pre></div>
+
+<p><strong>Windows:</strong></p>
+<ul>
+<li>Télécharger depuis https://www.postgresql.org/download/windows/</li>
+<li>Installer PostgreSQL 15+</li>
+</ul>
+<h3 id="creer-la-base-de-donnees">Créer la base de données</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Se connecter à PostgreSQL</span>
+sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql
+
+<span class="c1"># Créer user</span>
+CREATE<span class="w"> </span>USER<span class="w"> </span>filamenta_user<span class="w"> </span>WITH<span class="w"> </span>PASSWORD<span class="w"> </span><span class="s1">&#39;your_secure_password&#39;</span><span class="p">;</span>
+
+<span class="c1"># Créer database</span>
+CREATE<span class="w"> </span>DATABASE<span class="w"> </span>filamenta_db<span class="w"> </span>OWNER<span class="w"> </span>filamenta_user<span class="p">;</span>
+
+<span class="c1"># Grant privileges</span>
+GRANT<span class="w"> </span>ALL<span class="w"> </span>PRIVILEGES<span class="w"> </span>ON<span class="w"> </span>DATABASE<span class="w"> </span>filamenta_db<span class="w"> </span>TO<span class="w"> </span>filamenta_user<span class="p">;</span>
+
+<span class="c1"># Quit</span>
+<span class="se">\q</span>
+</code></pre></div>
+
+<h3 id="configuration_1">Configuration</h3>
+<p><strong>Fichier <code>.env</code> (Production):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nv">DATABASE_URL</span><span class="o">=</span>postgresql://filamenta_user:your_secure_password@localhost:5432/filamenta_db
+</code></pre></div>
+
+<p><strong>Format général:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nl">postgresql</span><span class="p">:</span><span class="o">//</span><span class="nl">username</span><span class="p">:</span><span class="n">password</span><span class="nv">@host</span><span class="err">:</span><span class="n">port</span><span class="o">/</span><span class="k">database</span>
+</code></pre></div>
+
+<h3 id="tester-la-connexion">Tester la connexion</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Via psql</span>
+psql<span class="w"> </span>-U<span class="w"> </span>filamenta_user<span class="w"> </span>-d<span class="w"> </span>filamenta_db<span class="w"> </span>-h<span class="w"> </span>localhost
+
+<span class="c1"># Via Python</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from backend.src.app import create_app, db; app = create_app(); app.app_context().push(); db.create_all(); print(&#39;✅ Connected&#39;)&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="migrations-avec-alembic">🗺️ Migrations avec Alembic</h2>
+<h3 id="creer-une-migration">Créer une migration</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Auto-générer depuis les models</span>
+alembic<span class="w"> </span>revision<span class="w"> </span>--autogenerate<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Description of changes&quot;</span>
+
+<span class="c1"># Créer une migration vide</span>
+alembic<span class="w"> </span>revision<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Description&quot;</span>
+</code></pre></div>
+
+<h3 id="appliquer-les-migrations">Appliquer les migrations</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Upgrade to latest</span>
+alembic<span class="w"> </span>upgrade<span class="w"> </span>head
+
+<span class="c1"># Upgrade one version</span>
+alembic<span class="w"> </span>upgrade<span class="w"> </span>+1
+
+<span class="c1"># Downgrade one version</span>
+alembic<span class="w"> </span>downgrade<span class="w"> </span>-1
+
+<span class="c1"># Downgrade to specific version</span>
+alembic<span class="w"> </span>downgrade<span class="w"> </span>&lt;revision&gt;
+</code></pre></div>
+
+<h3 id="voir-lhistorique">Voir l'historique</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Current version</span>
+alembic<span class="w"> </span>current
+
+<span class="c1"># History</span>
+alembic<span class="w"> </span><span class="nb">history</span>
+
+<span class="c1"># Show SQL (dry-run)</span>
+alembic<span class="w"> </span>upgrade<span class="w"> </span>head<span class="w"> </span>--sql
+</code></pre></div>
+
+<hr />
+<h2 id="migration-sqlite-postgresql">🔄 Migration SQLite → PostgreSQL</h2>
+<h3 id="exporter-les-donnees-sqlite">Exporter les données (SQLite)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># scripts/export_data.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.app</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span><span class="p">,</span> <span class="n">db</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">UserPreferences</span><span class="p">,</span> <span class="n">Content</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+    <span class="n">users</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">include_email</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()]</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data_export.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s1">&#39;users&#39;</span><span class="p">:</span> <span class="n">users</span><span class="p">},</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="importer-dans-postgresql">Importer dans PostgreSQL</h3>
+<ol>
+<li>Changer DATABASE_URL dans <code>.env</code></li>
+<li>Créer les tables: <code>alembic upgrade head</code></li>
+<li>Importer les données avec script personnalisé</li>
+</ol>
+<hr />
+<h2 id="deploiement">🚀 Déploiement</h2>
+<h3 id="cpanel-shared-hosting">cPanel (Shared Hosting)</h3>
+<p><strong>Configuration:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># app.ini (WSGI)</span>
+<span class="p">[</span><span class="n">uwsgi</span><span class="p">]</span>
+<span class="n">module</span> <span class="o">=</span> <span class="n">wsgi</span><span class="p">:</span><span class="n">app</span>
+<span class="n">master</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">processes</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">threads</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">DATABASE_URL</span><span class="o">=</span><span class="n">postgresql</span><span class="p">:</span><span class="o">//...</span>
+</code></pre></div>
+
+<p><strong>Remote PostgreSQL:</strong></p>
+<ul>
+<li>Utiliser l'IP publique de la DB</li>
+<li>Ouvrir le port 5432 dans firewall</li>
+<li>SSL recommandé</li>
+</ul>
+<h3 id="vpscloud">VPS/Cloud</h3>
+<p><strong>Docker:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># docker-compose.yml</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DATABASE_URL=postgresql://postgres:password@db:5432/filamenta</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
+
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:15-alpine</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POSTGRES_DB=filamenta</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POSTGRES_PASSWORD=password</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pgdata:/var/lib/postgresql/data</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pgdata</span><span class="p">:</span>
+</code></pre></div>
+
+<hr />
+<h2 id="securite">🔐 Sécurité</h2>
+<h3 id="bonnes-pratiques">Bonnes pratiques</h3>
+<p>✅ <strong>DO:</strong></p>
+<ul>
+<li>Utiliser variables d'environnement pour credentials</li>
+<li>SSL/TLS pour connexions DB</li>
+<li>Limiter les privilèges utilisateur DB</li>
+<li>Backups réguliers</li>
+<li>Changer les mots de passe par défaut</li>
+</ul>
+<p>❌ <strong>DON'T:</strong></p>
+<ul>
+<li>Hardcoder credentials dans le code</li>
+<li>Utiliser 'postgres' user en production</li>
+<li>Exposer DB directement sur Internet</li>
+<li>Stocker mots de passe en clair</li>
+</ul>
+<h3 id="exemple-securise">Exemple sécurisé</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># .env (NEVER commit this!)</span>
+<span class="nv">DATABASE_URL</span><span class="o">=</span>postgresql://filamenta_prod:<span class="k">$(</span>openssl<span class="w"> </span>rand<span class="w"> </span>-base64<span class="w"> </span><span class="m">32</span><span class="k">)</span>@db.internal:5432/filamenta_prod?sslmode<span class="o">=</span>require
+</code></pre></div>
+
+<hr />
+<h2 id="testing">🧪 Testing</h2>
+<h3 id="test-database">Test Database</h3>
+<p>Utiliser une DB en mémoire pour tests:</p>
+<div class="highlight"><pre><span></span><code><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_DATABASE_URI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sqlite:///:memory:&#39;</span>
+</code></pre></div>
+
+<p>Ou une DB de test dédiée:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">DATABASE_URL</span><span class="o">=</span>postgresql://test_user:test_pass@localhost:5432/test_db
+</code></pre></div>
+
+<hr />
+<h2 id="monitoring">📊 Monitoring</h2>
+<h3 id="queries-lentes">Queries lentes</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Enable SQLAlchemy echo</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_ECHO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre></div>
+
+<h3 id="connection-pool">Connection pool</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># config.py</span>
+<span class="n">SQLALCHEMY_ENGINE_OPTIONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;pool_size&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s1">&#39;pool_recycle&#39;</span><span class="p">:</span> <span class="mi">3600</span><span class="p">,</span>
+    <span class="s1">&#39;pool_pre_ping&#39;</span><span class="p">:</span> <span class="kc">True</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="troubleshooting">🆘 Troubleshooting</h2>
+<h3 id="could-not-connect-to-server">"Could not connect to server"</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Vérifier que PostgreSQL tourne</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>postgresql
+
+<span class="c1"># Vérifier pg_hba.conf</span>
+sudo<span class="w"> </span>nano<span class="w"> </span>/etc/postgresql/15/main/pg_hba.conf
+</code></pre></div>
+
+<h3 id="password-authentication-failed">"password authentication failed"</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Reset password</span>
+sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql
+ALTER<span class="w"> </span>USER<span class="w"> </span>filamenta_user<span class="w"> </span>WITH<span class="w"> </span>PASSWORD<span class="w"> </span><span class="s1">&#39;new_password&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="database-does-not-exist">"database does not exist"</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Créer la DB</span>
+sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>createdb<span class="w"> </span>filamenta_db<span class="w"> </span>-O<span class="w"> </span>filamenta_user
+</code></pre></div>
+
+<hr />
+<h2 id="references">📚 Références</h2>
+<ul>
+<li>SQLAlchemy: https://docs.sqlalchemy.org/</li>
+<li>Alembic: https://alembic.sqlalchemy.org/</li>
+<li>PostgreSQL: https://www.postgresql.org/docs/</li>
+<li>Flask-SQLAlchemy: https://flask-sqlalchemy.palletsprojects.com/</li>
+</ul>
+<hr />
+<p><strong>Last Updated:</strong> 2025-12-27<br />
+<strong>Status:</strong> ✅ Production Ready</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

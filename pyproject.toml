@@ -1,0 +1,112 @@
+# ------------------------------------------------------------------------------
+# Purpose: Python project configuration
+# Description: Defines build system, dependencies, and tool configurations
+#              (Ruff, mypy, pytest, coverage).
+#
+# File: pyproject.toml | Repository: Template-Python
+# Created: 2025-12-26
+# Last modified (Git): TBD | Commit: TBD
+#
+# Distributed by: XAREMA | Coder: AleGabMar
+# App version: 0.0.1-Alpha | File version: 0.0.1-Alpha
+#
+# License: AGPL-3.0-or-later
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# Copyright (c) 2025 XAREMA. All rights reserved.
+#
+# Metadata:
+# - Status: Draft
+# - Classification: Internal
+#
+# Notes:
+# - Git history is the source of truth for authorship and change tracking.
+# ------------------------------------------------------------------------------
+
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "template-python"
+version = "0.0.1-alpha"
+description = "Flask + HTMX + Bootstrap 5 template"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "TBD" }
+authors = [
+    { name = "AleGabMar", email = "contact@xarema.example" }
+]
+dependencies = [
+    "flask>=3.0,<4.0",
+    "python-dotenv>=1.0,<2.0",
+    "flask-sqlalchemy>=3.0,<4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "mypy>=1.0",
+    "ruff>=0.1.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["backend*"]
+exclude = ["backend.tests*"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+fix = true
+exclude = [".venv", "dist", "build", "node_modules"]
+
+[tool.ruff.lint]
+select = [
+  "E", "F", "W",
+  "I",
+  "B",
+  "UP",
+  "SIM",
+  "S",
+  "A",
+  "C4",
+]
+ignore = ["S101"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unreachable = true
+no_implicit_optional = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+strict_equality = true
+pretty = true
+exclude = "(^/)\\.venv/(^/)node_modules/"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["backend.tests.*"]
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+addopts = "-q --disable-warnings --maxfail=1 --cov=backend/src --cov-report=term-missing"
+
+[tool.coverage.run]
+branch = true
+source = ["backend/src"]
+
+[tool.coverage.report]
+fail_under = 50
+skip_covered = true
+show_missing = true

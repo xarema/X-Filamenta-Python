@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Architecture">
+    <title>Architecture - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <p>"""<br />
+Purpose: Architecture documentation</p>
+<p>File: docs/architecture/README.md | Repository: Template-Python<br />
+Created: 2025-12-26<br />
+Last modified (Git): TBD | Commit: TBD</p>
+<p>Distributed by: XAREMA | Coder: AleGabMar<br />
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha</p>
+<p>License: TBD<br />
+SPDX-License-Identifier: NOASSERTION</p>
+<p>Copyright (c) 2025 XAREMA. All rights reserved.</p>
+<p>Metadata:<br />
+- Status: Draft<br />
+- Classification: Public</p>
+<p>Notes:<br />
+- Document architecture decisions and patterns here<br />
+- Git history is the source of truth for authorship and change tracking.<br />
+"""</p>
+<h1 id="architecture">Architecture</h1>
+<h2 id="overview">Overview</h2>
+<p>This is a <strong>monorepo</strong> project using:<br />
+- <strong>Backend:</strong> Flask (Python 3.12)<br />
+- <strong>Frontend:</strong> HTMX + Bootstrap 5 + Jinja2 templates<br />
+- <strong>Database:</strong> (TBD — SQLite for dev, PostgreSQL for prod)<br />
+- <strong>Deployment:</strong> (TBD — Docker, Heroku, AWS, etc.)</p>
+<h2 id="key-patterns">Key Patterns</h2>
+<h3 id="app-factory-pattern">App Factory Pattern</h3>
+<p>Flask app is created via <code>create_app()</code> function in <code>backend/src/app.py</code>.<br />
+This allows multiple configurations (dev, test, prod).</p>
+<h3 id="blueprints">Blueprints</h3>
+<p>Routes are organized by domain in <code>backend/src/routes/</code>.<br />
+Each blueprint is a separate module (e.g., <code>api.py</code>, <code>auth.py</code>).</p>
+<h3 id="service-layer">Service Layer</h3>
+<p>Business logic is isolated in <code>backend/src/services/</code>.<br />
+Routes call services; services call models/database.</p>
+<h3 id="htmx-first-frontend">HTMX-First Frontend</h3>
+<ul>
+<li>Server renders <strong>complete pages</strong> on full requests</li>
+<li>Server returns <strong>fragments</strong> for HTMX requests</li>
+<li>Minimal custom JavaScript</li>
+<li>Bootstrap 5 for styling</li>
+</ul>
+<h2 id="data-flow">Data Flow</h2>
+<div class="highlight"><pre><span></span><code>User Browser
+    ↓ HTTP Request
+Flask Routes (routes/*.py)
+    ↓
+Services (services/*.py)
+    ↓
+Models (models/*.py)
+    ↓
+Database / External APIs
+    ↓
+Response (JSON or HTML)
+    ↓
+Browser renders / HTMX updates
+</code></pre></div>
+
+<h2 id="files-to-create">Files to Create</h2>
+<ul>
+<li>Architecture decision records (ADRs)</li>
+<li>Deployment diagrams</li>
+<li>Database schema</li>
+</ul>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

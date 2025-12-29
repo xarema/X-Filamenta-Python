@@ -1,0 +1,166 @@
+{
+  "wizard": {
+    "title": "Assistant d'installation",
+    "step": "Étape",
+    "continue": "Continuer",
+    "back": "Retour",
+    "cancel": "Annuler",
+
+    "language": {
+      "choose": "Choisissez votre langue",
+      "instruction": "Sélectionnez votre langue pour démarrer l'installation"
+    },
+
+    "steps": {
+      "welcome": "Bienvenue",
+      "requirements": "Prérequis",
+      "database": "Base de données",
+      "admin": "Administrateur",
+      "summary": "Résumé"
+    },
+
+    "welcome": {
+      "title": "Bienvenue dans l'assistant d'installation !",
+      "description": "Nous allons configurer votre application en quelques étapes simples : base de données, compte administrateur, et c'est terminé !"
+    },
+
+    "requirements": {
+      "title": "Prérequis système",
+      "description": "Vérification de votre environnement",
+      "python": "Python",
+      "version_required": "Version requise",
+      "version_found": "Version détectée",
+      "disk_space": "Espace disque",
+      "available": "Disponible",
+      "required": "Requis",
+      "permissions": "Permissions d'écriture",
+      "writable": "Autorisé",
+      "not_writable": "Non autorisé",
+      "not_detected": "Non détecté",
+      "all_ok": "Tous les prérequis sont remplis",
+      "some_missing": "Certains prérequis ne sont pas remplis",
+      "environment": "Environnement",
+      "instance_perms": "Dossier instance accessible en écriture",
+      "env_type": "Type d'environnement"
+    },
+
+    "db": {
+      "title": "Configuration de la base de données",
+      "description": "Choisissez et configurez votre base de données",
+      "type": "Type de base de données",
+      "host": "Serveur",
+      "port": "Port",
+      "dbname": "Nom de la base de données",
+      "username": "Nom d'utilisateur",
+      "password": "Mot de passe",
+      "test_button": "Tester la connexion",
+      "testing": "Test en cours...",
+      "success": "Connexion réussie ! La base de données est prête.",
+      "test_success": "Connexion réussie !",
+      "test_error": "Erreur de connexion",
+      "error": "La connexion a échoué. Vérifiez vos paramètres.",
+      "error_empty_field": "Ce champ est requis",
+      "error_empty_host": "Le serveur est requis",
+      "error_empty_port": "Le port est requis",
+      "error_empty_dbname": "Le nom de la base de données est requis",
+      "error_empty_username": "Le nom d'utilisateur est requis",
+      "continue_no_backup": "Continuer sans backup",
+      "or_restore": "ou restaurer un backup"
+    },
+
+    "backup": {
+      "title": "Restauration d'un backup",
+      "description": "Importez vos données existantes",
+      "upload": "Sélectionner un fichier",
+      "upload_button": "Téléverser le backup",
+      "choose_file": "Choisir un fichier",
+      "no_file": "Aucun fichier",
+      "formats": "Formats acceptés : .sql, .tar.gz, .zip",
+      "validating": "Validation en cours...",
+      "valid": "Backup valide",
+      "invalid": "Fichier invalide",
+      "error_empty": "Le fichier est vide",
+      "error_format": "Format de fichier non supporté",
+      "error_size": "Fichier trop volumineux",
+      "size": "Taille",
+      "checksum": "Empreinte",
+      "remove": "Retirer le backup"
+    },
+
+    "admin": {
+      "title": "Compte administrateur",
+      "description": "Créez le compte administrateur principal",
+      "username": "Nom d'utilisateur",
+      "username_placeholder": "admin",
+      "email": "Adresse email",
+      "email_placeholder": "admin@example.com",
+      "password": "Mot de passe",
+      "password_confirm": "Confirmer le mot de passe",
+      "password_hint": "Au moins 8 caractères, avec majuscules, minuscules et chiffres",
+      "error_username_empty": "Le nom d'utilisateur est requis",
+      "error_username_invalid": "Le nom d'utilisateur doit contenir entre 3 et 50 caractères alphanumériques",
+      "error_email_empty": "L'adresse email est requise",
+      "error_email_invalid": "Format d'email invalide",
+      "error_password_empty": "Le mot de passe est requis",
+      "error_password_weak": "Le mot de passe est trop faible",
+      "error_password_mismatch": "Les mots de passe ne correspondent pas"
+    },
+
+    "summary": {
+      "title": "Résumé de l'installation",
+      "review": "Vérifiez les informations ci-dessous",
+      "database": "Base de données",
+      "admin_account": "Compte administrateur",
+      "backup_restore": "Restauration de backup",
+      "yes": "Oui",
+      "no": "Non",
+      "finalize": "Finaliser l'installation"
+    },
+
+    "done": {
+      "title": "Installation terminée avec succès !",
+      "body": "L'application est configurée. Vous pouvez vous connecter.",
+      "install_summary": "Résumé de l'installation",
+      "database": "Base de données",
+      "tables_created": "Tables créées",
+      "admin_account": "Compte administrateur",
+      "username": "Utilisateur",
+      "email": "Email",
+      "install_marker": "Marqueur d'installation",
+      "backup_restored": "Backup restauré",
+      "backup_tables": "Tables importées du backup",
+      "backup_records": "Enregistrements restaurés",
+      "done_next": "Prochaine étape",
+      "done_hint": "Connectez-vous avec votre compte administrateur pour accéder au tableau de bord.",
+      "goto_login": "Se connecter",
+      "view_db": "Voir les données de la BD"
+    },
+
+    "verify_db": {
+      "title": "Vérification de la Base de Données",
+      "connection_success": "Connexion réussie",
+      "connection_failed": "Erreur de connexion",
+      "tables": "Tables créées",
+      "table_name": "Table",
+      "record_count": "Nb d'enregistrements",
+      "users_title": "Utilisateurs",
+      "user_id": "ID",
+      "user_username": "Username",
+      "user_email": "Email",
+      "user_admin": "Admin",
+      "user_created": "Créé le",
+      "close": "Fermer",
+      "back_home": "Retour à l'accueil"
+    },
+
+    "errors": {
+      "generic": "Une erreur est survenue",
+      "db_connection": "Impossible de se connecter à la base de données",
+      "db_creation": "Erreur lors de la création des tables",
+      "backup_invalid": "Le fichier de backup est invalide",
+      "admin_creation": "Erreur lors de la création du compte administrateur",
+      "finalize": "Erreur lors de la finalisation"
+    }
+  }
+}
+

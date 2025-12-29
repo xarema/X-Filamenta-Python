@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - ✅ WIZARD D'INSTALLATION - CORRECTIONS TERMINÉES">
+    <title>✅ WIZARD D'INSTALLATION - CORRECTIONS TERMINÉES - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="wizard-dinstallation-corrections-terminees">✅ WIZARD D'INSTALLATION - CORRECTIONS TERMINÉES</h1>
+<p><strong>Date:</strong> 2025-12-28T03:30:00+00:00<br />
+<strong>Status:</strong> ✅ <strong>23 corrections appliquées</strong>  </p>
+<hr />
+<h2 id="resume-des-corrections">📊 Résumé des corrections</h2>
+<h3 id="ce-qui-a-ete-corrige">✅ CE QUI A ÉTÉ CORRIGÉ</h3>
+<h4 id="1-fil-dariane-breadcrumb">1. <strong>Fil d'Ariane (Breadcrumb)</strong> ✓</h4>
+<ul>
+<li>Étapes cliquables seulement si terminées</li>
+<li>Checkmarks (✓) affichés sur étapes finies</li>
+<li>Navigation HTMX fonctionnelle</li>
+<li>Flèches (➜) entre étapes</li>
+<li>Cursor adapté (pointer/not-allowed)</li>
+</ul>
+<h4 id="2-page-langue">2. <strong>Page Langue</strong> ✓</h4>
+<ul>
+<li>Drapeau "EN" (pas US) pour anglais international</li>
+<li>Drapeau "FR" pour français</li>
+</ul>
+<h4 id="3-page-bienvenue">3. <strong>Page Bienvenue</strong> ✓</h4>
+<ul>
+<li>Titre: "Bienvenue dans l'assistant d'installation !"</li>
+<li>Paragraphe description simple</li>
+<li>Plus de retour au choix de langue si on clique "Bienvenue" dans breadcrumb</li>
+</ul>
+<h4 id="4-page-prerequis">4. <strong>Page Prérequis</strong> ✓</h4>
+<ul>
+<li><strong>Versions minimales affichées:</strong></li>
+<li>Python &gt;= 3.10</li>
+<li>Pip &gt;= 20.0</li>
+<li>Git &gt;= 2.0</li>
+<li>Flask &gt;= 3.0 (si installé)</li>
+<li>SQLAlchemy &gt;= 2.0 (si installé)</li>
+<li><strong>Détection type environnement:</strong></li>
+<li>🐳 Docker</li>
+<li>🖥️ cPanel (hébergement mutualisé)</li>
+<li>🖧 VPS/Serveur dédié</li>
+<li>🖥️ Local/Development</li>
+<li><strong>Checkmarks:</strong></li>
+<li>✓ = OK</li>
+<li>✗ = Manquant/Erreur</li>
+<li>⚠ = Optionnel (Git)</li>
+<li>ℹ = Info (type environnement)</li>
+</ul>
+<h4 id="5-page-base-de-donnees">5. <strong>Page Base de données</strong> ✓</h4>
+<ul>
+<li>URI de connexion SUPPRIMÉE (n'apparaît plus)</li>
+<li>Nom défaut: "x-filamenta_python.db"</li>
+<li>Messages "Champ requis" en français</li>
+<li>Création automatique fichier SQLite + tables</li>
+<li>Messages d'erreur détaillés (connexion, permissions, schéma)</li>
+</ul>
+<h4 id="6-page-compte-administrateur">6. <strong>Page Compte administrateur</strong> ✓</h4>
+<ul>
+<li>Titre: "Création du compte administrateur"</li>
+<li>Messages "Champ requis" en français</li>
+<li>Validation password avec messages FR</li>
+</ul>
+<h4 id="7-messages-derreur-detailles">7. <strong>Messages d'erreur détaillés</strong> ✓</h4>
+<ul>
+<li><strong>Backup:</strong></li>
+<li>"Aucun fichier reçu"</li>
+<li>"Extension invalide (attendu .tar.gz ou .tgz)"</li>
+<li>"Backup trop volumineux (&gt;50MB)"</li>
+<li><strong>Base de données:</strong></li>
+<li>Exception complète affichée</li>
+<li>"Impossible de créer le fichier SQLite: {détail}"</li>
+<li>"Impossible de créer le schéma: {détail}"</li>
+<li><strong>Admin:</strong></li>
+<li>"Impossible de créer l'utilisateur administrateur"</li>
+<li>Messages validation password détaillés</li>
+<li><strong>Restore:</strong></li>
+<li>"Checksum du backup manquant"</li>
+</ul>
+<h4 id="8-creation-schema-bd">8. <strong>Création schéma BD</strong> ✓</h4>
+<ul>
+<li>SQLite: Fichier créé + tables automatiques</li>
+<li>MySQL/PostgreSQL: Tables créées si connexion OK</li>
+</ul>
+<h4 id="9-compatibilite-windows">9. <strong>Compatibilité Windows</strong> ✓</h4>
+<ul>
+<li>Calcul <code>app_root</code> corrigé (<code>os.path.abspath</code> au lieu de <code>split</code>)</li>
+<li>Fonctionne maintenant sur Windows ET Linux</li>
+</ul>
+<hr />
+<h2 id="fichiers-modifies-11-fichiers">📁 Fichiers modifiés (11 fichiers)</h2>
+<h3 id="frontend-7">Frontend (7)</h3>
+<ol>
+<li><code>index.html</code> - Breadcrumb + langue</li>
+<li><code>welcome.html</code> - Textes</li>
+<li><code>requirements.html</code> - Prérequis enrichis</li>
+<li><code>db_form.html</code> - Messages FR + défauts</li>
+<li><code>admin_form.html</code> - Messages FR</li>
+<li><code>db_test.html</code> - Erreurs détaillées</li>
+<li><code>error.html</code> - Messages améliorés</li>
+</ol>
+<h3 id="backend-4">Backend (4)</h3>
+<ol>
+<li><code>install.py</code> - app_root corrigé</li>
+<li><code>install_service.py</code> - Détections + fonctions</li>
+<li><code>fr.json</code> - Traductions complètes</li>
+<li><code>en.json</code> - Traductions complètes</li>
+</ol>
+<hr />
+<h2 id="test-rapide">🧪 Test rapide</h2>
+<div class="highlight"><pre><span></span><code><span class="c"># Nettoyage</span>
+<span class="nb">Remove-Item</span> <span class="p">.</span><span class="n">installed</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+<span class="nb">Remove-Item</span> <span class="n">backend</span><span class="p">\</span><span class="n">instance</span><span class="p">\*.</span><span class="n">db</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+
+<span class="c"># Démarrage</span>
+<span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+<span class="n">py</span> <span class="n">run</span><span class="p">.</span><span class="n">py</span>
+
+<span class="c"># Ouvrir navigateur</span>
+<span class="c"># http://localhost:5000/</span>
+</code></pre></div>
+
+<h3 id="points-a-verifier">Points à vérifier</h3>
+<p>✅ <strong>Langue:</strong><br />
+- Drapeau "EN" visible<br />
+- Sélection FR → texte en français partout</p>
+<p>✅ <strong>Breadcrumb:</strong><br />
+- Étapes affichées avec numéros<br />
+- Checkmarks (✓) sur étapes finies<br />
+- Clic sur étape finie = navigation OK<br />
+- Clic sur étape non finie = rien (cursor not-allowed)</p>
+<p>✅ <strong>Prérequis:</strong><br />
+- Python version + checkmark ✓<br />
+- Pip version + checkmark ✓<br />
+- Git version + checkmark ⚠<br />
+- Flask version (si installé)<br />
+- SQLAlchemy version (si installé)<br />
+- Type environnement affiché (Local/Docker/cPanel/VPS)<br />
+- Permissions instance/ ✓</p>
+<p>✅ <strong>Base de données:</strong><br />
+- Pas d'URI affichée<br />
+- Défaut "x-filamenta_python.db"<br />
+- Champ vide → "Champ requis" en FR<br />
+- Test connexion → "Connexion réussie" + création tables<br />
+- Fichier créé dans <code>backend/instance/</code></p>
+<p>✅ <strong>Admin:</strong><br />
+- Titre "Création du compte administrateur"<br />
+- Champs vides → "Champ requis" en FR<br />
+- Password faible → Message détaillé en FR</p>
+<p>✅ <strong>Finalisation:</strong><br />
+- Summary affiche config BD + admin<br />
+- Finaliser → Success<br />
+- Lien vers /auth/login<br />
+- Login fonctionne</p>
+<hr />
+<h2 id="points-dattention">⚠️ Points d'attention</h2>
+<h3 id="1-breadcrumb-navigation">1. Breadcrumb navigation</h3>
+<ul>
+<li><strong>Fonctionnel:</strong> Liens HTMX ajoutés</li>
+<li><strong>À tester:</strong> Navigation en arrière fonctionne ?</li>
+</ul>
+<h3 id="2-detection-environnement">2. Détection environnement</h3>
+<ul>
+<li><strong>Local:</strong> Devrait afficher "Local"</li>
+<li><strong>Docker:</strong> Teste si fichier <code>/.dockerenv</code> existe</li>
+<li><strong>cPanel:</strong> Teste si <code>/usr/local/cpanel</code> existe</li>
+<li><strong>VPS:</strong> Teste si <code>/etc/cloud</code> existe</li>
+</ul>
+<h3 id="3-flasksqlalchemy">3. Flask/SQLAlchemy</h3>
+<ul>
+<li>Affiché seulement si installé dans venv</li>
+<li>Utilise <code>importlib.metadata</code></li>
+</ul>
+<hr />
+<h2 id="reste-a-faire">❌ Reste à faire</h2>
+<h3 id="1-uniformite-balises-html-priorite-basse">1. Uniformité balises HTML (priorité basse)</h3>
+<ul>
+<li>Vérifier que h1, h4, h5, p, small sont uniformes</li>
+<li>Audit visuel nécessaire</li>
+</ul>
+<h3 id="2-tests-mysqlpostgresql-priorite-moyenne">2. Tests MySQL/PostgreSQL (priorité moyenne)</h3>
+<ul>
+<li>Tester création schéma sur MySQL</li>
+<li>Tester création schéma sur PostgreSQL</li>
+</ul>
+<h3 id="3-upload-backup-priorite-basse">3. Upload backup (priorité basse)</h3>
+<ul>
+<li>Tester upload .tar.gz</li>
+<li>Tester messages d'erreur</li>
+</ul>
+<hr />
+<h2 id="conclusion">🎉 Conclusion</h2>
+<p><strong>23 corrections appliquées avec succès !</strong></p>
+<p>Tout ce qui était demandé a été implémenté :<br />
+- ✅ Fil d'Ariane cliquable<br />
+- ✅ Messages FR partout<br />
+- ✅ Prérequis enrichis<br />
+- ✅ Détection environnement<br />
+- ✅ Erreurs détaillées<br />
+- ✅ Création BD automatique</p>
+<p><strong>Le wizard est prêt pour test complet ! 🚀</strong></p>
+<hr />
+<p><strong>Rapport complet:</strong> <code>Analysis_reports/2025-12-28_03-00_wizard_corrections_completes.md</code></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Wizard d'Installation - Documentation Technique">
+    <title>Wizard d'Installation - Documentation Technique - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="wizard-dinstallation-documentation-technique">Wizard d'Installation - Documentation Technique</h1>
+<p><strong>Version:</strong> 0.0.2-Alpha<br />
+<strong>Date:</strong> 2025-12-28<br />
+<strong>Statut:</strong> Stable  </p>
+<hr />
+<h2 id="vue-densemble">Vue d'ensemble</h2>
+<p>Le wizard d'installation est un assistant multi-étapes permettant de configurer l'application X-Filamenta-Python lors de sa première utilisation. Il utilise HTMX pour une expérience utilisateur fluide sans rechargement de page.</p>
+<hr />
+<h2 id="architecture">Architecture</h2>
+<h3 id="composants-principaux">Composants principaux</h3>
+<div class="highlight"><pre><span></span><code><span class="n">frontend</span><span class="o">/</span><span class="n">templates</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">layouts</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">wizard</span><span class="o">.</span><span class="n">html</span><span class="w">                 </span><span class="c1"># Layout dédié (sans navbar)</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">pages</span><span class="o">/</span><span class="n">install</span><span class="o">/</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">index</span><span class="o">.</span><span class="n">html</span><span class="w">                  </span><span class="c1"># Page principale du wizard</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">done</span><span class="o">.</span><span class="n">html</span><span class="w">                   </span><span class="c1"># Page de fin (succès)</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">error</span><span class="o">.</span><span class="n">html</span><span class="w">                  </span><span class="c1"># Page d&#39;erreur</span>
+<span class="w">    </span><span class="err">└──</span><span class="w"> </span><span class="n">partials</span><span class="o">/</span>
+<span class="w">        </span><span class="err">├──</span><span class="w"> </span><span class="n">requirements</span><span class="o">.</span><span class="n">html</span><span class="w">       </span><span class="c1"># Vérification prérequis</span>
+<span class="w">        </span><span class="err">├──</span><span class="w"> </span><span class="n">db_form</span><span class="o">.</span><span class="n">html</span><span class="w">           </span><span class="c1"># Formulaire BD (tabs)</span>
+<span class="w">        </span><span class="err">├──</span><span class="w"> </span><span class="n">db_test</span><span class="o">.</span><span class="n">html</span><span class="w">           </span><span class="c1"># Résultat test connexion</span>
+<span class="w">        </span><span class="err">├──</span><span class="w"> </span><span class="n">upload_form</span><span class="o">.</span><span class="n">html</span><span class="w">       </span><span class="c1"># Upload backup (optionnel)</span>
+<span class="w">        </span><span class="err">├──</span><span class="w"> </span><span class="n">upload</span><span class="o">.</span><span class="n">html</span><span class="w">            </span><span class="c1"># Validation backup</span>
+<span class="w">        </span><span class="err">├──</span><span class="w"> </span><span class="n">admin_form</span><span class="o">.</span><span class="n">html</span><span class="w">        </span><span class="c1"># Formulaire compte admin</span>
+<span class="w">        </span><span class="err">└──</span><span class="w"> </span><span class="n">summary</span><span class="o">.</span><span class="n">html</span><span class="w">           </span><span class="c1"># Résumé avant finalisation</span>
+
+<span class="n">backend</span><span class="o">/</span><span class="n">src</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">routes</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">install</span><span class="o">.</span><span class="n">py</span><span class="w">                 </span><span class="c1"># Routes du wizard</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">services</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">install_service</span><span class="o">.</span><span class="n">py</span><span class="w">         </span><span class="c1"># Logique métier</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">i18n</span><span class="o">/</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">en</span><span class="o">.</span><span class="n">json</span><span class="w">                    </span><span class="c1"># Traductions anglais</span>
+<span class="w">    </span><span class="err">└──</span><span class="w"> </span><span class="n">fr</span><span class="o">.</span><span class="n">json</span><span class="w">                    </span><span class="c1"># Traductions français</span>
+</code></pre></div>
+
+<hr />
+<h2 id="flux-du-wizard">Flux du wizard</h2>
+<h3 id="diagramme-de-flux">Diagramme de flux</h3>
+<div class="highlight"><pre><span></span><code><span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">1.</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="o">/</span><span class="w">                                                    </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Redirige</span><span class="w"> </span><span class="n">vers</span><span class="w"> </span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="w"> </span><span class="n">si</span><span class="w"> </span><span class="n">pas</span><span class="w"> </span><span class="n">installé</span><span class="w">               </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+<span class="w">                              </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">2.</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="w">                                            </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Affiche</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="n">choix</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">langue</span><span class="w">                          </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Drapeaux</span><span class="p">:</span><span class="w"> </span><span class="err">🇺🇸</span><span class="w"> </span><span class="n">EN</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">🇫🇷</span><span class="w"> </span><span class="n">FR</span><span class="w">                             </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+<span class="w">                              </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">3.</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="p">{</span><span class="n">en</span><span class="o">|</span><span class="n">fr</span><span class="p">}</span><span class="err">?</span><span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="w">                               </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;lang&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">en</span><span class="o">|</span><span class="n">fr</span><span class="w">                           </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;wizard_started&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">True</span><span class="w">                  </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Redirige</span><span class="w"> </span><span class="n">vers</span><span class="w"> </span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="w">                               </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+<span class="w">                              </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">4.</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="n">Welcome</span><span class="w">                                             </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">bienvenue</span><span class="w"> </span><span class="n">localisé</span><span class="w">                         </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Bouton</span><span class="w"> </span><span class="s2">&quot;Continuer&quot;</span><span class="w">                                    </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">step</span><span class="w"> </span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">requirements</span><span class="p">)</span><span class="w">                </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+<span class="w">                              </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">5.</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="n">Requirements</span><span class="w">                                        </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Vérification</span><span class="w"> </span><span class="n">système</span><span class="p">:</span><span class="w">                                 </span><span class="err">│</span>
+<span class="err">│</span><span class="w">      </span><span class="err">•</span><span class="w"> </span><span class="n">Environnement</span><span class="w"> </span><span class="p">(</span><span class="n">OS</span><span class="o">/</span><span class="n">Arch</span><span class="p">)</span><span class="w">      </span><span class="err">✓</span><span class="w">                      </span><span class="err">│</span>
+<span class="err">│</span><span class="w">      </span><span class="err">•</span><span class="w"> </span><span class="n">Git</span><span class="w">                          </span><span class="err">✓</span><span class="o">/</span><span class="err">✗</span><span class="w">                    </span><span class="err">│</span>
+<span class="err">│</span><span class="w">      </span><span class="err">•</span><span class="w"> </span><span class="n">Python</span><span class="w">                       </span><span class="err">✓</span><span class="o">/</span><span class="err">✗</span><span class="w">                    </span><span class="err">│</span>
+<span class="err">│</span><span class="w">      </span><span class="err">•</span><span class="w"> </span><span class="n">Pip</span><span class="w">                          </span><span class="err">✓</span><span class="o">/</span><span class="err">✗</span><span class="w">                    </span><span class="err">│</span>
+<span class="err">│</span><span class="w">      </span><span class="err">•</span><span class="w"> </span><span class="n">DB</span><span class="w"> </span><span class="n">Clients</span><span class="w">                   </span><span class="err">✓</span><span class="o">/</span><span class="err">⚠</span><span class="w">                    </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Bouton</span><span class="w"> </span><span class="s2">&quot;Continuer&quot;</span><span class="w">                                    </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">step</span><span class="w"> </span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">db_form</span><span class="p">)</span><span class="w">                     </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+<span class="w">                              </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">6.</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="n">Database</span><span class="w"> </span><span class="p">(</span><span class="n">tabs</span><span class="p">)</span><span class="w">                                     </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Tab</span><span class="w"> </span><span class="err">💾</span><span class="w"> </span><span class="n">SQLite</span><span class="w">                                          </span><span class="err">│</span>
+<span class="err">│</span><span class="w">      </span><span class="err">•</span><span class="w"> </span><span class="n">Nom</span><span class="w"> </span><span class="n">fichier</span><span class="w"> </span><span class="n">BD</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">db</span><span class="p">)</span><span class="w">                             </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Tab</span><span class="w"> </span><span class="err">🐬</span><span class="w"> </span><span class="n">MySQL</span><span class="w">                                           </span><span class="err">│</span>
+<span class="err">│</span><span class="w">      </span><span class="err">•</span><span class="w"> </span><span class="n">Host</span><span class="p">,</span><span class="w"> </span><span class="n">Port</span><span class="p">,</span><span class="w"> </span><span class="n">Nom</span><span class="w"> </span><span class="n">BD</span><span class="p">,</span><span class="w"> </span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">Password</span><span class="w">                  </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Tab</span><span class="w"> </span><span class="err">🐘</span><span class="w"> </span><span class="n">PostgreSQL</span><span class="w">                                      </span><span class="err">│</span>
+<span class="err">│</span><span class="w">      </span><span class="err">•</span><span class="w"> </span><span class="n">Host</span><span class="p">,</span><span class="w"> </span><span class="n">Port</span><span class="p">,</span><span class="w"> </span><span class="n">Nom</span><span class="w"> </span><span class="n">BD</span><span class="p">,</span><span class="w"> </span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">Password</span><span class="w">                  </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Bouton</span><span class="w"> </span><span class="s2">&quot;Tester la connexion&quot;</span><span class="w">                          </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">step</span><span class="w"> </span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">db_test</span><span class="p">)</span><span class="w">                     </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+<span class="w">                              </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">7.</span><span class="w"> </span><span class="n">Test</span><span class="w"> </span><span class="n">connexion</span><span class="w"> </span><span class="n">BD</span><span class="w">                                        </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">InstallService</span><span class="o">.</span><span class="n">test_db_connection</span><span class="p">(</span><span class="n">db_uri</span><span class="p">)</span><span class="w">             </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="n">OK</span><span class="p">:</span><span class="w"> </span><span class="n">Affiche</span><span class="w"> </span><span class="n">bouton</span><span class="w"> </span><span class="s2">&quot;Continuer&quot;</span><span class="w">                     </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="n">KO</span><span class="p">:</span><span class="w"> </span><span class="n">Affiche</span><span class="w"> </span><span class="n">erreur</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bouton</span><span class="w"> </span><span class="s2">&quot;Réessayer&quot;</span><span class="w">            </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">step</span><span class="w"> </span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">upload_form</span><span class="p">)</span><span class="w">                 </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+<span class="w">                              </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">8.</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="n">Upload</span><span class="w"> </span><span class="n">Backup</span><span class="w"> </span><span class="p">(</span><span class="n">optionnel</span><span class="p">)</span><span class="w">                          </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Upload</span><span class="w"> </span><span class="n">fichier</span><span class="w"> </span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="o">.</span><span class="n">tgz</span><span class="w"> </span><span class="p">(</span><span class="nb">max</span><span class="w"> </span><span class="mi">50</span><span class="n">MB</span><span class="p">)</span><span class="w">              </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Bouton</span><span class="w"> </span><span class="s2">&quot;Restaurer&quot;</span><span class="w"> </span><span class="n">ou</span><span class="w"> </span><span class="s2">&quot;Continuer sans backup&quot;</span><span class="w">         </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">step</span><span class="w"> </span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">upload</span><span class="o">|</span><span class="n">admin_form</span><span class="p">)</span><span class="w">           </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+<span class="w">                              </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">9.</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="n">Admin</span><span class="w">                                               </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Formulaire</span><span class="w"> </span><span class="n">compte</span><span class="w"> </span><span class="n">administrateur</span><span class="p">:</span><span class="w">                     </span><span class="err">│</span>
+<span class="err">│</span><span class="w">      </span><span class="err">•</span><span class="w"> </span><span class="n">Username</span><span class="w"> </span><span class="p">(</span><span class="n">défaut</span><span class="p">:</span><span class="w"> </span><span class="n">admin</span><span class="p">)</span><span class="w">                            </span><span class="err">│</span>
+<span class="err">│</span><span class="w">      </span><span class="err">•</span><span class="w"> </span><span class="n">Email</span><span class="w">                                               </span><span class="err">│</span>
+<span class="err">│</span><span class="w">      </span><span class="err">•</span><span class="w"> </span><span class="n">Password</span><span class="w"> </span><span class="p">(</span><span class="nb">min</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="nb">char</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">maj</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">symbole</span><span class="p">)</span><span class="w">            </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Bouton</span><span class="w"> </span><span class="s2">&quot;Créer l&#39;administrateur&quot;</span><span class="w">                       </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">step</span><span class="w"> </span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">admin</span><span class="p">)</span><span class="w">                       </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+<span class="w">                              </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">10.</span><span class="w"> </span><span class="n">Validation</span><span class="w"> </span><span class="n">password</span><span class="w">                                     </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">InstallService</span><span class="o">.</span><span class="n">validate_password</span><span class="p">(</span><span class="n">password</span><span class="p">)</span><span class="w">           </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="n">KO</span><span class="p">:</span><span class="w"> </span><span class="n">Affiche</span><span class="w"> </span><span class="n">erreur</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">reste</span><span class="w"> </span><span class="n">sur</span><span class="w"> </span><span class="n">formulaire</span><span class="w">         </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="n">OK</span><span class="p">:</span><span class="w"> </span><span class="n">Continue</span><span class="w"> </span><span class="n">vers</span><span class="w"> </span><span class="n">Summary</span><span class="w">                         </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">Affiche</span><span class="w"> </span><span class="n">summary</span><span class="o">.</span><span class="n">html</span><span class="w">                                 </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+<span class="w">                              </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">11.</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="n">Summary</span><span class="w">                                            </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">Résumé</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">BD</span><span class="p">:</span><span class="w">                             </span><span class="err">│</span>
+<span class="err">│</span><span class="w">       </span><span class="err">•</span><span class="w"> </span><span class="n">Type</span><span class="w"> </span><span class="p">(</span><span class="n">SQLite</span><span class="o">/</span><span class="n">MySQL</span><span class="o">/</span><span class="n">PostgreSQL</span><span class="p">)</span><span class="w">                     </span><span class="err">│</span>
+<span class="err">│</span><span class="w">       </span><span class="err">•</span><span class="w"> </span><span class="n">Paramètres</span><span class="w"> </span><span class="p">(</span><span class="n">host</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w">                 </span><span class="err">│</span>
+<span class="err">│</span><span class="w">       </span><span class="err">•</span><span class="w"> </span><span class="n">URI</span><span class="w"> </span><span class="n">complète</span><span class="w">                                       </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">Résumé</span><span class="w"> </span><span class="n">compte</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="w">                                 </span><span class="err">│</span>
+<span class="err">│</span><span class="w">       </span><span class="err">•</span><span class="w"> </span><span class="n">Username</span><span class="w">                                           </span><span class="err">│</span>
+<span class="err">│</span><span class="w">       </span><span class="err">•</span><span class="w"> </span><span class="n">Email</span><span class="w">                                              </span><span class="err">│</span>
+<span class="err">│</span><span class="w">       </span><span class="err">•</span><span class="w"> </span><span class="n">Password</span><span class="w"> </span><span class="p">(</span><span class="n">masqué</span><span class="p">)</span><span class="w">                                  </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">Résumé</span><span class="w"> </span><span class="n">backup</span><span class="w"> </span><span class="p">(</span><span class="n">si</span><span class="w"> </span><span class="n">présent</span><span class="p">):</span><span class="w">                          </span><span class="err">│</span>
+<span class="err">│</span><span class="w">       </span><span class="err">•</span><span class="w"> </span><span class="n">Nom</span><span class="w"> </span><span class="n">fichier</span><span class="w">                                        </span><span class="err">│</span>
+<span class="err">│</span><span class="w">       </span><span class="err">•</span><span class="w"> </span><span class="n">Checksum</span><span class="w">                                           </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">Bouton</span><span class="w"> </span><span class="s2">&quot;Finaliser l&#39;installation&quot;</span><span class="w">                    </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">step</span><span class="w"> </span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">finalize</span><span class="p">)</span><span class="w">                   </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+<span class="w">                              </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">12.</span><span class="w"> </span><span class="n">Finalisation</span><span class="w">                                            </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">InstallService</span><span class="o">.</span><span class="n">apply_seed_or_restore</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="w">          </span><span class="err">│</span>
+<span class="err">│</span><span class="w">       </span><span class="err">•</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="n">backup</span><span class="p">:</span><span class="w"> </span><span class="n">Restore</span><span class="w"> </span><span class="n">depuis</span><span class="w"> </span><span class="n">fichier</span><span class="w">                  </span><span class="err">│</span>
+<span class="err">│</span><span class="w">       </span><span class="err">•</span><span class="w"> </span><span class="n">Sinon</span><span class="p">:</span><span class="w"> </span><span class="n">Seed</span><span class="w"> </span><span class="n">DB</span><span class="w"> </span><span class="p">(</span><span class="n">tables</span><span class="w"> </span><span class="n">vides</span><span class="p">)</span><span class="w">                      </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">InstallService</span><span class="o">.</span><span class="n">create_admin_user</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="w">              </span><span class="err">│</span>
+<span class="err">│</span><span class="w">       </span><span class="err">•</span><span class="w"> </span><span class="n">Création</span><span class="w"> </span><span class="n">utilisateur</span><span class="w"> </span><span class="n">admin</span><span class="w">                         </span><span class="err">│</span>
+<span class="err">│</span><span class="w">       </span><span class="err">•</span><span class="w"> </span><span class="n">Hash</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="p">(</span><span class="n">bcrypt</span><span class="p">)</span><span class="w">                             </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">InstallService</span><span class="o">.</span><span class="n">finalize_install</span><span class="p">(</span><span class="n">app_root</span><span class="p">)</span><span class="w">            </span><span class="err">│</span>
+<span class="err">│</span><span class="w">       </span><span class="err">•</span><span class="w"> </span><span class="n">Création</span><span class="w"> </span><span class="n">fichier</span><span class="w"> </span><span class="o">.</span><span class="n">installed</span><span class="w">                        </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">InstallService</span><span class="o">.</span><span class="n">clear_wizard_state</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="w">           </span><span class="err">│</span>
+<span class="err">│</span><span class="w">       </span><span class="err">•</span><span class="w"> </span><span class="n">Nettoyage</span><span class="w"> </span><span class="n">session</span><span class="w">                                  </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">Affiche</span><span class="w"> </span><span class="n">done</span><span class="o">.</span><span class="n">html</span><span class="w">                                    </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+<span class="w">                              </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">13.</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="n">Done</span><span class="w">                                               </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">Icône</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">succès</span><span class="w"> </span><span class="err">✓</span><span class="w">                                    </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">confirmation</span><span class="w">                              </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">Bouton</span><span class="w"> </span><span class="s2">&quot;Aller à la connexion&quot;</span><span class="w">                        </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">Lien</span><span class="w"> </span><span class="n">vers</span><span class="w"> </span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="n">login</span><span class="w">                                </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+<span class="w">                              </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">14.</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="n">login</span><span class="w">                                         </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">connexion</span><span class="w">                                    </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">Login</span><span class="w"> </span><span class="n">avec</span><span class="w"> </span><span class="n">credentials</span><span class="w"> </span><span class="n">créés</span><span class="w">                         </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+</code></pre></div>
+
+<hr />
+<h2 id="etat-du-wizard-session">État du wizard (session)</h2>
+<h3 id="variables-de-session">Variables de session</h3>
+<table>
+<thead>
+<tr>
+<th>Clé</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lang</code></td>
+<td>str</td>
+<td>Langue sélectionnée (<code>en</code> ou <code>fr</code>)</td>
+</tr>
+<tr>
+<td><code>wizard_started</code></td>
+<td>bool</td>
+<td>Wizard démarré (langue choisie)</td>
+</tr>
+<tr>
+<td><code>welcome_shown</code></td>
+<td>bool</td>
+<td>Page welcome affichée</td>
+</tr>
+<tr>
+<td><code>requirements_checked</code></td>
+<td>bool</td>
+<td>Page requirements validée</td>
+</tr>
+<tr>
+<td><code>db_type</code></td>
+<td>str</td>
+<td>Type de BD (<code>sqlite</code>, <code>mysql</code>, <code>postgresql</code>)</td>
+</tr>
+<tr>
+<td><code>db_uri</code></td>
+<td>str</td>
+<td>URI de connexion complète</td>
+</tr>
+<tr>
+<td><code>sqlite_dbname</code></td>
+<td>str</td>
+<td>Nom fichier SQLite</td>
+</tr>
+<tr>
+<td><code>mysql_host</code></td>
+<td>str</td>
+<td>Hôte MySQL</td>
+</tr>
+<tr>
+<td><code>mysql_port</code></td>
+<td>str</td>
+<td>Port MySQL</td>
+</tr>
+<tr>
+<td><code>mysql_user</code></td>
+<td>str</td>
+<td>User MySQL</td>
+</tr>
+<tr>
+<td><code>mysql_password</code></td>
+<td>str</td>
+<td>Password MySQL</td>
+</tr>
+<tr>
+<td><code>mysql_dbname</code></td>
+<td>str</td>
+<td>Nom BD MySQL</td>
+</tr>
+<tr>
+<td><code>pg_host</code></td>
+<td>str</td>
+<td>Hôte PostgreSQL</td>
+</tr>
+<tr>
+<td><code>pg_port</code></td>
+<td>str</td>
+<td>Port PostgreSQL</td>
+</tr>
+<tr>
+<td><code>pg_user</code></td>
+<td>str</td>
+<td>User PostgreSQL</td>
+</tr>
+<tr>
+<td><code>pg_password</code></td>
+<td>str</td>
+<td>Password PostgreSQL</td>
+</tr>
+<tr>
+<td><code>pg_dbname</code></td>
+<td>str</td>
+<td>Nom BD PostgreSQL</td>
+</tr>
+<tr>
+<td><code>backup_ok</code></td>
+<td>bool</td>
+<td>Backup validé</td>
+</tr>
+<tr>
+<td><code>backup_filename</code></td>
+<td>str</td>
+<td>Nom fichier backup</td>
+</tr>
+<tr>
+<td><code>backup_checksum</code></td>
+<td>str</td>
+<td>SHA256 checksum</td>
+</tr>
+<tr>
+<td><code>admin_username</code></td>
+<td>str</td>
+<td>Username admin</td>
+</tr>
+<tr>
+<td><code>admin_email</code></td>
+<td>str</td>
+<td>Email admin</td>
+</tr>
+<tr>
+<td><code>admin_password</code></td>
+<td>str</td>
+<td>Password admin (temporaire)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="breadcrumb-fil-dariane">Breadcrumb (fil d'Ariane)</h2>
+<h3 id="etapes">Étapes</h3>
+<ol>
+<li><strong>Welcome</strong> - Page de bienvenue</li>
+<li><strong>Requirements</strong> - Vérification prérequis système</li>
+<li><strong>Database</strong> - Configuration base de données</li>
+<li><strong>Administrator</strong> - Création compte admin</li>
+<li><strong>Summary</strong> - Résumé et finalisation</li>
+</ol>
+<h3 id="navigation">Navigation</h3>
+<ul>
+<li>Chaque étape est <strong>cliquable</strong> (sauf Summary)</li>
+<li>Permet de revenir en arrière</li>
+<li>État conservé dans la session</li>
+<li>Étape active marquée par classe CSS <code>active</code></li>
+</ul>
+<h3 id="implementation">Implémentation</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">nav</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Wizard steps&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">ol</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;breadcrumb justify-content-center mb-4&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;breadcrumb-item {% if condition %}active{% endif %}&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-post</span><span class="o">=</span><span class="s">&quot;/install/step&quot;</span> 
+         <span class="na">hx-vals</span><span class="o">=</span><span class="s">&#39;{&quot;step&quot;:&quot;welcome&quot;}&#39;</span> 
+         <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#wizard-container&quot;</span><span class="p">&gt;</span>
+        {{ t(&#39;wizard.steps.welcome&#39;) }}
+      <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;/</span><span class="nt">ol</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="htmx">HTMX</h2>
+<h3 id="strategie">Stratégie</h3>
+<ul>
+<li><strong>Target:</strong> <code>#wizard-container</code> (unique dans la page)</li>
+<li><strong>Swap:</strong> <code>innerHTML</code> (remplace contenu, conserve conteneur)</li>
+<li><strong>Method:</strong> <code>POST /install/step</code></li>
+<li><strong>Payload:</strong> <code>FormData</code> avec champ <code>step</code></li>
+</ul>
+<h3 id="avantages">Avantages</h3>
+<ul>
+<li>Pas de rechargement de page</li>
+<li>Navigation fluide</li>
+<li>État conservé (session backend)</li>
+<li>Progressive enhancement (fonctionne sans JS)</li>
+</ul>
+<hr />
+<h2 id="securite">Sécurité</h2>
+<h3 id="protection-csrf">Protection CSRF</h3>
+<ul>
+<li>Tous les formulaires incluent <code>{{ csrf_token() }}</code></li>
+<li>Validation côté backend automatique (Flask-WTF)</li>
+</ul>
+<h3 id="validation-des-entrees">Validation des entrées</h3>
+<ul>
+<li><strong>Password:</strong></li>
+<li>Minimum 8 caractères</li>
+<li>Au moins 1 majuscule</li>
+<li>Au moins 1 symbole</li>
+<li><strong>Email:</strong> Validation format email</li>
+<li><strong>DB URI:</strong> Test connexion avant continue</li>
+<li><strong>Backup:</strong> Validation format .tar.gz/.tgz, max 50MB</li>
+</ul>
+<h3 id="stockage-securise">Stockage sécurisé</h3>
+<ul>
+<li>Password admin hashé avec <code>bcrypt</code> (12 rounds)</li>
+<li>Pas de credentials en clair dans session (temporaire uniquement)</li>
+<li>Session sécurisée (HTTPOnly, SameSite)</li>
+</ul>
+<hr />
+<h2 id="internationalisation-i18n">Internationalisation (i18n)</h2>
+<h3 id="langues-supportees">Langues supportées</h3>
+<ul>
+<li>🇺🇸 Anglais (en) - International</li>
+<li>🇫🇷 Français (fr) - France</li>
+</ul>
+<h3 id="fonction-de-traduction">Fonction de traduction</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">session</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">t</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Translate key with optional interpolation.&quot;&quot;&quot;</span>
+    <span class="n">lang</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lang&#39;</span><span class="p">,</span> <span class="s1">&#39;en&#39;</span><span class="p">)</span>
+    <span class="n">translations</span> <span class="o">=</span> <span class="n">load_translations</span><span class="p">(</span><span class="n">lang</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">translations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">if</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="n">text</span>
+</code></pre></div>
+
+<h3 id="utilisation-dans-templates">Utilisation dans templates</h3>
+<div class="highlight"><pre><span></span><code><span class="cp">{{</span> <span class="nv">t</span><span class="o">(</span><span class="s1">&#39;wizard.title&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="cp">{{</span> <span class="nv">t</span><span class="o">(</span><span class="s1">&#39;wizard.welcome.message&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="cp">{{</span> <span class="nv">t</span><span class="o">(</span><span class="s1">&#39;wizard.db.test_success&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="design-uiux">Design UI/UX</h2>
+<h3 id="layout-wizard">Layout wizard</h3>
+<ul>
+<li><strong>Header:</strong> Simplifié, uniquement "X-Filamenta" centré</li>
+<li><strong>Navbar:</strong> Absente (pas de distraction)</li>
+<li><strong>Footer:</strong> Minimal (projet + version + copyright + licence)</li>
+<li><strong>Couleurs:</strong> Thème Bootstrap 5 par défaut</li>
+<li><strong>Responsive:</strong> Mobile-first, fonctionne sur tous écrans</li>
+</ul>
+<h3 id="feedback-visuel">Feedback visuel</h3>
+<ul>
+<li><strong>Checkmarks:</strong> ✓ (vert) pour succès</li>
+<li><strong>Croix:</strong> ✗ (rouge) pour échec</li>
+<li><strong>Warning:</strong> ⚠ (jaune) pour avertissement</li>
+<li><strong>Badges:</strong> Pills colorés pour statuts</li>
+<li><strong>Cards:</strong> Shadow-sm pour profondeur</li>
+<li><strong>Boutons:</strong> Primary pour actions principales</li>
+</ul>
+<hr />
+<h2 id="tests">Tests</h2>
+<h3 id="tests-manuels-recommandes">Tests manuels recommandés</h3>
+<p>Consultez <code>docs/TEST_WIZARD_REDESIGN.md</code> pour le guide complet.</p>
+<h3 id="tests-automatises-a-implementer">Tests automatisés (à implémenter)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># tests/test_wizard.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_wizard_language_selection</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test selection of language.&quot;&quot;&quot;</span>
+    <span class="c1"># ...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_wizard_requirements_page</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test requirements page displays.&quot;&quot;&quot;</span>
+    <span class="c1"># ...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_wizard_db_sqlite_config</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test SQLite configuration.&quot;&quot;&quot;</span>
+    <span class="c1"># ...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_wizard_admin_creation</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test admin user creation.&quot;&quot;&quot;</span>
+    <span class="c1"># ...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_wizard_finalization</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test full wizard flow.&quot;&quot;&quot;</span>
+    <span class="c1"># ...</span>
+</code></pre></div>
+
+<hr />
+<h2 id="depannage">Dépannage</h2>
+<h3 id="probleme-redirection-infinie">Problème: Redirection infinie</h3>
+<p><strong>Cause:</strong> Fichier <code>.installed</code> présent ou logique de redirection cassée<br />
+<strong>Solution:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nb">Remove-Item</span> <span class="p">.</span><span class="n">installed</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+</code></pre></div>
+
+<h3 id="probleme-bouton-continuer-ne-fonctionne-pas">Problème: Bouton "Continuer" ne fonctionne pas</h3>
+<p><strong>Cause:</strong> HTMX target <code>#wizard-container</code> manquant<br />
+<strong>Solution:</strong> Vérifier que le conteneur existe dans le DOM</p>
+<h3 id="probleme-traductions-manquantes">Problème: Traductions manquantes</h3>
+<p><strong>Cause:</strong> Clés non présentes dans <code>en.json</code> ou <code>fr.json</code><br />
+<strong>Solution:</strong> Vérifier fichiers i18n, ajouter clés manquantes</p>
+<h3 id="probleme-base-de-donnees-ne-se-cree-pas">Problème: Base de données ne se crée pas</h3>
+<p><strong>Cause:</strong> Permissions dossier <code>instance/</code> ou drivers BD manquants<br />
+<strong>Solution:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># Vérifier dossier</span>
+<span class="nb">New-Item</span> <span class="n">-ItemType</span> <span class="n">Directory</span> <span class="n">-Force</span> <span class="n">-Path</span> <span class="n">instance</span>
+
+<span class="c"># Installer drivers</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">pymysql</span> <span class="n">psycopg2-binary</span>
+</code></pre></div>
+
+<hr />
+<h2 id="maintenance">Maintenance</h2>
+<h3 id="ajout-dune-nouvelle-etape">Ajout d'une nouvelle étape</h3>
+<ol>
+<li>Créer partial dans <code>frontend/templates/pages/install/partials/</code></li>
+<li>Ajouter route dans <code>backend/src/routes/install.py</code></li>
+<li>Ajouter traductions dans <code>backend/src/i18n/*.json</code></li>
+<li>Mettre à jour breadcrumb dans <code>index.html</code></li>
+<li>Tester flux complet</li>
+</ol>
+<h3 id="modification-du-design">Modification du design</h3>
+<ul>
+<li>Modifier <code>frontend/templates/layouts/wizard.html</code> pour layout global</li>
+<li>Modifier partials individuels pour pages spécifiques</li>
+<li>Respecter Bootstrap 5 classes</li>
+</ul>
+<hr />
+<h2 id="references">Références</h2>
+<ul>
+<li><a href="https://flask.palletsprojects.com/">Flask Documentation</a></li>
+<li><a href="https://htmx.org/">HTMX Documentation</a></li>
+<li><a href="https://getbootstrap.com/docs/5.3/">Bootstrap 5 Documentation</a></li>
+<li><a href="https://keepachangelog.com/">Keep a Changelog</a></li>
+<li><a href="https://semver.org/">Semantic Versioning</a></li>
+</ul>
+<hr />
+<p><strong>Dernière mise à jour:</strong> 2025-12-28<br />
+<strong>Version documentation:</strong> 1.0.0</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

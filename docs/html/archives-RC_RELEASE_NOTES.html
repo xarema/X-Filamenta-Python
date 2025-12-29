@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🚀 X-Filamenta-Python — Release Candidate (RC)">
+    <title>🚀 X-Filamenta-Python — Release Candidate (RC) - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="x-filamenta-python-release-candidate-rc">🚀 X-Filamenta-Python — Release Candidate (RC)</h1>
+<p><strong>Version:</strong> 0.0.1-Alpha RC<br />
+<strong>Date:</strong> 2025-12-27<br />
+<strong>Status:</strong> Ready for Testing</p>
+<hr />
+<h2 id="quoi-de-neuf-dans-cette-rc">✨ Quoi de neuf dans cette RC ?</h2>
+<h3 id="support-wsgi-complet">🎯 Support WSGI complet</h3>
+<ul>
+<li>✅ Compatible <strong>Gunicorn</strong> (recommandé)</li>
+<li>✅ Compatible <strong>uWSGI</strong></li>
+<li>✅ Compatible <strong>cPanel</strong> Setup Python App</li>
+<li>✅ Point d'entrée WSGI standard : <code>backend/wsgi.py</code></li>
+</ul>
+<h3 id="support-multi-bases-de-donnees">📊 Support multi-bases de données</h3>
+<ul>
+<li>✅ <strong>SQLite</strong> (développement, défaut)</li>
+<li>✅ <strong>MySQL</strong> (production recommandée)</li>
+<li>✅ <strong>PostgreSQL</strong> (advanced, optionnel)</li>
+<li>✅ Configuration automatique via <code>.env</code></li>
+</ul>
+<h3 id="deploiement-multi-plateforme">🌍 Déploiement multi-plateforme</h3>
+<ul>
+<li>✅ <strong>cPanel</strong> → <a href="DEPLOYMENT_CPANEL.md">Guide complet</a></li>
+<li>✅ <strong>VPS/Linux</strong> → <a href="DEPLOYMENT_VPS.md">Guide complet</a></li>
+<li>✅ <strong>Docker</strong> → <a href="DEPLOYMENT_DOCKER.md">Guide complet</a></li>
+<li>✅ <strong>Development local</strong> → <a href="QUICKSTART.md">Guide rapide</a></li>
+</ul>
+<h3 id="documentation-complete">📚 Documentation complète</h3>
+<ul>
+<li>✅ <a href="DEPLOYMENT.md">DEPLOYMENT.md</a> — Comparaison des plateformes</li>
+<li>✅ <a href="WSGI_AND_MULTIDB_ADAPTATION.md">WSGI_AND_MULTIDB_ADAPTATION.md</a> — Architecture technique</li>
+<li>✅ <a href="DEPLOYMENT_CPANEL.md">DEPLOYMENT_CPANEL.md</a> — Guide cPanel étape par étape</li>
+<li>✅ <a href="DEPLOYMENT_VPS.md">DEPLOYMENT_VPS.md</a> — Guide VPS/Linux étape par étape</li>
+<li>✅ <a href="DEPLOYMENT_DOCKER.md">DEPLOYMENT_DOCKER.md</a> — Guide Docker étape par étape</li>
+</ul>
+<hr />
+<h2 id="demarrage-rapide">🏃 Démarrage rapide</h2>
+<h3 id="pour-developpement-local">Pour développement local</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Clone et setup</span>
+git<span class="w"> </span>clone<span class="w"> </span>&lt;repo&gt;
+<span class="nb">cd</span><span class="w"> </span>X-Filamenta-Python
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate<span class="w">  </span><span class="c1"># ou .venv\Scripts\Activate.ps1 sur Windows</span>
+
+<span class="c1"># 2. Installer</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-dev.txt
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+
+<span class="c1"># 3. Lancer</span>
+python<span class="w"> </span>-m<span class="w"> </span>backend.src
+<span class="c1"># Accès: http://localhost:5000</span>
+</code></pre></div>
+
+<h3 id="pour-docker">Pour Docker</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Préparer</span>
+git<span class="w"> </span>clone<span class="w"> </span>&lt;repo&gt;
+<span class="nb">cd</span><span class="w"> </span>X-Filamenta-Python
+cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+
+<span class="c1"># 2. Démarrer</span>
+docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+
+<span class="c1"># 3. Initialiser BD</span>
+docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>python<span class="w"> </span>scripts/init_db.py<span class="w"> </span>init
+
+<span class="c1"># Accès: https://localhost</span>
+</code></pre></div>
+
+<h3 id="pour-cpanel">Pour cPanel</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. SSH</span>
+ssh<span class="w"> </span>user@domain.com
+
+<span class="c1"># 2. Setup (voir DEPLOYMENT_CPANEL.md pour détails)</span>
+<span class="nb">cd</span><span class="w"> </span>~/apps/filamenta
+python3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+
+<span class="c1"># 3. Configurer via cPanel UI</span>
+<span class="c1"># Setup Python App → backend/wsgi.py:app</span>
+
+<span class="c1"># Accès: https://domain.com/filamenta</span>
+</code></pre></div>
+
+<hr />
+<h2 id="configuration-requise">📋 Configuration requise</h2>
+<h3 id="prerequis-minimaux">Prérequis minimaux</h3>
+<ul>
+<li><strong>Python:</strong> 3.12</li>
+<li><strong>RAM:</strong> 512 MB minimum</li>
+<li><strong>Disque:</strong> 100 MB minimum</li>
+</ul>
+<h3 id="par-plateforme">Par plateforme</h3>
+<table>
+<thead>
+<tr>
+<th>Plateforme</th>
+<th>Python</th>
+<th>BD</th>
+<th>WSGI</th>
+<th>Reverse Proxy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Local</strong></td>
+<td>3.12</td>
+<td>SQLite</td>
+<td>Flask dev</td>
+<td>None</td>
+</tr>
+<tr>
+<td><strong>cPanel</strong></td>
+<td>3.12 (cPanel)</td>
+<td>MySQL</td>
+<td>Gunicorn</td>
+<td>Apache</td>
+</tr>
+<tr>
+<td><strong>VPS</strong></td>
+<td>3.12</td>
+<td>MySQL/PostgreSQL</td>
+<td>Gunicorn</td>
+<td>Nginx</td>
+</tr>
+<tr>
+<td><strong>Docker</strong></td>
+<td>3.12 (image)</td>
+<td>MySQL</td>
+<td>Gunicorn</td>
+<td>Nginx</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="choisir-votre-plateforme">🎯 Choisir votre plateforme</h2>
+<h3 id="cpanel-le-plus-simple">🏠 cPanel — Le plus simple</h3>
+<p><strong>Recommandé si :</strong></p>
+<ul>
+<li>Tu as un hébergement cPanel</li>
+<li>Tu veux zéro maintenance</li>
+<li>Tu ne besoin pas de scaling</li>
+</ul>
+<p><strong>Avantages :</strong> Setup graphique, SSL AutoSSL, facile<br />
+<strong>Temps de setup :</strong> ~30 min<br />
+→ <a href="DEPLOYMENT_CPANEL.md">Voir le guide cPanel</a></p>
+<h3 id="vpslinux-le-plus-flexible">🖥️ VPS/Linux — Le plus flexible</h3>
+<p><strong>Recommandé si :</strong></p>
+<ul>
+<li>Tu veux full contrôle</li>
+<li>Tu vas scaler</li>
+<li>Tu as exp. Linux</li>
+</ul>
+<p><strong>Avantages :</strong> Pleine liberté, excellent perf, scaling<br />
+<strong>Temps de setup :</strong> ~1h<br />
+→ <a href="DEPLOYMENT_VPS.md">Voir le guide VPS</a></p>
+<h3 id="docker-le-plus-moderne">🐳 Docker — Le plus moderne</h3>
+<p><strong>Recommandé si :</strong></p>
+<ul>
+<li>Tu veux déployer partout</li>
+<li>Tu aimes containers</li>
+<li>Tu veux CI/CD</li>
+</ul>
+<p><strong>Avantages :</strong> Même image dev=prod, scaling facile<br />
+<strong>Temps de setup :</strong> ~15 min<br />
+→ <a href="DEPLOYMENT_DOCKER.md">Voir le guide Docker</a></p>
+<hr />
+<h2 id="configuration-env">🔧 Configuration <code>.env</code></h2>
+<h3 id="minimal-development-avec-sqlite">Minimal (development avec SQLite)</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">FLASK_ENV</span><span class="o">=</span>development
+<span class="nv">FLASK_SECRET_KEY</span><span class="o">=</span>dev-key-change-in-production
+<span class="nv">FLASK_DEBUG</span><span class="o">=</span>False
+<span class="nv">DB_TYPE</span><span class="o">=</span>sqlite
+</code></pre></div>
+
+<h3 id="cpanel-mysql">cPanel (MySQL)</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">FLASK_ENV</span><span class="o">=</span>cpanel
+<span class="nv">FLASK_SECRET_KEY</span><span class="o">=</span>votre-clé-secrète-longue
+<span class="nv">DB_TYPE</span><span class="o">=</span>mysql
+<span class="nv">DB_USER</span><span class="o">=</span>cpanel_user
+<span class="nv">DB_PASSWORD</span><span class="o">=</span>votre-password
+<span class="nv">DB_HOST</span><span class="o">=</span>localhost
+<span class="nv">DB_NAME</span><span class="o">=</span>cpanel_db
+<span class="nv">APPLICATION_ROOT</span><span class="o">=</span>/filamenta
+<span class="nv">SECURE_SSL_REDIRECT</span><span class="o">=</span>True
+</code></pre></div>
+
+<h3 id="vps-mysql-ou-postgresql">VPS (MySQL ou PostgreSQL)</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">FLASK_ENV</span><span class="o">=</span>vps
+<span class="nv">FLASK_SECRET_KEY</span><span class="o">=</span>votre-clé-secrète-longue
+<span class="nv">DB_TYPE</span><span class="o">=</span>mysql<span class="w">  </span><span class="c1"># ou postgresql</span>
+<span class="nv">DB_USER</span><span class="o">=</span>filamenta
+<span class="nv">DB_PASSWORD</span><span class="o">=</span>votre-password
+<span class="nv">DB_HOST</span><span class="o">=</span>localhost
+<span class="nv">DB_NAME</span><span class="o">=</span>filamenta_db
+<span class="nv">SECURE_SSL_REDIRECT</span><span class="o">=</span>True
+<span class="nv">PREFERRED_URL_SCHEME</span><span class="o">=</span>https
+</code></pre></div>
+
+<h3 id="docker">Docker</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">FLASK_ENV</span><span class="o">=</span>docker
+<span class="nv">FLASK_SECRET_KEY</span><span class="o">=</span>votre-clé-secrète-longue
+<span class="nv">DB_TYPE</span><span class="o">=</span>mysql
+<span class="nv">DB_USER</span><span class="o">=</span>filamenta
+<span class="nv">DB_PASSWORD</span><span class="o">=</span>votre-password
+<span class="nv">DB_HOST</span><span class="o">=</span>db
+<span class="nv">DB_NAME</span><span class="o">=</span>filamenta_db
+<span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>root-password
+</code></pre></div>
+
+<hr />
+<h2 id="features-principales">📊 Features principales</h2>
+<h3 id="backend">Backend</h3>
+<ul>
+<li>✅ Flask 3.x + SQLAlchemy 3.x</li>
+<li>✅ WSGI-ready (Gunicorn, uWSGI, cPanel)</li>
+<li>✅ Multi-BD (SQLite, MySQL, PostgreSQL)</li>
+<li>✅ Configuration multi-env</li>
+<li>✅ Logging &amp; monitoring prêt</li>
+</ul>
+<h3 id="frontend">Frontend</h3>
+<ul>
+<li>✅ HTMX pour interactions</li>
+<li>✅ Bootstrap 5 pour design</li>
+<li>✅ CSS variables (tokens)</li>
+<li>✅ Static files optimisés</li>
+</ul>
+<h3 id="devops">DevOps</h3>
+<ul>
+<li>✅ Docker Compose complet</li>
+<li>✅ Nginx configuration incluse</li>
+<li>✅ SSL support (Let's Encrypt)</li>
+<li>✅ Scripts d'init BD</li>
+</ul>
+<h3 id="tests-quality">Tests &amp; Quality</h3>
+<ul>
+<li>✅ pytest pour tests</li>
+<li>✅ Ruff pour linting</li>
+<li>✅ mypy pour type checking</li>
+<li>✅ Prettier pour formatage</li>
+</ul>
+<hr />
+<h2 id="deploiement-etape-par-etape">🚀 Déploiement étape par étape</h2>
+<h3 id="1-choisir-plateforme">1. Choisir plateforme</h3>
+<ul>
+<li>cPanel ? → <a href="DEPLOYMENT_CPANEL.md">DEPLOYMENT_CPANEL.md</a></li>
+<li>VPS ? → <a href="DEPLOYMENT_VPS.md">DEPLOYMENT_VPS.md</a></li>
+<li>Docker ? → <a href="DEPLOYMENT_DOCKER.md">DEPLOYMENT_DOCKER.md</a></li>
+</ul>
+<h3 id="2-cloner-et-configurer">2. Cloner et configurer</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>&lt;repo&gt;
+cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+nano<span class="w"> </span>.env<span class="w">  </span><span class="c1"># Adapter selon plateforme</span>
+</code></pre></div>
+
+<h3 id="3-installer-dependances">3. Installer dépendances</h3>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</code></pre></div>
+
+<h3 id="4-initialiser-bd">4. Initialiser BD</h3>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>scripts/init_db.py<span class="w"> </span>init
+</code></pre></div>
+
+<h3 id="5-demarrer">5. Démarrer</h3>
+<ul>
+<li>Local: <code>python -m backend.src</code></li>
+<li>cPanel: Utiliser Setup Python App</li>
+<li>VPS: <code>systemctl start filamenta</code></li>
+<li>Docker: <code>docker-compose up -d</code></li>
+</ul>
+<h3 id="6-acceder">6. Accéder</h3>
+<ul>
+<li>Local: http://localhost:5000</li>
+<li>cPanel: https://domain.com/filamenta</li>
+<li>VPS: https://domain.com</li>
+<li>Docker: https://localhost</li>
+</ul>
+<hr />
+<h2 id="securite">🔒 Sécurité</h2>
+<h3 id="avant-tout-deploiement">Avant TOUT déploiement</h3>
+<ul>
+<li>[ ] Générer une FLASK_SECRET_KEY unique</li>
+<li>[ ] Utiliser HTTPS/SSL</li>
+<li>[ ] Ne pas commiter <code>.env</code></li>
+<li>[ ] Utiliser une BD externe (MySQL/PostgreSQL, pas SQLite)</li>
+<li>[ ] Configurer un firewall</li>
+</ul>
+<h3 id="generer-une-cle-secrete">Générer une clé secrète</h3>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import secrets; print(secrets.token_hex(32))&quot;</span>
+</code></pre></div>
+
+<p>Copier la sortie dans <code>.env</code> sous <code>FLASK_SECRET_KEY=...</code></p>
+<hr />
+<h2 id="performance">📈 Performance</h2>
+<h3 id="recommandations">Recommandations</h3>
+<table>
+<thead>
+<tr>
+<th>Élément</th>
+<th>Recommandation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BD</strong></td>
+<td>MySQL/PostgreSQL en prod (SQLite dev seulement)</td>
+</tr>
+<tr>
+<td><strong>WSGI workers</strong></td>
+<td>2-4 (selon CPU cores)</td>
+</tr>
+<tr>
+<td><strong>Timeout</strong></td>
+<td>60s (par défaut)</td>
+</tr>
+<tr>
+<td><strong>Cache</strong></td>
+<td>Redis (optionnel, futur)</td>
+</tr>
+<tr>
+<td><strong>CDN</strong></td>
+<td>CloudFlare (optionnel, static files)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="changelog">📝 Changelog</h2>
+<h3 id="version-001-alpha-rc-2025-12-27">Version 0.0.1-Alpha RC (2025-12-27)</h3>
+<h4 id="ajoute">Ajouté</h4>
+<ul>
+<li>✨ Support WSGI complet (Gunicorn, uWSGI, cPanel)</li>
+<li>✨ Multi-base de données (SQLite, MySQL, PostgreSQL)</li>
+<li>✨ Configuration multi-environnements</li>
+<li>✨ Docker Compose complet</li>
+<li>✨ Documentation de déploiement pour cPanel, VPS, Docker</li>
+<li>✨ Script d'initialisation BD</li>
+<li>✨ nginx.conf pour reverse proxy</li>
+</ul>
+<h4 id="modifie">Modifié</h4>
+<ul>
+<li>🔧 <code>backend/src/app.py</code> — Accepte config object</li>
+<li>🔧 <code>backend/src/config.py</code> — Complet avec classes multi-env</li>
+<li>🔧 <code>.env.example</code> — Support complet</li>
+</ul>
+<h4 id="documentation">Documentation</h4>
+<ul>
+<li>📚 <code>DEPLOYMENT.md</code> — Guide comparatif</li>
+<li>📚 <code>DEPLOYMENT_CPANEL.md</code> — Guide cPanel</li>
+<li>📚 <code>DEPLOYMENT_VPS.md</code> — Guide VPS</li>
+<li>📚 <code>DEPLOYMENT_DOCKER.md</code> — Guide Docker</li>
+<li>📚 <code>WSGI_AND_MULTIDB_ADAPTATION.md</code> — Architecture technique</li>
+</ul>
+<hr />
+<h2 id="support-aide">🆘 Support &amp; Aide</h2>
+<h3 id="documentation_1">Documentation</h3>
+<ul>
+<li><a href="DEPLOYMENT.md">Guide de déploiement général</a></li>
+<li><a href="QUICKSTART.md">Guide rapide development</a></li>
+<li><a href="DEPLOYMENT_CPANEL.md">Guide cPanel</a></li>
+<li><a href="DEPLOYMENT_VPS.md">Guide VPS</a></li>
+<li><a href="DEPLOYMENT_DOCKER.md">Guide Docker</a></li>
+</ul>
+<h3 id="problemes-courants">Problèmes courants</h3>
+<p><strong>Application ne démarre pas</strong><br />
+→ Vérifier les logs + FLASK_SECRET_KEY défini</p>
+<p><strong>BD non accessible</strong><br />
+→ Vérifier DB_TYPE + credentials + création tables</p>
+<p><strong>HTTPS ne marche pas</strong><br />
+→ Vérifier certificat SSL + redirects HTTP→HTTPS</p>
+<p><strong>Port déjà utilisé</strong><br />
+→ Changer le port ou tuer le processus existant</p>
+<p>→ Voir les guides spécifiques pour plus de détails</p>
+<hr />
+<h2 id="prochaines-etapes">🎯 Prochaines étapes</h2>
+<h3 id="phase-rc-cette-version">Phase RC (Cette version)</h3>
+<ul>
+<li>[ ] Tester sur cPanel réel</li>
+<li>[ ] Tester sur VPS réel</li>
+<li>[ ] Tester Docker en production</li>
+<li>[ ] Collecte feedback</li>
+</ul>
+<h3 id="phase-100">Phase 1.0.0</h3>
+<ul>
+<li>[ ] Corrections bugs</li>
+<li>[ ] Optimisations</li>
+<li>[ ] Sécurité audit</li>
+<li>[ ] Version stable</li>
+</ul>
+<hr />
+<h2 id="statistiques">📊 Statistiques</h2>
+<ul>
+<li><strong>Lignes de code Python:</strong> ~500</li>
+<li><strong>Fichiers de configuration:</strong> 5 (pyproject.toml, package.json, etc.)</li>
+<li><strong>Documentation:</strong> 2000+ lignes</li>
+<li><strong>Tests:</strong> 1 smoke test + suite test ready</li>
+<li><strong>Plateforme:</strong> 4 (Local, cPanel, VPS, Docker)</li>
+<li><strong>BD supportées:</strong> 3 (SQLite, MySQL, PostgreSQL)</li>
+</ul>
+<hr />
+<h2 id="contact-feedback">📞 Contact &amp; Feedback</h2>
+<ul>
+<li><strong>Email:</strong> filamenta@xarema.com</li>
+<li><strong>Problèmes:</strong> Issues sur GitHub</li>
+<li><strong>Suggestions:</strong> Discussions sur GitHub</li>
+</ul>
+<hr />
+<h2 id="licence">📄 Licence</h2>
+<p>Voir <a href="LICENSE.md">LICENSE.md</a> (TBD)</p>
+<hr />
+<h2 id="remerciements">🙏 Remerciements</h2>
+<p>Merci d'avoir choisi X-Filamenta-Python !</p>
+<p>Cette version RC représente des mois de développement pour rendre l'application flexible, deployable et maintenable sur plusieurs plateformes.</p>
+<p><strong>Prêt à déployer ? Choisir votre plateforme et commencez !</strong> 🚀</p>
+<hr />
+<p><strong>Dernière mise à jour:</strong> 2025-12-27<br />
+<strong>Version:</strong> 0.0.1-Alpha RC<br />
+<strong>Statut:</strong> ✅ Ready for Testing</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

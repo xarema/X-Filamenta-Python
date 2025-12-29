@@ -1,0 +1,127 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Wizard summary step
+Description: Show recap before finalize
+
+File: frontend/templates/pages/install/partials/summary.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): 2025-12-28T13:52:00+01:00 | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.3-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+
+- Status: Stable
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+<div class="card shadow-sm mb-3">
+  <div class="card-body">
+    <h5 class="card-title text-center mb-4">{{ t('wizard.summary.title') or 'Summary' }}</h5>
+
+    <!-- Database Configuration -->
+    <div class="mb-4">
+      <h6 class="border-bottom pb-2 mb-3">
+        <strong>{{ t('wizard.summary.database') or 'Database Configuration' }}</strong>
+      </h6>
+      <dl class="row mb-0">
+        <dt class="col-sm-4">{{ t('wizard.summary.db_type') or 'Type' }}:</dt>
+        <dd class="col-sm-8">
+          {% if state.get('db_type') == 'sqlite' %}
+            💾 SQLite
+          {% elif state.get('db_type') == 'mysql' %}
+            🐬 MySQL
+          {% elif state.get('db_type') == 'postgresql' %}
+            🐘 PostgreSQL
+          {% else %}
+            {{ state.get('db_type', 'Unknown') }}
+          {% endif %}
+        </dd>
+
+        {% if state.get('db_type') == 'sqlite' %}
+          <dt class="col-sm-4">{{ t('wizard.summary.db_file') or 'Database File' }}:</dt>
+          <dd class="col-sm-8"><code>instance/{{ state.get('sqlite_dbname', 'app.db') }}</code></dd>
+        {% elif state.get('db_type') == 'mysql' %}
+          <dt class="col-sm-4">{{ t('wizard.summary.db_host') or 'Host' }}:</dt>
+          <dd class="col-sm-8">{{ state.get('mysql_host', 'localhost') }}:{{ state.get('mysql_port', '3306') }}</dd>
+
+          <dt class="col-sm-4">{{ t('wizard.summary.db_name') or 'Database' }}:</dt>
+          <dd class="col-sm-8">{{ state.get('mysql_dbname', 'N/A') }}</dd>
+
+          <dt class="col-sm-4">{{ t('wizard.summary.db_user') or 'User' }}:</dt>
+          <dd class="col-sm-8">{{ state.get('mysql_user', 'N/A') }}</dd>
+        {% elif state.get('db_type') == 'postgresql' %}
+          <dt class="col-sm-4">{{ t('wizard.summary.db_host') or 'Host' }}:</dt>
+          <dd class="col-sm-8">{{ state.get('pg_host', 'localhost') }}:{{ state.get('pg_port', '5432') }}</dd>
+
+          <dt class="col-sm-4">{{ t('wizard.summary.db_name') or 'Database' }}:</dt>
+          <dd class="col-sm-8">{{ state.get('pg_dbname', 'N/A') }}</dd>
+
+          <dt class="col-sm-4">{{ t('wizard.summary.db_user') or 'User' }}:</dt>
+          <dd class="col-sm-8">{{ state.get('pg_user', 'N/A') }}</dd>
+        {% endif %}
+
+        <dt class="col-sm-4">{{ t('wizard.summary.db_uri') or 'Connection URI' }}:</dt>
+        <dd class="col-sm-8"><code class="small">{{ state.db_uri }}</code></dd>
+      </dl>
+    </div>
+
+    <!-- Admin Account -->
+    <div class="mb-4">
+      <h6 class="border-bottom pb-2 mb-3">
+        <strong>{{ t('wizard.summary.admin_account') or 'Administrator Account' }}</strong>
+      </h6>
+      <dl class="row mb-0">
+        <dt class="col-sm-4">{{ t('wizard.summary.username') or 'Username' }}:</dt>
+        <dd class="col-sm-8"><strong>{{ state.admin_username or 'admin' }}</strong></dd>
+
+        <dt class="col-sm-4">{{ t('wizard.summary.email') or 'Email' }}:</dt>
+        <dd class="col-sm-8">{{ state.admin_email or 'N/A' }}</dd>
+
+        <dt class="col-sm-4">{{ t('wizard.summary.password') or 'Password' }}:</dt>
+        <dd class="col-sm-8"><em class="text-muted">{{ t('wizard.summary.password_hidden') or '(hidden for security)' }}</em></dd>
+      </dl>
+    </div>
+
+    <!-- Backup (optional) -->
+    {% if state.get('backup_ok') %}
+    <div class="mb-4">
+      <h6 class="border-bottom pb-2 mb-3">
+        <strong>{{ t('wizard.summary.backup') or 'Backup Restore' }}</strong>
+      </h6>
+      <dl class="row mb-0">
+        <dt class="col-sm-4">{{ t('wizard.summary.backup_file') or 'File' }}:</dt>
+        <dd class="col-sm-8">
+          {{ state.backup_filename or 'N/A' }}
+          <form method="POST" action="/install/step"   class="d-inline ms-2">
+            <input type="hidden" name="step" value="remove_backup" />
+            <button type="submit" class="btn btn-sm btn-outline-danger">
+              {{ t('wizard.backup.remove') or 'Retirer' }} ✕
+            </button>
+          </form>
+        </dd>
+
+        <dt class="col-sm-4">{{ t('wizard.summary.backup_checksum') or 'Checksum' }}:</dt>
+        <dd class="col-sm-8"><code class="small">{{ state.backup_checksum[:16] }}...</code></dd>
+      </dl>
+    </div>
+    {% endif %}
+
+    <!-- Finalize Button -->
+    <div class="text-center mt-4">
+      <form method="POST" action="/install/step"  >
+        <input type="hidden" name="step" value="finalize" />
+        <button class="btn btn-success btn-lg px-5" type="submit">
+          {{ t('wizard.summary.finalize') or 'Finalize Installation' }} ✓
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

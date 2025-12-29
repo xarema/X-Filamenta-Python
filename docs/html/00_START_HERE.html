@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🎯 X-Filamenta-Python — Commencez ici">
+    <title>🎯 X-Filamenta-Python — Commencez ici - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="x-filamenta-python-commencez-ici">🎯 X-Filamenta-Python — Commencez ici</h1>
+<p><strong>Bienvenue !</strong> Ce guide vous aide à naviguer rapidement vers la documentation pertinente.</p>
+<blockquote>
+<p><strong>Version</strong> : 0.0.1-Alpha RC<br />
+<strong>License</strong> : AGPL-3.0-or-later<br />
+<strong>Distributed by</strong> : XAREMA</p>
+</blockquote>
+<hr />
+<h2 id="demarrage-rapide-5-minutes">⚡ Démarrage rapide (5 minutes)</h2>
+<p>Vous voulez juste <strong>tester l'appli rapidement</strong> ?</p>
+<p>→ <strong><a href="guides/01_QUICKSTART.md">guides/01_QUICKSTART.md</a></strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Installation locale</span>
+git<span class="w"> </span>clone<span class="w"> </span>&lt;repo&gt;
+<span class="nb">cd</span><span class="w"> </span>X-Filamenta-Python
+.<span class="se">\.</span>venv<span class="se">\S</span>cripts<span class="se">\p</span>ython.exe<span class="w"> </span>run_prod.py
+<span class="c1"># Accédez à http://127.0.0.1:5000</span>
+</code></pre></div>
+
+<hr />
+<h2 id="guides-par-besoin">📚 Guides par besoin</h2>
+<h3 id="je-veux-deployer-lapplication">🚀 Je veux <strong>DÉPLOYER</strong> l'application</h3>
+<p><strong>Choisissez votre plateforme :</strong></p>
+<table>
+<thead>
+<tr>
+<th>Plateforme</th>
+<th>Guide</th>
+<th>Durée</th>
+<th>Compexité</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>cPanel</strong></td>
+<td><a href="deployment/01_CPANEL.md">deployment/01_CPANEL.md</a></td>
+<td>30 min</td>
+<td>Basse</td>
+</tr>
+<tr>
+<td><strong>VPS/Linux</strong></td>
+<td><a href="deployment/02_VPS_LINUX.md">deployment/02_VPS_LINUX.md</a></td>
+<td>1h</td>
+<td>Moyenne</td>
+</tr>
+<tr>
+<td><strong>Docker</strong></td>
+<td><a href="deployment/03_DOCKER.md">deployment/03_DOCKER.md</a></td>
+<td>15 min</td>
+<td>Basse</td>
+</tr>
+<tr>
+<td><strong>Développement</strong></td>
+<td><a href="deployment/04_LOCAL_DEVELOPMENT.md">deployment/04_LOCAL_DEVELOPMENT.md</a></td>
+<td>10 min</td>
+<td>Très basse</td>
+</tr>
+</tbody>
+</table>
+<p>→ <strong>Comparer les approches</strong> : <a href="deployment/README.md">deployment/README.md</a></p>
+<hr />
+<h3 id="je-veux-developper-une-fonctionnalite">🎯 Je veux <strong>DÉVELOPPER</strong> une fonctionnalité</h3>
+<p><strong>Documents essentiels :</strong></p>
+<ol>
+<li><strong>Architecture générale</strong> → <a href="architecture/overview.md">architecture/overview.md</a></li>
+<li><strong>Structure du code</strong> → <a href="architecture/backend.md">architecture/backend.md</a> + <a href="architecture/frontend.md">architecture/frontend.md</a></li>
+<li><strong>Base de données</strong> → <a href="architecture/database.md">architecture/database.md</a></li>
+<li><strong>Standards de code</strong> → <a href="contributing/code-standards.md">contributing/code-standards.md</a></li>
+<li><strong>Guide de test</strong> → <a href="contributing/testing.md">contributing/testing.md</a></li>
+</ol>
+<p>→ <strong>Commencez ici</strong> : <a href="guides/04_DEVELOPMENT.md">guides/04_DEVELOPMENT.md</a></p>
+<hr />
+<h3 id="je-veux-comprendre-les-fonctionnalites">📋 Je veux <strong>COMPRENDRE</strong> les fonctionnalités</h3>
+<p><strong>Vue d'ensemble des features :</strong></p>
+<ul>
+<li>🔐 <strong>Authentification &amp; 2FA</strong> → <a href="features/authentication.md">features/authentication.md</a></li>
+<li>🧙 <strong>Installation Wizard</strong> → <a href="features/wizard-installation.md">features/wizard-installation.md</a></li>
+<li>🌍 <strong>Internationalisation</strong> → <a href="features/internationalization.md">features/internationalization.md</a></li>
+<li>💾 <strong>Support Multi-BD</strong> → <a href="features/database.md">features/database.md</a></li>
+</ul>
+<p>→ <strong>Vue complète</strong> : <a href="features/README.md">features/README.md</a></p>
+<hr />
+<h3 id="je-veux-securiser-lappli">🔒 Je veux <strong>SÉCURISER</strong> l'appli</h3>
+<p><strong>Documents sécurité :</strong></p>
+<ul>
+<li><strong>Bonnes pratiques</strong> → <a href="security/best-practices.md">security/best-practices.md</a></li>
+<li><strong>Protection CSRF</strong> → <a href="security/csrf-protection.md">security/csrf-protection.md</a></li>
+<li><strong>2FA/TOTP</strong> → <a href="security/2fa.md">security/2fa.md</a></li>
+<li><strong>Gestion des secrets</strong> → <a href="security/secrets-management.md">security/secrets-management.md</a></li>
+</ul>
+<p>→ <strong>Index complet</strong> : <a href="security/README.md">security/README.md</a></p>
+<hr />
+<h3 id="je-suis-bloque-sur-un-probleme">❓ Je suis <strong>BLOQUÉ</strong> sur un problème</h3>
+<p><strong>Aide au débogage :</strong></p>
+<ul>
+<li><strong>Problèmes courants</strong> → <a href="troubleshooting/common-issues.md">troubleshooting/common-issues.md</a></li>
+<li><strong>FAQ</strong> → <a href="troubleshooting/faq.md">troubleshooting/faq.md</a></li>
+</ul>
+<p>→ <strong>Rechercher une solution</strong> : <a href="troubleshooting/README.md">troubleshooting/README.md</a></p>
+<hr />
+<h3 id="je-veux-la-documentation-complete">📖 Je veux la <strong>DOCUMENTATION COMPLÈTE</strong></h3>
+<p>→ <strong><a href="REFERENCE.md">REFERENCE.md</a></strong> — Référence exhaustive de tous les modules et APIs</p>
+<hr />
+<h2 id="index-complet-par-section">🗺️ Index complet par section</h2>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Contenu</th>
+<th>Public</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Guides</strong></td>
+<td>Tutoriels, quickstart, installation</td>
+<td>Tous</td>
+</tr>
+<tr>
+<td><strong>Features</strong></td>
+<td>Description des fonctionnalités</td>
+<td>Utilisateurs + Développeurs</td>
+</tr>
+<tr>
+<td><strong>Deployment</strong></td>
+<td>Guides de déploiement</td>
+<td>DevOps + Ops</td>
+</tr>
+<tr>
+<td><strong>Architecture</strong></td>
+<td>Design, structure, patterns</td>
+<td>Développeurs</td>
+</tr>
+<tr>
+<td><strong>API</strong></td>
+<td>Endpoints, codes d'erreur</td>
+<td>Développeurs backend</td>
+</tr>
+<tr>
+<td><strong>Security</strong></td>
+<td>Bonnes pratiques, authentification</td>
+<td>Développeurs + Ops</td>
+</tr>
+<tr>
+<td><strong>Contributing</strong></td>
+<td>Standards, tests, processus</td>
+<td>Contributeurs</td>
+</tr>
+<tr>
+<td><strong>Troubleshooting</strong></td>
+<td>FAQ, problèmes courants</td>
+<td>Tous</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="fichiers-importants">📋 Fichiers importants</h2>
+<h3 id="a-la-racine-du-projet">À la racine du projet</h3>
+<ul>
+<li><strong>README.md</strong> — Vue d'ensemble du projet</li>
+<li><strong>CHANGELOG.md</strong> — Historique des versions</li>
+<li><strong>LICENSE</strong> — Licence AGPL-3.0-or-later</li>
+</ul>
+<h3 id="dans-ce-dossier-docs">Dans ce dossier (docs/)</h3>
+<ul>
+<li><strong>00_START_HERE.md</strong> — Ce fichier (vous êtes ici)</li>
+<li><strong>REFERENCE.md</strong> — Documentation exhaustive</li>
+<li><strong>DOCUMENTATION_INDEX.md</strong> — Index des rubriques (ancien, voir START_HERE)</li>
+</ul>
+<hr />
+<h2 id="proximas-etapes-suggerees">🚀 Próximas étapes suggérées</h2>
+<h3 id="pour-les-nouveaux-developpeurs">Pour les <strong>nouveaux développeurs</strong></h3>
+<ol>
+<li>Lire <strong><a href="guides/01_QUICKSTART.md">guides/01_QUICKSTART.md</a></strong> (5 min)</li>
+<li>Lire <strong><a href="architecture/overview.md">architecture/overview.md</a></strong> (15 min)</li>
+<li>Lire <strong><a href="guides/04_DEVELOPMENT.md">guides/04_DEVELOPMENT.md</a></strong> (20 min)</li>
+<li>Commencer à coder !</li>
+</ol>
+<h3 id="pour-les-devopsops">Pour les <strong>DevOps/Ops</strong></h3>
+<ol>
+<li>Lire <strong><a href="deployment/README.md">deployment/README.md</a></strong> (5 min)</li>
+<li>Choisir votre plateforme et lire le guide correspondant (30 min - 1h)</li>
+<li>Déployer !</li>
+</ol>
+<h3 id="pour-les-auditeurs-securite">Pour les <strong>auditeurs sécurité</strong></h3>
+<ol>
+<li>Lire <strong><a href="security/README.md">security/README.md</a></strong> (5 min)</li>
+<li>Parcourir <strong><a href="REFERENCE.md">REFERENCE.md</a></strong> section sécurité (15 min)</li>
+<li>Auditer le code</li>
+</ol>
+<hr />
+<h2 id="contribuer-a-ce-projet">🤝 Contribuer à ce projet</h2>
+<p>Avant de contribuer, lisez :<br />
+- <strong><a href="contributing/README.md">contributing/README.md</a></strong> — Overview<br />
+- <strong><a href="contributing/code-standards.md">contributing/code-standards.md</a></strong> — Standards<br />
+- <strong><a href="contributing/testing.md">contributing/testing.md</a></strong> — Tests<br />
+- <strong><a href="../.github/copilot-instructions.md">.github/copilot-instructions.md</a></strong> — Règles IA</p>
+<hr />
+<h2 id="questions-frequentes-rapides">❓ Questions fréquentes rapides</h2>
+<p><strong>Q : Comment installer localement ?</strong><br />
+A : <a href="guides/01_QUICKSTART.md">guides/01_QUICKSTART.md</a></p>
+<p><strong>Q : Comment déployer en production ?</strong><br />
+A : <a href="deployment/README.md">deployment/README.md</a> → choisir votre plateforme</p>
+<p><strong>Q : Comment ajouter une nouvelle fonctionnalité ?</strong><br />
+A : <a href="guides/04_DEVELOPMENT.md">guides/04_DEVELOPMENT.md</a> + <a href="contributing/code-standards.md">contributing/code-standards.md</a></p>
+<p><strong>Q : Où sont les images/screenshots ?</strong><br />
+A : <a href="screenshots/">screenshots/</a></p>
+<p><strong>Q : Où est l'historique des versions ?</strong><br />
+A : <a href="../CHANGELOG.md">../CHANGELOG.md</a></p>
+<hr />
+<h2 id="support">📞 Support</h2>
+<ul>
+<li><strong>Problème technique</strong> → <a href="troubleshooting/README.md">troubleshooting/README.md</a></li>
+<li><strong>Question sécurité</strong> → <a href="security/README.md">security/README.md</a></li>
+<li><strong>Rapport d'audit</strong> → <a href="../Analysis_reports/">../Analysis_reports/</a></li>
+</ul>
+<hr />
+<p><strong>Bienvenue dans X-Filamenta-Python ! 🎉</strong></p>
+<p><em>Bonne exploration de la documentation !</em></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

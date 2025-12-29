@@ -1,0 +1,41 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Wizard welcome step after language selection
+Description: Simple welcome message with continue button to requirements
+
+File: frontend/templates/pages/install/partials/welcome.html | Repository: X-Filamenta-Python
+Created: 2025-12-28T00:00:00+00:00
+Last modified (Git): 2025-12-28T13:46:00+01:00 | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.2-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+
+- Status: Stable
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+<div class="card shadow-sm">
+  <div class="card-body text-center py-5">
+    <h4 class="mb-4">{{ t('wizard.welcome.title') or 'Bienvenue dans l\'assistant d\'installation !' }}</h4>
+    <p class="text-muted">{{ t('wizard.welcome.description') or 'Nous allons configurer votre application en quelques étapes simples : base de données, compte administrateur, et c\'est terminé !' }}</p>
+
+    <div class="mt-4">
+      <form method="POST" action="/install/step">
+        <input type="hidden" name="step" value="requirements" />
+        <input type="hidden" name="welcome_shown" value="1" />
+        <button class="btn btn-primary btn-lg px-5" type="submit">
+          {{ t('wizard.continue') or 'Continuer' }} →
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+

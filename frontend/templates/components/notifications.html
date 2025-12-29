@@ -1,0 +1,113 @@
+<!--
+Purpose: Notifications component
+Description: Toast notifications with HTMX integration
+
+File: frontend/templates/components/notifications.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Public
+
+Usage:
+  Include in a layout or page via:
+  {% raw %}{% include "components/notifications.html" %}{% endraw %}
+-->
+
+<!-- Alert Container for HTMX responses -->
+<div id="alert-container" class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+  <!-- Alerts will be inserted here by HTMX -->
+</div>
+
+<!-- Notification script for HTMX -->
+<script>
+  // Notification system
+  window.notify = {
+    // Show success message
+    success: function (message) {
+      this._show("success", message);
+    },
+
+    // Show error message
+    error: function (message) {
+      this._show("danger", message);
+    },
+
+    // Show info message
+    info: function (message) {
+      this._show("info", message);
+    },
+
+    // Show warning message
+    warning: function (message) {
+      this._show("warning", message);
+    },
+
+    // Internal show method
+    _show: function (type, message) {
+      const container = document.getElementById("alert-container");
+      const alertId = "alert-" + Date.now();
+
+      const alertHtml = `
+      <div id="${alertId}" class="alert alert-${type} alert-dismissible fade show" role="alert" style="min-width: 300px;">
+        <strong>${this._getIcon(type)}</strong> ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    `;
+
+      container.insertAdjacentHTML("beforeend", alertHtml);
+
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => {
+        const alert = document.getElementById(alertId);
+        if (alert) {
+          const bsAlert = new bootstrap.Alert(alert);
+          bsAlert.close();
+        }
+      }, 5000);
+    },
+
+    // Get icon based on type
+    _getIcon: function (type) {
+      const icons = {
+        success: "✅",
+        danger: "❌",
+        warning: "⚠️",
+        info: "ℹ️",
+      };
+      return icons[type] || "ℹ️";
+    },
+  };
+
+  // HTMX event listeners for automatic notifications
+  document.addEventListener("htmx:afterRequest", function (evt) {
+    const response = evt.detail.xhr;
+
+    if (response.status === 200) {
+      try {
+        const data = JSON.parse(response.responseText);
+        if (data.message) {
+          window.notify.success(data.message);
+        }
+      } catch (e) {
+        // Response wasn't JSON, ignore
+      }
+    } else if (response.status >= 400) {
+      window.notify.error("Une erreur s'est produite");
+    }
+  });
+
+  // Bootstrap alert auto-close
+  document.addEventListener("shown.bs.alert", function () {
+    // Alert shown
+  });
+</script>

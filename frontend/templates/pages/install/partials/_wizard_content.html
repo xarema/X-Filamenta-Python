@@ -1,0 +1,165 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Wizard content with breadcrumb (refreshed by HTMX)
+Description: Contains breadcrumb and current step content
+
+File: frontend/templates/pages/install/partials/_wizard_content.html | Repository: X-Filamenta-Python
+Created: 2025-12-28T03:30:00+00:00
+Last modified (Git): 2025-12-28T13:40:00+01:00 | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.2-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+
+- Status: Stable
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+{% set welcome_done = state.get('welcome_shown') %}
+{% set req_done = state.get('requirements_checked') %}
+{% set db_done = state.get('db_uri') %}
+{% set admin_done = state.get('admin_username') %}
+{% set current_step = step or state.get('step') or 'welcome' %}
+
+{% set steps = [
+  {'key': 'welcome', 'label': t('wizard.steps.welcome') or 'Bienvenue', 'done': welcome_done, 'step_target': 'welcome'},
+  {'key': 'requirements', 'label': t('wizard.steps.requirements') or 'Prérequis', 'done': req_done, 'step_target': 'requirements'},
+  {'key': 'database', 'label': t('wizard.steps.database') or 'Base de données', 'done': db_done, 'step_target': 'db_form'},
+  {'key': 'admin', 'label': t('wizard.steps.admin') or 'Administrateur', 'done': admin_done, 'step_target': 'admin_form'},
+  {'key': 'summary', 'label': t('wizard.steps.summary') or 'Résumé', 'done': admin_done, 'step_target': 'summary'},
+] %}
+
+{% set effective_step = current_step %}
+{% if not welcome_done and current_step not in ['welcome'] %}
+  {% set effective_step = 'welcome' %}
+{% elif not req_done and current_step not in ['welcome','requirements'] %}
+  {% set effective_step = 'requirements' %}
+{% elif not db_done and current_step not in ['welcome','requirements','db_form','db_test','upload_form','upload'] %}
+  {% set effective_step = 'db_form' %}
+{% elif not admin_done and current_step not in ['welcome','requirements','db_form','db_test','upload_form','upload','admin_form','admin'] %}
+  {% set effective_step = 'admin_form' %}
+{% elif admin_done and current_step not in ['summary','finalize','done'] %}
+  {% set effective_step = 'summary' %}
+{% endif %}
+
+<!-- Fil d'Ariane / Breadcrumb (toujours affiché) -->
+<div class="wizard-breadcrumb">
+  {% for s in steps %}
+    {% set step_num = loop.index %}
+    {% set is_active = (
+      effective_step == s.step_target
+      or (effective_step == 'db_form' and s.key == 'database')
+      or (effective_step == 'db_test' and s.key == 'database')
+      or (effective_step == 'upload_form' and s.key == 'database')
+      or (effective_step == 'upload' and s.key == 'database')
+      or (effective_step == 'admin_form' and s.key == 'admin')
+      or (effective_step == 'summary' and s.key == 'summary')
+    ) %}
+    {% set can_click = s.done and not is_active %}
+    {% set step_class = 'step-done' if s.done else ('step-active' if is_active else 'step-pending') %}
+
+    {% if can_click %}
+      <!-- Étape terminée et cliquable -->
+      <form method="POST" action="/install/step" class="m-0">
+        <input type="hidden" name="step" value="{{ s.step_target }}" />
+        {% if welcome_done %}<input type="hidden" name="welcome_shown" value="1" />{% endif %}
+        {% if req_done %}<input type="hidden" name="requirements_checked" value="1" />{% endif %}
+        {% if db_done %}<input type="hidden" name="db_uri" value="{{ state.get('db_uri', '') }}" />{% endif %}
+        {% if admin_done %}
+          <input type="hidden" name="admin_username" value="{{ state.get('admin_username', '') }}" />
+          <input type="hidden" name="admin_email" value="{{ state.get('admin_email', '') }}" />
+        {% endif %}
+        <button type="submit" class="wizard-step-button">
+          <div class="wizard-step {{ step_class }}">
+            <span class="wizard-step-label">{{ t('wizard.step') or 'ÉTAPE' }} {{ step_num }}</span>
+            <span class="wizard-step-title">{{ s.label }}</span>
+            <span class="wizard-step-icon">✓</span>
+          </div>
+        </button>
+      </form>
+    {% else %}
+      <!-- Étape active ou non terminée -->
+      <div class="wizard-step {{ step_class }}">
+        <span class="wizard-step-label">{{ t('wizard.step') or 'ÉTAPE' }} {{ step_num }}</span>
+        <span class="wizard-step-title">{{ s.label }}</span>
+        {% if is_active %}
+          <span class="wizard-step-icon">●</span>
+        {% else %}
+          <span class="wizard-step-icon">○</span>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if not loop.last %}
+      <div class="wizard-arrow {{ 'arrow-done' if s.done else ('arrow-active' if is_active else 'arrow-pending') }}">
+        →
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+<!-- Ancienne deuxième ligne supprimée -->
+
+<!-- Contenu de l'étape actuelle -->
+{% if error_content %}
+  {{ error_content | safe }}
+{% endif %}
+
+{% if not session.get('wizard_started') or (not state and step == 'language') %}
+<!-- Étape 0: Choix de langue -->
+<div class="card shadow-sm">
+  <div class="card-body text-center py-5">
+    <h4 class="mb-4">{{ t('wizard.language.choose') or 'Choisissez votre langue' }}</h4>
+    <p class="text-muted mb-4">{{ t('wizard.language.instruction') or 'Sélectionnez votre langue pour démarrer' }}</p>
+    <div class="row justify-content-center">
+      <div class="col-md-5 mb-3">
+        <a class="btn btn-lg btn-primary w-100 py-3" href="/lang/en?start=1">
+          <div class="fs-2 mb-2">EN</div>
+          <strong>Continue in English</strong>
+        </a>
+      </div>
+      <div class="col-md-5 mb-3">
+        <a class="btn btn-lg btn-outline-primary w-100 py-3" href="/lang/fr?start=1">
+          <div class="fs-2 mb-2">FR</div>
+          <strong>Continuer en français</strong>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% elif effective_step == 'welcome' %}
+<!-- Étape 1: Bienvenue -->
+{% include 'pages/install/partials/welcome.html' %}
+{% elif effective_step == 'requirements' %}
+<!-- Étape 2: Prérequis -->
+{% include 'pages/install/partials/requirements.html' %}
+{% elif effective_step == 'db_test' %}
+<!-- Étape 3bis: Résultat Test DB -->
+{% include 'pages/install/partials/db_test.html' %}
+{% elif effective_step == 'upload_form' %}
+<!-- Étape 3ter: Upload Backup -->
+{% include 'pages/install/partials/upload_form.html' %}
+{% elif effective_step == 'upload' %}
+<!-- Étape 3quad: Résultat Upload -->
+{% include 'pages/install/partials/upload.html' %}
+{% elif effective_step in ['db_form'] %}
+<!-- Étape 3: Base de données -->
+{% include 'pages/install/partials/db_form.html' %}
+{% elif effective_step in ['admin_form','admin'] %}
+<!-- Étape 4: Compte admin -->
+{% include 'pages/install/partials/admin_form.html' %}
+{% elif effective_step == 'done' or step == 'done' %}
+<!-- Étape finale: Installation terminée -->
+{% include 'pages/install/partials/done.html' %}
+{% else %}
+<!-- Étape 5: Résumé -->
+{% include 'pages/install/partials/summary.html' %}
+{% endif %}
+

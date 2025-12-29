@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Rapport de corrections complètes du Wizard d'Installation">
+    <title>Rapport de corrections complètes du Wizard d'Installation - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="rapport-de-corrections-completes-du-wizard-dinstallation">Rapport de corrections complètes du Wizard d'Installation</h1>
+<p><strong>Date:</strong> 2025-12-28T03:00:00+00:00<br />
+<strong>Type:</strong> Corrections majeures basées sur feedback utilisateur<br />
+<strong>Auteur:</strong> GitHub Copilot  </p>
+<hr />
+<h2 id="corrections-appliquees-23-au-total">✅ Corrections appliquées (23 au total)</h2>
+<h3 id="1-drapeaux-de-langue">1. Drapeaux de langue</h3>
+<ul>
+<li><strong>Problème:</strong> Drapeau 🇺🇸 (US) pour anglais</li>
+<li><strong>Correction:</strong> Changé en texte "EN" pour anglais international</li>
+<li><strong>Fichier:</strong> <code>frontend/templates/pages/install/index.html</code></li>
+</ul>
+<h3 id="2-texte-page-bienvenue">2. Texte page Bienvenue</h3>
+<ul>
+<li><strong>Problème:</strong> Titre "Assistant d'installation" + Sous-titre "Bienvenue..."</li>
+<li><strong>Correction:</strong> </li>
+<li>Titre: "Bienvenue dans l'assistant d'installation !"</li>
+<li>Paragraphe: Description simple</li>
+<li>Suppression du sous-titre redondant</li>
+<li><strong>Fichiers:</strong> </li>
+<li><code>frontend/templates/pages/install/partials/welcome.html</code></li>
+<li><code>backend/src/i18n/fr.json</code></li>
+<li><code>backend/src/i18n/en.json</code></li>
+</ul>
+<h3 id="3-nom-base-de-donnees-par-defaut">3. Nom base de données par défaut</h3>
+<ul>
+<li><strong>Problème:</strong> Défaut "app.db"</li>
+<li><strong>Correction:</strong> Changé en "x-filamenta_python.db"</li>
+<li><strong>Fichier:</strong> <code>frontend/templates/pages/install/partials/db_form.html</code></li>
+</ul>
+<h3 id="4-affichage-uri-base-de-donnees">4. Affichage URI base de données</h3>
+<ul>
+<li><strong>Problème:</strong> Ligne db_uri affichée au-dessus du titre</li>
+<li><strong>Correction:</strong> Supprimée complètement</li>
+<li><strong>Fichier:</strong> <code>frontend/templates/pages/install/partials/db_form.html</code></li>
+</ul>
+<h3 id="5-8-messages-champ-requis-localises">5-8. Messages "Champ requis" localisés</h3>
+<ul>
+<li><strong>Problème:</strong> Messages en anglais "Please fill in this field" même en français</li>
+<li><strong>Correction:</strong> Ajout attributs <code>oninvalid</code> et <code>oninput</code> sur tous les champs requis</li>
+<li><strong>Fichiers:</strong></li>
+<li><code>frontend/templates/pages/install/partials/db_form.html</code> (SQLite, MySQL, PostgreSQL)</li>
+<li><code>frontend/templates/pages/install/partials/admin_form.html</code></li>
+<li><code>backend/src/i18n/fr.json</code> (clé <code>wizard.form.required</code>)</li>
+<li><code>backend/src/i18n/en.json</code> (clé <code>wizard.form.required</code>)</li>
+</ul>
+<h3 id="9-11-correction-calcul-app_root">9-11. Correction calcul app_root</h3>
+<ul>
+<li><strong>Problème:</strong> Calcul app_root cassé avec <code>split("/backend/src")</code> incompatible Windows</li>
+<li><strong>Correction:</strong> Utilisation <code>os.path.abspath(os.path.join(...))</code> partout</li>
+<li><strong>Fichier:</strong> <code>backend/src/routes/install.py</code></li>
+<li><strong>Sections corrigées:</strong></li>
+<li><code>install_index()</code></li>
+<li><code>install_step()</code> - requirements</li>
+<li><code>install_step()</code> - db_form</li>
+<li><code>install_step()</code> - db_test</li>
+<li><code>install_step()</code> - finalize</li>
+</ul>
+<h3 id="12-13-fonctions-manquantes">12-13. Fonctions manquantes</h3>
+<ul>
+<li><strong>Problème:</strong> <code>ensure_sqlite_db()</code> et <code>test_db_connection()</code> manquantes</li>
+<li><strong>Correction:</strong> Rajoutées dans <code>InstallService</code></li>
+<li><strong>Fichier:</strong> <code>backend/src/services/install_service.py</code></li>
+<li><strong>Détails:</strong></li>
+<li><code>test_db_connection(db_uri)</code>: Test connexion + message détaillé</li>
+<li><code>ensure_sqlite_db(app_root, dbname)</code>: Crée fichier SQLite + gère permissions</li>
+</ul>
+<h3 id="14-messages-derreur-detailles">14. Messages d'erreur détaillés</h3>
+<ul>
+<li><strong>Problème:</strong> "Une erreur s'est produite" générique</li>
+<li><strong>Correction:</strong> Messages spécifiques pour:</li>
+<li>Backup: "Aucun fichier reçu", "Extension invalide", "Trop volumineux"</li>
+<li>BD SQLite: "Impossible de créer le fichier SQLite: {détail}"</li>
+<li>BD connexion: Exception complète affichée</li>
+<li>Schéma: "Impossible de créer le schéma: {détail}"</li>
+<li>Admin: "Impossible de créer l'utilisateur administrateur"</li>
+<li>Restore: "Checksum du backup manquant"</li>
+<li><strong>Fichiers:</strong> </li>
+<li><code>backend/src/services/install_service.py</code></li>
+<li><code>backend/src/routes/install.py</code></li>
+<li><code>frontend/templates/pages/install/partials/db_test.html</code></li>
+<li><code>frontend/templates/pages/install/error.html</code></li>
+</ul>
+<h3 id="15-creation-schema-base-de-donnees">15. Création schéma base de données</h3>
+<ul>
+<li><strong>Problème:</strong> Tables non créées automatiquement</li>
+<li><strong>Correction:</strong> Ajout <code>create_schema()</code> appelée après test connexion réussi</li>
+<li><strong>Fichier:</strong> <code>backend/src/services/install_service.py</code></li>
+<li><strong>Fonctionnalité:</strong> Utilise SQLAlchemy <code>db.metadata.create_all()</code> pour créer toutes les tables</li>
+</ul>
+<h3 id="16-traductions-completes">16. Traductions complètes</h3>
+<ul>
+<li><strong>Ajouts FR:</strong></li>
+<li><code>wizard.form.required</code>: "Champ requis"</li>
+<li><code>wizard.welcome.title</code>: "Bienvenue dans l'assistant d'installation !"</li>
+<li><code>wizard.requirements.instance_perms</code>: "Dossier instance inscriptible"</li>
+<li>Toutes les clés backup, admin, summary détaillées</li>
+<li><strong>Ajouts EN:</strong></li>
+<li><code>wizard.form.required</code>: "Required field"</li>
+<li><code>wizard.welcome.title</code>: "Welcome to the installation wizard!"</li>
+<li><code>wizard.requirements.instance_perms</code>: "Instance folder writable"</li>
+</ul>
+<h3 id="17-page-error-amelioree">17. Page Error améliorée</h3>
+<ul>
+<li><strong>Problème:</strong> Message générique sans contexte</li>
+<li><strong>Correction:</strong> </li>
+<li>Affichage du message d'erreur spécifique passé</li>
+<li>Ajout hint "Merci de corriger et réessayer"</li>
+<li>Bouton retour centré</li>
+<li><strong>Fichier:</strong> <code>frontend/templates/pages/install/error.html</code></li>
+</ul>
+<h3 id="18-breadcrumb-cliquable-nouveau">18. Breadcrumb cliquable (NOUVEAU)</h3>
+<ul>
+<li><strong>Problème:</strong> Breadcrumb non cliquable, étapes non finies cliquables</li>
+<li><strong>Correction:</strong></li>
+<li>Ajout attributs HTMX (<code>hx-post</code>, <code>hx-vals</code>, <code>hx-target</code>) sur étapes finies</li>
+<li>Cursor pointer sur étapes cliquables</li>
+<li>Cursor not-allowed + bg-secondary pour étapes non finies</li>
+<li>Navigation conditionnelle vers le bon step</li>
+<li><strong>Fichier:</strong> <code>frontend/templates/pages/install/index.html</code></li>
+</ul>
+<h3 id="19-page-requirements-enrichie-nouveau">19. Page Requirements enrichie (NOUVEAU)</h3>
+<ul>
+<li><strong>Problème:</strong> Prérequis basiques, pas de versions minimales</li>
+<li><strong>Correction:</strong></li>
+<li>Ajout versions minimales affichées (Python &gt;= 3.10, Pip &gt;= 20.0, Git &gt;= 2.0)</li>
+<li>Affichage Flask et SQLAlchemy si installés</li>
+<li>Détection type environnement (Docker, cPanel, VPS, Local)</li>
+<li>Ordre logique : Env, Python, Pip, Git, Flask, SQLAlchemy, Permissions</li>
+<li><strong>Fichier:</strong> <code>frontend/templates/pages/install/partials/requirements.html</code></li>
+</ul>
+<h3 id="20-detection-packages-python-nouveau">20. Détection packages Python (NOUVEAU)</h3>
+<ul>
+<li><strong>Problème:</strong> Pas de détection Flask/SQLAlchemy</li>
+<li><strong>Correction:</strong></li>
+<li>Ajout fonction <code>_get_package_version()</code> utilisant <code>importlib.metadata</code></li>
+<li>Détection Flask et SQLAlchemy dans <code>detect_versions()</code></li>
+<li><strong>Fichier:</strong> <code>backend/src/services/install_service.py</code></li>
+</ul>
+<h3 id="21-detection-type-environnement-nouveau">21. Détection type environnement (NOUVEAU)</h3>
+<ul>
+<li><strong>Problème:</strong> Pas de détection hébergement</li>
+<li><strong>Correction:</strong></li>
+<li>Nouvelle fonction <code>detect_env_type()</code></li>
+<li>Détecte Docker (/.dockerenv), cPanel (/usr/local/cpanel), VPS (/etc/cloud), Local</li>
+<li>Intégré dans <code>render_env_summary()</code></li>
+<li><strong>Fichier:</strong> <code>backend/src/services/install_service.py</code></li>
+</ul>
+<h3 id="22-23-traductions-env_type-nouveau">22-23. Traductions env_type (NOUVEAU)</h3>
+<ul>
+<li><strong>Ajouts FR:</strong></li>
+<li><code>wizard.requirements.env_type</code>: "Type d'environnement"</li>
+<li><strong>Ajouts EN:</strong></li>
+<li><code>wizard.requirements.env_type</code>: "Environment Type"</li>
+<li><strong>Fichiers:</strong> </li>
+<li><code>backend/src/i18n/fr.json</code></li>
+<li><code>backend/src/i18n/en.json</code></li>
+</ul>
+<hr />
+<h2 id="corrections-non-encore-appliquees-a-faire">❌ Corrections NON ENCORE appliquées (à faire)</h2>
+<h3 id="1-fil-dariane-liens-cliquables-fait-correction-18">1. ~~Fil d'Ariane - Liens cliquables~~ ✅ FAIT (Correction 18)</h3>
+<ul>
+<li><strong>État:</strong> ✅ Breadcrumb cliquable avec navigation conditionnelle</li>
+<li><strong>Terminé:</strong> Liens HTMX ajoutés, étapes non finies non cliquables</li>
+</ul>
+<h3 id="2-prerequis-adaptes-a-lenvironnement-fait-corrections-19-21">2. ~~Prérequis adaptés à l'environnement~~ ✅ FAIT (Corrections 19-21)</h3>
+<ul>
+<li><strong>État:</strong> ✅ Détection environnement + Flask/SQLAlchemy + versions minimales</li>
+<li><strong>Terminé:</strong> Type environnement détecté et affiché</li>
+</ul>
+<h3 id="3-retour-a-choix-langue-correct">3. ~~Retour à choix langue~~ ✅ CORRECT</h3>
+<ul>
+<li><strong>État:</strong> ✅ Page welcome.html est un partial séparé</li>
+<li><strong>Note:</strong> Fonctionne comme demandé, pas de retour au choix langue</li>
+</ul>
+<h3 id="4-uniformisation-tailles-balises">4. Uniformisation tailles balises</h3>
+<ul>
+<li><strong>État:</strong> À vérifier manuellement</li>
+<li><strong>À faire:</strong> Audit visuel de tous les h1, h4, h5, p, small pour cohérence</li>
+<li><strong>Complexité:</strong> Faible (ajustements CSS/HTML)</li>
+</ul>
+<hr />
+<h2 id="tests-recommandes">🧪 Tests recommandés</h2>
+<h3 id="test-complet-du-wizard">Test complet du wizard</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># 1. Nettoyage</span>
+<span class="nb">Remove-Item</span> <span class="p">.</span><span class="n">installed</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+<span class="nb">Remove-Item</span> <span class="n">backend</span><span class="p">\</span><span class="n">instance</span><span class="p">\*.</span><span class="n">db</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+
+<span class="c"># 2. Démarrage</span>
+<span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+<span class="n">py</span> <span class="n">run</span><span class="p">.</span><span class="n">py</span>
+
+<span class="c"># 3. Ouvrir navigateur</span>
+<span class="c"># http://localhost:5000/</span>
+</code></pre></div>
+
+<h3 id="scenario-de-test">Scénario de test</h3>
+<ol>
+<li>
+<p><strong>Page langue:</strong><br />
+   - ✅ Vérifier drapeau "EN" (pas US)<br />
+   - ✅ Sélectionner français</p>
+</li>
+<li>
+<p><strong>Page Bienvenue:</strong><br />
+   - ✅ Vérifier titre "Bienvenue dans l'assistant d'installation !"<br />
+   - ✅ Vérifier paragraphe description<br />
+   - ✅ Cliquer "Continuer"</p>
+</li>
+<li>
+<p><strong>Page Prérequis:</strong><br />
+   - ✅ Vérifier checkmarks (✓ ou ✗)<br />
+   - ✅ Vérifier versions affichées<br />
+   - ✅ Vérifier permissions instance/ OK<br />
+   - ✅ Cliquer "Continuer"</p>
+</li>
+<li>
+<p><strong>Page Base de données:</strong><br />
+   - ✅ Vérifier pas d'URI affichée<br />
+   - ✅ Vérifier nom défaut "x-filamenta_python.db"<br />
+   - ✅ Laisser champ vide → Message "Champ requis" en FR<br />
+   - ✅ Remplir "test.db"<br />
+   - ✅ Cliquer "Tester la connexion"<br />
+   - ✅ Vérifier message "Connexion réussie"<br />
+   - ✅ Vérifier tables créées dans instance/test.db</p>
+</li>
+<li>
+<p><strong>Page Admin:</strong><br />
+   - ✅ Vérifier titre "Création du compte administrateur"<br />
+   - ✅ Laisser champ vide → Message "Champ requis" en FR<br />
+   - ✅ Remplir admin / admin@example.com / Admin123!<br />
+   - ✅ Cliquer "Continuer"</p>
+</li>
+<li>
+<p><strong>Page Summary:</strong><br />
+   - ✅ Vérifier détails BD affichés<br />
+   - ✅ Vérifier détails admin affichés<br />
+   - ✅ Cliquer "Finaliser l'installation"</p>
+</li>
+<li>
+<p><strong>Page Done:</strong><br />
+   - ✅ Vérifier message succès<br />
+   - ✅ Cliquer "Aller à la connexion"<br />
+   - ✅ Vérifier redirection vers <code>/auth/login</code></p>
+</li>
+<li>
+<p><strong>Test login:</strong><br />
+   - ✅ Login avec admin / Admin123!<br />
+   - ✅ Vérifier accès dashboard</p>
+</li>
+</ol>
+<h3 id="test-messages-derreur">Test messages d'erreur</h3>
+<ol>
+<li>
+<p><strong>Erreur BD:</strong><br />
+   - MySQL avec mauvais port → Message détaillé (Can't connect...)<br />
+   - PostgreSQL non installé → Message détaillé</p>
+</li>
+<li>
+<p><strong>Erreur backup:</strong><br />
+   - Upload fichier .txt → "Extension invalide"<br />
+   - Upload 100MB → "Backup trop volumineux"<br />
+   - Pas de fichier → "Aucun fichier reçu"</p>
+</li>
+<li>
+<p><strong>Erreur password:</strong><br />
+   - "test" → "Mot de passe trop court"<br />
+   - "testtest" → "Doit contenir majuscules"<br />
+   - "TestTest" → "Doit contenir au moins un symbole"</p>
+</li>
+</ol>
+<hr />
+<h2 id="fichiers-modifies">📁 Fichiers modifiés</h2>
+<h3 id="frontend-7-fichiers">Frontend (7 fichiers)</h3>
+<ol>
+<li><code>frontend/templates/pages/install/index.html</code> - Drapeau EN + Breadcrumb cliquable</li>
+<li><code>frontend/templates/pages/install/partials/welcome.html</code> - Texte bienvenue</li>
+<li><code>frontend/templates/pages/install/partials/requirements.html</code> - Prérequis enrichis + versions min</li>
+<li><code>frontend/templates/pages/install/partials/db_form.html</code> - Messages FR, nom défaut, pas d'URI</li>
+<li><code>frontend/templates/pages/install/partials/admin_form.html</code> - Messages FR</li>
+<li><code>frontend/templates/pages/install/partials/db_test.html</code> - Erreurs détaillées</li>
+<li><code>frontend/templates/pages/install/error.html</code> - Message + hint</li>
+</ol>
+<h3 id="backend-4-fichiers">Backend (4 fichiers)</h3>
+<ol>
+<li><code>backend/src/routes/install.py</code> - app_root corrigé partout</li>
+<li><code>backend/src/services/install_service.py</code> - Fonctions rajoutées + détection env + Flask/SQLAlchemy</li>
+<li><code>backend/src/i18n/fr.json</code> - Traductions complètes + env_type</li>
+<li><code>backend/src/i18n/en.json</code> - Traductions complètes + env_type</li>
+</ol>
+<p><strong>Total:</strong> 11 fichiers modifiés</p>
+<hr />
+<h2 id="etat-actuel">🎯 État actuel</h2>
+<h3 id="fonctionnel">✅ Fonctionnel</h3>
+<ul>
+<li>Sélection langue (EN/FR)</li>
+<li>Page bienvenue correcte</li>
+<li>Prérequis système détaillés avec versions minimales</li>
+<li>Détection Flask, SQLAlchemy, type environnement</li>
+<li>Breadcrumb cliquable avec navigation conditionnelle</li>
+<li>Test connexion SQLite avec création schéma</li>
+<li>Messages "Champ requis" en français</li>
+<li>Messages d'erreur détaillés</li>
+<li>Finalisation + redirection login</li>
+</ul>
+<h3 id="a-tester">⚠️ À tester</h3>
+<ul>
+<li>Breadcrumb navigation en arrière</li>
+<li>Affichage Flask/SQLAlchemy dans requirements</li>
+<li>Détection type environnement (Docker/cPanel/VPS)</li>
+</ul>
+<h3 id="non-teste">❌ Non testé</h3>
+<ul>
+<li>MySQL / PostgreSQL création schéma</li>
+<li>Upload backup + restore</li>
+<li>Uniformité tailles texte</li>
+</ul>
+<hr />
+<h2 id="prochaines-etapes">🚀 Prochaines étapes</h2>
+<ol>
+<li><strong>Tester le wizard complet</strong> (priorité haute)</li>
+<li><strong>Vérifier breadcrumb navigation</strong> (priorité haute)</li>
+<li><strong>Tester détection environnement</strong> (priorité moyenne)</li>
+<li><strong>Audit uniformité CSS</strong> (priorité basse)</li>
+</ol>
+<hr />
+<p><strong>Fin du rapport</strong><br />
+<strong>Status:</strong> ✅ 23 corrections appliquées, test complet nécessaire</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Wizard DB test result partial
+Description: Shows DB URI and connectivity result
+
+File: frontend/templates/pages/install/partials/db_test.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): 2025-12-28T13:53:00+01:00 | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.3-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+
+- Status: Stable
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+<div class="card shadow-sm mb-3">
+  <div class="card-body text-center">
+    <h5 class="card-title mb-4">{{ t('wizard.db.title') }}</h5>
+
+    <div class="alert {{ 'alert-success' if ok else 'alert-danger' }} mx-auto" role="alert" style="max-width: 600px;">
+      <small class="font-monospace d-block mb-2">{{ db_uri }}</small>
+      {% if ok %}
+        <span class="fs-5">✅ {{ t('wizard.db.test_success') or 'Connexion réussie !' }}</span>
+      {% else %}
+        <span class="fs-5">❌ {{ error or t('wizard.db.test_error') or 'Erreur de connexion' }}</span>
+      {% endif %}
+    </div>
+
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+      {{ error or t('wizard.db.error') or 'La connexion a échoué. Vérifiez les paramètres.' }}
+    </div>
+    {% endif %}
+
+    {% if ok %}
+    <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+      <!-- Bouton: Passer l'upload (skip backup) -->
+      <form method="POST" action="/install/step"  >
+        <input type="hidden" name="step" value="admin_form" />
+        <button class="btn btn-primary btn-lg px-4" type="submit">
+          {{ t('wizard.skip_backup') or 'Continuer sans backup' }}
+        </button>
+      </form>
+
+      <!-- Bouton optionnel: Upload backup -->
+      <form method="POST" action="/install/step"  >
+        <input type="hidden" name="step" value="upload_form" />
+        <button class="btn btn-outline-secondary btn-lg px-4" type="submit">
+          {{ t('wizard.restore_backup') or 'Restaurer un backup' }}
+        </button>
+      </form>
+    </div>
+    {% else %}
+    <!-- Si échec, retour au formulaire DB -->
+    <div class="mt-4">
+      <form method="POST" action="/install/step"  >
+        <input type="hidden" name="step" value="db_form" />
+        <button class="btn btn-warning btn-lg px-4" type="submit">
+          {{ t('wizard.retry') or 'Réessayer' }}
+        </button>
+      </form>
+    </div>
+    {% endif %}
+  </div>
+</div>

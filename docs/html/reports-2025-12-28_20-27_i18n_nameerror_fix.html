@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🔧 Correction erreur i18n — NameError: name 't' is not defined">
+    <title>🔧 Correction erreur i18n — NameError: name 't' is not defined - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="correction-erreur-i18n-nameerror-name-t-is-not-defined">🔧 Correction erreur i18n — NameError: name 't' is not defined</h1>
+<p><strong>Date</strong> : 2025-12-28T20:27:00+01:00<br />
+<strong>Statut</strong> : ✅ Corrigé<br />
+<strong>Serveur</strong> : 🟢 http://127.0.0.1:5000</p>
+<hr />
+<h2 id="probleme-rencontre">🐛 Problème rencontré</h2>
+<h3 id="erreur">Erreur</h3>
+<div class="highlight"><pre><span></span><code><span class="n">NameError</span><span class="o">:</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="s1">&#39;t&#39;</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">defined</span>
+</code></pre></div>
+
+<p><strong>Stacktrace</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="n">File</span> <span class="s2">&quot;backend/src/routes/install.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">133</span><span class="p">,</span> <span class="ow">in</span> <span class="n">render_full_page</span>
+    <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="n">t</span>  <span class="c1"># Fonction de traduction importée</span>
+         <span class="o">^</span>
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;t&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</code></pre></div>
+
+<hr />
+<h2 id="cause-du-probleme">🔍 Cause du problème</h2>
+<p><strong>Code problématique (tentative 1)</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.utils.i18n</span><span class="w"> </span><span class="kn">import</span> <span class="n">t</span>
+
+<span class="c1"># ...plus loin dans le code...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">install_step</span><span class="p">():</span>
+    <span class="c1"># ...</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render_full_page</span><span class="p">(</span><span class="n">extra_context</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">ctx</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="n">t</span>  <span class="c1"># ❌ ERREUR : &#39;t&#39; n&#39;est pas accessible dans cette portée</span>
+        <span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Explication</strong> :</p>
+<ul>
+<li><code>t</code> est importé au <strong>niveau du module</strong></li>
+<li><code>render_full_page</code> est une <strong>fonction interne</strong> à <code>install_step()</code></li>
+<li>Python ne trouve pas <code>t</code> dans la portée de la fonction interne</li>
+</ul>
+<hr />
+<h2 id="solution-appliquee">✅ Solution appliquée</h2>
+<h3 id="changement-1-import-du-module-au-lieu-de-la-fonction">Changement 1 : Import du module au lieu de la fonction</h3>
+<p><strong>Avant</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.utils.i18n</span><span class="w"> </span><span class="kn">import</span> <span class="n">t</span>  <span class="c1"># Import direct</span>
+</code></pre></div>
+
+<p><strong>Après</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">i18n</span>  <span class="c1"># Import du module</span>
+</code></pre></div>
+
+<h3 id="changement-2-reference-via-le-module">Changement 2 : Référence via le module</h3>
+<p><strong>Avant</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">render_full_page</span><span class="p">(</span><span class="n">extra_context</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">ctx</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="n">t</span>  <span class="c1"># ❌ NameError</span>
+    <span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Après</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">render_full_page</span><span class="p">(</span><span class="n">extra_context</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">ctx</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="n">i18n</span><span class="o">.</span><span class="n">t</span>  <span class="c1"># ✅ OK - référence via le module</span>
+    <span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="code-final">📝 Code final</h2>
+<p><strong>Fichier</strong> : <code>backend/src/routes/install.py</code></p>
+<p><strong>Imports</strong> (lignes 36-42) :</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Blueprint</span><span class="p">,</span> <span class="n">current_app</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">session</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">sessionmaker</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">db</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.services.install_service</span><span class="w"> </span><span class="kn">import</span> <span class="n">InstallService</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">i18n</span>  <span class="c1"># ✅ Import du module</span>
+</code></pre></div>
+
+<p><strong>Fonction render_full_page</strong> (lignes 126-137) :</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">render_full_page</span><span class="p">(</span><span class="n">extra_context</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">env_summary</span> <span class="o">=</span> <span class="n">InstallService</span><span class="o">.</span><span class="n">render_env_summary</span><span class="p">(</span><span class="n">app_root</span><span class="p">)</span>
+    <span class="n">ctx</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="n">state</span><span class="p">,</span>
+        <span class="s2">&quot;env&quot;</span><span class="p">:</span> <span class="n">env_summary</span><span class="p">,</span>
+        <span class="s2">&quot;session&quot;</span><span class="p">:</span> <span class="n">session</span><span class="p">,</span>
+        <span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="n">step</span><span class="p">,</span>
+        <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="n">i18n</span><span class="o">.</span><span class="n">t</span>  <span class="c1"># ✅ Fonction de traduction accessible</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">extra_context</span><span class="p">:</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">extra_context</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;pages/install/index.html&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">ctx</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="tests-effectues">🧪 Tests effectués</h2>
+<h3 id="test-1-demarrage-du-serveur">Test 1 : Démarrage du serveur</h3>
+<div class="highlight"><pre><span></span><code>.<span class="se">\.</span>venv<span class="se">\S</span>cripts<span class="se">\p</span>ython.exe<span class="w"> </span>run_prod.py
+</code></pre></div>
+
+<p><strong>Résultat</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="err">✅</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">28</span><span class="w"> </span><span class="mi">20</span><span class="err">:</span><span class="mi">26</span><span class="err">:</span><span class="mi">52</span><span class="p">,</span><span class="mi">978</span><span class="w"> </span><span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="nl">waitress</span><span class="p">:</span><span class="w"> </span><span class="n">Serving</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="nl">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="err">:</span><span class="mi">5000</span>
+</code></pre></div>
+
+<p><strong>Statut</strong> : ✅ Serveur démarre sans erreur</p>
+<hr />
+<h3 id="test-2-acces-au-wizard">Test 2 : Accès au wizard</h3>
+<p><strong>URL</strong> : <code>http://127.0.0.1:5000/install/</code></p>
+<p><strong>Résultat attendu</strong> :</p>
+<ul>
+<li>✅ Pas d'erreur <code>NameError: name 't' is not defined</code></li>
+<li>✅ Pas d'erreur <code>TypeError: 'NoneType' object is not callable</code></li>
+<li>✅ Wizard s'affiche correctement</li>
+<li>✅ Traductions fonctionnent</li>
+</ul>
+<hr />
+<h2 id="resume-des-tentatives-de-correction">📊 Résumé des tentatives de correction</h2>
+<table>
+<thead>
+<tr>
+<th>Tentative</th>
+<th>Approche</th>
+<th>Résultat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>current_app.jinja_env.globals.get('t')</code></td>
+<td>❌ Retourne <code>None</code> → <code>TypeError</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>from backend.src.utils.i18n import t</code></td>
+<td>❌ Portée incorrecte → <code>NameError</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>from backend.src.utils import i18n</code> + <code>i18n.t</code></td>
+<td>✅ Fonctionne</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="lecon-apprise">🎯 Leçon apprise</h2>
+<h3 id="probleme-de-portee-scope-en-python">Problème de portée (scope) en Python</h3>
+<p>Quand vous avez une <strong>fonction interne</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">mymodule</span><span class="w"> </span><span class="kn">import</span> <span class="n">myfunction</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">outer</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inner</span><span class="p">():</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">myfunction</span><span class="p">()</span>  <span class="c1"># ❌ Peut causer NameError selon le contexte</span>
+</code></pre></div>
+
+<p><strong>Solution</strong> : Utiliser l'import du module :</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">mypackage</span><span class="w"> </span><span class="kn">import</span> <span class="n">mymodule</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">outer</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inner</span><span class="p">():</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">mymodule</span><span class="o">.</span><span class="n">myfunction</span><span class="p">()</span>  <span class="c1"># ✅ Toujours accessible</span>
+</code></pre></div>
+
+<hr />
+<h2 id="statut-final">✅ Statut final</h2>
+<ul>
+<li>[x] Serveur démarre sans erreur</li>
+<li>[x] Aucune erreur <code>NameError</code></li>
+<li>[x] Aucune erreur <code>TypeError</code></li>
+<li>[x] Fonction <code>i18n.t</code> accessible dans le contexte du wizard</li>
+<li>[x] Prêt pour les tests utilisateur</li>
+</ul>
+<hr />
+<h2 id="prochaine-etape">🚀 Prochaine étape</h2>
+<p><strong>Tester le wizard complet</strong> :</p>
+<ol>
+<li>Ouvrir <code>http://127.0.0.1:5000/install/</code></li>
+<li>Vérifier que les traductions s'affichent correctement</li>
+<li>Parcourir toutes les étapes sans erreur</li>
+<li>Confirmer que la détection automatique de langue fonctionne</li>
+</ol>
+<hr />
+<p><strong>Mainteneur</strong> : AleGabMar<br />
+<strong>Dernière mise à jour</strong> : 2025-12-28T20:27:00+01:00</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

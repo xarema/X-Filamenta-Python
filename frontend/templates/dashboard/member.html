@@ -1,0 +1,183 @@
+<!--
+Purpose: Member dashboard template
+Description: Dashboard page for authenticated members
+
+File: frontend/templates/dashboard/member.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T14:30:00+00:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Public
+-->
+
+{% extends "layouts/base.html" %}
+
+{% block title %}Tableau de bord - X-Filamenta{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="h3">Tableau de bord</h1>
+            <p class="text-muted">Bienvenue, {{ current_user.username }}</p>
+        </div>
+        <div class="col-auto">
+            <button
+                type="button"
+                class="btn btn-outline-secondary"
+                onclick="logout()"
+            >
+                Déconnexion
+            </button>
+        </div>
+    </div>
+
+    <!-- Welcome Card -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Bienvenue sur X-Filamenta</h5>
+                    <p class="card-text">
+                        Vous êtes connecté en tant que membre. Explorez les fonctionnalités disponibles.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="row g-3">
+        <!-- Stat Card 1 -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Contenu</h6>
+                    <h3 class="card-title mb-0">{{ stats.content_count or 0 }}</h3>
+                    <p class="text-muted small mb-0">Articles publiés</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stat Card 2 -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Activité</h6>
+                    <h3 class="card-title mb-0">{{ stats.activity_count or 0 }}</h3>
+                    <p class="text-muted small mb-0">Actions récentes</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stat Card 3 -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Préférences</h6>
+                    <h3 class="card-title mb-0">
+                        <span class="badge bg-{{ current_user.preferences.theme or 'light' }}">
+                            {{ current_user.preferences.theme or 'Défaut' }}
+                        </span>
+                    </h3>
+                    <p class="text-muted small mb-0">Thème actuel</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Activité récente</h5>
+                </div>
+                <div class="card-body">
+                    {% if recent_activity %}
+                        <div class="list-group list-group-flush">
+                            {% for activity in recent_activity %}
+                                <div class="list-group-item">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">{{ activity.title }}</h6>
+                                        <small class="text-muted">{{ activity.date }}</small>
+                                    </div>
+                                    <p class="mb-1 small">{{ activity.description }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-muted mb-0">Aucune activité récente</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Actions rapides</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="{{ url_for('pages.profile') }}" class="btn btn-outline-primary">
+                            Mon profil
+                        </a>
+                        <a href="{{ url_for('pages.preferences') }}" class="btn btn-outline-secondary">
+                            Préférences
+                        </a>
+                        <a href="{{ url_for('pages.content_list') }}" class="btn btn-outline-info">
+                            Voir le contenu
+                        </a>
+                        {% if current_user.is_admin %}
+                            <a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline-success">
+                                Administration
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Logout Script -->
+<script>
+function logout() {
+    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+        fetch('{{ url_for("auth.logout") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                window.location.href = result.redirect;
+            } else {
+                alert('Erreur lors de la déconnexion');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Une erreur est survenue');
+        });
+    }
+}
+</script>
+{% endblock %}
+

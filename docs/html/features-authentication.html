@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🔐 Authentification & 2FA">
+    <title>🔐 Authentification & 2FA - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="authentification-2fa">🔐 Authentification &amp; 2FA</h1>
+<p><strong>Authentification sécurisée avec support 2FA (TOTP).</strong></p>
+<hr />
+<h2 id="vue-densemble">🎯 Vue d'ensemble</h2>
+<p>L'authentification X-Filamenta-Python comporte trois niveaux de sécurité :</p>
+<ol>
+<li><strong>Authentification simple</strong> : Username/Email + Mot de passe</li>
+<li><strong>2FA TOTP</strong> : Code à usage unique (authenticator app)</li>
+<li><strong>Backup codes</strong> : Codes de secours si authenticator perdu</li>
+</ol>
+<hr />
+<h2 id="authentification-simple">🔑 Authentification simple</h2>
+<h3 id="flux-de-login">Flux de login</h3>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Utilisateur</span><span class="w"> </span><span class="n">accède</span><span class="w"> </span><span class="n">à</span><span class="w"> </span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="nb">log</span><span class="n">in</span>
+<span class="mf">2.</span><span class="w"> </span><span class="c1">Remplit formulaire : username/email + password</span>
+<span class="mf">3.</span><span class="w"> </span><span class="nb">Val</span><span class="n">idation</span><span class="w"> </span><span class="n">des</span><span class="w"> </span><span class="n">credentials</span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="mf">2</span><span class="n">FA</span><span class="w"> </span><span class="n">activé</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">Redirection</span><span class="w"> </span><span class="n">vers</span><span class="w"> </span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="mf">2</span><span class="n">fa</span><span class="o">-</span><span class="kr">verify</span>
+<span class="mf">5.</span><span class="w"> </span><span class="n">Si</span><span class="w"> </span><span class="mf">2</span><span class="n">FA</span><span class="w"> </span><span class="n">désactivé</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">Création</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">Redirection</span><span class="w"> </span><span class="n">dashboard</span>
+</code></pre></div>
+
+<h3 id="specifications-techniques">Spécifications techniques</h3>
+<p><strong>Endpoint :</strong> <code>POST /auth/login</code></p>
+<p><strong>Paramètres :</strong><br />
+- <code>username_or_email</code> : String (username ou email)<br />
+- <code>password</code> : String (mot de passe)<br />
+- <code>remember_me</code> : Boolean (optionnel, défaut=false)</p>
+<p><strong>Réponses :</strong><br />
+- <code>200 OK</code> : Login réussi → Redirection dashboard/2FA<br />
+- <code>401 Unauthorized</code> : Credentials invalides<br />
+- <code>429 Too Many Requests</code> : Trop de tentatives (rate limit)<br />
+- <code>500 Server Error</code> : Erreur serveur</p>
+<p><strong>Sécurité :</strong><br />
+- ✅ Hash bcrypt (cost=12)<br />
+- ✅ Rate limiting (5 essais/heure par IP)<br />
+- ✅ CSRF token requis<br />
+- ✅ Session sécurisée (HttpOnly, Secure, SameSite)</p>
+<hr />
+<h2 id="2fa-totp-time-based-one-time-password">🔑 2FA TOTP (Time-based One-Time Password)</h2>
+<h3 id="activation-2fa">Activation 2FA</h3>
+<p><strong>Flux :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Utilisateur</span><span class="w"> </span><span class="n">accède</span><span class="w"> </span><span class="n">à</span><span class="w"> </span><span class="o">/</span><span class="n">account</span><span class="o">/</span><span class="n">security</span><span class="o">/</span><span class="mf">2</span><span class="n">fa</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Génération</span><span class="w"> </span><span class="n">secret</span><span class="w"> </span><span class="kr">TO</span><span class="n">TP</span><span class="w"> </span><span class="p">(</span><span class="mf">32</span><span class="w"> </span><span class="n">chars</span><span class="w"> </span><span class="n">base32</span><span class="p">)</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Affichage</span><span class="w"> </span><span class="n">QR</span><span class="w"> </span><span class="n">code</span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">Utilisateur</span><span class="w"> </span><span class="n">scanne</span><span class="w"> </span><span class="n">avec</span><span class="w"> </span><span class="n">authenticator</span><span class="w"> </span><span class="p">(</span><span class="kr">Go</span><span class="n">ogle</span><span class="w"> </span><span class="n">Authenticator</span><span class="p">,</span><span class="w"> </span><span class="n">Authy</span><span class="p">,</span><span class="w"> </span><span class="n">etc</span><span class="mf">.</span><span class="p">)</span>
+<span class="mf">5.</span><span class="w"> </span><span class="n">Utilisateur</span><span class="w"> </span><span class="n">entre</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">du</span><span class="w"> </span><span class="n">phone</span><span class="w"> </span><span class="p">(</span><span class="mf">6</span><span class="w"> </span><span class="n">digits</span><span class="p">)</span>
+<span class="mf">6.</span><span class="w"> </span><span class="nb">Val</span><span class="n">idation</span><span class="w"> </span><span class="n">et</span><span class="w"> </span><span class="n">activation</span>
+<span class="mf">7.</span><span class="w"> </span><span class="n">Génération</span><span class="w"> </span><span class="n">backup</span><span class="w"> </span><span class="n">codes</span><span class="w"> </span><span class="p">(</span><span class="mf">10</span><span class="n">x</span><span class="w"> </span><span class="n">codes</span><span class="w"> </span><span class="mf">8</span><span class="o">-</span><span class="n">digits</span><span class="p">)</span>
+<span class="mf">8.</span><span class="w"> </span><span class="n">Affichage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">demande</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">sauvegarde</span>
+</code></pre></div>
+
+<p><strong>Specs TOTP :</strong><br />
+- Algorithme : SHA-1<br />
+- Fenêtre temps : 30 secondes<br />
+- Digits : 6<br />
+- Fenêtre validation : ±1 période (60s total)</p>
+<h3 id="verification-2fa">Vérification 2FA</h3>
+<p><strong>Endpoint :</strong> <code>POST /auth/2fa-verify</code></p>
+<p><strong>Paramètres :</strong><br />
+- <code>code</code> : String (6 digits du phone)<br />
+- OU <code>backup_code</code> : String (code de secours 8-digits)</p>
+<p><strong>Réponses :</strong><br />
+- <code>200 OK</code> : Vérification réussie → Création session<br />
+- <code>401 Unauthorized</code> : Code invalide<br />
+- <code>429 Too Many Requests</code> : Trop de tentatives (rate limit)</p>
+<p><strong>Sécurité :</strong><br />
+- ✅ Codes invalidés après utilisation<br />
+- ✅ Fenêtre temps stricte (±30s)<br />
+- ✅ Rate limiting (3 essais/5min par utilisateur)<br />
+- ✅ Backup codes hashés (bcrypt)</p>
+<hr />
+<h2 id="backup-codes">🆘 Backup codes</h2>
+<h3 id="generation">Génération</h3>
+<p>À l'activation de 2FA :<br />
+- 10 codes de 8 digits générés aléatoirement<br />
+- Tous hashés au stockage<br />
+- Affichés une seule fois à l'utilisateur<br />
+- L'utilisateur doit copier/coller ou télécharger</p>
+<h3 id="utilisation">Utilisation</h3>
+<ul>
+<li>Chaque code ne peut être utilisé qu'une fois</li>
+<li>Utilisable à la place du code TOTP</li>
+<li>Cas d'usage : perte de l'authenticator</li>
+</ul>
+<h3 id="regeneration">Régénération</h3>
+<ul>
+<li>Possible depuis /account/security/2fa</li>
+<li>Invalide tous les anciens codes</li>
+<li>Affiche nouveaux codes</li>
+</ul>
+<hr />
+<h2 id="csrf-protection">🛡️ CSRF Protection</h2>
+<h3 id="mise-en-uvre">Mise en œuvre</h3>
+<p><strong>Token CSRF :</strong><br />
+- ✅ Généré par Flask-WTF<br />
+- ✅ Stocké en session (HttpOnly)<br />
+- ✅ Inclus dans tous les formulaires (<code>{{ csrf_token() }}</code>)<br />
+- ✅ Validé automatiquement sur POST/PUT/DELETE</p>
+<p><strong>Dans les templates :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
+    {{ csrf_token }}
+
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>Ou avec HTMX :</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">button</span> <span class="na">hx-post</span><span class="o">=</span><span class="s">&quot;/endpoint&quot;</span> <span class="na">hx-headers</span><span class="o">=</span><span class="s">&#39;{&quot;X-CSRFToken&quot;: &quot;{{ csrf_token() }}&quot;}&#39;</span><span class="p">&gt;</span>
+    Bouton
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h3 id="endpoints-proteges">Endpoints protégés</h3>
+<ul>
+<li>✅ <code>/auth/login</code> - POST</li>
+<li>✅ <code>/auth/logout</code> - POST</li>
+<li>✅ <code>/auth/2fa-verify</code> - POST</li>
+<li>✅ Tous les formulaires utilisateur</li>
+</ul>
+<hr />
+<h2 id="scenarios-de-securite">📊 Scénarios de sécurité</h2>
+<h3 id="scenario-1-login-simple">Scénario 1 : Login simple</h3>
+<div class="highlight"><pre><span></span><code>User → /auth/login
+       → Saisit credentials
+       → POST /auth/login (CSRF token inclus)
+       → Serveur valide (bcrypt, rate limit)
+       → Session créée (HttpOnly)
+       → Redirection /dashboard
+</code></pre></div>
+
+<h3 id="scenario-2-login-2fa">Scénario 2 : Login + 2FA</h3>
+<div class="highlight"><pre><span></span><code>User → /auth/login
+       → Saisit credentials
+       → POST /auth/login (CSRF token)
+       → Serveur → /auth/2fa-verify (session temporaire)
+       → User scanne authenticator
+       → Saisit code TOTP (6 digits)
+       → POST /auth/2fa-verify (CSRF token)
+       → Serveur valide TOTP (fenêtre temps strict)
+       → Session complète créée
+       → Redirection /dashboard
+</code></pre></div>
+
+<h3 id="scenario-3-code-totp-perdu">Scénario 3 : Code TOTP perdu</h3>
+<div class="highlight"><pre><span></span><code><span class="nx">User</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="o">/</span><span class="nx">auth</span><span class="o">/</span><span class="nx">login</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">credentials</span>
+<span class="w">       </span><span class="err">→</span><span class="w"> </span><span class="o">/</span><span class="nx">auth</span><span class="o">/</span><span class="mi">2</span><span class="nx">fa</span><span class="o">-</span><span class="nx">verify</span>
+<span class="w">       </span><span class="err">→</span><span class="w"> </span><span class="nx">Impossible</span><span class="w"> </span><span class="nx">scanner</span><span class="w"> </span><span class="nx">phone</span>
+<span class="w">       </span><span class="err">→</span><span class="w"> </span><span class="nx">Utilise</span><span class="w"> </span><span class="nx">backup</span><span class="w"> </span><span class="nx">code</span><span class="w"> </span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="nx">digits</span><span class="p">)</span>
+<span class="w">       </span><span class="err">→</span><span class="w"> </span><span class="nx">POST</span><span class="w"> </span><span class="o">/</span><span class="nx">auth</span><span class="o">/</span><span class="mi">2</span><span class="nx">fa</span><span class="o">-</span><span class="nx">verify</span><span class="p">?</span><span class="k">type</span><span class="p">=</span><span class="nx">backup</span>
+<span class="w">       </span><span class="err">→</span><span class="w"> </span><span class="nx">Serveur</span><span class="w"> </span><span class="nx">invalide</span><span class="w"> </span><span class="nx">ce</span><span class="w"> </span><span class="nx">code</span>
+<span class="w">       </span><span class="err">→</span><span class="w"> </span><span class="nx">Session</span><span class="w"> </span><span class="nx">complète</span><span class="w"> </span><span class="nx">créée</span>
+<span class="w">       </span><span class="err">→</span><span class="w"> </span><span class="nx">Peut</span><span class="w"> </span><span class="nx">régénérer</span><span class="w"> </span><span class="nx">codes</span><span class="w"> </span><span class="nx">depuis</span><span class="w"> </span><span class="nx">compte</span>
+</code></pre></div>
+
+<h3 id="scenario-4-attaque-par-force-brute">Scénario 4 : Attaque par force brute</h3>
+<div class="highlight"><pre><span></span><code>Attacker → /auth/login
+          → 100 POST /auth/login en 1 heure
+          → Après 5 tentatives → 429 Too Many Requests
+          → IP bloquée temporairement
+          → Rate limit reset après 1 heure
+</code></pre></div>
+
+<hr />
+<h2 id="stockage-des-credentials">🔒 Stockage des credentials</h2>
+<table>
+<thead>
+<tr>
+<th>Données</th>
+<th>Stockage</th>
+<th>Sécurité</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Password</td>
+<td>DB (bcrypt hash)</td>
+<td>✅ Hash non réversible</td>
+</tr>
+<tr>
+<td>TOTP Secret</td>
+<td>DB (clair, DB chiffré à déploiement)</td>
+<td>✅ DB sécurisée</td>
+</tr>
+<tr>
+<td>Backup Codes</td>
+<td>DB (bcrypt hash)</td>
+<td>✅ Hash non réversible</td>
+</tr>
+<tr>
+<td>Session Token</td>
+<td>Session (HttpOnly, Secure)</td>
+<td>✅ Cookie sécurisé</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="checklist-securite">📋 Checklist sécurité</h2>
+<ul>
+<li>[x] Password hashing (bcrypt cost=12)</li>
+<li>[x] Rate limiting authentification</li>
+<li>[x] Session HttpOnly + Secure + SameSite</li>
+<li>[x] CSRF tokens sur tous les formulaires</li>
+<li>[x] 2FA TOTP avec validat fenêtre temps</li>
+<li>[x] Backup codes hashés</li>
+<li>[x] Pas de credentials loggés</li>
+<li>[x] Validation stricte des inputs</li>
+<li>[x] Timeouts de session</li>
+<li>[x] Logging des actions sensibles</li>
+</ul>
+<hr />
+<h2 id="ressources">📚 Ressources</h2>
+<ul>
+<li><strong>Guide sécurité</strong> → <a href="../security/best-practices.md">../security/best-practices.md</a></li>
+<li><strong>CSRF Protection</strong> → <a href="../security/csrf-protection.md">../security/csrf-protection.md</a></li>
+<li><strong>2FA Guide</strong> → <a href="../security/2fa.md">../security/2fa.md</a></li>
+</ul>
+<hr />
+<p><strong>→ Consultez les guides spécialisés pour des détails techniques.</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🧙 TEST DU WIZARD D'INSTALLATION - RAPPORT">
+    <title>🧙 TEST DU WIZARD D'INSTALLATION - RAPPORT - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="test-du-wizard-dinstallation-rapport">🧙 TEST DU WIZARD D'INSTALLATION - RAPPORT</h1>
+<p><strong>Date:</strong> 2025-12-27<br />
+<strong>Status:</strong> ✅ <strong>PRÊT POUR TEST</strong></p>
+<hr />
+<h2 id="preparation">📋 PRÉPARATION</h2>
+<h3 id="1-etat-actuel">1. État Actuel</h3>
+<p>✅ Flag d'installation sauvegardé (<code>installed.flag.backup</code>)<br />
+✅ Guard d'installation activé dans <code>app.py</code><br />
+✅ Imports corrigés (<code>Response</code>, <code>Any</code>)<br />
+✅ Serveur Flask démarré</p>
+<h3 id="2-configuration">2. Configuration</h3>
+<p><strong>URL serveur:</strong> http://localhost:5000<br />
+<strong>Redirect auto:</strong> Vers <code>/install/</code> si pas installé</p>
+<hr />
+<h2 id="tests-a-effectuer">🧪 TESTS À EFFECTUER</h2>
+<h3 id="test-1-redirection-automatique">Test 1: Redirection Automatique ✅</h3>
+<p><strong>Action:</strong><br />
+1. Ouvrir navigateur<br />
+2. Accéder à http://localhost:5000</p>
+<p><strong>Résultat attendu:</strong><br />
+- Redirection automatique vers <code>/install/</code><br />
+- Page wizard d'installation affichée</p>
+<p><strong>Vérifier:</strong><br />
+- [ ] Redirection fonctionne<br />
+- [ ] Page wizard chargée<br />
+- [ ] Pas d'erreur 404/500</p>
+<h3 id="test-2-page-wizard">Test 2: Page Wizard ✅</h3>
+<p><strong>URL:</strong> http://localhost:5000/install/</p>
+<p><strong>Vérifier:</strong><br />
+- [ ] Choix de langue (FR/EN) affiché<br />
+- [ ] Environnement détecté (OS, Python, Git, etc.)<br />
+- [ ] Boutons "Continue in English" / "Continuer en français"<br />
+- [ ] Interface Bootstrap 5 responsive</p>
+<h3 id="test-3-etape-1-choix-langue">Test 3: Étape 1 - Choix Langue ✅</h3>
+<p><strong>Action:</strong><br />
+1. Cliquer "Continuer en français"</p>
+<p><strong>Résultat attendu:</strong><br />
+- Session language = <code>fr</code><br />
+- Formulaire DB affiché</p>
+<p><strong>Vérifier:</strong><br />
+- [ ] Langue changée<br />
+- [ ] Formulaire DB en français</p>
+<h3 id="test-4-etape-2-configuration-db">Test 4: Étape 2 - Configuration DB ✅</h3>
+<p><strong>Formulaire affiché:</strong><br />
+- Input DB URI<br />
+- Exemples (SQLite, MySQL, PostgreSQL)<br />
+- Bouton "Tester la connexion"</p>
+<p><strong>Test avec SQLite:</strong></p>
+<div class="highlight"><pre><span></span><code>sqlite:///instance/app.db
+</code></pre></div>
+
+<p><strong>Action:</strong><br />
+1. Saisir URI SQLite<br />
+2. Cliquer "Tester la connexion"</p>
+<p><strong>Résultat attendu:</strong><br />
+- Test connexion exécuté<br />
+- Message succès ✅ ou erreur ❌<br />
+- Bouton "Suivant" activé si succès</p>
+<p><strong>Vérifier:</strong><br />
+- [ ] Formulaire fonctionne<br />
+- [ ] Test connexion OK<br />
+- [ ] Messages appropriés</p>
+<h3 id="test-5-etape-3-upload-backup-optionnel">Test 5: Étape 3 - Upload Backup (Optionnel) ⚠️</h3>
+<p><strong>Formulaire affiché:</strong><br />
+- Input file (<code>.tar.gz</code>, <code>.tgz</code>)<br />
+- Bouton "Passer" (skip)</p>
+<p><strong>Action:</strong><br />
+1. Cliquer "Passer" (pas de backup)</p>
+<p><strong>Résultat attendu:</strong><br />
+- Passage à l'étape suivante<br />
+- Pas d'erreur</p>
+<p><strong>Vérifier:</strong><br />
+- [ ] Skip fonctionne<br />
+- [ ] Pas obligatoire</p>
+<h3 id="test-6-etape-4-creation-admin">Test 6: Étape 4 - Création Admin ✅</h3>
+<p><strong>Formulaire affiché:</strong><br />
+- Username<br />
+- Email<br />
+- Password</p>
+<p><strong>Données test:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">Username</span><span class="o">:</span><span class="w"> </span><span class="n">admin</span>
+<span class="n">Email</span><span class="o">:</span><span class="w"> </span><span class="n">admin</span><span class="err">@</span><span class="n">test</span><span class="o">.</span><span class="na">com</span>
+<span class="n">Password</span><span class="o">:</span><span class="w"> </span><span class="n">Admin123</span><span class="o">!</span>
+</code></pre></div>
+
+<p><strong>Action:</strong><br />
+1. Saisir données admin<br />
+2. Cliquer "Suivant"</p>
+<p><strong>Résultat attendu:</strong><br />
+- Validation password fort<br />
+- Erreur si password faible<br />
+- Succès si password OK</p>
+<p><strong>Vérifier:</strong><br />
+- [ ] Validation fonctionne<br />
+- [ ] Messages d'erreur clairs<br />
+- [ ] Password fort accepté</p>
+<h3 id="test-7-etape-5-resume">Test 7: Étape 5 - Résumé ✅</h3>
+<p><strong>Affiché:</strong><br />
+- DB URI configurée<br />
+- Admin username/email<br />
+- Bouton "Finaliser"</p>
+<p><strong>Action:</strong><br />
+1. Vérifier récapitulatif<br />
+2. Cliquer "Finaliser l'installation"</p>
+<p><strong>Résultat attendu:</strong><br />
+- Application configuration DB<br />
+- Création admin en database<br />
+- Création flag <code>instance/installed.flag</code><br />
+- Redirect vers login ou dashboard</p>
+<p><strong>Vérifier:</strong><br />
+- [ ] Résumé correct<br />
+- [ ] Finalisation OK<br />
+- [ ] Flag créé<br />
+- [ ] Redirect appropriée</p>
+<h3 id="test-8-post-installation">Test 8: Post-Installation ✅</h3>
+<p><strong>Action:</strong><br />
+1. Rafraîchir page (F5)<br />
+2. Accéder à http://localhost:5000</p>
+<p><strong>Résultat attendu:</strong><br />
+- <strong>PAS</strong> de redirection wizard<br />
+- Accès normal à l'application<br />
+- Login avec compte admin créé</p>
+<p><strong>Vérifier:</strong><br />
+- [ ] Wizard inaccessible<br />
+- [ ] Application accessible<br />
+- [ ] Admin peut se connecter</p>
+<hr />
+<h2 id="tests-securite">🔍 TESTS SÉCURITÉ</h2>
+<h3 id="test-s1-path-traversal-backup">Test S1: Path Traversal (Backup)</h3>
+<p><strong>Si backup testé:</strong><br />
+- Upload fichier avec <code>../</code> dans nom<br />
+- Vérifier rejet</p>
+<h3 id="test-s2-password-faible">Test S2: Password Faible</h3>
+<p><strong>Tester passwords:</strong><br />
+- <code>admin</code> → ❌ Rejeté<br />
+- <code>Admin</code> → ❌ Rejeté (pas de symbole)<br />
+- <code>admin123</code> → ❌ Rejeté (pas maj/symbole)<br />
+- <code>Admin123!</code> → ✅ Accepté</p>
+<h3 id="test-s3-email-invalide">Test S3: Email Invalide</h3>
+<p><strong>Tester emails:</strong><br />
+- <code>admin</code> → ❌ Rejeté<br />
+- <code>admin@</code> → ❌ Rejeté<br />
+- <code>admin@test.com</code> → ✅ Accepté</p>
+<hr />
+<h2 id="tests-erreurs">🐛 TESTS ERREURS</h2>
+<h3 id="test-e1-db-invalide">Test E1: DB Invalide</h3>
+<p><strong>Action:</strong><br />
+- Saisir URI invalide: <code>invalid://db</code><br />
+- Tester connexion</p>
+<p><strong>Attendu:</strong><br />
+- Message erreur connexion<br />
+- Bouton "Suivant" désactivé</p>
+<h3 id="test-e2-backup-trop-gros">Test E2: Backup Trop Gros</h3>
+<p><strong>Si upload testé:</strong><br />
+- Upload fichier &gt; 50MB<br />
+- Vérifier rejet avec message</p>
+<h3 id="test-e3-extension-invalide">Test E3: Extension Invalide</h3>
+<p><strong>Si upload testé:</strong><br />
+- Upload <code>.zip</code> ou <code>.exe</code><br />
+- Vérifier rejet</p>
+<hr />
+<h2 id="checklist-complete">📊 CHECKLIST COMPLÈTE</h2>
+<h3 id="fonctionnel">Fonctionnel</h3>
+<ul>
+<li>[ ] Redirection auto vers wizard</li>
+<li>[ ] Choix langue FR/EN</li>
+<li>[ ] Détection environnement</li>
+<li>[ ] Formulaire DB</li>
+<li>[ ] Test connexion DB</li>
+<li>[ ] Upload backup (skip)</li>
+<li>[ ] Formulaire admin</li>
+<li>[ ] Validation password</li>
+<li>[ ] Résumé config</li>
+<li>[ ] Finalisation</li>
+<li>[ ] Flag créé</li>
+<li>[ ] Redirect post-install</li>
+</ul>
+<h3 id="securite">Sécurité</h3>
+<ul>
+<li>[ ] Password fort requis</li>
+<li>[ ] Email validé</li>
+<li>[ ] Path traversal bloqué</li>
+<li>[ ] Extensions whitelist</li>
+<li>[ ] Taille max backup</li>
+</ul>
+<h3 id="uxui">UX/UI</h3>
+<ul>
+<li>[ ] Interface responsive</li>
+<li>[ ] Messages clairs</li>
+<li>[ ] Erreurs inline</li>
+<li>[ ] Bootstrap 5 styling</li>
+<li>[ ] Navigation fluide</li>
+<li>[ ] Pas de bugs visuels</li>
+</ul>
+<hr />
+<h2 id="resultat-attendu">🎯 RÉSULTAT ATTENDU</h2>
+<p><strong>À la fin du wizard:</strong></p>
+<p>✅ Database configurée<br />
+✅ Admin créé (username: admin)<br />
+✅ Flag installation: <code>instance/installed.flag</code><br />
+✅ Application accessible<br />
+✅ Wizard inaccessible<br />
+✅ Login admin fonctionne  </p>
+<hr />
+<h2 id="reinitialiser-test">🔄 RÉINITIALISER TEST</h2>
+<p><strong>Pour retester le wizard:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># 1. Arrêter serveur (Ctrl+C)</span>
+
+<span class="c"># 2. Supprimer flag</span>
+<span class="nb">Remove-Item</span> <span class="n">instance</span><span class="p">\</span><span class="n">installed</span><span class="p">.</span><span class="n">flag</span>
+
+<span class="c"># 3. Optionnel: Supprimer DB test</span>
+<span class="nb">Remove-Item</span> <span class="n">instance</span><span class="p">\</span><span class="n">test_wizard</span><span class="p">.</span><span class="n">db</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+
+<span class="c"># 4. Relancer serveur</span>
+<span class="n">python</span> <span class="n">run</span><span class="p">.</span><span class="n">py</span>
+
+<span class="c"># 5. Accéder http://localhost:5000</span>
+</code></pre></div>
+
+<hr />
+<h2 id="commandes-rapides">📝 COMMANDES RAPIDES</h2>
+<h3 id="verifier-flag">Vérifier Flag</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">Test-Path</span> <span class="n">instance</span><span class="p">\</span><span class="n">installed</span><span class="p">.</span><span class="n">flag</span>
+</code></pre></div>
+
+<h3 id="voir-contenu-flag">Voir Contenu Flag</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-Content</span> <span class="n">instance</span><span class="p">\</span><span class="n">installed</span><span class="p">.</span><span class="n">flag</span>
+</code></pre></div>
+
+<h3 id="restaurer-flag-original">Restaurer Flag Original</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">Move-Item</span> <span class="n">instance</span><span class="p">\</span><span class="n">installed</span><span class="p">.</span><span class="n">flag</span><span class="p">.</span><span class="n">backup</span> <span class="n">instance</span><span class="p">\</span><span class="n">installed</span><span class="p">.</span><span class="n">flag</span> <span class="n">-Force</span>
+</code></pre></div>
+
+<h3 id="verifier-db-creee">Vérifier DB Créée</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">Test-Path</span> <span class="n">instance</span><span class="p">\</span><span class="n">app</span><span class="p">.</span><span class="n">db</span>
+</code></pre></div>
+
+<h3 id="tester-connexion-admin">Tester Connexion Admin</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Après installation, login avec:</span>
+<span class="c"># Username: admin</span>
+<span class="c"># Password: Admin123!</span>
+</code></pre></div>
+
+<hr />
+<h2 id="succes-complet">🎊 SUCCÈS COMPLET</h2>
+<p><strong>Wizard fonctionnel si:</strong></p>
+<ol>
+<li>✅ Toutes étapes complétées sans erreur</li>
+<li>✅ Admin créé et peut se connecter</li>
+<li>✅ Flag installation créé</li>
+<li>✅ Wizard inaccessible après install</li>
+<li>✅ Application opérationnelle</li>
+<li>✅ Validation sécurité OK</li>
+<li>✅ UX fluide et claire</li>
+</ol>
+<hr />
+<p><strong>Test wizard préparé:</strong> 2025-12-27<br />
+<strong>Serveur:</strong> ✅ Démarré sur http://localhost:5000<br />
+<strong>Status:</strong> ✅ <strong>PRÊT POUR TEST MANUEL</strong></p>
+<p><strong>Accédez à http://localhost:5000 pour commencer le test !</strong> 🧙✨</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

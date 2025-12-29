@@ -1,0 +1,168 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Wizard DB form with tabs for different database types
+Description: SQLite (simple), MySQL/PostgreSQL (detailed fields)
+
+File: frontend/templates/pages/install/partials/db_form.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): 2025-12-28T13:48:00+01:00 | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.2-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+
+- Status: Stable
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+<div class="card shadow-sm mb-3">
+  <div class="card-body">
+    <div class="text-center mb-3">
+      <h5 class="card-title mb-1">{{ t('wizard.db.title') }}</h5>
+    </div>
+
+    <div class="mx-auto" style="max-width: 780px;">
+      <!-- Onglets type de base de données -->
+      {% set active_tab = active_tab or state.get('db_type') or 'sqlite' %}
+
+      <ul class="nav nav-tabs justify-content-center mb-3" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link {% if active_tab == 'sqlite' %}active{% endif %}" id="sqlite-tab" data-bs-toggle="tab" data-bs-target="#sqlite-panel" type="button">
+            💾 SQLite
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link {% if active_tab == 'mysql' %}active{% endif %}" id="mysql-tab" data-bs-toggle="tab" data-bs-target="#mysql-panel" type="button">
+            🐬 MySQL
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link {% if active_tab == 'postgresql' %}active{% endif %}" id="postgresql-tab" data-bs-toggle="tab" data-bs-target="#postgresql-panel" type="button">
+            🐘 PostgreSQL
+          </button>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <!-- Panel SQLite -->
+        <div class="tab-pane fade {% if active_tab == 'sqlite' %}show active{% endif %}" id="sqlite-panel">
+          <form method="POST" action="/install/step"   class="mx-auto" style="max-width: 520px;">
+            <input type="hidden" name="step" value="db_test" />
+            <div class="mb-3">
+              <label class="form-label">{{ t('wizard.db.dbname') or 'Nom de la base de données' }}</label>
+              <input
+                type="text"
+                name="sqlite_dbname"
+                class="form-control"
+                value="{{ state.sqlite_dbname or 'x-filamenta_python.db' }}"
+                placeholder="x-filamenta_python.db"
+                required oninvalid="this.setCustomValidity('{{ t("wizard.db.error_empty_field", "Ce champ est requis") }}') " oninput="this.setCustomValidity('')"
+                oninput="this.setCustomValidity('')"
+              />
+              <small class="text-muted">📁 Fichier créé dans: instance/</small>
+            </div>
+            <div class="text-center">
+              <button class="btn btn-primary" type="submit">
+                {{ t('wizard.db.test_button') or 'Tester la connexion' }}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Panel MySQL -->
+        <div class="tab-pane fade {% if active_tab == 'mysql' %}show active{% endif %}" id="mysql-panel">
+          <form method="POST" action="/install/step"   class="mx-auto" style="max-width: 640px;">
+            <input type="hidden" name="step" value="db_test" />
+            <input type="hidden" name="db_type" value="mysql" />
+
+            <div class="row">
+              <div class="col-md-8 mb-3">
+                <label class="form-label">{{ t('wizard.db.host') or 'Serveur' }}</label>
+                <input type="text" name="mysql_host" class="form-control" value="{{ state.mysql_host or 'localhost' }}" required oninvalid="this.setCustomValidity('{{ t("wizard.db.error_empty_field", "Ce champ est requis") }}') " oninput="this.setCustomValidity('')" />
+              </div>
+              <div class="col-md-4 mb-3">
+                <label class="form-label">{{ t('wizard.db.port') or 'Port' }}</label>
+                <input type="number" name="mysql_port" class="form-control" value="{{ state.mysql_port or '3306' }}" required oninvalid="this.setCustomValidity('{{ t("wizard.db.error_empty_field", "Ce champ est requis") }}') " oninput="this.setCustomValidity('')" />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">{{ t('wizard.db.dbname') or 'Base de données' }}</label>
+              <input type="text" name="mysql_dbname" class="form-control" value="{{ state.mysql_dbname or '' }}" placeholder="myapp" required oninvalid="this.setCustomValidity('{{ t("wizard.db.error_empty_field", "Ce champ est requis") }}') " oninput="this.setCustomValidity('')" />
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">{{ t('wizard.db.username') or 'Utilisateur' }}</label>
+                <input type="text" name="mysql_user" class="form-control" value="{{ state.mysql_user or 'root' }}" required oninvalid="this.setCustomValidity('{{ t("wizard.db.error_empty_field", "Ce champ est requis") }}') " oninput="this.setCustomValidity('')" />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">{{ t('wizard.db.password') or 'Mot de passe' }}</label>
+                <input type="password" name="mysql_password" class="form-control" value="{{ state.mysql_password or '' }}" />
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button class="btn btn-primary" type="submit">
+                {{ t('wizard.db.test_button') or 'Tester la connexion' }}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Panel PostgreSQL -->
+        <div class="tab-pane fade {% if active_tab == 'postgresql' %}show active{% endif %}" id="postgresql-panel">
+          <form method="POST" action="/install/step"   class="mx-auto" style="max-width: 640px;">
+            <input type="hidden" name="step" value="db_test" />
+            <input type="hidden" name="db_type" value="postgresql" />
+
+            <div class="row">
+              <div class="col-md-8 mb-3">
+                <label class="form-label">{{ t('wizard.db.host') or 'Serveur' }}</label>
+                <input type="text" name="pg_host" class="form-control" value="{{ state.pg_host or 'localhost' }}" required oninvalid="this.setCustomValidity('{{ t("wizard.db.error_empty_field", "Ce champ est requis") }}') " oninput="this.setCustomValidity('')" />
+              </div>
+              <div class="col-md-4 mb-3">
+                <label class="form-label">{{ t('wizard.db.port') or 'Port' }}</label>
+                <input type="number" name="pg_port" class="form-control" value="{{ state.pg_port or '5432' }}" required oninvalid="this.setCustomValidity('{{ t("wizard.db.error_empty_field", "Ce champ est requis") }}') " oninput="this.setCustomValidity('')" />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">{{ t('wizard.db.dbname') or 'Base de données' }}</label>
+              <input type="text" name="pg_dbname" class="form-control" value="{{ state.pg_dbname or '' }}" placeholder="myapp" required oninvalid="this.setCustomValidity('{{ t("wizard.db.error_empty_field", "Ce champ est requis") }}') " oninput="this.setCustomValidity('')" />
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">{{ t('wizard.db.username') or 'Utilisateur' }}</label>
+                <input type="text" name="pg_user" class="form-control" value="{{ state.pg_user or 'postgres' }}" required oninvalid="this.setCustomValidity('{{ t("wizard.db.error_empty_field", "Ce champ est requis") }}') " oninput="this.setCustomValidity('')" />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">{{ t('wizard.db.password') or 'Mot de passe' }}</label>
+                <input type="password" name="pg_password" class="form-control" value="{{ state.pg_password or '' }}" />
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button class="btn btn-primary" type="submit">
+                {{ t('wizard.db.test_button') or 'Tester la connexion' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      {% if error %}
+      <div class="alert alert-danger" role="alert" id="db-error">
+        {{ error }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

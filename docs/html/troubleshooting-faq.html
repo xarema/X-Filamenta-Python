@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - ❓ FAQ — Questions Fréquemment Posées">
+    <title>❓ FAQ — Questions Fréquemment Posées - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="faq-questions-frequemment-posees">❓ FAQ — Questions Fréquemment Posées</h1>
+<hr />
+<h2 id="installation-demarrage">🚀 Installation &amp; Démarrage</h2>
+<h3 id="q-comment-installer-lapplication-localement">Q: Comment installer l'application localement ?</h3>
+<p><strong>A:</strong> Voir <a href="../guides/01_QUICKSTART.md">../guides/01_QUICKSTART.md</a></p>
+<p>Résumé rapide :</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>&lt;repo&gt;
+<span class="nb">cd</span><span class="w"> </span>X-Filamenta-Python
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+.venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate<span class="w">  </span><span class="c1"># ou source .venv/bin/activate</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+npm<span class="w"> </span>install
+python<span class="w"> </span>run_prod.py
+<span class="c1"># Accédez à http://127.0.0.1:5000</span>
+</code></pre></div>
+
+<h3 id="q-comment-acceder-a-lapplication-une-fois-demarree">Q: Comment accéder à l'application une fois démarrée ?</h3>
+<p><strong>A:</strong> http://127.0.0.1:5000</p>
+<p>Le wizard d'installation s'affiche automatiquement à la première visite.</p>
+<h3 id="q-jobtiens-une-erreur-address-already-in-use-au-demarrage">Q: J'obtiens une erreur "Address already in use" au démarrage</h3>
+<p><strong>A:</strong> Voir <a href="common-issues.md#address-already-in-use">common-issues.md#address-already-in-use</a></p>
+<hr />
+<h2 id="authentification-securite">🔐 Authentification &amp; Sécurité</h2>
+<h3 id="q-comment-activer-2fa">Q: Comment activer 2FA ?</h3>
+<p><strong>A:</strong> Une fois connecté :<br />
+1. Allez dans <code>/account/security/2fa</code><br />
+2. Cliquez "Activer 2FA"<br />
+3. Scannez le QR code avec Google Authenticator, Authy, etc.<br />
+4. Entrez un code pour confirmer<br />
+5. Sauvegardez les codes de secours</p>
+<h3 id="q-jai-perdu-mes-codes-de-secours-2fa">Q: J'ai perdu mes codes de secours 2FA</h3>
+<p><strong>A:</strong> Vous pouvez les régénérer depuis <code>/account/security/2fa</code>. Les anciens codes seront invalidés.</p>
+<h3 id="q-comment-reinitialiser-un-mot-de-passe-oublie">Q: Comment réinitialiser un mot de passe oublié ?</h3>
+<p><strong>A:</strong> Demandez à l'administrateur de réinitialiser votre compte.</p>
+<p><em>(Fonctionnalité "Mot de passe oublié" à implémenter)</em></p>
+<hr />
+<h2 id="base-de-donnees">💾 Base de données</h2>
+<h3 id="q-quelle-bd-devrais-je-utiliser">Q: Quelle BD devrais-je utiliser ?</h3>
+<p><strong>A:</strong> <br />
+- <strong>SQLite</strong> : Dev, tests, petites installations<br />
+- <strong>MySQL</strong> : Production légère-moyenne<br />
+- <strong>PostgreSQL</strong> : Production robuste/complexe</p>
+<p>Voir <a href="../features/database.md">../features/database.md</a> pour détails.</p>
+<h3 id="q-comment-changer-de-bd-apres-installation">Q: Comment changer de BD après installation ?</h3>
+<p><strong>A:</strong> <br />
+1. Modifier <code>SQLALCHEMY_DATABASE_URI</code> dans <code>.env</code><br />
+2. Relancer l'application<br />
+3. Optionnel : Restaurer un backup depuis l'interface d'administration</p>
+<h3 id="q-comment-faire-un-backup">Q: Comment faire un backup ?</h3>
+<p><strong>A:</strong> </p>
+<div class="highlight"><pre><span></span><code><span class="c1"># SQLite</span>
+cp<span class="w"> </span>instance/app.db<span class="w"> </span>instance/app.db.backup
+
+<span class="c1"># MySQL</span>
+mysqldump<span class="w"> </span>-u<span class="w"> </span>user<span class="w"> </span>-p<span class="w"> </span>database<span class="w"> </span>&gt;<span class="w"> </span>backup.sql
+
+<span class="c1"># PostgreSQL</span>
+pg_dump<span class="w"> </span>-U<span class="w"> </span>user<span class="w"> </span>-d<span class="w"> </span>database<span class="w"> </span>&gt;<span class="w"> </span>backup.sql
+</code></pre></div>
+
+<hr />
+<h2 id="langues-internationalisation">🌍 Langues &amp; Internationalisation</h2>
+<h3 id="q-comment-ajouter-une-nouvelle-langue">Q: Comment ajouter une nouvelle langue ?</h3>
+<p><strong>A:</strong> Voir <a href="../features/internationalization.md#ajouter-une-nouvelle-langue">../features/internationalization.md#ajouter-une-nouvelle-langue</a></p>
+<p>Résumé :<br />
+1. Copier <code>backend/src/i18n/en.json</code> → <code>backend/src/i18n/xx.json</code><br />
+2. Traduire tous les textes<br />
+3. Ajouter le code dans <code>SUPPORTED_LANGUAGES</code></p>
+<h3 id="q-une-traduction-est-manquante">Q: Une traduction est manquante</h3>
+<p><strong>A:</strong> Créez une issue avec :<br />
+- Le texte non traduit<br />
+- Où l'avez-vous trouvé<br />
+- La langue affectée</p>
+<h3 id="q-comment-changer-la-langue-de-linterface">Q: Comment changer la langue de l'interface ?</h3>
+<p><strong>A:</strong> <br />
+- Pendant l'installation : Choisir dès le départ<br />
+- Après installation : Depuis <code>/account/preferences</code></p>
+<hr />
+<h2 id="deploiement">🚀 Déploiement</h2>
+<h3 id="q-comment-deployer-en-production">Q: Comment déployer en production ?</h3>
+<p><strong>A:</strong> Voir <a href="../deployment/README.md">../deployment/README.md</a> et choisir votre plateforme :<br />
+- <a href="../deployment/01_CPANEL.md">cPanel</a><br />
+- <a href="../deployment/02_VPS_LINUX.md">VPS/Linux</a><br />
+- <a href="../deployment/03_DOCKER.md">Docker</a></p>
+<h3 id="q-quelle-plateforme-choisir">Q: Quelle plateforme choisir ?</h3>
+<p><strong>A:</strong><br />
+- <strong>Petit budget</strong> : cPanel (facile, managed)<br />
+- <strong>Plus de contrôle</strong> : VPS/Linux (configuration complète)<br />
+- <strong>Containerisé</strong> : Docker (portable, scalable)</p>
+<h3 id="q-comment-faire-un-backup-avant-deploiement">Q: Comment faire un backup avant déploiement ?</h3>
+<p><strong>A:</strong> Consultez le guide déploiement de votre plateforme. Généralement :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Backup BD + fichiers</span>
+cp<span class="w"> </span>-r<span class="w"> </span>instance/<span class="w"> </span>backup_<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>/
+mysqldump<span class="w"> </span>...<span class="w"> </span>&gt;<span class="w"> </span>database_<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>.sql
+</code></pre></div>
+
+<hr />
+<h2 id="developpement">👨‍💻 Développement</h2>
+<h3 id="q-comment-ajouter-une-nouvelle-page">Q: Comment ajouter une nouvelle page ?</h3>
+<p><strong>A:</strong> Voir <a href="../guides/04_DEVELOPMENT.md">../guides/04_DEVELOPMENT.md</a></p>
+<p>Résumé :<br />
+1. Créer template : <code>frontend/templates/pages/mypage.html</code><br />
+2. Créer route : <code>backend/src/routes/mypage.py</code><br />
+3. Enregistrer blueprint dans <code>app.py</code></p>
+<h3 id="q-comment-tester-mon-code">Q: Comment tester mon code ?</h3>
+<p><strong>A:</strong> Voir <a href="../contributing/testing.md">../contributing/testing.md</a></p>
+<div class="highlight"><pre><span></span><code>pytest<span class="w"> </span>backend/tests/
+ruff<span class="w"> </span>check<span class="w"> </span>.
+mypy<span class="w"> </span>backend/src/
+</code></pre></div>
+
+<h3 id="q-comment-contribuer-un-bug-fix">Q: Comment contribuer un bug fix ?</h3>
+<p><strong>A:</strong> Voir <a href="../contributing/README.md">../contributing/README.md</a></p>
+<ol>
+<li>Fork → Branch → Code → Tests</li>
+<li>Commit clair + message</li>
+<li>PR avec description</li>
+</ol>
+<hr />
+<h2 id="erreurs-courantes">❌ Erreurs courantes</h2>
+<h3 id="q-modulenotfounderror-no-module-named-flask">Q: "ModuleNotFoundError: No module named 'flask'"</h3>
+<p><strong>A:</strong> </p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</code></pre></div>
+
+<h3 id="q-connectionrefusederror-avec-la-bd">Q: "ConnectionRefusedError" avec la BD</h3>
+<p><strong>A:</strong> Voir <a href="common-issues.md#database-connection-refused">common-issues.md#database-connection-refused</a></p>
+<h3 id="q-permission-denied-sur-les-fichiers">Q: "Permission denied" sur les fichiers</h3>
+<p><strong>A:</strong> </p>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">755</span><span class="w"> </span>instance/
+chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">755</span><span class="w"> </span>frontend/static/
+</code></pre></div>
+
+<hr />
+<h2 id="obtenir-de-laide">📞 Obtenir de l'aide</h2>
+<ol>
+<li><strong>Consulter</strong> cette FAQ</li>
+<li><strong>Chercher</strong> dans <a href="common-issues.md">common-issues.md</a></li>
+<li><strong>Lire</strong> le guide approprié</li>
+<li><strong>Créer</strong> une issue sur GitHub</li>
+</ol>
+<hr />
+<p><strong>→ N'hésitez pas à poser des questions !</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

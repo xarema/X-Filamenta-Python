@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Fonctionnalités Complètes — X-Filamenta-Python">
+    <title>Fonctionnalités Complètes — X-Filamenta-Python - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="fonctionnalites-completes-x-filamenta-python">Fonctionnalités Complètes — X-Filamenta-Python</h1>
+<p><strong>Version:</strong> 0.0.1-Alpha<br />
+<strong>Date:</strong> 2025-12-28<br />
+<strong>Statut:</strong> Développement Actif</p>
+<hr />
+<h2 id="vue-densemble">🎯 Vue d'Ensemble</h2>
+<p>X-Filamenta-Python est une application web Flask moderne avec authentification, gestion d'utilisateurs, et wizard d'installation. Stack : Flask + HTMX + Bootstrap 5 + SQLAlchemy.</p>
+<hr />
+<h2 id="fonctionnalites-principales">📦 Fonctionnalités Principales</h2>
+<h3 id="1-wizard-dinstallation-complet">1. 🚀 <strong>Wizard d'Installation</strong> ✅ COMPLET</h3>
+<p><strong>Description:</strong> Assistant d'installation guidé en plusieurs étapes pour configurer l'application au premier lancement.</p>
+<p><strong>Étapes:</strong><br />
+1. ✅ Choix de langue (Français / English)<br />
+2. ✅ Écran de bienvenue<br />
+3. ✅ Configuration base de données<br />
+   - SQLite (local, par défaut)<br />
+   - MySQL (avec formulaire détaillé)<br />
+   - PostgreSQL (avec formulaire détaillé)<br />
+4. ✅ Test de connexion BD<br />
+5. ✅ Upload backup (optionnel)<br />
+6. ✅ Création compte administrateur<br />
+   - Validation mot de passe forte<br />
+   - Min 8 caractères, majuscule, chiffre, symbole<br />
+7. ✅ Résumé et finalisation</p>
+<p><strong>Fichiers:</strong><br />
+- Routes: <code>backend/src/routes/install.py</code><br />
+- Service: <code>backend/src/services/install_service.py</code><br />
+- Templates: <code>frontend/templates/pages/install/</code><br />
+- Tests: <code>scripts/tests/test_wizard_manual.py</code></p>
+<p><strong>Caractéristiques:</strong><br />
+- Interface HTMX pour navigation fluide<br />
+- Support multi-langues (FR/EN)<br />
+- Validation sécurisée des entrées<br />
+- Détection environnement système<br />
+- Guard d'installation automatique</p>
+<hr />
+<h3 id="2-authentification-utilisateur-complet">2. 🔐 <strong>Authentification Utilisateur</strong> ✅ COMPLET</h3>
+<p><strong>Description:</strong> Système complet de gestion d'authentification avec sécurité renforcée.</p>
+<p><strong>Fonctionnalités:</strong><br />
+- ✅ Inscription utilisateur<br />
+- ✅ Connexion / Déconnexion<br />
+- ✅ Hashage mot de passe (Werkzeug)<br />
+- ✅ Sessions Flask sécurisées<br />
+- ✅ Protection CSRF (Flask-WTF)<br />
+- ✅ Rate limiting anti-brute force<br />
+  - 5 tentatives/min, 20/heure<br />
+- ✅ Verrouillage compte après 5 échecs (15 min)<br />
+- ✅ Tracking IP de connexion<br />
+- ✅ Historique dernière connexion</p>
+<p><strong>Routes:</strong><br />
+- <code>POST /auth/login</code> — Connexion<br />
+- <code>POST /auth/logout</code> — Déconnexion<br />
+- <code>POST /auth/register</code> — Inscription<br />
+- <code>GET /auth/login</code> — Page de connexion</p>
+<p><strong>Fichiers:</strong><br />
+- Routes: <code>backend/src/routes/auth.py</code><br />
+- Service: <code>backend/src/services/user_service.py</code><br />
+- Modèle: <code>backend/src/models/user.py</code><br />
+- Templates: <code>frontend/templates/auth/</code></p>
+<hr />
+<h3 id="3-authentification-2fa-totp-complet">3. 🔑 <strong>Authentification 2FA (TOTP)</strong> ✅ COMPLET</h3>
+<p><strong>Description:</strong> Authentification à deux facteurs basée sur TOTP (Time-based One-Time Password) compatible Google Authenticator.</p>
+<p><strong>Fonctionnalités:</strong><br />
+- ✅ Génération secret TOTP (pyotp)<br />
+- ✅ QR Code pour Google Authenticator<br />
+- ✅ Codes de secours (backup codes)<br />
+- ✅ Validation TOTP à 6 chiffres<br />
+- ✅ Activation/Désactivation 2FA<br />
+- ✅ Protection rate limiting<br />
+  - Setup: 3/min, 10/h<br />
+  - Vérification: 10/min, 30/h<br />
+- ✅ Verrouillage après échecs répétés<br />
+- ✅ Interface utilisateur intuitive</p>
+<p><strong>Routes:</strong><br />
+- <code>GET /auth/2fa/setup</code> — Configuration 2FA<br />
+- <code>POST /auth/2fa/enable</code> — Activer 2FA<br />
+- <code>POST /auth/2fa/disable</code> — Désactiver 2FA<br />
+- <code>GET /auth/2fa/verify</code> — Page vérification<br />
+- <code>POST /auth/2fa/verify</code> — Vérifier code</p>
+<p><strong>Fichiers:</strong><br />
+- Routes: <code>backend/src/routes/auth_2fa.py</code><br />
+- Service: <code>backend/src/services/totp_service.py</code><br />
+- Tests: <code>backend/tests/test_totp.py</code>, <code>backend/tests/test_user_2fa.py</code></p>
+<p><strong>Dépendances:</strong><br />
+- pyotp (TOTP generation)<br />
+- qrcode (QR code generation)<br />
+- Pillow (Image processing)</p>
+<hr />
+<h3 id="4-gestion-des-utilisateurs-complet">4. 👥 <strong>Gestion des Utilisateurs</strong> ✅ COMPLET</h3>
+<p><strong>Description:</strong> Administration complète des comptes utilisateurs.</p>
+<p><strong>Fonctionnalités:</strong><br />
+- ✅ Liste de tous les utilisateurs<br />
+- ✅ Filtrage et recherche<br />
+- ✅ Création utilisateur manuel<br />
+- ✅ Modification utilisateur<br />
+- ✅ Suppression utilisateur<br />
+- ✅ Gestion des rôles (MEMBER/ADMIN)<br />
+- ✅ Activation/Désactivation compte<br />
+- ✅ Statistiques utilisateurs<br />
+- ✅ Historique actions admin</p>
+<p><strong>Routes:</strong><br />
+- <code>GET /admin/users</code> — Liste utilisateurs<br />
+- <code>POST /admin/users/create</code> — Créer utilisateur<br />
+- <code>POST /admin/users/&lt;id&gt;/edit</code> — Modifier utilisateur<br />
+- <code>DELETE /admin/users/&lt;id&gt;</code> — Supprimer utilisateur</p>
+<p><strong>Fichiers:</strong><br />
+- Routes: <code>backend/src/routes/admin_users.py</code><br />
+- Service: <code>backend/src/services/user_service.py</code><br />
+- Modèle: <code>backend/src/models/user.py</code><br />
+- Templates: <code>frontend/templates/admin/users/</code></p>
+<hr />
+<h3 id="5-dashboard-administrateur-complet">5. 📊 <strong>Dashboard Administrateur</strong> ✅ COMPLET</h3>
+<p><strong>Description:</strong> Tableau de bord avec statistiques temps réel et actions rapides.</p>
+<p><strong>Statistiques affichées:</strong><br />
+- ✅ Nombre total d'utilisateurs<br />
+- ✅ Utilisateurs actifs<br />
+- ✅ Administrateurs<br />
+- ✅ Utilisateurs avec 2FA activé<br />
+- ✅ Connexions dernières 24h<br />
+- ✅ Contenus publiés<br />
+- ✅ Historique des 10 dernières actions admin</p>
+<p><strong>Actions rapides:</strong><br />
+- ✅ Gérer les utilisateurs<br />
+- ✅ Gérer le contenu<br />
+- ✅ Paramètres système</p>
+<p><strong>Route:</strong><br />
+- <code>GET /admin/</code> — Dashboard principal</p>
+<p><strong>Fichiers:</strong><br />
+- Routes: <code>backend/src/routes/admin.py</code><br />
+- Modèle: <code>backend/src/models/admin_history.py</code><br />
+- Template: <code>frontend/templates/admin/dashboard_new.html</code></p>
+<hr />
+<h3 id="6-internationalisation-i18n-complet">6. 🌍 <strong>Internationalisation (i18n)</strong> ✅ COMPLET</h3>
+<p><strong>Description:</strong> Support multilingue complet de l'interface.</p>
+<p><strong>Langues supportées:</strong><br />
+- ✅ Français (FR)<br />
+- ✅ Anglais (EN)</p>
+<p><strong>Fonctionnalités:</strong><br />
+- ✅ Changement de langue dynamique<br />
+- ✅ Persistance en session<br />
+- ✅ Traductions complètes<br />
+- ✅ Fonction <code>t()</code> dans templates<br />
+- ✅ Fichiers JSON structurés</p>
+<p><strong>Routes:</strong><br />
+- <code>GET /lang/&lt;code&gt;</code> — Changer langue</p>
+<p><strong>Fichiers:</strong><br />
+- Routes: <code>backend/src/routes/lang.py</code><br />
+- Service: <code>backend/src/services/i18n_service.py</code><br />
+- Traductions: <code>backend/src/i18n/fr.json</code>, <code>backend/src/i18n/en.json</code></p>
+<p><strong>Sections traduites:</strong><br />
+- Navigation<br />
+- Authentification<br />
+- Wizard d'installation<br />
+- Dashboard admin<br />
+- Messages d'erreur<br />
+- Pages publiques</p>
+<hr />
+<h3 id="7-securite-complet">7. 🛡️ <strong>Sécurité</strong> ✅ COMPLET</h3>
+<p><strong>Description:</strong> Couche de sécurité multi-niveaux.</p>
+<p><strong>Protections implémentées:</strong><br />
+- ✅ <strong>CSRF Protection</strong><br />
+  - Tokens CSRF sur tous les formulaires<br />
+  - Service dédié: <code>csrf_service.py</code><br />
+  - Validation automatique</p>
+<ul>
+<li>✅ <strong>Rate Limiting</strong></li>
+<li>Flask-Limiter intégré</li>
+<li>Limites par route et par IP/utilisateur</li>
+<li>
+<p>Messages d'erreur personnalisés</p>
+</li>
+<li>
+<p>✅ <strong>Protection Mots de Passe</strong></p>
+</li>
+<li>Hashage Werkzeug (PBKDF2-SHA256)</li>
+<li>Validation force (min 8 car, maj, chiffre, symbole)</li>
+<li>
+<p>Pas de stockage en clair</p>
+</li>
+<li>
+<p>✅ <strong>Verrouillage Compte</strong></p>
+</li>
+<li>5 tentatives max</li>
+<li>Verrouillage 15 minutes</li>
+<li>
+<p>Réinitialisation auto</p>
+</li>
+<li>
+<p>✅ <strong>Headers Sécurité</strong></p>
+</li>
+<li>HSTS</li>
+<li>X-Frame-Options</li>
+<li>Content-Security-Policy (à configurer)</li>
+</ul>
+<p><strong>Fichiers:</strong><br />
+- <code>backend/src/services/csrf_service.py</code><br />
+- <code>backend/src/services/rate_limiter.py</code><br />
+- <code>backend/src/services/user_service.py</code><br />
+- Tests: <code>backend/tests/test_csrf.py</code></p>
+<hr />
+<h3 id="8-base-de-donnees-complet">8. 🗄️ <strong>Base de Données</strong> ✅ COMPLET</h3>
+<p><strong>Description:</strong> Gestion de base de données avec SQLAlchemy et migrations Alembic.</p>
+<p><strong>Supports:</strong><br />
+- ✅ SQLite (développement)<br />
+- ✅ MySQL / MariaDB<br />
+- ✅ PostgreSQL</p>
+<p><strong>Modèles:</strong><br />
+- ✅ <code>User</code> — Utilisateurs<br />
+  - Authentification<br />
+  - 2FA<br />
+  - Rôles<br />
+  - Sécurité<br />
+- ✅ <code>AdminHistory</code> — Historique admin<br />
+  - Actions<br />
+  - Timestamps<br />
+  - User associé</p>
+<p><strong>Migrations:</strong><br />
+- ✅ Alembic configuré<br />
+- ✅ Migrations versionnées<br />
+- ✅ Scripts de migration fournis</p>
+<p><strong>Fichiers:</strong><br />
+- Modèles: <code>backend/src/models/</code><br />
+- Config: <code>alembic.ini</code><br />
+- Migrations: <code>migrations/versions/</code></p>
+<hr />
+<h3 id="9-interface-utilisateur-complet">9. 🎨 <strong>Interface Utilisateur</strong> ✅ COMPLET</h3>
+<p><strong>Description:</strong> Interface moderne et responsive.</p>
+<p><strong>Stack Frontend:</strong><br />
+- ✅ Bootstrap 5.3<br />
+- ✅ HTMX 1.9 (interactions dynamiques)<br />
+- ✅ Alpine.js 3.x (composants réactifs)<br />
+- ✅ Design tokens CSS<br />
+- ✅ Thème personnalisable</p>
+<p><strong>Composants:</strong><br />
+- ✅ Navbar responsive<br />
+- ✅ Notifications toast<br />
+- ✅ Formulaires validés<br />
+- ✅ Tables interactives<br />
+- ✅ Modales<br />
+- ✅ Breadcrumbs<br />
+- ✅ Badges et alertes</p>
+<p><strong>Fichiers:</strong><br />
+- Templates: <code>frontend/templates/</code><br />
+- CSS: <code>frontend/static/css/</code><br />
+- JS: <code>frontend/static/js/</code></p>
+<p><strong>Fonctionnalités:</strong><br />
+- ✅ Chargement partiel (HTMX)<br />
+- ✅ Pas de rechargement page<br />
+- ✅ Animations fluides<br />
+- ✅ Feedback visuel immédiat</p>
+<hr />
+<h3 id="10-pages-publiques-complet">10. 📝 <strong>Pages Publiques</strong> ✅ COMPLET</h3>
+<p><strong>Description:</strong> Pages d'information et contenu statique.</p>
+<p><strong>Pages disponibles:</strong><br />
+- ✅ Accueil (<code>/</code>)<br />
+- ✅ À Propos (<code>/about</code>)<br />
+- ✅ Contact (<code>/contact</code>)<br />
+- ✅ Fonctionnalités (<code>/features</code>)<br />
+- ✅ Mentions légales (<code>/legal</code>)<br />
+- ✅ Erreur 404<br />
+- ✅ Erreur 500</p>
+<p><strong>Fichiers:</strong><br />
+- Routes: <code>backend/src/routes/pages.py</code><br />
+- Templates: <code>frontend/templates/pages/</code></p>
+<hr />
+<h3 id="11-api-rest-partiel">11. 🔌 <strong>API REST</strong> ⚠️ PARTIEL</h3>
+<p><strong>Description:</strong> API REST JSON pour intégrations externes.</p>
+<p><strong>Endpoints disponibles:</strong><br />
+- ✅ <code>GET /api/ping</code> — Health check<br />
+- ⏳ <code>GET /api/users</code> — Liste utilisateurs (à implémenter)<br />
+- ⏳ <code>POST /api/users</code> — Créer utilisateur (à implémenter)<br />
+- ⏳ Authentification API (tokens JWT)</p>
+<p><strong>Rate Limiting:</strong><br />
+- ✅ 100 requêtes/heure</p>
+<p><strong>Fichiers:</strong><br />
+- Routes: <code>backend/src/routes/api.py</code></p>
+<p><strong>Status:</strong> Squelette présent, à compléter</p>
+<hr />
+<h3 id="12-tests-complet">12. 🧪 <strong>Tests</strong> ✅ COMPLET</h3>
+<p><strong>Description:</strong> Suite de tests complète avec pytest.</p>
+<p><strong>Couverture:</strong><br />
+- ✅ Tests unitaires (models, services)<br />
+- ✅ Tests d'intégration (routes)<br />
+- ✅ Tests 2FA complets (27 tests)<br />
+- ✅ Tests CSRF<br />
+- ✅ Tests auth<br />
+- ✅ Tests admin<br />
+- ✅ Tests rate limiting<br />
+- ✅ Tests wizard</p>
+<p><strong>Statistiques:</strong><br />
+- 116 tests totaux<br />
+- 115 tests passent ✅<br />
+- 1 test échoue (rate_limiter, non critique)</p>
+<p><strong>Fichiers:</strong><br />
+- Tests: <code>backend/tests/</code><br />
+- Config: <code>pyproject.toml</code> (pytest)</p>
+<p><strong>Commande:</strong></p>
+<div class="highlight"><pre><span></span><code>pytest<span class="w"> </span>backend/tests/<span class="w"> </span>-v
+</code></pre></div>
+
+<hr />
+<h2 id="fonctionnalites-en-developpement">🔄 Fonctionnalités en Développement</h2>
+<h3 id="prochaines-etapes-roadmap">Prochaines Étapes (Roadmap)</h3>
+<h4 id="phase-5-fonctionnalites-avancees">Phase 5 — Fonctionnalités Avancées</h4>
+<ul>
+<li>[ ] Gestion de contenu (CMS léger)</li>
+<li>[ ] Upload de fichiers</li>
+<li>[ ] Export PDF/Excel</li>
+<li>[ ] Notifications email</li>
+<li>[ ] Logs système</li>
+<li>[ ] Sauvegarde automatique</li>
+</ul>
+<h4 id="phase-6-optimisations">Phase 6 — Optimisations</h4>
+<ul>
+<li>[ ] Cache Redis</li>
+<li>[ ] Queue de tâches (Celery)</li>
+<li>[ ] Monitoring (Sentry)</li>
+<li>[ ] Performance optimizations</li>
+<li>[ ] CDN pour assets statiques</li>
+</ul>
+<h4 id="phase-7-production">Phase 7 — Production</h4>
+<ul>
+<li>[ ] Configuration Docker</li>
+<li>[ ] CI/CD pipeline</li>
+<li>[ ] Documentation déploiement</li>
+<li>[ ] Guide d'administration</li>
+<li>[ ] Tests de charge</li>
+</ul>
+<hr />
+<h2 id="statistiques-projet">📊 Statistiques Projet</h2>
+<h3 id="code">Code</h3>
+<ul>
+<li><strong>Lignes Python:</strong> ~8,000</li>
+<li><strong>Lignes Templates:</strong> ~2,000</li>
+<li><strong>Lignes CSS/JS:</strong> ~500</li>
+<li><strong>Fichiers totaux:</strong> ~150</li>
+</ul>
+<h3 id="tests">Tests</h3>
+<ul>
+<li><strong>Tests automatisés:</strong> 116</li>
+<li><strong>Couverture:</strong> ~75%</li>
+<li><strong>Tests manuels:</strong> 3 scripts</li>
+</ul>
+<h3 id="documentation">Documentation</h3>
+<ul>
+<li><strong>Rapports d'analyse:</strong> 15+</li>
+<li><strong>Guides:</strong> 5</li>
+<li><strong>README:</strong> Complet</li>
+</ul>
+<hr />
+<h2 id="points-forts">🏆 Points Forts</h2>
+<ol>
+<li>✅ <strong>Sécurité robuste</strong> — CSRF, rate limiting, 2FA, verrouillage</li>
+<li>✅ <strong>UX moderne</strong> — HTMX, Bootstrap 5, responsive</li>
+<li>✅ <strong>Code propre</strong> — Type hints, docstrings, structure claire</li>
+<li>✅ <strong>Tests complets</strong> — 116 tests, couverture élevée</li>
+<li>✅ <strong>Multilingue</strong> — Support FR/EN natif</li>
+<li>✅ <strong>Documentation</strong> — Rapports détaillés, guides</li>
+<li>✅ <strong>Installation facile</strong> — Wizard intuitif</li>
+<li>✅ <strong>Extensible</strong> — Architecture modulaire</li>
+</ol>
+<hr />
+<h2 id="dependances-principales">📦 Dépendances Principales</h2>
+<h3 id="python">Python</h3>
+<ul>
+<li>Flask 3.0+</li>
+<li>SQLAlchemy 2.0+</li>
+<li>Alembic (migrations)</li>
+<li>Flask-Limiter (rate limiting)</li>
+<li>pyotp (TOTP/2FA)</li>
+<li>qrcode + Pillow (QR codes)</li>
+<li>pytest (tests)</li>
+</ul>
+<h3 id="frontend">Frontend</h3>
+<ul>
+<li>Bootstrap 5.3</li>
+<li>HTMX 1.9</li>
+<li>Alpine.js 3.x</li>
+<li>Tabulator (tables)</li>
+</ul>
+<hr />
+<h2 id="utilisation">🎯 Utilisation</h2>
+<h3 id="installation">Installation</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Cloner le repo</span>
+git<span class="w"> </span>clone<span class="w"> </span>&lt;repo-url&gt;
+<span class="nb">cd</span><span class="w"> </span>X-Filamenta-Python
+
+<span class="c1"># Installer dépendances</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c1"># Lancer l&#39;application</span>
+python<span class="w"> </span>run.py
+</code></pre></div>
+
+<h3 id="premier-lancement">Premier Lancement</h3>
+<ol>
+<li>Ouvrir http://localhost:5000/</li>
+<li>Suivre le wizard d'installation</li>
+<li>Créer un compte administrateur</li>
+<li>Se connecter</li>
+</ol>
+<h3 id="administration">Administration</h3>
+<ul>
+<li>Dashboard: http://localhost:5000/admin/</li>
+<li>Utilisateurs: http://localhost:5000/admin/users</li>
+</ul>
+<hr />
+<p><strong>Version:</strong> 0.0.1-Alpha<br />
+<strong>License:</strong> AGPL-3.0-or-later<br />
+<strong>Auteur:</strong> AleGabMar<br />
+<strong>Dernière MAJ:</strong> 2025-12-28</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

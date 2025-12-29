@@ -1,0 +1,101 @@
+{% extends "layouts/base.html" %} {% block title %}{{ t('pages.about.title') }} - {{
+t('app.name') }}{% endblock %} {% block content %}
+<div class="container py-5">
+  <!-- Header Section -->
+  <div class="row mb-5">
+    <div class="col-lg-12 text-center">
+      <h1 class="display-4 fw-bold text-primary mb-3">{{ t('pages.about.title') }}</h1>
+      <p class="lead text-muted">{{ t('pages.about.lead') }}</p>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <!-- Mission -->
+      <div class="card shadow-sm mb-4">
+        <div class="card-body p-4">
+          <h3 class="card-title mb-3">🎯 {{ t('pages.about.mission') }}</h3>
+          <p class="card-text">{{ t('pages.about.mission_body') }}</p>
+        </div>
+      </div>
+
+      <!-- Technology Stack -->
+      <div class="card shadow-sm mb-4">
+        <div class="card-body p-4">
+          <h3 class="card-title mb-3">🚀 {{ t('pages.about.stack') }}</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <h5 class="fw-bold text-primary">{{ t('pages.about.backend') }}</h5>
+              <ul class="list-unstyled">
+                <li>✓ Python 3.12</li>
+                <li>✓ Flask 3.x</li>
+                <li>✓ SQLAlchemy ORM</li>
+                <li>✓ CSRF Protection (Flask-WTF)</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h5 class="fw-bold text-primary">{{ t('pages.about.frontend') }}</h5>
+              <ul class="list-unstyled">
+                <li>✓ Bootstrap 5</li>
+                <li>✓ Jinja2 Templates</li>
+                <li>✓ HTMX</li>
+                <li>✓ Alpine.js</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h3 class="card-title mb-3">✨ {{ t('pages.about.features') }}</h3>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <div class="text-center">
+                <h5 class="fw-bold">🔒 {{ t('pages.about.security') }}</h5>
+                <p class="text-muted small">{{ t('pages.about.security_desc') }}</p>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="text-center">
+                <h5 class="fw-bold">⚡ {{ t('pages.about.performance') }}</h5>
+                <p class="text-muted small">{{ t('pages.about.performance_desc') }}</p>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="text-center">
+                <h5 class="fw-bold">📱 {{ t('pages.about.responsive') }}</h5>
+                <p class="text-muted small">{{ t('pages.about.responsive_desc') }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="row mt-5">
+    <div class="col-lg-8 mx-auto text-center">
+      <p class="lead text-muted mb-4">{{ t('pages.about.cta') }}</p>
+      <div class="btn-group" role="group">
+        <a href="/features" class="btn btn-primary"
+          >{{ t('pages.about.cta_features') }}</a
+        >
+        <a href="/contact" class="btn btn-outline-primary"
+          >{{ t('pages.about.cta_contact') }}</a
+        >
+        <a
+          href="https://github.com/xarema/X-Filamenta-Python"
+          class="btn btn-outline-secondary"
+          target="_blank"
+        >
+          {{ t('pages.about.cta_source') }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

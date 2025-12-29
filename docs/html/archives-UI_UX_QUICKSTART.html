@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - Guide rapide UI/UX — X-Filamenta-Python">
+    <title>Guide rapide UI/UX — X-Filamenta-Python - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="guide-rapide-uiux-x-filamenta-python">Guide rapide UI/UX — X-Filamenta-Python</h1>
+<p><strong>Version:</strong> 0.0.1-Alpha<br />
+<strong>Date:</strong> 2025-12-27</p>
+<hr />
+<h2 id="structure-du-projet-ui">📁 Structure du projet UI</h2>
+<div class="highlight"><pre><span></span><code><span class="n">frontend</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">css</span><span class="o">/</span><span class="n">tokens</span><span class="o">/</span><span class="n">variables</span><span class="o">.</span><span class="n">css</span><span class="w">    </span><span class="err">←</span><span class="w"> </span><span class="n">Définir</span><span class="w"> </span><span class="n">les</span><span class="w"> </span><span class="n">couleurs</span><span class="p">,</span><span class="w"> </span><span class="n">espacements</span><span class="p">,</span><span class="w"> </span><span class="n">etc</span><span class="o">.</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">css</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">css</span><span class="w">               </span><span class="err">←</span><span class="w"> </span><span class="n">Styles</span><span class="w"> </span><span class="n">Bootstrap</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">customs</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">js</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">tabulator</span><span class="o">.</span><span class="n">js</span><span class="w">           </span><span class="err">←</span><span class="w"> </span><span class="n">DataGrid</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">alpine</span><span class="o">-</span><span class="n">utils</span><span class="o">.</span><span class="n">js</span><span class="w">        </span><span class="err">←</span><span class="w"> </span><span class="n">Petits</span><span class="w"> </span><span class="n">comportements</span><span class="w"> </span><span class="p">(</span><span class="n">toggle</span><span class="p">,</span><span class="w"> </span><span class="n">dropdown</span><span class="p">)</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">htmx</span><span class="o">-</span><span class="n">utils</span><span class="o">.</span><span class="n">js</span><span class="w">          </span><span class="err">←</span><span class="w"> </span><span class="n">Interactions</span><span class="w"> </span><span class="n">sans</span><span class="w"> </span><span class="n">reload</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">templates</span><span class="o">/</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">layouts</span><span class="o">/</span><span class="n">base</span><span class="o">.</span><span class="n">html</span><span class="w">      </span><span class="err">←</span><span class="w"> </span><span class="n">Layout</span><span class="w"> </span><span class="n">principal</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">components</span><span class="o">/</span><span class="w">            </span><span class="err">←</span><span class="w"> </span><span class="n">Réutilisables</span><span class="w"> </span><span class="p">(</span><span class="n">navbar</span><span class="p">,</span><span class="w"> </span><span class="n">footer</span><span class="p">)</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">pages</span><span class="o">/</span><span class="w">                 </span><span class="err">←</span><span class="w"> </span><span class="n">Pages</span><span class="w"> </span><span class="n">publiques</span>
+<span class="w">    </span><span class="err">└──</span><span class="w"> </span><span class="n">admin</span><span class="o">/</span><span class="w">                 </span><span class="err">←</span><span class="w"> </span><span class="n">Pages</span><span class="w"> </span><span class="n">admin</span>
+</code></pre></div>
+
+<hr />
+<h2 id="creer-une-nouvelle-page">🎨 Créer une nouvelle page</h2>
+<h3 id="1-creer-le-fichier-template">1. Créer le fichier template</h3>
+<div class="highlight"><pre><span></span><code>{% extends &quot;layouts/base.html&quot; %} {% block title %}Mon titre - X-Filamenta{% endblock %}
+{% block content %}
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container py-4&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Ma page<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Contenu ici<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+{% endblock %}
+</code></pre></div>
+
+<h3 id="2-ajouter-la-route-flask">2. Ajouter la route Flask</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># backend/src/routes/__init__.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Blueprint</span><span class="p">,</span> <span class="n">render_template</span>
+
+<span class="n">main</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;main&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@main</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/my-page&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_page</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;pages/my-page.html&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="3-enregistrer-le-blueprint">3. Enregistrer le blueprint</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># backend/src/app.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.routes</span><span class="w"> </span><span class="kn">import</span> <span class="n">main</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_app</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">app</span>
+</code></pre></div>
+
+<hr />
+<h2 id="changer-les-couleurs-theme">🎨 Changer les couleurs (thème)</h2>
+<h3 id="1-editer-les-variables-css">1. Éditer les variables CSS</h3>
+<div class="highlight"><pre><span></span><code><span class="c">/* frontend/css/tokens/variables.css */</span>
+
+<span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nv">--color-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#0d6efd</span><span class="p">;</span><span class="w">        </span><span class="err">←</span><span class="w"> </span><span class="err">Changer</span><span class="w"> </span><span class="err">cette</span><span class="w"> </span><span class="err">couleur</span>
+<span class="w">  </span><span class="nv">--color-success</span><span class="p">:</span><span class="w"> </span><span class="mh">#198754</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#212529</span><span class="p">;</span>
+<span class="w">  </span><span class="c">/* ... */</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="2-ajouter-un-theme-alternatif">2. Ajouter un thème alternatif</h3>
+<div class="highlight"><pre><span></span><code><span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;custom-blue&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nv">--color-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#1e90ff</span><span class="p">;</span><span class="w">        </span><span class="err">←</span><span class="w"> </span><span class="err">Nouvelle</span><span class="w"> </span><span class="err">couleur</span><span class="w"> </span><span class="err">primaire</span>
+<span class="w">  </span><span class="nv">--color-success</span><span class="p">:</span><span class="w"> </span><span class="mh">#00aa00</span><span class="p">;</span><span class="w">        </span><span class="err">←</span><span class="w"> </span><span class="err">Nouvelle</span><span class="w"> </span><span class="err">couleur</span><span class="w"> </span><span class="err">succès</span>
+<span class="w">  </span><span class="nv">--text-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#1a1a2e</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="3-changer-le-theme-en-js">3. Changer le thème en JS</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;data-theme&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;custom-blue&quot;</span><span class="p">);</span>
+<span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&quot;theme&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;custom-blue&quot;</span><span class="p">);</span>
+</code></pre></div>
+
+<hr />
+<h2 id="creer-un-datagrid-tabulator">📊 Créer un DataGrid (Tabulator)</h2>
+<h3 id="1-preparer-les-donnees">1. Préparer les données</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># backend/src/routes/__init__.py</span>
+<span class="nd">@main</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/users&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">users</span><span class="p">():</span>
+    <span class="n">users_list</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Jean&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;jean@example.com&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Marie&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;marie@example.com&#39;</span><span class="p">},</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;pages/users.html&#39;</span><span class="p">,</span> <span class="n">users</span><span class="o">=</span><span class="n">users_list</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="2-creer-le-template">2. Créer le template</h3>
+<div class="highlight"><pre><span></span><code>{% extends &quot;layouts/base.html&quot; %} {% block content %}
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container py-4&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Utilisateurs<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+
+
+  <span class="p">&lt;</span><span class="nt">input</span>
+    <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span>
+    <span class="na">id</span><span class="o">=</span><span class="s">&quot;searchInput&quot;</span>
+    <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-control mb-3&quot;</span>
+    <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Rechercher...&quot;</span>
+  <span class="p">/&gt;</span>
+
+
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mb-3&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-success&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;exportCSV&quot;</span><span class="p">&gt;</span>📥 CSV<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-danger&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;exportPDF&quot;</span><span class="p">&gt;</span>📕 PDF<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;usersTable&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;ID&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="mf">80</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Nom&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;name&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Email&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;email&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">];</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{{</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">tojson</span><span class="w"> </span><span class="p">}};</span><span class="w">  </span><span class="err">←</span><span class="w"> </span><span class="nx">Passer</span><span class="w"> </span><span class="nx">les</span><span class="w"> </span><span class="nx">données</span><span class="w"> </span><span class="nx">Flask</span>
+
+<span class="w">    </span><span class="nb">window</span><span class="p">.</span><span class="nx">table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">initTabulator</span><span class="p">(</span><span class="s1">&#39;usersTable&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">columns</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Recherche</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;searchInput&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">debounce</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">filterTableBySearch</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">table</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="mf">300</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// Export</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;exportCSV&#39;</span><span class="p">).</span><span class="nx">onclick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">      </span><span class="nx">exportTableToCSV</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">table</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;users.csv&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;exportPDF&#39;</span><span class="p">).</span><span class="nx">onclick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">      </span><span class="nx">exportTableToPDF</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">table</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;users.pdf&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+{% endblock %}
+</code></pre></div>
+
+<hr />
+<h2 id="ajouter-une-interaction-toggledropdownmodal">🔘 Ajouter une interaction (Toggle/Dropdown/Modal)</h2>
+<h3 id="toggle">Toggle</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="o">=</span><span class="s">&quot;toggleComponent(&#39;isOpen&#39;)&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&quot;toggle()&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="p">&gt;</span>
+    {{ isOpen ? &#39;Masquer&#39; : &#39;Afficher&#39; }}
+  <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-show</span><span class="o">=</span><span class="s">&quot;isOpen&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mt-3&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Contenu caché<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h3 id="dropdown">Dropdown</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="o">=</span><span class="s">&quot;dropdownComponent()&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&quot;toggle()&quot;</span><span class="p">&gt;</span>Menu ▼<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;dropdown-menu&quot;</span> <span class="na">x-show</span><span class="o">=</span><span class="s">&quot;isOpen&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Option 1<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Option 2<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h3 id="modal">Modal</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span> <span class="na">data-bs-toggle</span><span class="o">=</span><span class="s">&quot;modal&quot;</span> <span class="na">data-bs-target</span><span class="o">=</span><span class="s">&quot;#myModal&quot;</span><span class="p">&gt;</span>
+  Ouvrir Modal
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;modal fade&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;myModal&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;-1&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;modal-dialog&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;modal-content&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;modal-header&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h5</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;modal-title&quot;</span><span class="p">&gt;</span>Titre<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn-close&quot;</span> <span class="na">data-bs-dismiss</span><span class="o">=</span><span class="s">&quot;modal&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;modal-body&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Contenu...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="interaction-sans-reload-htmx">📝 Interaction sans reload (HTMX)</h2>
+<h3 id="1-template">1. Template</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">form</span> <span class="na">hx-post</span><span class="o">=</span><span class="s">&quot;/api/save-preference&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#feedback&quot;</span> <span class="na">hx-swap</span><span class="o">=</span><span class="s">&quot;innerHTML&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;show_text&quot;</span> <span class="p">/&gt;</span> Afficher texte <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="p">&gt;</span>Enregistrer<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;feedback&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h3 id="2-route-flask">2. Route Flask</h3>
+<div class="highlight"><pre><span></span><code><span class="nd">@main</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/api/save-preference&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_preference</span><span class="p">():</span>
+    <span class="n">show_text</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;show_text&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;on&#39;</span>
+    <span class="c1"># Sauvegarder la préférence</span>
+    <span class="k">return</span> <span class="s1">&#39;&lt;p class=&quot;alert alert-success&quot;&gt;✓ Enregistré!&lt;/p&gt;&#39;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="bonnes-pratiques">🎯 Bonnes pratiques</h2>
+<h3 id="do">✅ DO</h3>
+<ul>
+<li>Utiliser CSS Variables pour les couleurs</li>
+<li>Nommer les classes : <code>.btn-primary</code>, <code>.card</code>, <code>.table</code></li>
+<li>Utiliser Bootstrap utilities : <code>mt-3</code>, <code>p-4</code>, <code>text-center</code></li>
+<li>Structurer templates avec <code>{% extends %}</code> et <code>{% include %}</code></li>
+<li>Débouncer les recherches (300ms minimum)</li>
+</ul>
+<h3 id="dont">❌ DON'T</h3>
+<ul>
+<li>Hardcoder des couleurs (#0d6efd au lieu de var(--color-primary))</li>
+<li>Mélanger inline styles et CSS</li>
+<li>Créer trop de classes CSS custom</li>
+<li>Changer le layout pour les thèmes (seulement couleurs!)</li>
+<li>Charger de gros datasets sans pagination</li>
+</ul>
+<hr />
+<h2 id="tester-localement">🧪 Tester localement</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Activer l&#39;env virtuel</span>
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+
+<span class="c1"># 2. Installer les dépendances</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c1"># 3. Démarrer Flask</span>
+python<span class="w"> </span>-m<span class="w"> </span>backend.src
+
+<span class="c1"># 4. Ouvrir le navigateur</span>
+<span class="c1"># http://localhost:5000</span>
+</code></pre></div>
+
+<hr />
+<h2 id="exemples-rapides">📊 Exemples rapides</h2>
+<h3 id="bouton-avec-couleur-primaire">Bouton avec couleur primaire</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="p">&gt;</span>Cliquez-moi<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h3 id="carte-card">Carte (Card)</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card-body&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h5</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card-title&quot;</span><span class="p">&gt;</span>Titre<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card-text&quot;</span><span class="p">&gt;</span>Texte...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="p">&gt;</span>Action<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h3 id="alerte">Alerte</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-success&quot;</span><span class="p">&gt;</span>✓ Succès!<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-danger&quot;</span><span class="p">&gt;</span>✗ Erreur!<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h3 id="formulaire">Formulaire</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mb-3&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-label&quot;</span><span class="p">&gt;</span>Nom<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-control&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mb-3&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;email&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-label&quot;</span><span class="p">&gt;</span>Email<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;email&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-control&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;email&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;email&quot;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="p">&gt;</span>Envoyer<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="ressources-rapides">📚 Ressources rapides</h2>
+<ul>
+<li><strong>Couleurs :</strong> Éditer <code>frontend/css/tokens/variables.css</code></li>
+<li><strong>Bootstrap :</strong> https://getbootstrap.com/docs/5.3/</li>
+<li><strong>HTMX :</strong> https://htmx.org/reference/</li>
+<li><strong>Alpine :</strong> https://alpinejs.dev/</li>
+<li><strong>Tabulator :</strong> https://tabulator.info/docs/5.4</li>
+</ul>
+<hr />
+<h2 id="prochaines-etapes">🚀 Prochaines étapes</h2>
+<ol>
+<li>Tester la page d'accueil</li>
+<li>Créer une page CRUD (admin)</li>
+<li>Ajouter un DataGrid</li>
+<li>Tester les thèmes (light/dark)</li>
+<li>Optimiser les performances</li>
+</ol>
+<hr />
+<p><strong>Besoin d'aide ?</strong> Consulter <code>docs/UI_UX_STACK.md</code> pour plus de détails ! 🎉</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

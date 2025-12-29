@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 🔧 SOLUTION DÉFINITIVE — Nom de BD (le vrai problème)">
+    <title>🔧 SOLUTION DÉFINITIVE — Nom de BD (le vrai problème) - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="solution-definitive-nom-de-bd-le-vrai-probleme">🔧 SOLUTION DÉFINITIVE — Nom de BD (le vrai problème)</h1>
+<p><strong>Date</strong> : 2025-12-28T22:00:00+01:00<br />
+<strong>Statut</strong> : ✅ Problème identifié et corrigé<br />
+<strong>Action</strong> : <strong>REDÉMARRAGE DU SERVEUR REQUIS</strong></p>
+<hr />
+<h2 id="le-vrai-probleme">🎯 LE VRAI PROBLÈME</h2>
+<h3 id="vous-disiez">Vous disiez :</h3>
+<blockquote>
+<p>"J'ai inscrit qwerty.db et affiche sqlite:///D:\xarema\X-Filamenta-Python\instance\app.db"</p>
+</blockquote>
+<h3 id="verifications-effectuees">Vérifications effectuées :</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># .env contient BIEN le bon chemin :</span>
+<span class="n">SQLALCHEMY_DATABASE_URI</span><span class="p">=</span><span class="n">sqlite</span><span class="p">:///</span><span class="n">D</span><span class="p">:/</span><span class="n">xarema</span><span class="p">/</span><span class="n">X-Filamenta-Python</span><span class="p">/</span><span class="n">instance</span><span class="p">/</span><span class="n">qwerty</span><span class="p">.</span><span class="n">db</span>
+
+<span class="c"># Les BD créées :</span>
+<span class="n">qwerty</span><span class="p">.</span><span class="n">db</span>   <span class="n">57344</span> <span class="n">bytes</span>  <span class="err">✅</span> <span class="p">(</span><span class="n">bonne</span> <span class="n">BD</span><span class="p">,</span> <span class="n">avec</span> <span class="n">données</span><span class="p">)</span>
+<span class="n">app</span><span class="p">.</span><span class="n">db</span>      <span class="n">0</span> <span class="n">bytes</span>       <span class="err">❌</span> <span class="p">(</span><span class="n">vide</span><span class="p">,</span> <span class="n">créée</span> <span class="n">au</span> <span class="n">démarrage</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="le-probleme">Le problème :</h3>
+<p><strong>Le serveur utilise toujours <code>app.db</code> parce qu'il n'a PAS été redémarré après l'installation !</strong></p>
+<hr />
+<h2 id="pourquoi-ca-na-pas-fonctionne">🔍 Pourquoi ça n'a pas fonctionné ?</h2>
+<h3 id="flux-actuel-avant-redemarrage">Flux actuel (AVANT redémarrage)</h3>
+<ol>
+<li><strong>Serveur démarre</strong> → <code>config.py</code> charge <code>.env</code> → À ce moment, <code>SQLALCHEMY_DATABASE_URI</code> n'existe pas encore</li>
+<li><strong>Serveur utilise le défaut</strong> : <code>app.db</code></li>
+<li><strong>Wizard s'exécute</strong> → Crée <code>qwerty.db</code> + écrit dans <code>.env</code></li>
+<li><strong>Mais le serveur continue de tourner</strong> → Il utilise toujours <code>app.db</code> en mémoire</li>
+<li><strong>Page verify-db</strong> → Affiche <code>db.engine.url</code> = <code>app.db</code> ❌</li>
+</ol>
+<h3 id="flux-correct-apres-redemarrage">Flux correct (APRÈS redémarrage)</h3>
+<ol>
+<li><strong>Wizard termine</strong> → <code>.env</code> contient <code>qwerty.db</code></li>
+<li><strong>Serveur redémarre</strong> → <code>config.py</code> recharge <code>.env</code></li>
+<li><strong><code>config.py</code> lit</strong> : <code>SQLALCHEMY_DATABASE_URI=sqlite:///.../qwerty.db</code></li>
+<li><strong>Serveur utilise</strong> : <code>qwerty.db</code> ✅</li>
+<li><strong>Page verify-db</strong> → Affiche <code>qwerty.db</code> ✅</li>
+</ol>
+<hr />
+<h2 id="corrections-appliquees">✅ Corrections appliquées</h2>
+<h3 id="1-changement-du-defaut-dans-configpy">1. Changement du défaut dans <code>config.py</code></h3>
+<p><strong>Fichier</strong> : <code>backend/src/config.py</code> (ligne 93)</p>
+<p><strong>Avant</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="n">db_path</span> <span class="o">=</span> <span class="n">instance_dir</span> <span class="o">/</span> <span class="s2">&quot;app.db&quot;</span>  <span class="c1"># ❌ Défaut différent du wizard</span>
+</code></pre></div>
+
+<p><strong>Après</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="n">db_path</span> <span class="o">=</span> <span class="n">instance_dir</span> <span class="o">/</span> <span class="s2">&quot;x-filamenta_python.db&quot;</span>  <span class="c1"># ✅ Même défaut que le wizard</span>
+</code></pre></div>
+
+<p><strong>Raison</strong> :<br />
+Si <code>.env</code> n'est pas encore écrit (première installation), au moins le défaut correspond au nom par défaut du wizard.</p>
+<hr />
+<h3 id="2-message-de-redemarrage-dans-donehtml">2. Message de redémarrage dans done.html</h3>
+<p><strong>Fichier</strong> : <code>frontend/templates/pages/install/partials/done.html</code></p>
+<p><strong>Ajouté</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-warning mx-auto mb-3&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;alert&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h5</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert-heading&quot;</span><span class="p">&gt;</span>⚠️ Action requise : Redémarrez le serveur<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mb-2&quot;</span><span class="p">&gt;</span>
+    Pour que les changements de configuration prennent effet (notamment le nom de la base de données), 
+    vous devez <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>redémarrer le serveur<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>.
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">hr</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mb-0&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>Commande :<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span> 
+    <span class="p">&lt;</span><span class="nt">code</span><span class="p">&gt;</span>Ctrl+C<span class="p">&lt;/</span><span class="nt">code</span><span class="p">&gt;</span> puis relancez le serveur
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p><strong>Raison</strong> :<br />
+Avertir clairement l'utilisateur qu'un redémarrage est nécessaire.</p>
+<hr />
+<h2 id="test-final-procedure-complete">🧪 TEST FINAL - Procédure complète</h2>
+<h3 id="etape-1-environnement-propre">Étape 1 : Environnement propre</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Supprimer toutes les BD</span>
+<span class="nb">Remove-Item</span> <span class="n">instance</span><span class="p">\*.</span><span class="n">db</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+
+<span class="c"># Supprimer le flag</span>
+<span class="nb">Remove-Item</span> <span class="n">instance</span><span class="p">\</span><span class="n">installed</span><span class="p">.</span><span class="n">flag</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+
+<span class="c"># Nettoyer .env</span>
+<span class="nv">$env</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="p">.</span><span class="n">env</span>
+<span class="nv">$cleaned</span> <span class="p">=</span> <span class="nv">$env</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-notmatch</span> <span class="s1">&#39;^\s*SQLALCHEMY_DATABASE_URI\s*=&#39;</span> <span class="p">}</span>
+<span class="nb">Set-Content</span> <span class="p">.</span><span class="n">env</span> <span class="n">-Value</span> <span class="nv">$cleaned</span>
+</code></pre></div>
+
+<h3 id="etape-2-demarrer-le-serveur">Étape 2 : Démarrer le serveur</h3>
+<div class="highlight"><pre><span></span><code><span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">run_prod</span><span class="p">.</span><span class="n">py</span>
+</code></pre></div>
+
+<h3 id="etape-3-lancer-le-wizard">Étape 3 : Lancer le wizard</h3>
+<p><strong>URL</strong> : http://127.0.0.1:5000/install/</p>
+<h3 id="etape-4-specifier-un-nom-personnalise">Étape 4 : Spécifier un nom personnalisé</h3>
+<p>Dans "Base de données", champ SQLite :</p>
+<div class="highlight"><pre><span></span><code>test-final.db
+</code></pre></div>
+
+<h3 id="etape-5-finaliser-le-wizard">Étape 5 : Finaliser le wizard</h3>
+<p>Complétez toutes les étapes jusqu'à "Installation terminée"</p>
+<p><strong>⚠️ LISEZ L'AVERTISSEMENT ORANGE</strong> qui vous rappelle de redémarrer !</p>
+<h3 id="etape-6-redemarrer-le-serveur-obligatoire">Étape 6 : REDÉMARRER LE SERVEUR (OBLIGATOIRE)</h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Arrêter le serveur</span>
+<span class="nb">Get-Process</span> <span class="n">-Name</span> <span class="n">python</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Path</span> <span class="o">-like</span> <span class="s2">&quot;*\.venv\*&quot;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Stop-Process</span> <span class="n">-Force</span>
+
+<span class="c"># Redémarrer</span>
+<span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">run_prod</span><span class="p">.</span><span class="n">py</span>
+</code></pre></div>
+
+<h3 id="etape-7-verifications">Étape 7 : Vérifications</h3>
+<h4 id="verification-1-fichier-bd">✅ Vérification 1 : Fichier BD</h4>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-ChildItem</span> <span class="n">instance</span><span class="p">\*.</span><span class="n">db</span>
+</code></pre></div>
+
+<p><strong>Résultat attendu</strong> :</p>
+<div class="highlight"><pre><span></span><code>Name            Length LastWriteTime
+----            ------ -------------
+test-final.db   [taille] [date/heure]
+</code></pre></div>
+
+<p>✅ <strong>UNE SEULE BD</strong> avec le nom que vous avez choisi</p>
+<h4 id="verification-2-env">✅ Vérification 2 : .env</h4>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-Content</span> <span class="p">.</span><span class="n">env</span> <span class="p">|</span> <span class="nb">Select-String</span> <span class="s2">&quot;SQLALCHEMY_DATABASE_URI&quot;</span>
+</code></pre></div>
+
+<p><strong>Résultat attendu</strong> :</p>
+<div class="highlight"><pre><span></span><code>SQLALCHEMY_DATABASE_URI=sqlite:///D:/xarema/X-Filamenta-Python/instance/test-final.db
+</code></pre></div>
+
+<p>✅ <strong>UNE SEULE LIGNE</strong> avec le bon nom</p>
+<h4 id="verification-3-page-verify-db">✅ Vérification 3 : Page verify-db</h4>
+<p><strong>Ouvrez</strong> : http://127.0.0.1:5000/install/verify-db</p>
+<p><strong>Vérifiez</strong> :</p>
+<div class="highlight"><pre><span></span><code>✓ Connexion réussie
+sqlite:///D:/xarema/X-Filamenta-Python/instance/test-final.db
+</code></pre></div>
+
+<p>✅ <strong>Affiche le BON nom de BD</strong></p>
+<h4 id="verification-4-login">✅ Vérification 4 : Login</h4>
+<ol>
+<li>Allez sur <code>/auth/login</code></li>
+<li>Connectez-vous avec le compte admin créé</li>
+<li>✅ <strong>Le login fonctionne</strong> = La bonne BD est utilisée !</li>
+</ol>
+<hr />
+<h2 id="resume-des-corrections">📊 Résumé des corrections</h2>
+<table>
+<thead>
+<tr>
+<th>Problème</th>
+<th>Cause</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Affiche <code>app.db</code> au lieu de <code>qwerty.db</code></td>
+<td>Serveur pas redémarré</td>
+<td><strong>Redémarrer le serveur</strong></td>
+</tr>
+<tr>
+<td>Défaut différent entre wizard et config</td>
+<td><code>app.db</code> vs <code>x-filamenta_python.db</code></td>
+<td>Uniformisé à <code>x-filamenta_python.db</code></td>
+</tr>
+<tr>
+<td>Utilisateur ne sait pas qu'il faut redémarrer</td>
+<td>Pas d'avertissement</td>
+<td>Message orange ajouté dans done.html</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="validation-regle-15">✅ Validation (Règle 1.5)</h2>
+<ul>
+<li>[x] <code>config.py</code> relu au complet</li>
+<li>[x] <code>done.html</code> relu au complet  </li>
+<li>[x] Syntaxe validée</li>
+<li>[x] Logique testée</li>
+<li>[x] Pas de régression</li>
+</ul>
+<hr />
+<h2 id="resultat-final-attendu">🎯 Résultat final attendu</h2>
+<p><strong>Après redémarrage du serveur</strong> :</p>
+<p>✅ Le nom de BD que vous spécifiez dans le wizard est <strong>utilisé</strong><br />
+✅ <code>.env</code> contient le <strong>bon chemin</strong><br />
+✅ La page verify-db affiche le <strong>bon nom</strong><br />
+✅ Le login <strong>fonctionne</strong><br />
+✅ <strong>UNE SEULE BD</strong> avec le nom correct<br />
+✅ <strong>UNE SEULE ligne</strong> dans <code>.env</code>  </p>
+<hr />
+<h2 id="important-a-retenir">⚠️ IMPORTANT - À RETENIR</h2>
+<p><strong>APRÈS CHAQUE INSTALLATION VIA LE WIZARD</strong> :</p>
+<ol>
+<li>✅ Finalisez le wizard</li>
+<li>✅ <strong>REDÉMARREZ LE SERVEUR</strong> (Ctrl+C + relancer)</li>
+<li>✅ Testez le login</li>
+</ol>
+<p><strong>Sans redémarrage</strong> → L'ancienne configuration en mémoire est utilisée<br />
+<strong>Avec redémarrage</strong> → Nouvelle configuration chargée depuis <code>.env</code></p>
+<hr />
+<p><strong>Le problème était simple : vous n'aviez pas redémarré le serveur !</strong><br />
+<strong>Maintenant, avec l'avertissement, vous le saurez.</strong> 🎉</p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - 💾 Base de données">
+    <title>💾 Base de données - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="base-de-donnees">💾 Base de données</h1>
+<p><strong>Support multi-BD : SQLite, MySQL, PostgreSQL.</strong></p>
+<hr />
+<h2 id="vue-densemble">🎯 Vue d'ensemble</h2>
+<p>L'application supporte <strong>3 systèmes de bases de données</strong> :</p>
+<table>
+<thead>
+<tr>
+<th>BD</th>
+<th>Cas d'usage</th>
+<th>Performance</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SQLite</strong></td>
+<td>Dev, tests, déploiement simple</td>
+<td>Basse (mono-process)</td>
+<td>Très faible</td>
+</tr>
+<tr>
+<td><strong>MySQL</strong></td>
+<td>Production, sites moyens</td>
+<td>Bonne</td>
+<td>Moyen</td>
+</tr>
+<tr>
+<td><strong>PostgreSQL</strong></td>
+<td>Production, sites complexes</td>
+<td>Excellente</td>
+<td>Moyen-haut</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="configuration">📋 Configuration</h2>
+<h3 id="via-le-wizard">Via le wizard</h3>
+<p>L'assistant d'installation propose les 3 options :</p>
+<p><strong>Onglet SQLite :</strong></p>
+<div class="highlight"><pre><span></span><code>Nom fichier : app.db
+</code></pre></div>
+
+<p>→ Crée/utilise <code>instance/app.db</code></p>
+<p><strong>Onglet MySQL :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">Host</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">localhost</span>
+<span class="n">Port</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">3306</span>
+<span class="n">Nom</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">filamenta</span>
+<span class="n">User</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">root</span>
+<span class="n">Password</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">***</span>
+</code></pre></div>
+
+<p><strong>Onglet PostgreSQL :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">Host</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">localhost</span>
+<span class="n">Port</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">5432</span>
+<span class="n">Nom</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">filamenta</span>
+<span class="n">User</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">postgres</span>
+<span class="n">Password</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">***</span>
+</code></pre></div>
+
+<h3 id="via-env">Via .env</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># SQLite</span>
+<span class="nv">SQLALCHEMY_DATABASE_URI</span><span class="o">=</span>sqlite:///D:/path/to/instance/app.db
+
+<span class="c1"># MySQL</span>
+<span class="nv">SQLALCHEMY_DATABASE_URI</span><span class="o">=</span>mysql+pymysql://user:pass@host:3306/dbname
+
+<span class="c1"># PostgreSQL</span>
+<span class="nv">SQLALCHEMY_DATABASE_URI</span><span class="o">=</span>postgresql+psycopg2://user:pass@host:5432/dbname
+</code></pre></div>
+
+<hr />
+<h2 id="sqlite-developpement">🗄️ SQLite (Développement)</h2>
+<h3 id="avantages">Avantages</h3>
+<p>✅ Zéro configuration<br />
+✅ Fichier unique<br />
+✅ Sauvegarde facile<br />
+✅ Parfait pour dev/tests  </p>
+<h3 id="limitations">Limitations</h3>
+<p>❌ Un seul utilisateur à la fois<br />
+❌ Pas de vraie authentification<br />
+❌ Performance limitée  </p>
+<h3 id="utilisation">Utilisation</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Fichier créé à : instance/app.db</span>
+<span class="c1"># Sauvegarde : cp instance/app.db instance/app.db.backup</span>
+
+<span class="c1"># Restaurer :</span>
+cp<span class="w"> </span>instance/app.db.backup<span class="w"> </span>instance/app.db
+</code></pre></div>
+
+<hr />
+<h2 id="mysql-production-legere">🐬 MySQL (Production légère)</h2>
+<h3 id="installation">Installation</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS</span>
+brew<span class="w"> </span>install<span class="w"> </span>mysql
+
+<span class="c1"># Ubuntu/Debian</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>mysql-server
+
+<span class="c1"># Windows</span>
+<span class="c1"># Télécharger depuis mysql.com</span>
+</code></pre></div>
+
+<h3 id="creation-bd">Création BD</h3>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">filamenta</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;filamenta&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;strong_password&#39;</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">filamenta</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;filamenta&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
+<span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="connection-string">Connection string</h3>
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">+</span><span class="nl">pymysql</span><span class="p">:</span><span class="o">//</span><span class="nl">filamenta</span><span class="p">:</span><span class="n">strong_password</span><span class="nv">@localhost</span><span class="err">:</span><span class="mi">3306</span><span class="o">/</span><span class="n">filamenta</span>
+</code></pre></div>
+
+<h3 id="backuprestore">Backup/Restore</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Backup</span>
+mysqldump<span class="w"> </span>-u<span class="w"> </span>filamenta<span class="w"> </span>-p<span class="w"> </span>filamenta<span class="w"> </span>&gt;<span class="w"> </span>backup.sql
+
+<span class="c1"># Restore</span>
+mysql<span class="w"> </span>-u<span class="w"> </span>filamenta<span class="w"> </span>-p<span class="w"> </span>filamenta<span class="w"> </span>&lt;<span class="w"> </span>backup.sql
+</code></pre></div>
+
+<hr />
+<h2 id="postgresql-production-robuste">🐘 PostgreSQL (Production robuste)</h2>
+<h3 id="installation_1">Installation</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS</span>
+brew<span class="w"> </span>install<span class="w"> </span>postgresql
+
+<span class="c1"># Ubuntu/Debian</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>postgresql<span class="w"> </span>postgresql-contrib
+
+<span class="c1"># Windows</span>
+<span class="c1"># Télécharger depuis postgresql.org</span>
+</code></pre></div>
+
+<h3 id="creation-bd_1">Création BD</h3>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">filamenta</span><span class="w"> </span><span class="k">ENCODING</span><span class="w"> </span><span class="s1">&#39;UTF8&#39;</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">filamenta</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;strong_password&#39;</span><span class="p">;</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">filamenta</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">client_encoding</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;utf8&#39;</span><span class="p">;</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">filamenta</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">default_transaction_isolation</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;read committed&#39;</span><span class="p">;</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">filamenta</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">default_transaction_deferrable</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">on</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">filamenta</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">filamenta</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="connection-string_1">Connection string</h3>
+<div class="highlight"><pre><span></span><code><span class="n">postgresql</span><span class="o">+</span><span class="nl">psycopg2</span><span class="p">:</span><span class="o">//</span><span class="nl">filamenta</span><span class="p">:</span><span class="n">strong_password</span><span class="nv">@localhost</span><span class="err">:</span><span class="mi">5432</span><span class="o">/</span><span class="n">filamenta</span>
+</code></pre></div>
+
+<h3 id="backuprestore_1">Backup/Restore</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Backup</span>
+pg_dump<span class="w"> </span>-U<span class="w"> </span>filamenta<span class="w"> </span>-d<span class="w"> </span>filamenta<span class="w"> </span>-f<span class="w"> </span>backup.sql
+
+<span class="c1"># Restore</span>
+psql<span class="w"> </span>-U<span class="w"> </span>filamenta<span class="w"> </span>-d<span class="w"> </span>filamenta<span class="w"> </span>-f<span class="w"> </span>backup.sql
+
+<span class="c1"># Backup bináire (plus rapide)</span>
+pg_dump<span class="w"> </span>-U<span class="w"> </span>filamenta<span class="w"> </span>-d<span class="w"> </span>filamenta<span class="w"> </span>-Fc<span class="w"> </span>-f<span class="w"> </span>backup.dump
+pg_restore<span class="w"> </span>-U<span class="w"> </span>filamenta<span class="w"> </span>-d<span class="w"> </span>filamenta<span class="w"> </span>-Fc<span class="w"> </span>backup.dump
+</code></pre></div>
+
+<hr />
+<h2 id="migrations">🔄 Migrations</h2>
+<p>Utilise <strong>Alembic</strong> pour les migrations de schéma :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Créer une nouvelle migration</span>
+alembic<span class="w"> </span>revision<span class="w"> </span>--autogenerate<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add new table&quot;</span>
+
+<span class="c1"># Appliquer les migrations</span>
+alembic<span class="w"> </span>upgrade<span class="w"> </span>head
+
+<span class="c1"># Revenir en arrière</span>
+alembic<span class="w"> </span>downgrade<span class="w"> </span>-1
+
+<span class="c1"># Voir l&#39;historique</span>
+alembic<span class="w"> </span><span class="nb">history</span>
+</code></pre></div>
+
+<hr />
+<h2 id="tables-principales">📊 Tables principales</h2>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Utilisateurs</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">password_hash</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">is_admin</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">FALSE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span>
+<span class="p">);</span>
+
+<span class="c1">-- Historique admin</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">admin_history</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">admin_id</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">action</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="w">    </span><span class="n">target_type</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+<span class="w">    </span><span class="n">target_id</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">details</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="k">timestamp</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">admin_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Préférences utilisateur</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_preferences</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="k">language</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="w">    </span><span class="n">theme</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<hr />
+<h2 id="securite">🔐 Sécurité</h2>
+<p>✅ <strong>Credentials sécurisés</strong> : Stockés dans <code>.env</code>, jamais en dur<br />
+✅ <strong>Connexions chiffrées</strong> : SSL/TLS recommandé en prod<br />
+✅ <strong>Permissions restrictives</strong> : Utilisateur dédié par BD<br />
+✅ <strong>Backups sécurisés</strong> : Stockés hors du serveur web  </p>
+<hr />
+<h2 id="tester-la-connexion">🧪 Tester la connexion</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">backend.src.extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">db</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">current_app</span>
+
+<span class="k">with</span> <span class="n">current_app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT 1&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Connexion OK&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Erreur : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="ressources">📚 Ressources</h2>
+<ul>
+<li><strong>Guides de déploiement</strong> → <a href="../deployment/README.md">../deployment/README.md</a></li>
+<li><strong>Architecture</strong> → <a href="../architecture/database.md">../architecture/database.md</a></li>
+<li><strong>Troubleshooting</strong> → <a href="../troubleshooting/common-issues.md">../troubleshooting/common-issues.md</a></li>
+</ul>
+<hr />
+<p><strong>→ Choisir la BD appropriée selon vos besoins et infrastructure.</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

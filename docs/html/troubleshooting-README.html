@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-Filamenta Documentation - ❓ Dépannage — X-Filamenta-Python">
+    <title>❓ Dépannage — X-Filamenta-Python - X-Filamenta Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📚 X-Filamenta Documentation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="all-pages.html">All Pages</a>
+            <a href="analysis-reports.html">Analysis Reports</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="00_START_HERE.html">Start Here</a></li>
+    <li><a href="guides-QUICKSTART.html">Quick Start</a></li>
+    <li><a href="REFERENCE.html">Reference</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Features</div>
+  <ul>
+    <li><a href="features-README.html">Overview</a></li>
+    <li><a href="features-authentication.html">Authentication</a></li>
+    <li><a href="features-wizard-installation.html">Installation Wizard</a></li>
+    <li><a href="features-internationalization.html">Internationalization</a></li>
+    <li><a href="features-database.html">Database Support</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Deployment</div>
+  <ul>
+    <li><a href="deployment-DEPLOYMENT.html">Overview</a></li>
+    <li><a href="deployment-DEPLOYMENT_CPANEL.html">cPanel</a></li>
+    <li><a href="deployment-DEPLOYMENT_VPS.html">VPS/Linux</a></li>
+    <li><a href="deployment-DEPLOYMENT_DOCKER.html">Docker</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Architecture</div>
+  <ul>
+    <li><a href="architecture-README.html">Overview</a></li>
+    <li><a href="DATABASE.html">Database</a></li>
+    <li><a href="technical-WSGI_AND_MULTIDB_ADAPTATION.html">WSGI & Multi-DB</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Security</div>
+  <ul>
+    <li><a href="security-README.html">Overview</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Contributing</div>
+  <ul>
+    <li><a href="contributing-README.html">Guidelines</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Help</div>
+  <ul>
+    <li><a href="troubleshooting-README.html">Troubleshooting</a></li>
+    <li><a href="troubleshooting-faq.html">FAQ</a></li>
+    <li><a href="troubleshooting-common-issues.html">Common Issues</a></li>
+    <li><a href="analysis-reports.html">Analysis Reports</a></li>
+  </ul>
+</div>
+
+        </aside>
+
+        <main class="main">
+            <h1 id="depannage-x-filamenta-python">❓ Dépannage — X-Filamenta-Python</h1>
+<p><strong>Aide au dépannage et réponses aux questions fréquentes.</strong></p>
+<hr />
+<h2 id="sections-principales">📋 Sections principales</h2>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Sujet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="common-issues.md">common-issues.md</a></td>
+<td>Problèmes courants et solutions</td>
+</tr>
+<tr>
+<td><a href="faq.md">faq.md</a></td>
+<td>Questions fréquemment posées</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="trouver-une-solution">🔍 Trouver une solution</h2>
+<h3 id="1-je-recois-une-erreur">1. <strong>Je reçois une erreur</strong></h3>
+<p>→ Consultez <a href="common-issues.md">common-issues.md</a></p>
+<p>Recherchez :<br />
+- Le message d'erreur exact<br />
+- L'étape/action qui la cause<br />
+- L'environment (OS, Python version, etc.)</p>
+<h3 id="2-jai-une-question-generale">2. <strong>J'ai une question générale</strong></h3>
+<p>→ Consultez <a href="faq.md">faq.md</a></p>
+<p>Parcourez les catégories :<br />
+- Installation &amp; Déploiement<br />
+- Utilisation &amp; Fonctionnalités<br />
+- Développement<br />
+- Sécurité</p>
+<h3 id="3-mon-probleme-nest-pas-liste">3. <strong>Mon problème n'est pas listé</strong></h3>
+<p>→ Actions recommandées :<br />
+1. Vérifier les logs<br />
+2. Consulter les guides appropriés<br />
+3. Créer une issue sur GitHub</p>
+<hr />
+<h2 id="deboguer-rapidement">🆘 Déboguer rapidement</h2>
+<h3 id="verifier-les-logs">Vérifier les logs</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Logs de l&#39;application</span>
+tail<span class="w"> </span>-f<span class="w"> </span>instance/logs/app.log
+
+<span class="c1"># Logs serveur (si applicable)</span>
+sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>filamenta<span class="w"> </span>-f
+</code></pre></div>
+
+<h3 id="verifier-la-configuration">Vérifier la configuration</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Environnement</span>
+cat<span class="w"> </span>.env
+
+<span class="c1"># Configuration BD</span>
+<span class="c1"># Vérifier que la BD est accessible et contient les tables</span>
+</code></pre></div>
+
+<h3 id="relancer-lapplication">Relancer l'application</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Arrêter</span>
+Ctrl+C
+
+<span class="c1"># Nettoyer les caches</span>
+rm<span class="w"> </span>-rf<span class="w"> </span>.mypy_cache<span class="w"> </span>.ruff_cache<span class="w"> </span>.pytest_cache<span class="w"> </span>__pycache__
+
+<span class="c1"># Relancer</span>
+python<span class="w"> </span>run_prod.py
+</code></pre></div>
+
+<hr />
+<h2 id="conseils-utiles">💡 Conseils utiles</h2>
+<h3 id="pour-les-developpeurs">Pour les développeurs</h3>
+<ul>
+<li>Activez le mode DEBUG local (<code>FLASK_ENV=development</code>)</li>
+<li>Utilisez <code>print()</code> ou logging pour déboguer</li>
+<li>Relancez après chaque modification</li>
+<li>Vérifiez les dépendances (<code>pip install -r requirements.txt</code>)</li>
+</ul>
+<h3 id="pour-les-adminsops">Pour les admins/ops</h3>
+<ul>
+<li>Vérifiez les logs du serveur (nginx, apache, etc.)</li>
+<li>Vérifiez la BD (tables, données, permissions)</li>
+<li>Vérifiez les permissions de fichiers</li>
+<li>Vérifiez l'espace disque</li>
+</ul>
+<h3 id="pour-les-utilisateurs">Pour les utilisateurs</h3>
+<ul>
+<li>Vider le cache du navigateur</li>
+<li>Essayer un autre navigateur</li>
+<li>Vérifier la connexion internet</li>
+<li>Contacter l'administrateur</li>
+</ul>
+<hr />
+<h2 id="obtenir-de-laide">📞 Obtenir de l'aide</h2>
+<h3 id="1-avant-de-chercher-de-laide">1. Avant de chercher de l'aide</h3>
+<ul>
+<li>[ ] Consulter <a href="common-issues.md">common-issues.md</a></li>
+<li>[ ] Consulter <a href="faq.md">faq.md</a></li>
+<li>[ ] Consulter les logs</li>
+<li>[ ] Essayer de redémarrer</li>
+</ul>
+<h3 id="2-chercher-de-laide">2. Chercher de l'aide</h3>
+<ul>
+<li>Créer une issue sur GitHub (avec contexte complet)</li>
+<li>Consulter les issues existantes (peut-être que quelqu'un a le même problème)</li>
+</ul>
+<h3 id="3-signaler-un-bug">3. Signaler un bug</h3>
+<p>Inclure :<br />
+- Description claire<br />
+- Étapes pour reproduire<br />
+- Résultat attendu vs actuel<br />
+- Environment (OS, Python, etc.)<br />
+- Logs pertinents</p>
+<hr />
+<h2 id="documentation-supplementaire">📚 Documentation supplémentaire</h2>
+<ul>
+<li><strong>Guides</strong> → <a href="../guides/README.md">../guides/README.md</a></li>
+<li><strong>Déploiement</strong> → <a href="../deployment/README.md">../deployment/README.md</a></li>
+<li><strong>Sécurité</strong> → <a href="../security/README.md">../security/README.md</a></li>
+</ul>
+<hr />
+<p><strong>→ Consultez les guides détaillés pour solutions spécifiques.</strong></p>
+
+            <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    © 2025 XAREMA. Licensed under <strong>AGPL-3.0-or-later</strong>.
+                    <a href="https://github.com/XAREMA" target="_blank">View source</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

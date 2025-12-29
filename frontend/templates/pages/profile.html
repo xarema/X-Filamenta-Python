@@ -1,0 +1,43 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Profile page
+Description: User profile placeholder
+
+File: frontend/templates/pages/profile.html | Repository: X-Filamenta-Python
+Created: 2025-12-27T00:00:00+00:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.0.1-Alpha | File version: 0.0.1-Alpha
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+{% extends "layouts/base.html" %} {% block title %}{{ t('pages.profile.title') }} - {{
+t('app.name') }}{% endblock %} {% block content %}
+<div class="container py-5">
+  <div class="row mb-4">
+    <div class="col-lg-8 mx-auto">
+      <h1 class="display-5 fw-bold text-primary">{{ t('pages.profile.title') }}</h1>
+      <p class="text-muted">{{ t('pages.profile.subtitle') }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <p class="text-muted">{{ t('pages.profile.subtitle') }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

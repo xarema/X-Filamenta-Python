@@ -29,6 +29,7 @@
   "version": "0.1.0-beta",
   "description": "Flask + HTMX + Bootstrap 5 — Application de gestion avec authentification 2FA, admin panel et i18n",
   "private": true,
+  "type": "module",
   "license": "AGPL-3.0-or-later",
   "author": {
     "name": "AleGabMar",
@@ -66,11 +67,11 @@
   "scripts": {
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint .",
-    "lint:css": "stylelint \"**/*.css\"",
+    "lint:css": "stylelint \"frontend/**/*.css\"",
     "fmt": "npm run fmt:js && npm run fmt:css",
-    "fmt:js": "prettier --write \"**/*.{js,json}\"",
-    "fmt:css": "prettier --write \"**/*.css\"",
-    "fmt:check": "prettier --check \"**/*.{js,json,css}\""
+    "fmt:js": "prettier --write \"frontend/**/*.js\" \"*.{js,json}\"",
+    "fmt:css": "prettier --write \"frontend/**/*.css\"",
+    "fmt:check": "prettier --check \"frontend/**/*.{js,json,css}\" \"*.{js,json}\""
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

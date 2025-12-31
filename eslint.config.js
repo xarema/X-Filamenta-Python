@@ -11,6 +11,7 @@ export default [
         ...globals.node,
         htmx: "readonly",
         Tabulator: "readonly",
+        Alpine: "readonly",
         module: "writable",
       },
       ecmaVersion: "latest",

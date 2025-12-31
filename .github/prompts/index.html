@@ -179,6 +179,7 @@
         <div class="container text-center">
             <h1 class="display-4 fw-bold mb-3">📚 Référence des Prompts AI</h1>
             <p class="lead">25 prompts agents pour automatiser le développement, debug, tests, et documentation</p>
+            <p class="mb-0">✨ Avec workflows recommandés et ordre d'exécution pour la roadmap</p>
         </div>
     </div>
 
@@ -220,6 +221,120 @@
             </div>
         </div>
 
+        <!-- Roadmap Workflow Guide -->
+        <div class="card mb-4 border-warning">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">🗺️ Workflow Roadmap — Ordre Recommandé</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="fw-bold">📋 Workflow Hebdomadaire (Simple)</h6>
+                        <ol class="mb-3">
+                            <li><strong>update-roadmap</strong> — Mise à jour manuelle hebdo</li>
+                            <li><em>cleanup-roadmap</em> (optionnel)</li>
+                        </ol>
+                        <p class="text-muted small">⏱️ Durée: 10-15 min | 📅 Fréquence: Chaque lundi</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-bold">🔍 Workflow Bi-hebdomadaire (Audit)</h6>
+                        <ol class="mb-3">
+                            <li><strong>analyze-code-vs-roadmap</strong> — Audit code réel</li>
+                            <li>Si gaps trouvés: <strong>generate-completion-plan</strong></li>
+                            <li><em>cleanup-roadmap</em> (fin de mois)</li>
+                        </ol>
+                        <p class="text-muted small">⏱️ Durée: 35-45 min | 📅 Fréquence: Lundis pairs</p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <h6 class="fw-bold">🎯 Workflow Fin de Phase</h6>
+                        <ol class="mb-3">
+                            <li><strong>analyze-code-vs-roadmap</strong> (comprehensive)</li>
+                            <li><strong>generate-completion-plan</strong> (si incomplet)</li>
+                            <li>Développer features manquantes</li>
+                            <li>Re-vérifier avec <strong>analyze-code-vs-roadmap</strong></li>
+                            <li><strong>cleanup-roadmap</strong> (archiver phase)</li>
+                        </ol>
+                        <p class="text-muted small">⏱️ Durée: 50-70 min | 📅 Phase supposée complète</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-bold">📊 Workflow Mensuel (Complet)</h6>
+                        <ol class="mb-3">
+                            <li><strong>analyze-code-vs-roadmap</strong> (comprehensive)</li>
+                            <li><strong>cleanup-roadmap</strong> (tout nettoyer)</li>
+                        </ol>
+                        <p class="text-muted small">⏱️ Durée: 80-110 min | 📅 Premier lundi du mois</p>
+                        <div class="alert alert-info py-2 px-3 mt-2 mb-0">
+                            <small><strong>💡 Ordre optimal:</strong> analyze → (plan si gaps) → (develop) → sync → cleanup</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Decision Matrix -->
+        <div class="card mb-4 border-primary">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">❓ Quel Prompt Utiliser ?</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th>Situation</th>
+                                <th>Prompt à utiliser</th>
+                                <th>Fréquence</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>🔄 Lundi matin routine</td>
+                                <td><a href="#update-roadmap"><strong>update-roadmap</strong></a></td>
+                                <td><span class="badge bg-secondary">Hebdomadaire</span></td>
+                            </tr>
+                            <tr>
+                                <td>🔍 Doute sur exactitude roadmap</td>
+                                <td><a href="#analyze-code-vs-roadmap"><strong>analyze-code-vs-roadmap</strong></a></td>
+                                <td><span class="badge bg-secondary">Bi-hebdo</span></td>
+                            </tr>
+                            <tr>
+                                <td>✅ Phase supposée complète</td>
+                                <td><a href="#analyze-code-vs-roadmap"><strong>analyze-code-vs-roadmap</strong></a> (comprehensive)</td>
+                                <td><span class="badge bg-warning text-dark">Fin phase</span></td>
+                            </tr>
+                            <tr>
+                                <td>📋 Features incomplètes trouvées</td>
+                                <td><a href="#generate-completion-plan"><strong>generate-completion-plan</strong></a></td>
+                                <td><span class="badge bg-info">Au besoin</span></td>
+                            </tr>
+                            <tr>
+                                <td>🔧 Nouvelle feature à coder</td>
+                                <td><a href="#add-feature-complete"><strong>add-feature-complete</strong></a> → <a href="#generate-test-suite"><strong>generate-test-suite</strong></a></td>
+                                <td><span class="badge bg-info">Au besoin</span></td>
+                            </tr>
+                            <tr>
+                                <td>🐛 Bug détecté</td>
+                                <td><a href="#debug-issue"><strong>debug-issue</strong></a></td>
+                                <td><span class="badge bg-danger">Urgent</span></td>
+                            </tr>
+                            <tr>
+                                <td>🚀 Avant déploiement</td>
+                                <td><a href="#pre-production-cleanup"><strong>pre-production-cleanup</strong></a></td>
+                                <td><span class="badge bg-success">Pré-deploy</span></td>
+                            </tr>
+                            <tr>
+                                <td>🧹 Fin de mois</td>
+                                <td><a href="#cleanup-roadmap"><strong>cleanup-roadmap</strong></a></td>
+                                <td><span class="badge bg-secondary">Mensuel</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <!-- Table of Contents -->
             <div class="col-lg-3 d-none d-lg-block">
@@ -250,7 +365,11 @@
                 description: 'Créer une fonctionnalité complète de A à Z: backend (routes Flask, modèles, services), frontend (templates Jinja, HTMX), tests (pytest), et documentation.',
                 inputs: ['Feature description', 'User stories', 'Technical requirements', 'Design mockups (optional)'],
                 steps: ['Database layer', 'Business logic', 'API routes', 'Frontend templates', 'i18n', 'Tests', 'Documentation'],
-                example: 'Ajouter authentification utilisateur avec email/password, 2FA, et session management.'
+                example: 'Ajouter authentification utilisateur avec email/password, 2FA, et session management.',
+                whenToUse: 'Nouvelle fonctionnalité majeure nécessitant DB + UI + API',
+                frequency: 'as-needed',
+                prerequisites: ['Spécifications claires', 'User stories définies'],
+                nextSteps: ['generate-test-suite', 'analyze-code-vs-roadmap']
             },
             {
                 id: 'debug-issue',
@@ -260,7 +379,11 @@
                 description: 'Analyse systématique et correction d\'un bug/erreur avec approche root cause analysis, reproduction, fix, et prévention.',
                 inputs: ['Issue description', 'Type (bug/error/test-failure)', 'Severity', 'Location', 'Steps to reproduce'],
                 steps: ['Gather information', 'Reproduce', 'Root cause analysis', 'Fix implementation', 'Verification', 'Prevention'],
-                example: 'Corriger erreur 500 sur /admin/dashboard causée par problème i18n manquant.'
+                example: 'Corriger erreur 500 sur /admin/dashboard causée par problème i18n manquant.',
+                whenToUse: 'Bug détecté en dev ou production',
+                frequency: 'as-needed',
+                prerequisites: ['Description bug', 'Steps reproduction'],
+                nextSteps: ['generate-test-suite (regression tests)']
             },
             {
                 id: 'create-htmx-endpoint',
@@ -270,7 +393,11 @@
                 description: 'Générer un endpoint HTMX complet: route Flask backend, template partiel, traductions i18n (FR+EN), tests pytest.',
                 inputs: ['Endpoint name', 'HTTP method', 'HTMX action', 'Response type'],
                 steps: ['Backend route', 'Partial template', 'i18n keys', 'Tests', 'Documentation'],
-                example: 'Créer endpoint pour recherche live de produits avec autocomplete HTMX.'
+                example: 'Créer endpoint pour recherche live de produits avec autocomplete HTMX.',
+                whenToUse: 'Nouvelle interaction AJAX/HTMX nécessaire',
+                frequency: 'as-needed',
+                prerequisites: ['Blueprint Flask existant', 'Fichiers i18n'],
+                nextSteps: ['Test manuel', 'generate-test-suite']
             },
             {
                 id: 'fix-security-issue',
@@ -280,7 +407,11 @@
                 description: 'Correction de vulnérabilité de sécurité avec audit, impact assessment, fix prioritaire, et tests de régression.',
                 inputs: ['Vulnerability type', 'Severity (CVSS)', 'Affected components', 'Discovery source'],
                 steps: ['Security audit', 'Impact analysis', 'Fix implementation', 'Security testing', 'Documentation'],
-                example: 'Corriger SQL injection dans search endpoint, ajouter parameterized queries.'
+                example: 'Corriger SQL injection dans search endpoint, ajouter parameterized queries.',
+                whenToUse: 'Vulnérabilité détectée (scan, audit, rapport)',
+                frequency: 'as-needed',
+                prerequisites: ['Rapport de vulnérabilité', 'Tests d\'exploitation'],
+                nextSteps: ['generate-test-suite (security tests)', 'security-audit']
             },
             {
                 id: 'refactor-route',
@@ -290,7 +421,11 @@
                 description: 'Refactoriser une route Flask existante: améliorer structure, séparer logique business, ajouter tests, maintenir compatibilité.',
                 inputs: ['Route path', 'Current issues', 'Refactoring goals'],
                 steps: ['Code analysis', 'Extract business logic', 'Improve error handling', 'Add tests', 'Update docs'],
-                example: 'Refactoriser /auth/login pour extraire validation dans service séparé.'
+                example: 'Refactoriser /auth/login pour extraire validation dans service séparé.',
+                whenToUse: 'Route trop complexe, logique métier dans handler, besoin optimisation',
+                frequency: 'as-needed',
+                prerequisites: ['Tests existants (non-régression)', 'Tuer serveurs'],
+                nextSteps: ['generate-test-suite', 'dev-quality']
             },
             {
                 id: 'migrate-dependency',
@@ -300,7 +435,11 @@
                 description: 'Migrer vers nouvelle version de dépendance ou remplacer librairie: audit breaking changes, update code, tests de régression.',
                 inputs: ['Package name', 'Current version', 'Target version', 'Migration reason'],
                 steps: ['Review changelog', 'Identify breaking changes', 'Update code', 'Run tests', 'Update documentation'],
-                example: 'Migrer de Flask 2.x à Flask 3.x avec nouveaux patterns.'
+                example: 'Migrer de Flask 2.x à Flask 3.x avec nouveaux patterns.',
+                whenToUse: 'Breaking changes, vulnérabilités CVE, nouvelles fonctionnalités',
+                frequency: 'as-needed',
+                prerequisites: ['Backup BD', 'Branche dédiée', 'Plan rollback'],
+                nextSteps: ['Tests complets', 'Performance check']
             },
             {
                 id: 'analyze-project-stack',
@@ -310,7 +449,11 @@
                 description: 'Analyse complète de la stack technique: dépendances, versions, architecture, patterns utilisés, recommandations.',
                 inputs: [],
                 steps: ['Scan dependencies', 'Analyze architecture', 'Review patterns', 'Generate report'],
-                example: 'Analyser stack pour identifier dépendances obsolètes et risques de sécurité.'
+                example: 'Analyser stack pour identifier dépendances obsolètes et risques de sécurité.',
+                whenToUse: 'Onboarding, audit tech, planification migration',
+                frequency: 'quarterly',
+                prerequisites: [],
+                nextSteps: ['Documentation technique', 'migrate-dependency (si obsolète)']
             },
             {
                 id: 'list-project-features',
@@ -320,7 +463,11 @@
                 description: 'Inventaire complet des fonctionnalités du projet: routes, templates, services, état d\'implémentation.',
                 inputs: [],
                 steps: ['Scan routes', 'List features', 'Check completion', 'Generate inventory'],
-                example: 'Créer inventaire de toutes les features pour documentation produit.'
+                example: 'Créer inventaire de toutes les features pour documentation produit.',
+                whenToUse: 'Documentation produit, release notes, comparaison roadmap',
+                frequency: 'monthly',
+                prerequisites: [],
+                nextSteps: ['analyze-code-vs-roadmap', 'Documentation']
             },
             {
                 id: 'analyze-code-vs-roadmap',
@@ -330,7 +477,12 @@
                 description: 'Comparer code implémenté avec roadmap: identifier écarts, features manquantes, déviations.',
                 inputs: [],
                 steps: ['Parse roadmap', 'Scan codebase', 'Compare features', 'Generate gap analysis'],
-                example: 'Vérifier que toutes les features Phase 1 de la roadmap sont implémentées.'
+                example: 'Vérifier que toutes les features Phase 1 de la roadmap sont implémentées.',
+                whenToUse: 'Audit bi-hebdomadaire OU doute sur exactitude roadmap',
+                frequency: 'bi-weekly',
+                order: 1,
+                prerequisites: ['Code récent commité', 'Tests passent'],
+                nextSteps: ['Si gaps trouvés: generate-completion-plan', 'Ensuite: sync-roadmap-from-analysis (si analyse auto)', 'cleanup-roadmap (fin workflow)']
             },
             {
                 id: 'dev-quality',
@@ -340,7 +492,11 @@
                 description: 'Audit qualité: linting (ruff), typing (mypy), tests coverage, code smells, best practices.',
                 inputs: [],
                 steps: ['Run linters', 'Type checking', 'Test coverage', 'Code review', 'Generate report'],
-                example: 'Audit complet avant release pour garantir qualité code.'
+                example: 'Audit complet avant release pour garantir qualité code.',
+                whenToUse: 'Workflow quotidien dev, avant commit, avant review',
+                frequency: 'daily',
+                prerequisites: [],
+                nextSteps: ['Fix issues', 'Commit code']
             },
             {
                 id: 'security-audit',
@@ -350,7 +506,11 @@
                 description: 'Audit sécurité complet: vulnérabilités dépendances (pip-audit), code patterns, config, CSP, CSRF.',
                 inputs: [],
                 steps: ['Dependency scan', 'Code security review', 'Configuration audit', 'Generate report'],
-                example: 'Audit sécurité avant déploiement production.'
+                example: 'Audit sécurité avant déploiement production.',
+                whenToUse: 'Avant production, après incident, audit annuel',
+                frequency: 'pre-release',
+                prerequisites: ['Code complet', 'Tests passent'],
+                nextSteps: ['fix-security-issue (si vulns)', 'pre-production-cleanup']
             },
             {
                 id: 'generate-test-suite',
@@ -360,7 +520,11 @@
                 description: 'Générer suite complète de tests pytest: unit tests, integration tests, fixtures, mocks.',
                 inputs: ['Module to test', 'Coverage target'],
                 steps: ['Analyze code', 'Generate unit tests', 'Generate integration tests', 'Setup fixtures'],
-                example: 'Générer tests complets pour module authentication (80%+ coverage).'
+                example: 'Générer tests complets pour module authentication (80%+ coverage).',
+                whenToUse: 'Nouvelle feature, feature sans tests, après refactoring',
+                frequency: 'as-needed',
+                prerequisites: ['Code implémenté', 'Fichier cible existe'],
+                nextSteps: ['Run tests', 'Fix failures avec debug-issue']
             },
             {
                 id: 'i18n-audit-fix',
@@ -370,7 +534,11 @@
                 description: 'Audit internationalisation: clés manquantes, traductions incomplètes, fix auto des erreurs i18n.',
                 inputs: [],
                 steps: ['Scan templates', 'Check translations', 'Find missing keys', 'Generate fixes'],
-                example: 'Corriger toutes les clés i18n manquantes détectées en production.'
+                example: 'Corriger toutes les clés i18n manquantes détectées en production.',
+                whenToUse: 'Erreurs i18n en prod, avant release, audit régulier',
+                frequency: 'as-needed',
+                prerequisites: [],
+                nextSteps: ['Test langues', 'Vérifier templates']
             },
             {
                 id: 'i18n-comprehensive-audit-and-fix',
@@ -380,7 +548,11 @@
                 description: 'Audit i18n exhaustif: tous les templates, toutes les langues, génération rapport détaillé, fix automatique.',
                 inputs: [],
                 steps: ['Full template scan', 'Cross-language comparison', 'Generate comprehensive report', 'Auto-fix'],
-                example: 'Audit complet i18n FR/EN avant release v1.0.'
+                example: 'Audit complet i18n FR/EN avant release v1.0.',
+                whenToUse: 'Avant release majeure, refonte i18n',
+                frequency: 'pre-release',
+                prerequisites: [],
+                nextSteps: ['Test toutes langues', 'Validation']
             },
             {
                 id: 'i18n-admin-management-implementation',
@@ -390,7 +562,11 @@
                 description: 'Implémenter interface admin pour gérer traductions: CRUD clés i18n, import/export JSON, prévisualisation.',
                 inputs: [],
                 steps: ['Admin routes', 'Management UI', 'Import/export', 'Tests'],
-                example: 'Ajouter interface admin pour que non-devs puissent éditer traductions.'
+                example: 'Ajouter interface admin pour que non-devs puissent éditer traductions.',
+                whenToUse: 'Besoin gestion traductions par non-devs',
+                frequency: 'once',
+                prerequisites: ['Admin panel existant'],
+                nextSteps: ['Tests UI', 'Documentation utilisateur']
             },
             {
                 id: 'i18n-audit-restructure',
@@ -400,7 +576,11 @@
                 description: 'Restructurer fichiers i18n: organiser par feature/module, améliorer nommage, migrer clés.',
                 inputs: [],
                 steps: ['Analyze current structure', 'Design new structure', 'Migrate keys', 'Update references'],
-                example: 'Réorganiser i18n de flat structure vers structure hiérarchique par feature.'
+                example: 'Réorganiser i18n de flat structure vers structure hiérarchique par feature.',
+                whenToUse: 'i18n désordonné, croissance fichiers, refactoring',
+                frequency: 'as-needed',
+                prerequisites: ['Backup i18n files'],
+                nextSteps: ['i18n-comprehensive-audit-and-fix', 'Test toutes pages']
             },
             {
                 id: 'i18n-restructure-tabulator',
@@ -410,7 +590,11 @@
                 description: 'Fix spécifique i18n pour Tabulator.js: traductions colonnes, pagination, menus contextuels.',
                 inputs: [],
                 steps: ['Scan Tabulator instances', 'Extract i18n strings', 'Update config', 'Test'],
-                example: 'Ajouter traductions FR pour tous les tableaux Tabulator du projet.'
+                example: 'Ajouter traductions FR pour tous les tableaux Tabulator du projet.',
+                whenToUse: 'Tables Tabulator non traduites',
+                frequency: 'as-needed',
+                prerequisites: ['Tabulator installé'],
+                nextSteps: ['Test tableaux', 'Vérifier langues']
             },
             {
                 id: 'pre-production-cleanup',
@@ -420,7 +604,11 @@
                 description: 'Checklist pré-production: remove debug code, clean logs, optimize, security scan, documentation update.',
                 inputs: [],
                 steps: ['Remove debug code', 'Clean comments/TODOs', 'Optimize', 'Security scan', 'Update docs'],
-                example: 'Préparer codebase pour release v1.0 en production.'
+                example: 'Préparer codebase pour release v1.0 en production.',
+                whenToUse: 'AVANT CHAQUE déploiement production',
+                frequency: 'pre-deployment',
+                prerequisites: ['Tests 100% pass', 'Backup planifié'],
+                nextSteps: ['Lire rapport GO/NO-GO', 'Deploy']
             },
             {
                 id: 'repository-cleanup',
@@ -430,7 +618,11 @@
                 description: 'Nettoyage repo: remove obsolete files, organize docs, update README, clean git history.',
                 inputs: [],
                 steps: ['Find obsolete files', 'Archive old docs', 'Update README', 'Clean branches'],
-                example: 'Nettoyer repository après phase de développement intensive.'
+                example: 'Nettoyer repository après phase de développement intensive.',
+                whenToUse: 'Préparation open-source, refonte repo, audit organisation',
+                frequency: 'quarterly',
+                prerequisites: ['Backup complet'],
+                nextSteps: ['Vérifier build', 'Update documentation']
             },
             {
                 id: 'cleanup-roadmap',
@@ -440,7 +632,12 @@
                 description: 'Nettoyer et mettre à jour roadmap: marquer completed tasks, archiver old versions, update status.',
                 inputs: [],
                 steps: ['Review roadmap', 'Mark completed', 'Archive old', 'Update priorities'],
-                example: 'Mettre à jour roadmap après fin de Phase 1.'
+                example: 'Mettre à jour roadmap après fin de Phase 1.',
+                whenToUse: 'Après update/sync roadmap, fin de mois, fin de phase',
+                frequency: 'monthly',
+                order: 3,
+                prerequisites: ['update-roadmap OU sync-roadmap-from-analysis exécuté'],
+                nextSteps: ['Vérifier .roadmap/INDEX.md généré']
             },
             {
                 id: 'update-roadmap',
@@ -450,7 +647,12 @@
                 description: 'Update roadmap avec nouvelles features, changements de priorité, ajustements timeline.',
                 inputs: ['New features', 'Priority changes', 'Timeline adjustments'],
                 steps: ['Review current roadmap', 'Add new items', 'Update priorities', 'Adjust timeline'],
-                example: 'Ajouter features Phase 2 et ajuster timeline suite à feedback client.'
+                example: 'Ajouter features Phase 2 et ajuster timeline suite à feedback client.',
+                whenToUse: 'Mise à jour hebdomadaire manuelle OU changements de plan',
+                frequency: 'weekly',
+                order: 1,
+                prerequisites: ['Documentation à jour (CHANGELOG, README)'],
+                nextSteps: ['cleanup-roadmap (optionnel)']
             },
             {
                 id: 'generate-completion-plan',
@@ -460,7 +662,12 @@
                 description: 'Générer plan détaillé pour compléter feature/phase: tasks breakdown, dependencies, estimation.',
                 inputs: ['Feature/phase name', 'Deadline'],
                 steps: ['Analyze requirements', 'Break down tasks', 'Identify dependencies', 'Estimate effort'],
-                example: 'Créer plan détaillé pour compléter authentification 2FA (Phase 4).'
+                example: 'Créer plan détaillé pour compléter authentification 2FA (Phase 4).',
+                whenToUse: 'Features incomplètes trouvées dans analyze-code-vs-roadmap',
+                frequency: 'as-needed',
+                order: 2,
+                prerequisites: ['Rapport analyze-code-vs-roadmap avec gaps identifiés'],
+                nextSteps: ['Développer selon plan', 'Re-vérifier avec analyze-code-vs-roadmap']
             },
             {
                 id: 'add-wizard-step',
@@ -470,7 +677,11 @@
                 description: 'Ajouter nouvelle étape au wizard d\'installation: backend logic, template, validation, i18n.',
                 inputs: ['Step name', 'Step position', 'Validation rules'],
                 steps: ['Backend route', 'Template', 'Validation', 'i18n', 'Tests'],
-                example: 'Ajouter étape "Choix thème" au wizard d\'installation.'
+                example: 'Ajouter étape "Choix thème" au wizard d\'installation.',
+                whenToUse: 'Extension wizard installation, nouveau paramètre config',
+                frequency: 'as-needed',
+                prerequisites: ['Wizard existant', 'Step number disponible'],
+                nextSteps: ['Test wizard complet', 'Update breadcrumb']
             },
             {
                 id: 'report-bug',
@@ -480,7 +691,11 @@
                 description: 'Créer rapport de bug standardisé dans docs/incidents/bugs/ avec template complet.',
                 inputs: ['Bug description', 'Severity', 'Steps to reproduce'],
                 steps: ['Create bug report', 'Fill template', 'Update incidents index'],
-                example: 'Rapporter bug de login 404 avec analyse complète.'
+                example: 'Rapporter bug de login 404 avec analyse complète.',
+                whenToUse: 'Bug détecté non corrigé immédiatement',
+                frequency: 'as-needed',
+                prerequisites: ['Reproduction confirmée'],
+                nextSteps: ['debug-issue (pour corriger)']
             },
             {
                 id: 'venv-setup-windows',
@@ -490,7 +705,11 @@
                 description: 'Guide setup environnement virtuel Python sur Windows: venv creation, activation, dependencies install.',
                 inputs: [],
                 steps: ['Create venv', 'Activate', 'Install dependencies', 'Verify'],
-                example: 'Configurer environnement dev Python sur Windows 11.'
+                example: 'Configurer environnement dev Python sur Windows 11.',
+                whenToUse: 'Setup initial, venv corrompu, migration Python version',
+                frequency: 'once',
+                prerequisites: ['Python 3.11+ installé'],
+                nextSteps: ['Configure IntelliJ', 'Run Flask']
             }
         ];
 
@@ -514,16 +733,32 @@
                 <div class="prompt-card" data-category="${prompt.category}" id="${prompt.id}">
                     <div class="prompt-header">
                         <div>
-                            <div class="prompt-title">${prompt.title}</div>
+                            <div class="prompt-title">${prompt.title}${prompt.order ? ` <span class="badge bg-info text-dark">Ordre ${prompt.order}</span>` : ''}</div>
                             <div class="prompt-filename">${prompt.filename}</div>
                         </div>
-                        <span class="category-badge badge-${prompt.category}">${getCategoryIcon(prompt.category)} ${getCategoryName(prompt.category)}</span>
+                        <div class="text-end">
+                            <span class="category-badge badge-${prompt.category}">${getCategoryIcon(prompt.category)} ${getCategoryName(prompt.category)}</span>
+                            ${prompt.frequency ? `<br><small class="badge bg-secondary mt-1">${getFrequencyLabel(prompt.frequency)}</small>` : ''}
+                        </div>
                     </div>
                     <p class="prompt-description">${prompt.description}</p>
+                    ${prompt.whenToUse ? `
+                        <div class="alert alert-info py-2 px-3 mb-2">
+                            <strong>📌 Quand l'utiliser:</strong> ${prompt.whenToUse}
+                        </div>
+                    ` : ''}
                     <details class="prompt-details">
                         <summary class="btn btn-sm btn-outline-primary">Voir les détails</summary>
                         <div class="mt-3">
-                            ${prompt.inputs ? `
+                            ${prompt.prerequisites && prompt.prerequisites.length > 0 ? `
+                                <div class="details-section">
+                                    <div class="details-title">⚠️ Prérequis:</div>
+                                    <ul>
+                                        ${prompt.prerequisites.map(prereq => `<li>${prereq}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            ` : ''}
+                            ${prompt.inputs && prompt.inputs.length > 0 ? `
                                 <div class="details-section">
                                     <div class="details-title">📋 Inputs requis:</div>
                                     <ul>
@@ -541,6 +776,14 @@
                                 <div class="details-section">
                                     <div class="details-title">💡 Exemple d'utilisation:</div>
                                     <div class="code-block">${prompt.example}</div>
+                                </div>
+                            ` : ''}
+                            ${prompt.nextSteps && prompt.nextSteps.length > 0 ? `
+                                <div class="details-section">
+                                    <div class="details-title">➡️ Étapes suivantes:</div>
+                                    <ul>
+                                        ${prompt.nextSteps.map(step => `<li>${step}</li>`).join('')}
+                                    </ul>
                                 </div>
                             ` : ''}
                             <div class="mt-3">
@@ -587,6 +830,21 @@
                 setup: 'Setup'
             };
             return names[category] || category;
+        }
+
+        function getFrequencyLabel(frequency) {
+            const labels = {
+                'daily': '📅 Quotidien',
+                'weekly': '📅 Hebdomadaire',
+                'bi-weekly': '📅 Bi-hebdomadaire',
+                'monthly': '📅 Mensuel',
+                'quarterly': '📅 Trimestriel',
+                'as-needed': '🔧 Au besoin',
+                'once': '1️⃣ Une fois',
+                'pre-release': '🚀 Avant release',
+                'pre-deployment': '🚀 Avant déploiement'
+            };
+            return labels[frequency] || frequency;
         }
 
         // Event listeners

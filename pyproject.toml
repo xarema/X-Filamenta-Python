@@ -59,7 +59,7 @@ dependencies = [
     "pyotp>=2.9,<3.0",
     "cryptography>=41.0,<47.0",
     "qrcode[pil]>=7.4,<9.0",
-    "redis>=5.0,<6.0",
+    "redis>=5.0,<8.0",
 ]
 
 [project.urls]

@@ -1,0 +1,85 @@
+{
+  "_comment_header": [
+    "==============================================================================",
+    "Package Configuration for X-Filamenta-Python",
+    "==============================================================================",
+    "Purpose: Node.js package configuration for frontend tooling",
+    "File: package.json | Repository: X-Filamenta-Python",
+    "",
+    "Created: 2025-12-31T14:16:27Z",
+    "Last modified (Git): TBD | Commit: TBD",
+    "",
+    "Distributed by: XAREMA | Coder: AleGabMar",
+    "App version: 0.1.0-beta | File version: 0.1.0-beta",
+    "",
+    "License: AGPL-3.0-or-later",
+    "SPDX-License-Identifier: AGPL-3.0-or-later",
+    "Copyright (c) 2025 XAREMA. All rights reserved.",
+    "",
+    "Metadata:",
+    "- Status: Stable",
+    "- Classification: Public",
+    "",
+    "Notes:",
+    "- This file manages frontend development dependencies and npm scripts",
+    "- Scripts mirror makefile targets for consistency",
+    "=============================================================================="
+  ],
+  "name": "x-filamenta-python",
+  "version": "0.1.0-beta",
+  "description": "Flask + HTMX + Bootstrap 5 — Application de gestion avec authentification 2FA, admin panel et i18n",
+  "private": true,
+  "type": "module",
+  "license": "AGPL-3.0-or-later",
+  "author": {
+    "name": "AleGabMar",
+    "email": "filamenta@xarema.com"
+  },
+  "contributors": [
+    {
+      "name": "XAREMA",
+      "url": "https://github.com/xarema"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xarema/X-Filamenta-Python.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xarema/X-Filamenta-Python/issues"
+  },
+  "homepage": "https://github.com/xarema/X-Filamenta-Python#readme",
+  "keywords": [
+    "flask",
+    "htmx",
+    "bootstrap",
+    "web-application",
+    "2fa",
+    "admin-panel",
+    "i18n",
+    "python",
+    "frontend-tooling"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "scripts": {
+    "lint": "npm run lint:js && npm run lint:css",
+    "lint:js": "eslint .",
+    "lint:css": "stylelint \"frontend/**/*.css\"",
+    "fmt": "npm run fmt:js && npm run fmt:css",
+    "fmt:js": "prettier --write \"frontend/**/*.js\" \"*.{js,json}\"",
+    "fmt:css": "prettier --write \"frontend/**/*.css\"",
+    "fmt:check": "prettier --check \"frontend/**/*.{js,json,css}\" \"*.{js,json}\""
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "eslint": "^9.17.0",
+    "globals": "^15.13.0",
+    "prettier": "^3.4.2",
+    "stylelint": "^16.12.0",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-order": "^6.0.4"
+  }
+}

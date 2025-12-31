@@ -30,11 +30,11 @@
  */
 
 // Initialisation Alpine
-document.addEventListener('alpine:init', () => {
-  console.log('Alpine.js utilities loaded');
+document.addEventListener("alpine:init", () => {
+  console.log("Alpine.js utilities loaded");
 
   // Composants Alpine globaux
-  Alpine.data('formHandler', () => ({
+  Alpine.data("formHandler", () => ({
     loading: false,
     error: null,
 
@@ -44,13 +44,13 @@ document.addEventListener('alpine:init', () => {
 
       try {
         // Logique de soumission
-        console.log('Form submitted');
+        console.log("Form submitted");
       } catch (error) {
         this.error = error.message;
       } finally {
         this.loading = false;
       }
-    }
+    },
   }));
 });
 
@@ -58,4 +58,3 @@ document.addEventListener('alpine:init', () => {
 window.alpineUtils = {
   // Fonctions utilitaires Alpine ici
 };
-

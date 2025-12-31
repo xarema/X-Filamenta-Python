@@ -32,51 +32,50 @@
 
 // Configuration Tabulator par défaut
 window.tabulatorDefaults = {
-  layout: 'fitColumns',
-  responsiveLayout: 'hide',
-  pagination: 'local',
+  layout: "fitColumns",
+  responsiveLayout: "hide",
+  pagination: "local",
   paginationSize: 10,
   paginationSizeSelector: [10, 25, 50, 100],
   movableColumns: true,
   resizableRows: true,
-  headerFilterPlaceholder: 'Filtrer...',
-  locale: 'fr',
+  headerFilterPlaceholder: "Filtrer...",
+  locale: "fr",
   langs: {
-    'fr': {
-      'pagination': {
-        'first': 'Premier',
-        'first_title': 'Première page',
-        'last': 'Dernier',
-        'last_title': 'Dernière page',
-        'prev': 'Précédent',
-        'prev_title': 'Page précédente',
-        'next': 'Suivant',
-        'next_title': 'Page suivante',
-        'page_size': 'Taille de page'
-      }
-    }
-  }
+    fr: {
+      pagination: {
+        first: "Premier",
+        first_title: "Première page",
+        last: "Dernier",
+        last_title: "Dernière page",
+        prev: "Précédent",
+        prev_title: "Page précédente",
+        next: "Suivant",
+        next_title: "Page suivante",
+        page_size: "Taille de page",
+      },
+    },
+  },
 };
 
 // Helper pour initialiser un tableau
 function initTabulator(selector, columns, data = []) {
-  if (typeof Tabulator === 'undefined') {
-    console.warn('Tabulator not loaded');
+  if (typeof Tabulator === "undefined") {
+    console.warn("Tabulator not loaded");
     return null;
   }
 
   return new Tabulator(selector, {
     ...window.tabulatorDefaults,
     columns: columns,
-    data: data
+    data: data,
   });
 }
 
 // Export
 window.tabulatorUtils = {
   init: initTabulator,
-  defaults: window.tabulatorDefaults
+  defaults: window.tabulatorDefaults,
 };
 
-console.log('Tabulator utilities loaded');
-
+console.log("Tabulator utilities loaded");

@@ -4,7 +4,7 @@
     "Package Configuration for X-Filamenta-Python",
     "==============================================================================",
     "Purpose: Node.js package configuration for frontend tooling",
-    "File: package.json | Repository: X-Filamenta-Python",
+    "File: package. json | Repository: X-Filamenta-Python",
     "",
     "Created: 2025-12-31T14:16:27Z",
     "Last modified (Git): TBD | Commit: TBD",
@@ -27,7 +27,7 @@
   ],
   "name": "x-filamenta-python",
   "version": "0.1.0-beta",
-  "description": "Flask + HTMX + Bootstrap 5 — Application de gestion avec authentification 2FA, admin panel et i18n",
+  "description": "Flask + HTMX + Bootstrap 5 â€” Application de gestion avec authentification 2FA, admin panel et i18n",
   "private": true,
   "type": "module",
   "license": "AGPL-3.0-or-later",
@@ -68,10 +68,12 @@
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint .",
     "lint:css": "stylelint \"frontend/**/*.css\"",
+    "lint:fix": "eslint . --fix && stylelint \"frontend/**/*.css\" --fix",
     "fmt": "npm run fmt:js && npm run fmt:css",
-    "fmt:js": "prettier --write \"frontend/**/*.js\" \"*.{js,json}\"",
+    "fmt:js": "prettier --write \"frontend/**/*.js\" \"*{js,json}\"",
     "fmt:css": "prettier --write \"frontend/**/*.css\"",
-    "fmt:check": "prettier --check \"frontend/**/*.{js,json,css}\" \"*.{js,json}\""
+    "fmt:check": "prettier --check \"frontend/**/*{js,json,css}\" \"*.{js,json}\"",
+    "validate": "npm run lint && npm run fmt:check"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

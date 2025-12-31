@@ -31,27 +31,27 @@
  */
 
 // Initialisation HTMX
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('HTMX utilities loaded');
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("HTMX utilities loaded");
 
   // Ajouter des événements HTMX personnalisés si nécessaire
-  document.body.addEventListener('htmx:afterSwap', function(event) {
+  document.body.addEventListener("htmx:afterSwap", function (event) {
     // Callback après un swap HTMX
-    console.log('HTMX swap completed');
+    console.log("HTMX swap completed");
   });
 
-  document.body.addEventListener('htmx:responseError', function(event) {
+  document.body.addEventListener("htmx:responseError", function (event) {
     // Gérer les erreurs HTMX
-    console.error('HTMX error:', event.detail);
+    console.error("HTMX error:", event.detail);
   });
 });
 
 // Helper pour afficher des notifications
-function showNotification(message, type = 'info') {
+function showNotification(message, type = "info") {
   // Simple notification toast
-  const toast = document.createElement('div');
+  const toast = document.createElement("div");
   toast.className = `alert alert-${type} position-fixed top-0 end-0 m-3`;
-  toast.style.zIndex = '9999';
+  toast.style.zIndex = "9999";
   toast.textContent = message;
   document.body.appendChild(toast);
 
@@ -62,6 +62,5 @@ function showNotification(message, type = 'info') {
 
 // Export pour utilisation globale
 window.htmxUtils = {
-  showNotification
+  showNotification,
 };
-

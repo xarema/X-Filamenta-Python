@@ -3,11 +3,7 @@
     "python_files": 40,
     "html_files": 55,
     "used_keys_count": 546,
-    "languages": [
-      "en",
-      "es",
-      "fr"
-    ]
+    "languages": ["en", "es", "fr"]
   },
   "missing": {
     "en": [
@@ -1495,38 +1491,22 @@
       ".\\backend\\src\\utils\\i18n.py",
       ".\\backend\\src\\app.py"
     ],
-    "en": [
-      ".\\backend\\src\\app.py"
-    ],
+    "en": [".\\backend\\src\\app.py"],
     "PYTEST_CURRENT_TEST": [
       ".\\backend\\src\\routes\\install.py",
       ".\\backend\\src\\app.py"
     ],
-    "/install/": [
-      ".\\backend\\src\\app.py"
-    ],
-    "DEBUG": [
-      ".\\backend\\src\\assets.py"
-    ],
+    "/install/": [".\\backend\\src\\app.py"],
+    "DEBUG": [".\\backend\\src\\assets.py"],
     "HX-Request": [
       ".\\backend\\src\\routes\\auth_2fa.py",
       ".\\backend\\src\\decorators.py"
     ],
-    "csrf_token": [
-      ".\\backend\\src\\decorators.py"
-    ],
-    "X-CSRF-Token": [
-      ".\\backend\\src\\decorators.py"
-    ],
-    "PREFERRED_URL_SCHEME": [
-      ".\\backend\\src\\middleware.py"
-    ],
-    "SECRET_KEY": [
-      ".\\backend\\src\\models\\settings.py"
-    ],
-    "description": [
-      ".\\backend\\src\\models\\settings.py"
-    ],
+    "csrf_token": [".\\backend\\src\\decorators.py"],
+    "X-CSRF-Token": [".\\backend\\src\\decorators.py"],
+    "PREFERRED_URL_SCHEME": [".\\backend\\src\\middleware.py"],
+    "SECRET_KEY": [".\\backend\\src\\models\\settings.py"],
+    "description": [".\\backend\\src\\models\\settings.py"],
     "email_verification_token_expiry_hours": [
       ".\\backend\\src\\models\\user.py",
       ".\\backend\\src\\services\\email_service.py",
@@ -1537,9 +1517,7 @@
       ".\\backend\\src\\services\\email_service.py",
       ".\\backend\\src\\routes\\admin.py"
     ],
-    "admin": [
-      ".\\backend\\src\\routes\\admin.py"
-    ],
+    "admin": [".\\backend\\src\\routes\\admin.py"],
     "smtp_host": [
       ".\\backend\\src\\services\\email_service.py",
       ".\\backend\\src\\routes\\admin.py"
@@ -1568,38 +1546,22 @@
       ".\\backend\\src\\services\\email_service.py",
       ".\\backend\\src\\routes\\admin.py"
     ],
-    "email_verification_required": [
-      ".\\backend\\src\\routes\\admin.py"
-    ],
-    "password_reset_rate_limit_per_hour": [
-      ".\\backend\\src\\routes\\admin.py"
-    ],
+    "email_verification_required": [".\\backend\\src\\routes\\admin.py"],
+    "password_reset_rate_limit_per_hour": [".\\backend\\src\\routes\\admin.py"],
     "email_format": [
       ".\\backend\\src\\services\\email_service.py",
       ".\\backend\\src\\routes\\admin.py"
     ],
-    "registration_enabled": [
-      ".\\backend\\src\\routes\\admin.py"
-    ],
-    "2fa_required": [
-      ".\\backend\\src\\routes\\admin.py"
-    ],
+    "registration_enabled": [".\\backend\\src\\routes\\admin.py"],
+    "2fa_required": [".\\backend\\src\\routes\\admin.py"],
     "site_name": [
       ".\\backend\\src\\services\\email_service.py",
       ".\\backend\\src\\routes\\admin.py"
     ],
-    "site_url": [
-      ".\\backend\\src\\routes\\admin.py"
-    ],
-    "logo_url": [
-      ".\\backend\\src\\routes\\admin.py"
-    ],
-    "footer_text": [
-      ".\\backend\\src\\routes\\admin.py"
-    ],
-    "admin_cache": [
-      ".\\backend\\src\\routes\\admin_cache.py"
-    ],
+    "site_url": [".\\backend\\src\\routes\\admin.py"],
+    "logo_url": [".\\backend\\src\\routes\\admin.py"],
+    "footer_text": [".\\backend\\src\\routes\\admin.py"],
+    "admin_cache": [".\\backend\\src\\routes\\admin_cache.py"],
     "cache_backend": [
       ".\\backend\\src\\routes\\install.py",
       ".\\backend\\src\\routes\\admin_cache.py"
@@ -1620,32 +1582,18 @@
       ".\\backend\\src\\routes\\install.py",
       ".\\backend\\src\\routes\\admin_cache.py"
     ],
-    "host": [
-      ".\\backend\\src\\routes\\admin_cache.py"
-    ],
-    "port": [
-      ".\\backend\\src\\routes\\admin_cache.py"
-    ],
+    "host": [".\\backend\\src\\routes\\admin_cache.py"],
+    "port": [".\\backend\\src\\routes\\admin_cache.py"],
     "password": [
       ".\\backend\\src\\routes\\admin_users.py",
       ".\\backend\\src\\routes\\auth.py",
       ".\\backend\\src\\routes\\admin_cache.py"
     ],
-    "db": [
-      ".\\backend\\src\\routes\\admin_cache.py"
-    ],
-    "admin_users": [
-      ".\\backend\\src\\routes\\admin_users.py"
-    ],
-    "page": [
-      ".\\backend\\src\\routes\\admin_users.py"
-    ],
-    "per_page": [
-      ".\\backend\\src\\routes\\admin_users.py"
-    ],
-    "active": [
-      ".\\backend\\src\\routes\\admin_users.py"
-    ],
+    "db": [".\\backend\\src\\routes\\admin_cache.py"],
+    "admin_users": [".\\backend\\src\\routes\\admin_users.py"],
+    "page": [".\\backend\\src\\routes\\admin_users.py"],
+    "per_page": [".\\backend\\src\\routes\\admin_users.py"],
+    "active": [".\\backend\\src\\routes\\admin_users.py"],
     "username": [
       ".\\backend\\src\\routes\\admin_users.py",
       ".\\backend\\src\\routes\\auth.py"
@@ -1655,135 +1603,59 @@
       ".\\backend\\src\\routes\\api.py",
       ".\\backend\\src\\routes\\auth.py"
     ],
-    "is_admin": [
-      ".\\backend\\src\\routes\\admin_users.py"
-    ],
-    "is_active": [
-      ".\\backend\\src\\routes\\admin_users.py"
-    ],
-    "send_email": [
-      ".\\backend\\src\\routes\\admin_users.py"
-    ],
-    "admin.users.create.error.required": [
-      ".\\backend\\src\\routes\\admin_users.py"
-    ],
+    "is_admin": [".\\backend\\src\\routes\\admin_users.py"],
+    "is_active": [".\\backend\\src\\routes\\admin_users.py"],
+    "send_email": [".\\backend\\src\\routes\\admin_users.py"],
+    "admin.users.create.error.required": [".\\backend\\src\\routes\\admin_users.py"],
     "admin.users.create.error.password_short": [
       ".\\backend\\src\\routes\\admin_users.py"
     ],
-    "admin.users.create.success": [
-      ".\\backend\\src\\routes\\admin_users.py"
-    ],
+    "admin.users.create.success": [".\\backend\\src\\routes\\admin_users.py"],
     "admin.users.edit.error.password_short": [
       ".\\backend\\src\\routes\\admin_users.py"
     ],
-    "admin.users.edit.success": [
-      ".\\backend\\src\\routes\\admin_users.py"
-    ],
-    "hard_delete": [
-      ".\\backend\\src\\routes\\admin_users.py"
-    ],
-    "api": [
-      ".\\backend\\src\\routes\\api.py"
-    ],
-    "name": [
-      ".\\backend\\src\\routes\\api.py"
-    ],
-    "message": [
-      ".\\backend\\src\\routes\\api.py"
-    ],
-    "auth": [
-      ".\\backend\\src\\routes\\auth.py"
-    ],
-    "password_confirm": [
-      ".\\backend\\src\\routes\\auth.py"
-    ],
-    "auth_2fa": [
-      ".\\backend\\src\\routes\\auth_2fa.py"
-    ],
+    "admin.users.edit.success": [".\\backend\\src\\routes\\admin_users.py"],
+    "hard_delete": [".\\backend\\src\\routes\\admin_users.py"],
+    "api": [".\\backend\\src\\routes\\api.py"],
+    "name": [".\\backend\\src\\routes\\api.py"],
+    "message": [".\\backend\\src\\routes\\api.py"],
+    "auth": [".\\backend\\src\\routes\\auth.py"],
+    "password_confirm": [".\\backend\\src\\routes\\auth.py"],
+    "auth_2fa": [".\\backend\\src\\routes\\auth_2fa.py"],
     "user_id": [
       ".\\backend\\src\\utils\\auth_helpers.py",
       ".\\backend\\src\\routes\\auth_2fa.py",
       ".\\backend\\src\\services\\rate_limiter.py"
     ],
-    "totp_setup_secret": [
-      ".\\backend\\src\\routes\\auth_2fa.py"
-    ],
-    "totp_setup_backup_codes": [
-      ".\\backend\\src\\routes\\auth_2fa.py"
-    ],
-    "code": [
-      ".\\backend\\src\\routes\\auth_2fa.py"
-    ],
-    "pending_2fa_user_id": [
-      ".\\backend\\src\\routes\\auth_2fa.py"
-    ],
-    "install": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "/": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "wizard_started": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "step": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "db_type": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "detected": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "version": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "db_uri": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "sqlite_dbname": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "mysql_host": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "mysql_port": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "mysql_user": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "mysql_password": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "mysql_dbname": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "pg_host": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "pg_port": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "pg_user": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "pg_password": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "pg_dbname": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
-    "backup": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
+    "totp_setup_secret": [".\\backend\\src\\routes\\auth_2fa.py"],
+    "totp_setup_backup_codes": [".\\backend\\src\\routes\\auth_2fa.py"],
+    "code": [".\\backend\\src\\routes\\auth_2fa.py"],
+    "pending_2fa_user_id": [".\\backend\\src\\routes\\auth_2fa.py"],
+    "install": [".\\backend\\src\\routes\\install.py"],
+    "/": [".\\backend\\src\\routes\\install.py"],
+    "wizard_started": [".\\backend\\src\\routes\\install.py"],
+    "step": [".\\backend\\src\\routes\\install.py"],
+    "db_type": [".\\backend\\src\\routes\\install.py"],
+    "detected": [".\\backend\\src\\routes\\install.py"],
+    "version": [".\\backend\\src\\routes\\install.py"],
+    "db_uri": [".\\backend\\src\\routes\\install.py"],
+    "sqlite_dbname": [".\\backend\\src\\routes\\install.py"],
+    "mysql_host": [".\\backend\\src\\routes\\install.py"],
+    "mysql_port": [".\\backend\\src\\routes\\install.py"],
+    "mysql_user": [".\\backend\\src\\routes\\install.py"],
+    "mysql_password": [".\\backend\\src\\routes\\install.py"],
+    "mysql_dbname": [".\\backend\\src\\routes\\install.py"],
+    "pg_host": [".\\backend\\src\\routes\\install.py"],
+    "pg_port": [".\\backend\\src\\routes\\install.py"],
+    "pg_user": [".\\backend\\src\\routes\\install.py"],
+    "pg_password": [".\\backend\\src\\routes\\install.py"],
+    "pg_dbname": [".\\backend\\src\\routes\\install.py"],
+    "backup": [".\\backend\\src\\routes\\install.py"],
     "admin_password": [
       ".\\backend\\src\\services\\install_service.py",
       ".\\backend\\src\\routes\\install.py"
     ],
-    "redis_available": [
-      ".\\backend\\src\\routes\\install.py"
-    ],
+    "redis_available": [".\\backend\\src\\routes\\install.py"],
     "redis_version": [
       ".\\backend\\src\\services\\install_service.py",
       ".\\backend\\src\\services\\cache_service.py",
@@ -1808,68 +1680,32 @@
     "SELECT id, username, email, is_admin, created_at FROM users": [
       ".\\backend\\src\\routes\\install.py"
     ],
-    "start": [
-      ".\\backend\\src\\routes\\lang.py"
-    ],
-    "Referer": [
-      ".\\backend\\src\\routes\\lang.py"
-    ],
+    "start": [".\\backend\\src\\routes\\lang.py"],
+    "Referer": [".\\backend\\src\\routes\\lang.py"],
     "Accept-Language": [
       ".\\backend\\src\\routes\\lang.py",
       ".\\backend\\src\\utils\\i18n.py"
     ],
-    "main": [
-      ".\\backend\\src\\routes\\main.py"
-    ],
-    "pages": [
-      ".\\backend\\src\\routes\\pages.py"
-    ],
-    "test": [
-      ".\\backend\\src\\services\\cache_service.py"
-    ],
-    "used_memory_human": [
-      ".\\backend\\src\\services\\cache_service.py"
-    ],
-    "uptime_in_days": [
-      ".\\backend\\src\\services\\cache_service.py"
-    ],
-    "connected_clients": [
-      ".\\backend\\src\\services\\cache_service.py"
-    ],
-    "alternative": [
-      ".\\backend\\src\\services\\email_service.py"
-    ],
-    "SERVER_NAME": [
-      ".\\backend\\src\\services\\email_service.py"
-    ],
-    "fr": [
-      ".\\backend\\src\\services\\i18n_service.py"
-    ],
+    "main": [".\\backend\\src\\routes\\main.py"],
+    "pages": [".\\backend\\src\\routes\\pages.py"],
+    "test": [".\\backend\\src\\services\\cache_service.py"],
+    "used_memory_human": [".\\backend\\src\\services\\cache_service.py"],
+    "uptime_in_days": [".\\backend\\src\\services\\cache_service.py"],
+    "connected_clients": [".\\backend\\src\\services\\cache_service.py"],
+    "alternative": [".\\backend\\src\\services\\email_service.py"],
+    "SERVER_NAME": [".\\backend\\src\\services\\email_service.py"],
+    "fr": [".\\backend\\src\\services\\i18n_service.py"],
     ".": [
       ".\\backend\\src\\utils\\i18n.py",
       ".\\backend\\src\\services\\i18n_service.py"
     ],
-    "wizard_state": [
-      ".\\backend\\src\\services\\install_service.py"
-    ],
-    "backup_ok": [
-      ".\\backend\\src\\services\\install_service.py"
-    ],
-    "backup_checksum": [
-      ".\\backend\\src\\services\\install_service.py"
-    ],
-    ",": [
-      ".\\backend\\src\\utils\\i18n.py"
-    ],
-    ";": [
-      ".\\backend\\src\\utils\\i18n.py"
-    ],
-    "-": [
-      ".\\backend\\src\\utils\\i18n.py"
-    ],
-    "admin.content.title": [
-      ".\\frontend\\templates\\admin\\content.html"
-    ],
+    "wizard_state": [".\\backend\\src\\services\\install_service.py"],
+    "backup_ok": [".\\backend\\src\\services\\install_service.py"],
+    "backup_checksum": [".\\backend\\src\\services\\install_service.py"],
+    ",": [".\\backend\\src\\utils\\i18n.py"],
+    ";": [".\\backend\\src\\utils\\i18n.py"],
+    "-": [".\\backend\\src\\utils\\i18n.py"],
+    "admin.content.title": [".\\frontend\\templates\\admin\\content.html"],
     "app.name": [
       ".\\frontend\\templates\\admin\\settings.html",
       ".\\frontend\\templates\\pages\\about.html",
@@ -1890,109 +1726,43 @@
       ".\\frontend\\templates\\auth\\login.html",
       ".\\frontend\\templates\\auth\\reset-password.html"
     ],
-    "admin.content.add": [
-      ".\\frontend\\templates\\admin\\content.html"
-    ],
-    "admin.content.table.title": [
-      ".\\frontend\\templates\\admin\\content.html"
-    ],
-    "admin.content.table.type": [
-      ".\\frontend\\templates\\admin\\content.html"
-    ],
-    "admin.content.table.author": [
-      ".\\frontend\\templates\\admin\\content.html"
-    ],
-    "admin.content.table.date": [
-      ".\\frontend\\templates\\admin\\content.html"
-    ],
-    "admin.content.table.status": [
-      ".\\frontend\\templates\\admin\\content.html"
-    ],
-    "admin.content.table.actions": [
-      ".\\frontend\\templates\\admin\\content.html"
-    ],
-    "admin.content.edit": [
-      ".\\frontend\\templates\\admin\\content.html"
-    ],
-    "admin.content.delete": [
-      ".\\frontend\\templates\\admin\\content.html"
-    ],
-    "admin.content.empty": [
-      ".\\frontend\\templates\\admin\\content.html"
-    ],
-    "admin.content.create": [
-      ".\\frontend\\templates\\admin\\content.html"
-    ],
-    "admin.dashboard.title": [
-      ".\\frontend\\templates\\admin\\dashboard.html"
-    ],
+    "admin.content.add": [".\\frontend\\templates\\admin\\content.html"],
+    "admin.content.table.title": [".\\frontend\\templates\\admin\\content.html"],
+    "admin.content.table.type": [".\\frontend\\templates\\admin\\content.html"],
+    "admin.content.table.author": [".\\frontend\\templates\\admin\\content.html"],
+    "admin.content.table.date": [".\\frontend\\templates\\admin\\content.html"],
+    "admin.content.table.status": [".\\frontend\\templates\\admin\\content.html"],
+    "admin.content.table.actions": [".\\frontend\\templates\\admin\\content.html"],
+    "admin.content.edit": [".\\frontend\\templates\\admin\\content.html"],
+    "admin.content.delete": [".\\frontend\\templates\\admin\\content.html"],
+    "admin.content.empty": [".\\frontend\\templates\\admin\\content.html"],
+    "admin.content.create": [".\\frontend\\templates\\admin\\content.html"],
+    "admin.dashboard.title": [".\\frontend\\templates\\admin\\dashboard.html"],
     "admin.dashboard.welcome": [
       ".\\frontend\\templates\\admin\\dashboard.html",
       ".\\frontend\\templates\\admin\\users.html"
     ],
-    "admin.dashboard.stats.users": [
-      ".\\frontend\\templates\\admin\\dashboard.html"
-    ],
-    "admin.dashboard.stats.content": [
-      ".\\frontend\\templates\\admin\\dashboard.html"
-    ],
-    "admin.dashboard.stats.errors": [
-      ".\\frontend\\templates\\admin\\dashboard.html"
-    ],
-    "admin.dashboard.stats.visits": [
-      ".\\frontend\\templates\\admin\\dashboard.html"
-    ],
-    "admin.dashboard.management": [
-      ".\\frontend\\templates\\admin\\dashboard.html"
-    ],
-    "admin.dashboard.users.title": [
-      ".\\frontend\\templates\\admin\\dashboard.html"
-    ],
-    "admin.dashboard.users.desc": [
-      ".\\frontend\\templates\\admin\\dashboard.html"
-    ],
-    "admin.dashboard.settings.title": [
-      ".\\frontend\\templates\\admin\\dashboard.html"
-    ],
-    "admin.dashboard.settings.desc": [
-      ".\\frontend\\templates\\admin\\dashboard.html"
-    ],
-    "admin.dashboard.content.title": [
-      ".\\frontend\\templates\\admin\\dashboard.html"
-    ],
-    "admin.dashboard.content.desc": [
-      ".\\frontend\\templates\\admin\\dashboard.html"
-    ],
-    "admin.settings.title": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.subtitle": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.smtp_title": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.smtp_host": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.smtp_port": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.smtp_user": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.smtp_password": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.smtp_tls": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.smtp_from_email": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.test_smtp": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
+    "admin.dashboard.stats.users": [".\\frontend\\templates\\admin\\dashboard.html"],
+    "admin.dashboard.stats.content": [".\\frontend\\templates\\admin\\dashboard.html"],
+    "admin.dashboard.stats.errors": [".\\frontend\\templates\\admin\\dashboard.html"],
+    "admin.dashboard.stats.visits": [".\\frontend\\templates\\admin\\dashboard.html"],
+    "admin.dashboard.management": [".\\frontend\\templates\\admin\\dashboard.html"],
+    "admin.dashboard.users.title": [".\\frontend\\templates\\admin\\dashboard.html"],
+    "admin.dashboard.users.desc": [".\\frontend\\templates\\admin\\dashboard.html"],
+    "admin.dashboard.settings.title": [".\\frontend\\templates\\admin\\dashboard.html"],
+    "admin.dashboard.settings.desc": [".\\frontend\\templates\\admin\\dashboard.html"],
+    "admin.dashboard.content.title": [".\\frontend\\templates\\admin\\dashboard.html"],
+    "admin.dashboard.content.desc": [".\\frontend\\templates\\admin\\dashboard.html"],
+    "admin.settings.title": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.subtitle": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.smtp_title": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.smtp_host": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.smtp_port": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.smtp_user": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.smtp_password": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.smtp_tls": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.smtp_from_email": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.test_smtp": [".\\frontend\\templates\\admin\\settings.html"],
     "admin.settings.email_verification_title": [
       ".\\frontend\\templates\\admin\\settings.html"
     ],
@@ -2008,36 +1778,18 @@
     "admin.settings.password_reset_limit": [
       ".\\frontend\\templates\\admin\\settings.html"
     ],
-    "admin.settings.features_title": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
+    "admin.settings.features_title": [".\\frontend\\templates\\admin\\settings.html"],
     "admin.settings.registration_enabled": [
       ".\\frontend\\templates\\admin\\settings.html"
     ],
-    "admin.settings.2fa_required": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.save": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.system_info": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.version": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.api_version": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.environment": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.status": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
-    "admin.settings.online": [
-      ".\\frontend\\templates\\admin\\settings.html"
-    ],
+    "admin.settings.2fa_required": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.save": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.system_info": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.version": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.api_version": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.environment": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.status": [".\\frontend\\templates\\admin\\settings.html"],
+    "admin.settings.online": [".\\frontend\\templates\\admin\\settings.html"],
     "admin.users.title": [
       ".\\frontend\\templates\\admin\\users_list.html",
       ".\\frontend\\templates\\admin\\users.html"
@@ -2046,9 +1798,7 @@
       ".\\frontend\\templates\\admin\\users_list.html",
       ".\\frontend\\templates\\admin\\users.html"
     ],
-    "admin.users.table.date_created": [
-      ".\\frontend\\templates\\admin\\users.html"
-    ],
+    "admin.users.table.date_created": [".\\frontend\\templates\\admin\\users.html"],
     "admin.users.table.role": [
       ".\\frontend\\templates\\admin\\users_list.html",
       ".\\frontend\\templates\\admin\\users.html"
@@ -2057,9 +1807,7 @@
       ".\\frontend\\templates\\admin\\users_list.html",
       ".\\frontend\\templates\\admin\\users.html"
     ],
-    "admin.users.table.name": [
-      ".\\frontend\\templates\\admin\\users.html"
-    ],
+    "admin.users.table.name": [".\\frontend\\templates\\admin\\users.html"],
     "admin.users.actions.edit": [
       ".\\frontend\\templates\\admin\\users_list.html",
       ".\\frontend\\templates\\admin\\users.html"
@@ -2072,21 +1820,11 @@
       ".\\frontend\\templates\\admin\\users_edit.html",
       ".\\frontend\\templates\\admin\\users.html"
     ],
-    "admin.users.form.name": [
-      ".\\frontend\\templates\\admin\\users.html"
-    ],
-    "admin.users.form.email": [
-      ".\\frontend\\templates\\admin\\users.html"
-    ],
-    "admin.users.form.role": [
-      ".\\frontend\\templates\\admin\\users.html"
-    ],
-    "admin.users.actions.save": [
-      ".\\frontend\\templates\\admin\\users.html"
-    ],
-    "admin.users.actions.cancel": [
-      ".\\frontend\\templates\\admin\\users.html"
-    ],
+    "admin.users.form.name": [".\\frontend\\templates\\admin\\users.html"],
+    "admin.users.form.email": [".\\frontend\\templates\\admin\\users.html"],
+    "admin.users.form.role": [".\\frontend\\templates\\admin\\users.html"],
+    "admin.users.actions.save": [".\\frontend\\templates\\admin\\users.html"],
+    "admin.users.actions.cancel": [".\\frontend\\templates\\admin\\users.html"],
     "admin.users.delete.title": [
       ".\\frontend\\templates\\admin\\users_list.html",
       ".\\frontend\\templates\\admin\\users.html"
@@ -2095,33 +1833,19 @@
       ".\\frontend\\templates\\admin\\users_list.html",
       ".\\frontend\\templates\\admin\\users.html"
     ],
-    "admin.users.add.title": [
-      ".\\frontend\\templates\\admin\\users.html"
-    ],
-    "admin.users.actions.add": [
-      ".\\frontend\\templates\\admin\\users.html"
-    ],
-    "admin.users.create.title": [
-      ".\\frontend\\templates\\admin\\users_create.html"
-    ],
-    "admin.users.create.username": [
-      ".\\frontend\\templates\\admin\\users_create.html"
-    ],
+    "admin.users.add.title": [".\\frontend\\templates\\admin\\users.html"],
+    "admin.users.actions.add": [".\\frontend\\templates\\admin\\users.html"],
+    "admin.users.create.title": [".\\frontend\\templates\\admin\\users_create.html"],
+    "admin.users.create.username": [".\\frontend\\templates\\admin\\users_create.html"],
     "admin.users.create.username_hint": [
       ".\\frontend\\templates\\admin\\users_create.html"
     ],
-    "admin.users.create.email": [
-      ".\\frontend\\templates\\admin\\users_create.html"
-    ],
-    "admin.users.create.password": [
-      ".\\frontend\\templates\\admin\\users_create.html"
-    ],
+    "admin.users.create.email": [".\\frontend\\templates\\admin\\users_create.html"],
+    "admin.users.create.password": [".\\frontend\\templates\\admin\\users_create.html"],
     "admin.users.create.password_hint": [
       ".\\frontend\\templates\\admin\\users_create.html"
     ],
-    "admin.users.create.is_admin": [
-      ".\\frontend\\templates\\admin\\users_create.html"
-    ],
+    "admin.users.create.is_admin": [".\\frontend\\templates\\admin\\users_create.html"],
     "admin.users.create.is_admin_hint": [
       ".\\frontend\\templates\\admin\\users_create.html"
     ],
@@ -2134,159 +1858,69 @@
     "admin.users.create.send_email_hint": [
       ".\\frontend\\templates\\admin\\users_create.html"
     ],
-    "admin.users.create.submit": [
-      ".\\frontend\\templates\\admin\\users_create.html"
-    ],
-    "admin.users.create.cancel": [
-      ".\\frontend\\templates\\admin\\users_create.html"
-    ],
-    "admin.users.edit.user_id": [
-      ".\\frontend\\templates\\admin\\users_edit.html"
-    ],
-    "admin.users.edit.created_at": [
-      ".\\frontend\\templates\\admin\\users_edit.html"
-    ],
-    "admin.users.edit.last_login": [
-      ".\\frontend\\templates\\admin\\users_edit.html"
-    ],
+    "admin.users.create.submit": [".\\frontend\\templates\\admin\\users_create.html"],
+    "admin.users.create.cancel": [".\\frontend\\templates\\admin\\users_create.html"],
+    "admin.users.edit.user_id": [".\\frontend\\templates\\admin\\users_edit.html"],
+    "admin.users.edit.created_at": [".\\frontend\\templates\\admin\\users_edit.html"],
+    "admin.users.edit.last_login": [".\\frontend\\templates\\admin\\users_edit.html"],
     "admin.users.edit.email_verified": [
       ".\\frontend\\templates\\admin\\users_edit.html"
     ],
-    "admin.users.edit.yes": [
-      ".\\frontend\\templates\\admin\\users_edit.html"
-    ],
-    "admin.users.edit.no": [
-      ".\\frontend\\templates\\admin\\users_edit.html"
-    ],
-    "admin.users.edit.username": [
-      ".\\frontend\\templates\\admin\\users_edit.html"
-    ],
+    "admin.users.edit.yes": [".\\frontend\\templates\\admin\\users_edit.html"],
+    "admin.users.edit.no": [".\\frontend\\templates\\admin\\users_edit.html"],
+    "admin.users.edit.username": [".\\frontend\\templates\\admin\\users_edit.html"],
     "admin.users.edit.username_readonly": [
       ".\\frontend\\templates\\admin\\users_edit.html"
     ],
-    "admin.users.edit.email": [
-      ".\\frontend\\templates\\admin\\users_edit.html"
-    ],
-    "admin.users.edit.password": [
-      ".\\frontend\\templates\\admin\\users_edit.html"
-    ],
+    "admin.users.edit.email": [".\\frontend\\templates\\admin\\users_edit.html"],
+    "admin.users.edit.password": [".\\frontend\\templates\\admin\\users_edit.html"],
     "admin.users.edit.password_hint": [
       ".\\frontend\\templates\\admin\\users_edit.html"
     ],
-    "admin.users.edit.is_admin": [
-      ".\\frontend\\templates\\admin\\users_edit.html"
-    ],
-    "admin.users.edit.is_active": [
-      ".\\frontend\\templates\\admin\\users_edit.html"
-    ],
-    "admin.users.edit.submit": [
-      ".\\frontend\\templates\\admin\\users_edit.html"
-    ],
-    "admin.users.edit.cancel": [
-      ".\\frontend\\templates\\admin\\users_edit.html"
-    ],
-    "admin.users.create_new": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.filter.status": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.filter.all": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
+    "admin.users.edit.is_admin": [".\\frontend\\templates\\admin\\users_edit.html"],
+    "admin.users.edit.is_active": [".\\frontend\\templates\\admin\\users_edit.html"],
+    "admin.users.edit.submit": [".\\frontend\\templates\\admin\\users_edit.html"],
+    "admin.users.edit.cancel": [".\\frontend\\templates\\admin\\users_edit.html"],
+    "admin.users.create_new": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.filter.status": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.filter.all": [".\\frontend\\templates\\admin\\users_list.html"],
     "admin.users.filter.active_only": [
       ".\\frontend\\templates\\admin\\users_list.html"
     ],
     "admin.users.filter.inactive_only": [
       ".\\frontend\\templates\\admin\\users_list.html"
     ],
-    "admin.users.table.id": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.table.username": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.table.status": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.table.created_at": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.verified": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.role.admin": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.role.user": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.status.active": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.status.inactive": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.no_users": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.pagination.previous": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.pagination.page": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.pagination.next": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.total": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.delete.warning": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.delete.soft": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.delete.soft_desc": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.delete.hard": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.delete.hard_desc": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
-    "admin.users.delete.cancel": [
-      ".\\frontend\\templates\\admin\\users_list.html"
-    ],
+    "admin.users.table.id": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.table.username": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.table.status": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.table.created_at": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.verified": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.role.admin": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.role.user": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.status.active": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.status.inactive": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.no_users": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.pagination.previous": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.pagination.page": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.pagination.next": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.total": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.delete.warning": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.delete.soft": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.delete.soft_desc": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.delete.hard": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.delete.hard_desc": [".\\frontend\\templates\\admin\\users_list.html"],
+    "admin.users.delete.cancel": [".\\frontend\\templates\\admin\\users_list.html"],
     "admin.users.delete.confirm_btn": [
       ".\\frontend\\templates\\admin\\users_list.html"
     ],
-    "auth.email_sent.resend_link": [
-      ".\\frontend\\templates\\auth\\email-sent.html"
-    ],
-    "auth.email_sent.resend": [
-      ".\\frontend\\templates\\auth\\email-sent.html"
-    ],
-    "auth.email_sent.back_dashboard": [
-      ".\\frontend\\templates\\auth\\email-sent.html"
-    ],
-    "auth.email_sent.instructions": [
-      ".\\frontend\\templates\\auth\\email-sent.html"
-    ],
-    "auth.email_sent.message": [
-      ".\\frontend\\templates\\auth\\email-sent.html"
-    ],
-    "auth.email_sent.heading": [
-      ".\\frontend\\templates\\auth\\email-sent.html"
-    ],
-    "auth.email_sent.title": [
-      ".\\frontend\\templates\\auth\\email-sent.html"
-    ],
-    "auth.email_verified.title": [
-      ".\\frontend\\templates\\auth\\email-verified.html"
-    ],
+    "auth.email_sent.resend_link": [".\\frontend\\templates\\auth\\email-sent.html"],
+    "auth.email_sent.resend": [".\\frontend\\templates\\auth\\email-sent.html"],
+    "auth.email_sent.back_dashboard": [".\\frontend\\templates\\auth\\email-sent.html"],
+    "auth.email_sent.instructions": [".\\frontend\\templates\\auth\\email-sent.html"],
+    "auth.email_sent.message": [".\\frontend\\templates\\auth\\email-sent.html"],
+    "auth.email_sent.heading": [".\\frontend\\templates\\auth\\email-sent.html"],
+    "auth.email_sent.title": [".\\frontend\\templates\\auth\\email-sent.html"],
+    "auth.email_verified.title": [".\\frontend\\templates\\auth\\email-verified.html"],
     "auth.email_verified.heading": [
       ".\\frontend\\templates\\auth\\email-verified.html"
     ],
@@ -2323,33 +1957,15 @@
     "auth.forgot_password.back_link": [
       ".\\frontend\\templates\\auth\\forgot-password.html"
     ],
-    "auth.login.title": [
-      ".\\frontend\\templates\\auth\\login.html"
-    ],
-    "auth.login.subtitle": [
-      ".\\frontend\\templates\\auth\\login.html"
-    ],
-    "auth.login.username": [
-      ".\\frontend\\templates\\auth\\login.html"
-    ],
-    "auth.login.password": [
-      ".\\frontend\\templates\\auth\\login.html"
-    ],
-    "auth.login.remember": [
-      ".\\frontend\\templates\\auth\\login.html"
-    ],
-    "auth.login.submit": [
-      ".\\frontend\\templates\\auth\\login.html"
-    ],
-    "auth.login.forgot": [
-      ".\\frontend\\templates\\auth\\login.html"
-    ],
-    "auth.login.first_time": [
-      ".\\frontend\\templates\\auth\\login.html"
-    ],
-    "auth.login.install_link": [
-      ".\\frontend\\templates\\auth\\login.html"
-    ],
+    "auth.login.title": [".\\frontend\\templates\\auth\\login.html"],
+    "auth.login.subtitle": [".\\frontend\\templates\\auth\\login.html"],
+    "auth.login.username": [".\\frontend\\templates\\auth\\login.html"],
+    "auth.login.password": [".\\frontend\\templates\\auth\\login.html"],
+    "auth.login.remember": [".\\frontend\\templates\\auth\\login.html"],
+    "auth.login.submit": [".\\frontend\\templates\\auth\\login.html"],
+    "auth.login.forgot": [".\\frontend\\templates\\auth\\login.html"],
+    "auth.login.first_time": [".\\frontend\\templates\\auth\\login.html"],
+    "auth.login.install_link": [".\\frontend\\templates\\auth\\login.html"],
     "auth.password_reset_sent.title": [
       ".\\frontend\\templates\\auth\\password-reset-sent.html"
     ],
@@ -2368,9 +1984,7 @@
     "auth.password_reset_sent.spam_note": [
       ".\\frontend\\templates\\auth\\password-reset-sent.html"
     ],
-    "auth.reset_password.title": [
-      ".\\frontend\\templates\\auth\\reset-password.html"
-    ],
+    "auth.reset_password.title": [".\\frontend\\templates\\auth\\reset-password.html"],
     "auth.reset_password.heading": [
       ".\\frontend\\templates\\auth\\reset-password.html"
     ],
@@ -2406,241 +2020,91 @@
       ".\\frontend\\templates\\components\\navbar.html",
       ".\\frontend\\templates\\components\\footer.html"
     ],
-    "footer.legal": [
-      ".\\frontend\\templates\\components\\footer.html"
-    ],
-    "nav.brand": [
-      ".\\frontend\\templates\\components\\navbar.html"
-    ],
-    "nav.home": [
-      ".\\frontend\\templates\\components\\navbar.html"
-    ],
-    "nav.features": [
-      ".\\frontend\\templates\\components\\navbar.html"
-    ],
-    "nav.admin": [
-      ".\\frontend\\templates\\components\\navbar.html"
-    ],
-    "nav.admin_dashboard": [
-      ".\\frontend\\templates\\components\\navbar.html"
-    ],
-    "nav.admin_users": [
-      ".\\frontend\\templates\\components\\navbar.html"
-    ],
-    "nav.admin_settings": [
-      ".\\frontend\\templates\\components\\navbar.html"
-    ],
-    "nav.admin_content": [
-      ".\\frontend\\templates\\components\\navbar.html"
-    ],
-    "nav.preferences": [
-      ".\\frontend\\templates\\components\\navbar.html"
-    ],
-    "nav.profile": [
-      ".\\frontend\\templates\\components\\navbar.html"
-    ],
-    "nav.logout": [
-      ".\\frontend\\templates\\components\\navbar.html"
-    ],
-    "nav.login": [
-      ".\\frontend\\templates\\components\\navbar.html"
-    ],
-    "nav.register": [
-      ".\\frontend\\templates\\components\\navbar.html"
-    ],
-    "errors.not_found": [
-      ".\\frontend\\templates\\errors\\404.html"
-    ],
+    "footer.legal": [".\\frontend\\templates\\components\\footer.html"],
+    "nav.brand": [".\\frontend\\templates\\components\\navbar.html"],
+    "nav.home": [".\\frontend\\templates\\components\\navbar.html"],
+    "nav.features": [".\\frontend\\templates\\components\\navbar.html"],
+    "nav.admin": [".\\frontend\\templates\\components\\navbar.html"],
+    "nav.admin_dashboard": [".\\frontend\\templates\\components\\navbar.html"],
+    "nav.admin_users": [".\\frontend\\templates\\components\\navbar.html"],
+    "nav.admin_settings": [".\\frontend\\templates\\components\\navbar.html"],
+    "nav.admin_content": [".\\frontend\\templates\\components\\navbar.html"],
+    "nav.preferences": [".\\frontend\\templates\\components\\navbar.html"],
+    "nav.profile": [".\\frontend\\templates\\components\\navbar.html"],
+    "nav.logout": [".\\frontend\\templates\\components\\navbar.html"],
+    "nav.login": [".\\frontend\\templates\\components\\navbar.html"],
+    "nav.register": [".\\frontend\\templates\\components\\navbar.html"],
+    "errors.not_found": [".\\frontend\\templates\\errors\\404.html"],
     "errors.back_home": [
       ".\\frontend\\templates\\errors\\404.html",
       ".\\frontend\\templates\\errors\\500.html"
     ],
-    "errors.server_error": [
-      ".\\frontend\\templates\\errors\\500.html"
-    ],
-    "pages.about.title": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.lead": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.mission": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.mission_body": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.stack": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.backend": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.frontend": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.features": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.security": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.security_desc": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.performance": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.performance_desc": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.responsive": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.responsive_desc": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.cta": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.cta_features": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.cta_contact": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.about.cta_source": [
-      ".\\frontend\\templates\\pages\\about.html"
-    ],
-    "pages.contact.title": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
-    "pages.contact.subtitle": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
-    "pages.contact.form_title": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
-    "pages.contact.name": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
-    "pages.contact.placeholder_name": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
-    "pages.contact.email": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
-    "pages.contact.placeholder_email": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
-    "pages.contact.subject": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
+    "errors.server_error": [".\\frontend\\templates\\errors\\500.html"],
+    "pages.about.title": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.lead": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.mission": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.mission_body": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.stack": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.backend": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.frontend": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.features": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.security": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.security_desc": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.performance": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.performance_desc": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.responsive": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.responsive_desc": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.cta": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.cta_features": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.cta_contact": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.about.cta_source": [".\\frontend\\templates\\pages\\about.html"],
+    "pages.contact.title": [".\\frontend\\templates\\pages\\contact.html"],
+    "pages.contact.subtitle": [".\\frontend\\templates\\pages\\contact.html"],
+    "pages.contact.form_title": [".\\frontend\\templates\\pages\\contact.html"],
+    "pages.contact.name": [".\\frontend\\templates\\pages\\contact.html"],
+    "pages.contact.placeholder_name": [".\\frontend\\templates\\pages\\contact.html"],
+    "pages.contact.email": [".\\frontend\\templates\\pages\\contact.html"],
+    "pages.contact.placeholder_email": [".\\frontend\\templates\\pages\\contact.html"],
+    "pages.contact.subject": [".\\frontend\\templates\\pages\\contact.html"],
     "pages.contact.placeholder_subject": [
       ".\\frontend\\templates\\pages\\contact.html"
     ],
-    "pages.contact.message": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
+    "pages.contact.message": [".\\frontend\\templates\\pages\\contact.html"],
     "pages.contact.placeholder_message": [
       ".\\frontend\\templates\\pages\\contact.html"
     ],
-    "pages.contact.send": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
-    "pages.contact.other": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
-    "pages.contact.email_label": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
-    "pages.contact.github_label": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
-    "pages.contact.support_label": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
-    "pages.contact.support_hours": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
-    "pages.contact.success": [
-      ".\\frontend\\templates\\pages\\contact.html"
-    ],
-    "pages.content.title": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.description": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.list_title": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.add_new": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.table.title": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.table.type": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.table.status": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.table.author": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.table.created": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.table.actions": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.no_items": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.modal.add_title": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.modal.title": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.modal.type": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.types.article": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.types.page": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.types.post": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.modal.body": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.modal.status": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.status.draft": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.status.published": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.modal.cancel": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.content.modal.save": [
-      ".\\frontend\\templates\\pages\\content.html"
-    ],
-    "pages.datagrid.title": [
-      ".\\frontend\\templates\\pages\\datagrid-example.html"
-    ],
-    "pages.datagrid.search": [
-      ".\\frontend\\templates\\pages\\datagrid-example.html"
-    ],
+    "pages.contact.send": [".\\frontend\\templates\\pages\\contact.html"],
+    "pages.contact.other": [".\\frontend\\templates\\pages\\contact.html"],
+    "pages.contact.email_label": [".\\frontend\\templates\\pages\\contact.html"],
+    "pages.contact.github_label": [".\\frontend\\templates\\pages\\contact.html"],
+    "pages.contact.support_label": [".\\frontend\\templates\\pages\\contact.html"],
+    "pages.contact.support_hours": [".\\frontend\\templates\\pages\\contact.html"],
+    "pages.contact.success": [".\\frontend\\templates\\pages\\contact.html"],
+    "pages.content.title": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.description": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.list_title": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.add_new": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.table.title": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.table.type": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.table.status": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.table.author": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.table.created": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.table.actions": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.no_items": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.modal.add_title": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.modal.title": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.modal.type": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.types.article": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.types.page": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.types.post": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.modal.body": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.modal.status": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.status.draft": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.status.published": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.modal.cancel": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.content.modal.save": [".\\frontend\\templates\\pages\\content.html"],
+    "pages.datagrid.title": [".\\frontend\\templates\\pages\\datagrid-example.html"],
+    "pages.datagrid.search": [".\\frontend\\templates\\pages\\datagrid-example.html"],
     "pages.datagrid.export_csv": [
       ".\\frontend\\templates\\pages\\datagrid-example.html"
     ],
@@ -2671,190 +2135,82 @@
     "pages.datagrid.filter_placeholder": [
       ".\\frontend\\templates\\pages\\datagrid-example.html"
     ],
-    "pages.features.title": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.lead": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.architecture": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
+    "pages.features.title": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.lead": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.architecture": [".\\frontend\\templates\\pages\\features.html"],
     "pages.features.architecture_desc": [
       ".\\frontend\\templates\\pages\\features.html"
     ],
-    "pages.features.security": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.security_desc": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.database": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.database_desc": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.frontend": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.frontend_desc": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.tests": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.tests_desc": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.deploy": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.deploy_desc": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.details_title": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.dev_title": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.dev_item_1": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.dev_item_2": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.dev_item_3": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.dev_item_4": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.dev_item_5": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.admin_title": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.admin_item_1": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.admin_item_2": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.admin_item_3": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.admin_item_4": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.admin_item_5": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.perf_title": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.perf_item_1": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.perf_item_2": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.perf_item_3": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.perf_item_4": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.perf_item_5": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.cta": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.features.cta_contact": [
-      ".\\frontend\\templates\\pages\\features.html"
-    ],
-    "pages.index.hero_title": [
-      ".\\frontend\\templates\\pages\\index.html"
-    ],
-    "pages.index.hero_subtitle": [
-      ".\\frontend\\templates\\pages\\index.html"
-    ],
-    "pages.index.cta_primary": [
-      ".\\frontend\\templates\\pages\\index.html"
-    ],
-    "pages.index.cta_secondary": [
-      ".\\frontend\\templates\\pages\\index.html"
-    ],
-    "legal.title": [
-      ".\\frontend\\templates\\pages\\legal.html"
-    ],
-    "legal.description": [
-      ".\\frontend\\templates\\pages\\legal.html"
-    ],
-    "legal.author": [
-      ".\\frontend\\templates\\pages\\legal.html"
-    ],
-    "legal.license": [
-      ".\\frontend\\templates\\pages\\legal.html"
-    ],
-    "legal.source": [
-      ".\\frontend\\templates\\pages\\legal.html"
-    ],
-    "pages.preferences.title": [
-      ".\\frontend\\templates\\pages\\preferences.html"
-    ],
+    "pages.features.security": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.security_desc": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.database": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.database_desc": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.frontend": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.frontend_desc": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.tests": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.tests_desc": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.deploy": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.deploy_desc": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.details_title": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.dev_title": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.dev_item_1": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.dev_item_2": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.dev_item_3": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.dev_item_4": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.dev_item_5": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.admin_title": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.admin_item_1": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.admin_item_2": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.admin_item_3": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.admin_item_4": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.admin_item_5": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.perf_title": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.perf_item_1": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.perf_item_2": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.perf_item_3": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.perf_item_4": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.perf_item_5": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.cta": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.features.cta_contact": [".\\frontend\\templates\\pages\\features.html"],
+    "pages.index.hero_title": [".\\frontend\\templates\\pages\\index.html"],
+    "pages.index.hero_subtitle": [".\\frontend\\templates\\pages\\index.html"],
+    "pages.index.cta_primary": [".\\frontend\\templates\\pages\\index.html"],
+    "pages.index.cta_secondary": [".\\frontend\\templates\\pages\\index.html"],
+    "legal.title": [".\\frontend\\templates\\pages\\legal.html"],
+    "legal.description": [".\\frontend\\templates\\pages\\legal.html"],
+    "legal.author": [".\\frontend\\templates\\pages\\legal.html"],
+    "legal.license": [".\\frontend\\templates\\pages\\legal.html"],
+    "legal.source": [".\\frontend\\templates\\pages\\legal.html"],
+    "pages.preferences.title": [".\\frontend\\templates\\pages\\preferences.html"],
     "pages.preferences.language_label": [
       ".\\frontend\\templates\\pages\\preferences.html"
     ],
-    "pages.preferences.theme": [
-      ".\\frontend\\templates\\pages\\preferences.html"
-    ],
+    "pages.preferences.theme": [".\\frontend\\templates\\pages\\preferences.html"],
     "pages.preferences.theme_light": [
       ".\\frontend\\templates\\pages\\preferences.html"
     ],
-    "pages.preferences.theme_dark": [
-      ".\\frontend\\templates\\pages\\preferences.html"
-    ],
-    "pages.preferences.theme_auto": [
-      ".\\frontend\\templates\\pages\\preferences.html"
-    ],
+    "pages.preferences.theme_dark": [".\\frontend\\templates\\pages\\preferences.html"],
+    "pages.preferences.theme_auto": [".\\frontend\\templates\\pages\\preferences.html"],
     "pages.preferences.theme_label": [
       ".\\frontend\\templates\\pages\\preferences.html"
     ],
-    "pages.preferences.language": [
-      ".\\frontend\\templates\\pages\\preferences.html"
-    ],
+    "pages.preferences.language": [".\\frontend\\templates\\pages\\preferences.html"],
     "pages.preferences.notifications": [
       ".\\frontend\\templates\\pages\\preferences.html"
     ],
     "pages.preferences.notifications_desc": [
       ".\\frontend\\templates\\pages\\preferences.html"
     ],
-    "pages.preferences.reset": [
-      ".\\frontend\\templates\\pages\\preferences.html"
-    ],
-    "pages.preferences.updated": [
-      ".\\frontend\\templates\\pages\\preferences.html"
-    ],
-    "pages.profile.title": [
-      ".\\frontend\\templates\\pages\\profile.html"
-    ],
-    "pages.profile.subtitle": [
-      ".\\frontend\\templates\\pages\\profile.html"
-    ],
-    "wizard.done_title": [
-      ".\\frontend\\templates\\pages\\install\\done.html"
-    ],
+    "pages.preferences.reset": [".\\frontend\\templates\\pages\\preferences.html"],
+    "pages.preferences.updated": [".\\frontend\\templates\\pages\\preferences.html"],
+    "pages.profile.title": [".\\frontend\\templates\\pages\\profile.html"],
+    "pages.profile.subtitle": [".\\frontend\\templates\\pages\\profile.html"],
+    "wizard.done_title": [".\\frontend\\templates\\pages\\install\\done.html"],
     "wizard.done_body": [
       ".\\frontend\\templates\\pages\\install\\done.html",
       ".\\frontend\\templates\\pages\\install\\partials\\done.html"
     ],
-    "wizard.go_login": [
-      ".\\frontend\\templates\\pages\\install\\done.html"
-    ],
+    "wizard.go_login": [".\\frontend\\templates\\pages\\install\\done.html"],
     "wizard.error_title": [
       ".\\frontend\\templates\\pages\\install\\error.html",
       ".\\frontend\\templates\\pages\\install\\partials\\error.html"
@@ -2877,16 +2233,12 @@
       ".\\frontend\\templates\\pages\\install\\error.html",
       ".\\frontend\\templates\\pages\\install\\partials\\error.html"
     ],
-    "wizard.title": [
-      ".\\frontend\\templates\\pages\\install\\index.html"
-    ],
+    "wizard.title": [".\\frontend\\templates\\pages\\install\\index.html"],
     "wizard.step": [
       ".\\frontend\\templates\\pages\\install\\step.html",
       ".\\frontend\\templates\\pages\\install\\partials\\_wizard_content.html"
     ],
-    "wizard.continue_en": [
-      ".\\frontend\\templates\\pages\\install\\step.html"
-    ],
+    "wizard.continue_en": [".\\frontend\\templates\\pages\\install\\step.html"],
     "wizard.admin.title": [
       ".\\frontend\\templates\\pages\\install\\partials\\admin_form.html"
     ],

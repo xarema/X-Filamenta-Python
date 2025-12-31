@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-Filamenta - Référence des Prompts AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --success-color: #198754;
+            --info-color: #0dcaf0;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            padding-top: 70px;
+        }
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--info-color) 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        .filter-buttons {
+            margin-bottom: 2rem;
+        }
+        .prompt-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .prompt-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        .prompt-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .prompt-filename {
+            font-size: 0.85rem;
+            color: var(--secondary-color);
+            font-family: 'Courier New', monospace;
+        }
+        .prompt-description {
+            color: #495057;
+            margin-bottom: 1rem;
+        }
+        .category-badge {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.65rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        .badge-development { background-color: #0d6efd; color: white; }
+        .badge-debug { background-color: #dc3545; color: white; }
+        .badge-i18n { background-color: #6f42c1; color: white; }
+        .badge-analysis { background-color: #0dcaf0; color: white; }
+        .badge-tests { background-color: #198754; color: white; }
+        .badge-documentation { background-color: #ffc107; color: #000; }
+        .badge-roadmap { background-color: #fd7e14; color: white; }
+        .badge-setup { background-color: #6c757d; color: white; }
+        .prompt-details {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #dee2e6;
+        }
+        .details-section {
+            margin-bottom: 1rem;
+        }
+        .details-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        .stats {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .stat-label {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+        .toc {
+            position: sticky;
+            top: 80px;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+        }
+        .toc-link {
+            color: #495057;
+            text-decoration: none;
+            padding: 0.5rem;
+            display: block;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .toc-link:hover {
+            background: #f8f9fa;
+            border-left-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .toc {
+                position: static;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><strong>X-Filamenta</strong> Prompts AI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../instructions/">Instructions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../docs/incidents/">Incidents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../docs/">Documentation</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">📚 Référence des Prompts AI</h1>
+            <p class="lead">25 prompts agents pour automatiser le développement, debug, tests, et documentation</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Search and Filters -->
+        <div class="search-box">
+            <input type="search" id="searchInput" class="form-control form-control-lg" 
+                   placeholder="🔍 Rechercher un prompt...">
+        </div>
+
+        <div class="filter-buttons text-center">
+            <button class="btn btn-sm btn-outline-primary me-2 filter-btn active" data-filter="all">Tous</button>
+            <button class="btn btn-sm btn-outline-primary me-2 filter-btn" data-filter="development">🔧 Développement</button>
+            <button class="btn btn-sm btn-outline-danger me-2 filter-btn" data-filter="debug">🐛 Debug</button>
+            <button class="btn btn-sm btn-outline-info me-2 filter-btn" data-filter="analysis">📊 Analyse</button>
+            <button class="btn btn-sm btn-outline-success me-2 filter-btn" data-filter="tests">🧪 Tests</button>
+            <button class="btn btn-sm btn-outline-warning me-2 filter-btn" data-filter="documentation">📝 Docs</button>
+            <button class="btn btn-sm btn-outline-secondary me-2 filter-btn" data-filter="i18n">🌍 i18n</button>
+            <button class="btn btn-sm btn-outline-secondary me-2 filter-btn" data-filter="roadmap">🗺️ Roadmap</button>
+        </div>
+
+        <!-- Statistics -->
+        <div class="stats row">
+            <div class="col-md-3 stat-item">
+                <div class="stat-number">25</div>
+                <div class="stat-label">Total Prompts</div>
+            </div>
+            <div class="col-md-3 stat-item">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Catégories</div>
+            </div>
+            <div class="col-md-3 stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Documenté</div>
+            </div>
+            <div class="col-md-3 stat-item">
+                <div class="stat-number">2025</div>
+                <div class="stat-label">Version</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Table of Contents -->
+            <div class="col-lg-3 d-none d-lg-block">
+                <div class="toc">
+                    <h5 class="mb-3">Table des Matières</h5>
+                    <nav id="toc-nav"></nav>
+                </div>
+            </div>
+
+            <!-- Prompts List -->
+            <div class="col-lg-9" id="prompts-container">
+                <!-- Prompts will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="btn btn-primary btn-lg back-to-top" id="backToTop">↑</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const prompts = [
+            {
+                id: 'add-feature-complete',
+                title: 'Ajouter Fonctionnalité Complète',
+                filename: 'add-feature-complete.prompt.md',
+                category: 'development',
+                description: 'Créer une fonctionnalité complète de A à Z: backend (routes Flask, modèles, services), frontend (templates Jinja, HTMX), tests (pytest), et documentation.',
+                inputs: ['Feature description', 'User stories', 'Technical requirements', 'Design mockups (optional)'],
+                steps: ['Database layer', 'Business logic', 'API routes', 'Frontend templates', 'i18n', 'Tests', 'Documentation'],
+                example: 'Ajouter authentification utilisateur avec email/password, 2FA, et session management.'
+            },
+            {
+                id: 'debug-issue',
+                title: 'Débugger un Problème',
+                filename: 'debug-issue.prompt.md',
+                category: 'debug',
+                description: 'Analyse systématique et correction d\'un bug/erreur avec approche root cause analysis, reproduction, fix, et prévention.',
+                inputs: ['Issue description', 'Type (bug/error/test-failure)', 'Severity', 'Location', 'Steps to reproduce'],
+                steps: ['Gather information', 'Reproduce', 'Root cause analysis', 'Fix implementation', 'Verification', 'Prevention'],
+                example: 'Corriger erreur 500 sur /admin/dashboard causée par problème i18n manquant.'
+            },
+            {
+                id: 'create-htmx-endpoint',
+                title: 'Créer Endpoint HTMX',
+                filename: 'create-htmx-endpoint.prompt.md',
+                category: 'development',
+                description: 'Générer un endpoint HTMX complet: route Flask backend, template partiel, traductions i18n (FR+EN), tests pytest.',
+                inputs: ['Endpoint name', 'HTTP method', 'HTMX action', 'Response type'],
+                steps: ['Backend route', 'Partial template', 'i18n keys', 'Tests', 'Documentation'],
+                example: 'Créer endpoint pour recherche live de produits avec autocomplete HTMX.'
+            },
+            {
+                id: 'fix-security-issue',
+                title: 'Corriger Faille Sécurité',
+                filename: 'fix-security-issue.prompt.md',
+                category: 'debug',
+                description: 'Correction de vulnérabilité de sécurité avec audit, impact assessment, fix prioritaire, et tests de régression.',
+                inputs: ['Vulnerability type', 'Severity (CVSS)', 'Affected components', 'Discovery source'],
+                steps: ['Security audit', 'Impact analysis', 'Fix implementation', 'Security testing', 'Documentation'],
+                example: 'Corriger SQL injection dans search endpoint, ajouter parameterized queries.'
+            },
+            {
+                id: 'refactor-route',
+                title: 'Refactoriser Route',
+                filename: 'refactor-route.prompt.md',
+                category: 'development',
+                description: 'Refactoriser une route Flask existante: améliorer structure, séparer logique business, ajouter tests, maintenir compatibilité.',
+                inputs: ['Route path', 'Current issues', 'Refactoring goals'],
+                steps: ['Code analysis', 'Extract business logic', 'Improve error handling', 'Add tests', 'Update docs'],
+                example: 'Refactoriser /auth/login pour extraire validation dans service séparé.'
+            },
+            {
+                id: 'migrate-dependency',
+                title: 'Migrer Dépendance',
+                filename: 'migrate-dependency.prompt.md',
+                category: 'development',
+                description: 'Migrer vers nouvelle version de dépendance ou remplacer librairie: audit breaking changes, update code, tests de régression.',
+                inputs: ['Package name', 'Current version', 'Target version', 'Migration reason'],
+                steps: ['Review changelog', 'Identify breaking changes', 'Update code', 'Run tests', 'Update documentation'],
+                example: 'Migrer de Flask 2.x à Flask 3.x avec nouveaux patterns.'
+            },
+            {
+                id: 'analyze-project-stack',
+                title: 'Analyser Stack Projet',
+                filename: 'analyze-project-stack.prompt.md',
+                category: 'analysis',
+                description: 'Analyse complète de la stack technique: dépendances, versions, architecture, patterns utilisés, recommandations.',
+                inputs: [],
+                steps: ['Scan dependencies', 'Analyze architecture', 'Review patterns', 'Generate report'],
+                example: 'Analyser stack pour identifier dépendances obsolètes et risques de sécurité.'
+            },
+            {
+                id: 'list-project-features',
+                title: 'Lister Fonctionnalités',
+                filename: 'list-project-features.prompt.md',
+                category: 'analysis',
+                description: 'Inventaire complet des fonctionnalités du projet: routes, templates, services, état d\'implémentation.',
+                inputs: [],
+                steps: ['Scan routes', 'List features', 'Check completion', 'Generate inventory'],
+                example: 'Créer inventaire de toutes les features pour documentation produit.'
+            },
+            {
+                id: 'analyze-code-vs-roadmap',
+                title: 'Code vs Roadmap',
+                filename: 'analyze-code-vs-roadmap.prompt.md',
+                category: 'analysis',
+                description: 'Comparer code implémenté avec roadmap: identifier écarts, features manquantes, déviations.',
+                inputs: [],
+                steps: ['Parse roadmap', 'Scan codebase', 'Compare features', 'Generate gap analysis'],
+                example: 'Vérifier que toutes les features Phase 1 de la roadmap sont implémentées.'
+            },
+            {
+                id: 'dev-quality',
+                title: 'Audit Qualité Code',
+                filename: 'dev-quality.prompt.md',
+                category: 'analysis',
+                description: 'Audit qualité: linting (ruff), typing (mypy), tests coverage, code smells, best practices.',
+                inputs: [],
+                steps: ['Run linters', 'Type checking', 'Test coverage', 'Code review', 'Generate report'],
+                example: 'Audit complet avant release pour garantir qualité code.'
+            },
+            {
+                id: 'security-audit',
+                title: 'Audit Sécurité',
+                filename: 'security-audit.prompt.md',
+                category: 'analysis',
+                description: 'Audit sécurité complet: vulnérabilités dépendances (pip-audit), code patterns, config, CSP, CSRF.',
+                inputs: [],
+                steps: ['Dependency scan', 'Code security review', 'Configuration audit', 'Generate report'],
+                example: 'Audit sécurité avant déploiement production.'
+            },
+            {
+                id: 'generate-test-suite',
+                title: 'Générer Suite Tests',
+                filename: 'generate-test-suite.prompt.md',
+                category: 'tests',
+                description: 'Générer suite complète de tests pytest: unit tests, integration tests, fixtures, mocks.',
+                inputs: ['Module to test', 'Coverage target'],
+                steps: ['Analyze code', 'Generate unit tests', 'Generate integration tests', 'Setup fixtures'],
+                example: 'Générer tests complets pour module authentication (80%+ coverage).'
+            },
+            {
+                id: 'i18n-audit-fix',
+                title: 'Audit i18n & Fix',
+                filename: 'i18n-audit-fix.prompt.md',
+                category: 'i18n',
+                description: 'Audit internationalisation: clés manquantes, traductions incomplètes, fix auto des erreurs i18n.',
+                inputs: [],
+                steps: ['Scan templates', 'Check translations', 'Find missing keys', 'Generate fixes'],
+                example: 'Corriger toutes les clés i18n manquantes détectées en production.'
+            },
+            {
+                id: 'i18n-comprehensive-audit-and-fix',
+                title: 'i18n Audit Complet',
+                filename: 'i18n-comprehensive-audit-and-fix.prompt.md',
+                category: 'i18n',
+                description: 'Audit i18n exhaustif: tous les templates, toutes les langues, génération rapport détaillé, fix automatique.',
+                inputs: [],
+                steps: ['Full template scan', 'Cross-language comparison', 'Generate comprehensive report', 'Auto-fix'],
+                example: 'Audit complet i18n FR/EN avant release v1.0.'
+            },
+            {
+                id: 'i18n-admin-management-implementation',
+                title: 'i18n Admin Management',
+                filename: 'i18n-admin-management-implementation.prompt.md',
+                category: 'i18n',
+                description: 'Implémenter interface admin pour gérer traductions: CRUD clés i18n, import/export JSON, prévisualisation.',
+                inputs: [],
+                steps: ['Admin routes', 'Management UI', 'Import/export', 'Tests'],
+                example: 'Ajouter interface admin pour que non-devs puissent éditer traductions.'
+            },
+            {
+                id: 'i18n-audit-restructure',
+                title: 'i18n Restructure',
+                filename: 'i18n-audit-restructure.prompt.md',
+                category: 'i18n',
+                description: 'Restructurer fichiers i18n: organiser par feature/module, améliorer nommage, migrer clés.',
+                inputs: [],
+                steps: ['Analyze current structure', 'Design new structure', 'Migrate keys', 'Update references'],
+                example: 'Réorganiser i18n de flat structure vers structure hiérarchique par feature.'
+            },
+            {
+                id: 'i18n-restructure-tabulator',
+                title: 'i18n Tabulator Fix',
+                filename: 'i18n-restructure-tabulator.prompt.md',
+                category: 'i18n',
+                description: 'Fix spécifique i18n pour Tabulator.js: traductions colonnes, pagination, menus contextuels.',
+                inputs: [],
+                steps: ['Scan Tabulator instances', 'Extract i18n strings', 'Update config', 'Test'],
+                example: 'Ajouter traductions FR pour tous les tableaux Tabulator du projet.'
+            },
+            {
+                id: 'pre-production-cleanup',
+                title: 'Nettoyage Pré-Production',
+                filename: 'pre-production-cleanup.prompt.md',
+                category: 'documentation',
+                description: 'Checklist pré-production: remove debug code, clean logs, optimize, security scan, documentation update.',
+                inputs: [],
+                steps: ['Remove debug code', 'Clean comments/TODOs', 'Optimize', 'Security scan', 'Update docs'],
+                example: 'Préparer codebase pour release v1.0 en production.'
+            },
+            {
+                id: 'repository-cleanup',
+                title: 'Nettoyage Repository',
+                filename: 'repository-cleanup.prompt.md',
+                category: 'documentation',
+                description: 'Nettoyage repo: remove obsolete files, organize docs, update README, clean git history.',
+                inputs: [],
+                steps: ['Find obsolete files', 'Archive old docs', 'Update README', 'Clean branches'],
+                example: 'Nettoyer repository après phase de développement intensive.'
+            },
+            {
+                id: 'cleanup-roadmap',
+                title: 'Nettoyage Roadmap',
+                filename: 'cleanup-roadmap.prompt.md',
+                category: 'roadmap',
+                description: 'Nettoyer et mettre à jour roadmap: marquer completed tasks, archiver old versions, update status.',
+                inputs: [],
+                steps: ['Review roadmap', 'Mark completed', 'Archive old', 'Update priorities'],
+                example: 'Mettre à jour roadmap après fin de Phase 1.'
+            },
+            {
+                id: 'update-roadmap',
+                title: 'Mettre à Jour Roadmap',
+                filename: 'update-roadmap.prompt.md',
+                category: 'roadmap',
+                description: 'Update roadmap avec nouvelles features, changements de priorité, ajustements timeline.',
+                inputs: ['New features', 'Priority changes', 'Timeline adjustments'],
+                steps: ['Review current roadmap', 'Add new items', 'Update priorities', 'Adjust timeline'],
+                example: 'Ajouter features Phase 2 et ajuster timeline suite à feedback client.'
+            },
+            {
+                id: 'generate-completion-plan',
+                title: 'Plan de Complétion',
+                filename: 'generate-completion-plan.prompt.md',
+                category: 'roadmap',
+                description: 'Générer plan détaillé pour compléter feature/phase: tasks breakdown, dependencies, estimation.',
+                inputs: ['Feature/phase name', 'Deadline'],
+                steps: ['Analyze requirements', 'Break down tasks', 'Identify dependencies', 'Estimate effort'],
+                example: 'Créer plan détaillé pour compléter authentification 2FA (Phase 4).'
+            },
+            {
+                id: 'add-wizard-step',
+                title: 'Ajouter Étape Wizard',
+                filename: 'add-wizard-step.prompt.md',
+                category: 'development',
+                description: 'Ajouter nouvelle étape au wizard d\'installation: backend logic, template, validation, i18n.',
+                inputs: ['Step name', 'Step position', 'Validation rules'],
+                steps: ['Backend route', 'Template', 'Validation', 'i18n', 'Tests'],
+                example: 'Ajouter étape "Choix thème" au wizard d\'installation.'
+            },
+            {
+                id: 'report-bug',
+                title: 'Rapporter Bug',
+                filename: 'report-bug.prompt.md',
+                category: 'debug',
+                description: 'Créer rapport de bug standardisé dans docs/incidents/bugs/ avec template complet.',
+                inputs: ['Bug description', 'Severity', 'Steps to reproduce'],
+                steps: ['Create bug report', 'Fill template', 'Update incidents index'],
+                example: 'Rapporter bug de login 404 avec analyse complète.'
+            },
+            {
+                id: 'venv-setup-windows',
+                title: 'Setup venv Windows',
+                filename: 'venv-setup-windows.prompt.md',
+                category: 'setup',
+                description: 'Guide setup environnement virtuel Python sur Windows: venv creation, activation, dependencies install.',
+                inputs: [],
+                steps: ['Create venv', 'Activate', 'Install dependencies', 'Verify'],
+                example: 'Configurer environnement dev Python sur Windows 11.'
+            }
+        ];
+
+        const container = document.getElementById('prompts-container');
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const tocNav = document.getElementById('toc-nav');
+        let currentFilter = 'all';
+
+        function renderPrompts(filter = 'all', searchTerm = '') {
+            const filtered = prompts.filter(p => {
+                const matchesFilter = filter === 'all' || p.category === filter;
+                const matchesSearch = searchTerm === '' || 
+                    p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    p.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    p.filename.toLowerCase().includes(searchTerm.toLowerCase());
+                return matchesFilter && matchesSearch;
+            });
+
+            container.innerHTML = filtered.map(prompt => `
+                <div class="prompt-card" data-category="${prompt.category}" id="${prompt.id}">
+                    <div class="prompt-header">
+                        <div>
+                            <div class="prompt-title">${prompt.title}</div>
+                            <div class="prompt-filename">${prompt.filename}</div>
+                        </div>
+                        <span class="category-badge badge-${prompt.category}">${getCategoryIcon(prompt.category)} ${getCategoryName(prompt.category)}</span>
+                    </div>
+                    <p class="prompt-description">${prompt.description}</p>
+                    <details class="prompt-details">
+                        <summary class="btn btn-sm btn-outline-primary">Voir les détails</summary>
+                        <div class="mt-3">
+                            ${prompt.inputs ? `
+                                <div class="details-section">
+                                    <div class="details-title">📋 Inputs requis:</div>
+                                    <ul>
+                                        ${prompt.inputs.map(input => `<li>${input}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            ` : ''}
+                            <div class="details-section">
+                                <div class="details-title">✅ Étapes du processus:</div>
+                                <ol>
+                                    ${prompt.steps.map(step => `<li>${step}</li>`).join('')}
+                                </ol>
+                            </div>
+                            ${prompt.example ? `
+                                <div class="details-section">
+                                    <div class="details-title">💡 Exemple d'utilisation:</div>
+                                    <div class="code-block">${prompt.example}</div>
+                                </div>
+                            ` : ''}
+                            <div class="mt-3">
+                                <a href="${prompt.filename}" class="btn btn-primary btn-sm">📄 Voir le fichier complet</a>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            `).join('');
+
+            // Update TOC
+            tocNav.innerHTML = filtered.map(p => `
+                <a href="#${p.id}" class="toc-link">${p.title}</a>
+            `).join('');
+
+            // Update count
+            const count = filtered.length;
+            document.querySelector('.stat-number').textContent = count;
+        }
+
+        function getCategoryIcon(category) {
+            const icons = {
+                development: '🔧',
+                debug: '🐛',
+                i18n: '🌍',
+                analysis: '📊',
+                tests: '🧪',
+                documentation: '📝',
+                roadmap: '🗺️',
+                setup: '⚙️'
+            };
+            return icons[category] || '📌';
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                development: 'Développement',
+                debug: 'Debug',
+                i18n: 'Internationalisation',
+                analysis: 'Analyse',
+                tests: 'Tests',
+                documentation: 'Documentation',
+                roadmap: 'Roadmap',
+                setup: 'Setup'
+            };
+            return names[category] || category;
+        }
+
+        // Event listeners
+        searchInput.addEventListener('input', (e) => {
+            renderPrompts(currentFilter, e.target.value);
+        });
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderPrompts(currentFilter, searchInput.value);
+            });
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Initial render
+        renderPrompts();
+    </script>
+</body>
+</html>

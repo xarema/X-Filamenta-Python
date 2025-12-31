@@ -549,19 +549,25 @@ For **domain-specific rules**, see:
 
 | Domain | File | Auto-loaded for |
 |--------|------|-----------------|
-| **Python/Flask** | `.github/python.instructions.md` | `*. py` files |
-| **Frontend (HTMX/Bootstrap/i18n)** | `.github/frontend.instructions.md` | `*.html`, `*.css`, `*.js` files |
-| **PowerShell/Windows** | `.github/powershell.instructions.md` | PowerShell contexts + reference |
-| **Workflow (routes, servers, tests)** | `.github/workflow-rules.md` | Manual reference |
-| **User Preferences** | `.github/user-preferences.md` | Manual reference |
-| **Git Commits** | `.github/git-commit-instructions.md` | Commit messages |
-| **Copilot Modes** | `.github/copilot-modes-reference.md` | Manual reference |
-| **IntelliJ IDEA Setup** | `.github/intellij-setup.md` | Manual reference |
-| **Incidents History** | `.github/incidents-history.md` | Manual reference |
+| **Python/Flask** | `.github/instructions/python.instructions.md` | `*.py` files |
+| **Frontend (HTMX/Bootstrap/i18n)** | `.github/instructions/frontend.instructions.md` | `*.html`, `*.css`, `*.js` files |
+| **PowerShell/Windows** | `.github/instructions/powershell.instructions.md` | PowerShell contexts + reference |
+| **Workflow (routes, servers, tests)** | `.github/instructions/workflow-rules.md` | Manual reference |
+| **User Preferences** | `.github/instructions/user-preferences.md` | Manual reference |
+| **Git Commits** | `.github/instructions/git-commit-instructions.md` | Commit messages |
+
+**Quick References:**
+- **[All Instructions Index](./README.md)** - Complete overview
+- **[Main Entry Point](../AI_INSTRUCTIONS.md)** - Root navigation file
 
 **Agent Prompts:**
 - Located in `.github/prompts/*.prompt.md`
+- **[Interactive Reference](../prompts/index.html)** - Browse all 25+ prompts
 - Use these for complex, multi-file modifications
+
+**Incidents & Bug Tracking:**
+- **[Incidents Directory](../../docs/incidents/)** - Organized by type (bugs, fixes, analysis)
+- Use `report-bug.prompt.md` to create standardized bug reports
 
 ---
 

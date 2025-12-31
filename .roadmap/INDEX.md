@@ -21,8 +21,8 @@ Metadata:
 
 # Roadmap Index — Quick Navigation
 
-**Last Updated:** 2025-12-29  
-**Cleanup Date:** 2025-12-29  
+**Last Updated:** 2025-12-31  
+**Cleanup Date:** 2025-12-31  
 **Status:** Organized and validated ✅
 
 ---
@@ -186,13 +186,14 @@ All detailed analysis reports are stored in `../Analysis_reports/`
 
 ### Latest Reports
 
-- 📊 [2025-12-29_18-00_roadmap-status.md](../Analysis_reports/2025-12-29_18-00_roadmap-status.md) — Full roadmap status update
-- 📊 [2025-12-29_features-analysis.md](../Analysis_reports/2025-12-29_features-analysis.md) — Features completeness analysis
-- 📊 [2025-12-29_project-stack-analysis.md](../Analysis_reports/2025-12-29_project-stack-analysis.md) — Technology stack analysis
+- 📊 [2025-12-31_19-54_code-vs-roadmap-analysis.md](../Analysis_reports/2025-12-31_19-54_code-vs-roadmap-analysis.md) — Code vs Roadmap comprehensive analysis
+- 📊 [2025-12-30_sprint1_progress_complet.md](../Analysis_reports/2025-12-30_sprint1_progress_complet.md) — Sprint 1 progress report
+- 📊 [2025-12-30_generate-test-suite-execution.md](../Analysis_reports/2025-12-30_generate-test-suite-execution.md) — Test suite execution report
 
 ### Roadmap-Specific Reports
 
-- 📊 [2025-12-29_roadmap-cleanup.md](../Analysis_reports/2025-12-29_roadmap-cleanup.md) — This cleanup report
+- 📊 [2025-12-31_CLEANUP_PREVIEW.md](../Analysis_reports/2025-12-31_CLEANUP_PREVIEW.md) — Latest cleanup preview
+- 📊 [rapport_analyse_2025-12-26_220556.md](../Analysis_reports/rapport_analyse_2025-12-26_220556.md) — Initial analysis report
 
 ---
 
@@ -229,15 +230,15 @@ Files that are no longer active but kept for reference: [archive/deprecated/](ar
 
 ### Check Progress
 
-1. **Full status update?** → Read [../Analysis_reports/2025-12-29_18-00_roadmap-status.md](../Analysis_reports/2025-12-29_18-00_roadmap-status.md)
+1. **Full status update?** → Read [../Analysis_reports/2025-12-31_19-54_code-vs-roadmap-analysis.md](../Analysis_reports/2025-12-31_19-54_code-vs-roadmap-analysis.md)
 2. **Phase 4 details?** → See [PHASES/PHASE4_PROGRESS.md](PHASES/PHASE4_PROGRESS.md)
-3. **Feature list?** → [../Analysis_reports/2025-12-29_features-analysis.md](../Analysis_reports/2025-12-29_features-analysis.md)
+3. **Sprint progress?** → [../Analysis_reports/2025-12-30_sprint1_progress_complet.md](../Analysis_reports/2025-12-30_sprint1_progress_complet.md)
 
 ### Understand Structure
 
 1. **Directory layout?** → See [Directory Structure](#-directory-structure) above
 2. **What's archived?** → Check [archive/](archive/) folder
-3. **Recent changes?** → See [archive/logs/](archive/logs/)
+3. **Recent changes?** → See [PROGRESS.md](PROGRESS.md) and [TIMELINE.md](TIMELINE.md)
 
 ---
 
@@ -253,7 +254,7 @@ Files that are no longer active but kept for reference: [archive/deprecated/](ar
 
 ### "What's the overall status?"
 
-👉 [../Analysis_reports/2025-12-29_18-00_roadmap-status.md](../Analysis_reports/2025-12-29_18-00_roadmap-status.md)
+👉 [../Analysis_reports/2025-12-31_19-54_code-vs-roadmap-analysis.md](../Analysis_reports/2025-12-31_19-54_code-vs-roadmap-analysis.md)
 
 ### "Show me the roadmap overview"
 
@@ -265,15 +266,15 @@ Files that are no longer active but kept for reference: [archive/deprecated/](ar
 
 ### "What features are complete?"
 
-👉 [../Analysis_reports/2025-12-29_features-analysis.md](../Analysis_reports/2025-12-29_features-analysis.md)
+👉 [PHASES/PHASE4_PROGRESS.md](PHASES/PHASE4_PROGRESS.md) (See completed section)
 
 ---
 
 ## 🔧 Maintenance
 
-**Last Cleanup:** 2025-12-29 20:00 UTC  
-**Next Scheduled Cleanup:** 2026-01-29 (monthly)  
-**Cleanup Report:** [../Analysis_reports/2025-12-29_roadmap-cleanup.md](../Analysis_reports/2025-12-29_roadmap-cleanup.md)
+**Last Cleanup:** 2025-12-31 20:02 UTC  
+**Next Scheduled Cleanup:** 2026-02-03 (monthly)  
+**Cleanup Report:** [../Analysis_reports/2025-12-31_20-02_roadmap-cleanup.md](../Analysis_reports/2025-12-31_20-02_roadmap-cleanup.md)
 
 ### Cleanup Actions Taken
 
@@ -291,7 +292,7 @@ Files that are no longer active but kept for reference: [archive/deprecated/](ar
 | Need | Location |
 |------|----------|
 | Phase 4 Status | [PHASES/PHASE4_PROGRESS.md](PHASES/PHASE4_PROGRESS.md) |
-| Overall Progress | [../Analysis_reports/2025-12-29_18-00_roadmap-status.md](../Analysis_reports/2025-12-29_18-00_roadmap-status.md) |
+| Overall Progress | [../Analysis_reports/2025-12-31_19-54_code-vs-roadmap-analysis.md](../Analysis_reports/2025-12-31_19-54_code-vs-roadmap-analysis.md) |
 | Roadmap Overview | [README.md](README.md) |
 | Completed Phases | [archive/completed/](archive/completed/) |
 | Old Files | [archive/deprecated/](archive/deprecated/) |

@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Documentation
+
+- **Major Documentation Reorganization (2025-12-31)** [#20]
+  - Reduced docs/ root from 26 files to 3 essential files (README.md, 00_START_HERE.md, REFERENCE.md)
+  - Consolidated duplicate archives/ directory into archive/ with proper structure
+  - Moved 50+ files to appropriate locations using git mv (history preserved)
+  - Created 10 missing README.md files for complete directory navigation
+  - Organized deprecated documentation in archive/deprecated/
+  - Consolidated all historical reports into archive/reports/2025-12/
+  - Moved phase completion reports to archive/phases/
+  - Reorganized technical content (DATABASE.md → architecture/, SETUP.md → guides/)
+  - Added comprehensive navigation README files in all directories
+  - Analysis reports: 2025-12-31_documentation-audit.md, 2025-12-31_documentation-cleanup-complete.md
+
 ### Changed
 
 - **Roadmap Update (2025-12-31)**

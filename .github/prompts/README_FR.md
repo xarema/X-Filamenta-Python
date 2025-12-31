@@ -24,8 +24,9 @@
   - [dev-quality](#9-dev-quality)
   - [security-audit](#10-security-audit)
   - [repository-cleanup](#11-repository-cleanup)
+  - [documentation-complete-cleanup](#12-documentation-complete-cleanup)
 - [Prompts de Configuration](#prompts-de-configuration)
-  - [venv-setup-windows](#12-venv-setup-windows)
+  - [venv-setup-windows](#13-venv-setup-windows)
 
 ---
 
@@ -994,9 +995,170 @@ Utilisez ce prompt quand vous devez :
 
 ---
 
+### 12. documentation-complete-cleanup
+
+**Fichier:** `.github/prompts/documentation-complete-cleanup.prompt.md`
+
+#### 📝 Description
+
+Nettoyage et réorganisation **complète** de toute la documentation du projet :
+- Analyse de 286+ fichiers markdown
+- Consolidation des doublons
+- Structure hiérarchique logique
+- Génération HTML avec navigation
+- Validation de tous les liens
+- Archivage des rapports historiques
+
+**Philosophy:** "Single source of truth, easy to find, easy to maintain"
+
+#### 🎯 Quand l'utiliser ?
+
+Utilisez ce prompt quand vous devez :
+- ✅ Réorganiser documentation devenue chaotique
+- ✅ Consolider des fichiers dupliqués/redondants
+- ✅ Créer structure de docs professionnelle
+- ✅ Générer documentation HTML navigable
+- ✅ Préparer docs pour production/open-source
+- ✅ Archiver rapports historiques proprement
+
+#### 📋 Problèmes résolus
+
+**1. Contenu dupliqué**
+- 5 fichiers FEATURES_*.md → 1 guide complet
+- 4 fichiers DEPLOYMENT*.md → structure organisée par plateforme
+- 15+ fichiers PHASE*.md → archivés par phase
+- 20+ fichiers SESSION*.md → archivés par date
+
+**2. Organisation chaotique**
+- 50+ fichiers à la racine docs/ → 3 fichiers (README, START_HERE, REFERENCE)
+- Structure plate → hiérarchie à 7 sections
+- Liens cassés → tous validés et fonctionnels
+- Navigation manquante → README.md dans chaque répertoire
+
+**3. Documentation HTML obsolète**
+- 146 fichiers HTML → régénérés avec navigation
+- Liens cassés → tous vérifiés
+- Navigation sidebar → fonctionnelle
+- Design responsive → mobile-friendly
+
+#### 📊 Phases d'exécution
+
+**Phase 1: Analyse (30 min)**
+- Inventaire de tous les fichiers (scripts PowerShell)
+- Identification des doublons
+- Détection des liens cassés
+- Rapport d'analyse complet
+
+**Phase 2: Consolidation (45 min)**
+- Fusion des fichiers dupliqués
+- Extraction du contenu unique
+- Création de fichiers autoritatifs
+- Notes de migration
+
+**Phase 3: Réorganisation (60 min)**
+- Création de la structure cible (7 sections)
+- Déplacement des fichiers (git mv)
+- Création des README.md (navigation)
+- Archivage des rapports historiques
+
+**Phase 4: HTML Generation (30 min)**
+- Script Python de génération
+- Conversion markdown → HTML
+- Navigation sidebar
+- Breadcrumbs
+- Validation des liens
+
+**Phase 5: Validation (45 min)**
+- Vérification de tous les liens
+- Tests des parcours utilisateur
+- Validation de la structure
+- Pas de fichiers orphelins
+
+**Phase 6: Mise à jour (30 min)**
+- README.md principal
+- Fichiers de navigation
+- Guides d'instructions AI
+- Références croisées
+
+**Phase 7: Documentation (30 min)**
+- Rapport de nettoyage
+- Mise à jour CHANGELOG.md
+- Index des archives
+- Notes de dépréciation
+
+**Total: ~4 heures**
+
+#### ✅ Structure cible
+
+```
+docs/
+├── README.md                    # Index principal
+├── 00_START_HERE.md             # Point d'entrée
+├── REFERENCE.md                 # Référence complète
+├── guides/                      # Tutoriels (5+ fichiers)
+├── features/                    # Fonctionnalités (6+ fichiers)
+├── deployment/                  # Déploiement (5+ fichiers)
+├── architecture/                # Architecture (7+ fichiers)
+├── api/                         # API docs (4+ fichiers)
+├── security/                    # Sécurité (5+ fichiers)
+├── contributing/                # Contribution (5+ fichiers)
+├── troubleshooting/             # Dépannage (4+ fichiers)
+├── examples/                    # Exemples
+├── html/                        # HTML généré
+└── archive/
+    ├── phases/                  # Rapports de phase
+    ├── reports/2025-12/         # Rapports mensuels
+    └── deprecated/              # Fichiers obsolètes
+```
+
+#### 📈 Métriques améliorées
+
+| Métrique | Avant | Après | Amélioration |
+|----------|-------|-------|--------------|
+| Fichiers à la racine | 50 | 3 | -94% |
+| Contenu dupliqué | 50+ fichiers | 0 | -100% |
+| Répertoires sans README | 10+ | 0 | +100% |
+| Liens cassés | Beaucoup | 0 | +100% |
+| Parcours utilisateur | Confus | Clair | +50% |
+
+#### ✅ Livrables
+
+- ✅ Structure docs/ complètement réorganisée
+- ✅ Tous les fichiers consolidés (pas de doublons)
+- ✅ README.md dans chaque répertoire
+- ✅ Documentation HTML avec navigation fonctionnelle
+- ✅ Tous les liens validés (internes et externes)
+- ✅ Rapports historiques archivés proprement
+- ✅ Rapport de nettoyage complet
+- ✅ Mise à jour CHANGELOG.md
+
+#### 🛡️ Sécurité
+
+- ✅ Backup créé avant toute modification
+- ✅ Utilisation de `git mv` (préserve l'historique)
+- ✅ Plan de rollback documenté
+- ✅ Validation à chaque étape
+- ✅ Pas de suppression sans archivage
+
+#### 🎯 Critères de succès
+
+Documentation considérée "propre" quand :
+1. ✅ Organisation logique et hiérarchique
+2. ✅ Navigation facile et intuitive
+3. ✅ Contenu complet et à jour
+4. ✅ Format cohérent et professionnel
+5. ✅ HTML accessible hors ligne
+6. ✅ Tous les liens fonctionnels
+7. ✅ Processus de mise à jour clair
+8. ✅ Facile à trouver l'information
+9. ✅ Pas de contenu obsolète
+10. ✅ Qualité production
+
+---
+
 ## Prompts de Configuration
 
-### 12. venv-setup-windows
+### 13. venv-setup-windows
 
 **Fichier:** `.github/prompts/venv-setup-windows.prompt.md`
 
@@ -1128,6 +1290,7 @@ Qui fait TOUT :
 | **dev-quality** | Qualité | Setup | Junior+ | Workflow quotidien |
 | **security-audit** | Qualité | 4-8 heures | Lead+ | Pré-production |
 | **repository-cleanup** | Qualité | 3-6 heures | Senior+ | Refonte repo |
+| **documentation-complete-cleanup** | Qualité | 3-4 heures | Intermédiaire+ | Nettoyage docs |
 | **venv-setup-windows** | Config | 20-30 min | Tous | Setup initial |
 
 ---

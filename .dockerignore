@@ -1,0 +1,133 @@
+# ============================================================================
+# .dockerignore — X-Filamenta-Python
+# ============================================================================
+# Excludes files and directories from Docker build context
+# Reduces build time and image size by excluding unnecessary files
+# ============================================================================
+
+# Git & Version Control
+# ============================================================================
+.git
+.gitignore
+.gitattributes
+.github
+
+# Documentation
+# ============================================================================
+docs/
+*.md
+!README.md
+CHANGELOG.md
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+SECURITY.md
+LICENSE
+
+# Python — Virtual Environments & Caches
+# ============================================================================
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+
+# Node.js — Dependencies & Caches
+# ============================================================================
+node_modules/
+npm-debug.log*
+npm-error.log*
+package-lock.json
+
+# IDE & Editor Files
+# ============================================================================
+.idea/
+.vscode/
+*.iml
+*.sublime-project
+*.sublime-workspace
+.netbeans/
+
+# Operating System Files
+# ============================================================================
+.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+.AppleDouble/
+.LSOverride/
+._*
+
+# Development & Testing
+# ============================================================================
+.editorconfig
+.pre-commit-config.yaml
+.eslintrc*
+.prettierrc*
+.stylelintrc*
+eslint.config.js
+pytest.ini
+pyproject.toml
+makefile
+Makefile
+
+# Scripts & Tools
+# ============================================================================
+scripts/
+.dev_scripts/
+
+# Temporary & Log Files
+# ============================================================================
+*.log
+*.tmp
+*.temp
+logs/
+cache/
+instance/sessions/*
+!instance/.gitkeep
+!instance/sessions/.gitkeep
+
+# Analysis & Reports
+# ============================================================================
+Analysis_reports/
+.roadmap/
+
+# Docker Files (avoid recursive inclusion)
+# ============================================================================
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Environment Files (CRITICAL - Never include)
+# ============================================================================
+.env
+.env.*
+!.env.example
+*.backup
+*.bak
+*.old
+
+# Database Files (instance should be recreated)
+# ============================================================================
+*.db
+*.sqlite
+*.sqlite3
+
+# ============================================================================
+# End of .dockerignore
+# ============================================================================

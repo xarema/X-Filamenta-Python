@@ -1,0 +1,95 @@
+name: ❓ Question / Support
+description: Ask a question or get help with X-Filamenta-Python
+title: "[QUESTION] "
+labels: ["question", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reaching out! Please provide details about your question below.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What would you like to know?
+      placeholder: "I'm trying to understand..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Question Category
+      description: Which area does your question relate to?
+      options:
+        - Installation / Setup
+        - Configuration
+        - Authentication / 2FA
+        - Admin Panel
+        - Database
+        - i18n / Translations
+        - Deployment (cPanel, VPS, Docker)
+        - API / Endpoints
+        - Frontend / HTMX
+        - Testing
+        - Security
+        - Performance
+        - General Usage
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context / Background
+      description: Provide any relevant context or background information
+      placeholder: "I'm working on... I've tried..."
+    validations:
+      required: false
+
+  - type: textarea
+    id: attempted
+    attributes:
+      label: What Have You Tried?
+      description: What steps have you already taken to solve this?
+      placeholder: "I tried... I looked at..."
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment (if relevant)
+      description: Provide environment details if applicable
+      placeholder: |
+        - OS: Windows 11
+        - Python: 3.12.0
+        - App Version: 0.1.0-beta
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots / Code Snippets
+      description: If applicable, add screenshots or code snippets (drag and drop images here)
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Please confirm the following before submitting
+      options:
+        - label: I have searched the documentation for an answer
+          required: true
+        - label: I have searched for similar questions and found none
+          required: true
+        - label: This is a question, not a bug report or feature request
+          required: true

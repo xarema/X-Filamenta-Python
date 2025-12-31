@@ -1,5 +1,11 @@
 # X-Filamenta-Python
 
+[![CI](https://github.com/xarema/X-Filamenta-Python/actions/workflows/ci.yml/badge.svg)](https://github.com/xarema/X-Filamenta-Python/actions/workflows/ci.yml)
+[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
+[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![Version](https://img.shields.io/badge/version-0.1.0--beta-orange.svg)](https://github.com/xarema/X-Filamenta-Python/releases)
+[![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
+
 **Version:** 0.1.0-Beta  
 **License:** AGPL-3.0-or-later  
 **Distributed by:** XAREMA  

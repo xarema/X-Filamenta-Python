@@ -26,14 +26,16 @@ Notes:
 ------------------------------------------------------------------------------
 """
 
-from flask import Blueprint, render_template, request, jsonify, flash, redirect, url_for
+from typing import Any
+
+from flask import Blueprint, flash, jsonify, redirect, render_template, request, url_for
 
 from backend.src.decorators import require_admin
-from backend.src.services.content_service import ContentService
-from backend.src.services.user_service import UserService
-from backend.src.services.email_service import EmailService
 from backend.src.models.settings import Settings
-from backend.src.extensions import db
+from backend.src.services.content_service import ContentService
+from backend.src.services.email_service import EmailService
+from backend.src.services.user_service import UserService
+from backend.src.utils.i18n import t
 
 # ---- Blueprint Definition ----
 admin = Blueprint("admin", __name__, url_prefix="/admin")
@@ -144,7 +146,7 @@ def settings() -> str:
 
 @admin.route("/settings", methods=["POST"])
 @require_admin
-def save_settings():
+def save_settings() -> Any:
     """
     Save application settings (POST).
 
@@ -168,34 +170,35 @@ def save_settings():
         Settings.set("smtp_port", request.form.get("smtp_port", "465"))
         Settings.set("smtp_user", request.form.get("smtp_user", ""))
         Settings.set("smtp_password", request.form.get("smtp_password", ""))
-        Settings.set(
-            "smtp_tls_enabled",
-            request.form.get("smtp_tls_enabled") == "on"
-        )
+        Settings.set("smtp_tls_enabled", request.form.get("smtp_tls_enabled") == "on")
         Settings.set("smtp_from_email", request.form.get("smtp_from_email", ""))
         Settings.set("smtp_from_name", request.form.get("smtp_from_name", ""))
 
         # Email Verification Settings
         Settings.set(
             "email_verification_required",
-            request.form.get("email_verification_required") == "on"
+            request.form.get("email_verification_required") == "on",
         )
         Settings.set(
             "email_verification_token_expiry_hours",
-            request.form.get("email_verification_token_expiry_hours", "24")
+            request.form.get("email_verification_token_expiry_hours", "24"),
         )
         Settings.set(
             "password_reset_token_expiry_minutes",
-            request.form.get("password_reset_token_expiry_minutes", "60")
+            request.form.get("password_reset_token_expiry_minutes", "60"),
         )
         Settings.set(
             "password_reset_rate_limit_per_hour",
-            request.form.get("password_reset_rate_limit_per_hour", "2")
+            request.form.get("password_reset_rate_limit_per_hour", "2"),
         )
-        Settings.set("email_format", request.form.get("email_format", "html_with_fallback"))
+        Settings.set(
+            "email_format", request.form.get("email_format", "html_with_fallback")
+        )
 
         # Feature Flags
-        Settings.set("registration_enabled", request.form.get("registration_enabled") == "on")
+        Settings.set(
+            "registration_enabled", request.form.get("registration_enabled") == "on"
+        )
         Settings.set("2fa_required", request.form.get("2fa_required") == "on")
 
         # Site Configuration
@@ -204,17 +207,17 @@ def save_settings():
         Settings.set("logo_url", request.form.get("logo_url", "/static/logo.png"))
         Settings.set("footer_text", request.form.get("footer_text", ""))
 
-        flash("Paramètres sauvegardés avec succès", "success")
+        flash(t("admin.settings.success_flash"), "success")
         return redirect(url_for("admin.settings"))
 
     except Exception as e:
-        flash(f"Erreur lors de la sauvegarde: {str(e)}", "error")
+        flash(t("admin.settings.error_save_details").replace("{details}", str(e)), "error")
         return redirect(url_for("admin.settings"))
 
 
 @admin.route("/settings/test-smtp", methods=["POST"])
 @require_admin
-def test_smtp_settings():
+def test_smtp_settings() -> Any:
     """
     Test SMTP connection (POST, AJAX).
 
@@ -229,16 +232,12 @@ def test_smtp_settings():
         email_service = EmailService()
         success, message = email_service.test_smtp_connection()
 
-        return jsonify({
-            "success": success,
-            "message": message
-        })
+        return jsonify({"success": success, "message": message})
 
     except Exception as e:
-        return jsonify({
-            "success": False,
-            "message": f"Erreur test SMTP: {str(e)}"
-        }), 500
+        return jsonify(
+            {"success": False, "message": f"Erreur test SMTP: {str(e)}"}
+        ), 500
 
 
 # ...existing code...

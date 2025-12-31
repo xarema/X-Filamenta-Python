@@ -52,15 +52,15 @@ def add_security_headers(response: Response) -> Response:
     """
     # Content-Security-Policy - Strict but allows Bootstrap/CDN resources
     # default-src 'self' = only allow same-origin resources by default
-    # script-src = allow inline (needed for HTMX/Alpine) + Bootstrap CDN
-    # style-src = allow inline Bootstrap + CDN
+    # script-src = allow inline (needed for HTMX/Alpine) + CDNs (jsdelivr, unpkg, cloudflare)
+    # style-src = allow inline Bootstrap + CDNs
     # img-src = allow data URLs + HTTPS
     response.headers["Content-Security-Policy"] = (
         "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline' cdn.jsdelivr.net https://cdn.jsdelivr.net; "
-        "style-src 'self' 'unsafe-inline' cdn.jsdelivr.net https://cdn.jsdelivr.net; "
+        "script-src 'self' 'unsafe-inline' cdn.jsdelivr.net https://cdn.jsdelivr.net unpkg.com https://unpkg.com cdnjs.cloudflare.com https://cdnjs.cloudflare.com; "
+        "style-src 'self' 'unsafe-inline' cdn.jsdelivr.net https://cdn.jsdelivr.net unpkg.com https://unpkg.com cdnjs.cloudflare.com https://cdnjs.cloudflare.com; "
         "img-src 'self' data: https: blob:; "
-        "font-src 'self' cdn.jsdelivr.net https://cdn.jsdelivr.net data:; "
+        "font-src 'self' cdn.jsdelivr.net https://cdn.jsdelivr.net unpkg.com https://unpkg.com cdnjs.cloudflare.com https://cdnjs.cloudflare.com data:; "
         "connect-src 'self' https: wss:; "
         "frame-ancestors 'none'; "
         "base-uri 'self'; "
@@ -86,11 +86,75 @@ def add_security_headers(response: Response) -> Response:
     )
 
     # Strict-Transport-Security (HSTS) - Force HTTPS
-    # Only add in production to avoid issues with HTTP-only dev environments
-    # max-age=31536000 (1 year), includeSubDomains for all subdomains
-    if response.headers.get("Server") or True:  # Always add for now
+    # Only add when HTTPS is actually used (avoid localhost dev issues)
+    from flask import current_app, request
+
+    if current_app.config.get("PREFERRED_URL_SCHEME") == "https" and request.is_secure:
         response.headers["Strict-Transport-Security"] = (
             "max-age=31536000; includeSubDomains; preload"
         )
+
+    return response
+
+
+def add_cache_headers(response: Response) -> Response:
+    """
+    Add cache headers for static assets optimization.
+
+    Sets appropriate cache headers based on content type:
+    - Static assets (CSS/JS/images): 1 year cache (immutable)
+    - Generated bundles (/gen/): 1 year cache (hash in filename)
+    - HTML: no-cache (always validate)
+    - API responses: no-store (never cache)
+
+    Args:
+        response: Flask Response object
+
+    Returns:
+        Response: Modified response with cache headers
+    """
+    from flask import request
+
+    path = request.path
+
+    # Static assets: long cache (1 year)
+    if path.startswith("/static/"):
+        # CSS, JS, images, fonts with extensions
+        if (
+            any(
+                path.endswith(ext)
+                for ext in [
+                    ".css",
+                    ".js",
+                    ".png",
+                    ".jpg",
+                    ".jpeg",
+                    ".gif",
+                    ".svg",
+                    ".woff",
+                    ".woff2",
+                    ".ttf",
+                    ".eot",
+                    ".ico",
+                ]
+            )
+            or "/gen/" in path
+        ):
+            response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+        else:
+            # Other static files: 1 hour cache
+            response.headers["Cache-Control"] = "public, max-age=3600"
+
+    # API responses: no cache
+    elif path.startswith("/api/"):
+        response.headers["Cache-Control"] = (
+            "no-store, no-cache, must-revalidate, max-age=0"
+        )
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+
+    # HTML pages: validate with server
+    elif response.content_type and "text/html" in response.content_type:
+        response.headers["Cache-Control"] = "no-cache, must-revalidate"
 
     return response

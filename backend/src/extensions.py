@@ -25,7 +25,48 @@ Metadata:
 
 from flask_sqlalchemy import SQLAlchemy
 
-# Global SQLAlchemy instance to be initialized in app factory
-# Import this as `from backend.src.extensions import db`
+# ---- Flask Extensions Registry ----
+#
+# This module centralizes all Flask extension instances to avoid circular imports.
+# Extensions are created here as uninitialized instances and initialized later
+# in the application factory (app.py) using the init_app() pattern.
+#
+# Usage:
+#   from backend.src.extensions import db
+#
+#   # In models:
+#   class User(db.Model):
+#       ...
+#
+#   # In app factory:
+#   db.init_app(app)
+#
+# Available Extensions:
+#   - db: SQLAlchemy ORM instance for database operations
+#
+# Future Extensions (to be added):
+#   - mail: Flask-Mail for email sending
+#   - migrate: Flask-Migrate for database migrations
+#   - login_manager: Flask-Login for user session management
+#   - babel: Flask-Babel for internationalization
+# ---- End Documentation ----
 
+
+# SQLAlchemy Database Extension
+# ------------------------------
+# Global SQLAlchemy instance providing ORM functionality.
+# Initialized in app factory with db.init_app(app).
+#
+# Configuration:
+#   - SQLALCHEMY_DATABASE_URI: Database connection string (from config.py)
+#   - SQLALCHEMY_TRACK_MODIFICATIONS: Disabled for performance
+#   - SQLALCHEMY_ENGINE_OPTIONS: Pool size, timeouts, etc.
+#
+# Models:
+#   Define models by extending db.Model:
+#
+#   class MyModel(db.Model):
+#       id = db.Column(db.Integer, primary_key=True)
+#       name = db.Column(db.String(100))
+#
 db = SQLAlchemy()

@@ -96,15 +96,66 @@ def _build_database_uri() -> str:
 
 
 class Config:
-    """Base configuration for all environments."""
+    """
+    Base configuration for all environments.
+
+    This class defines common settings used across development, testing,
+    and production environments. Environment-specific classes (DevelopmentConfig,
+    TestingConfig, ProductionConfig) inherit from this base.
+
+    Environment Variables:
+        FLASK_SECRET_KEY: Secret key for session signing (REQUIRED in production)
+        FLASK_DEBUG: Enable debug mode (default: False)
+        FLASK_ENV: Environment name (development, testing, production)
+        SQLALCHEMY_DATABASE_URI: Full database connection string
+        DB_TYPE: Database type (sqlite, mysql, postgresql)
+        DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME: DB connection params
+        DEPLOYMENT_TARGET: Deployment platform (development, cpanel, vps, docker)
+        PREFERRED_URL_SCHEME: URL scheme (http or https)
+        SECURE_SSL_REDIRECT: Force HTTPS redirect (production only)
+
+    Usage:
+        # In app factory:
+        from backend.src.config import DevelopmentConfig
+        app.config.from_object(DevelopmentConfig)
+
+        # Or from environment:
+        config_class = os.getenv('FLASK_CONFIG', 'development')
+        app.config.from_object(f'backend.src.config.{config_class}Config')
+
+    Security Notes:
+        - FLASK_SECRET_KEY is MANDATORY in production
+        - Use SESSION_COOKIE_SECURE=True with HTTPS
+        - Enable SECURE_SSL_REDIRECT in production
+        - Never commit secrets to version control
+
+    Database Configuration:
+        Supports multiple backends via SQLALCHEMY_DATABASE_URI:
+        - SQLite: sqlite:///path/to/db.db (default for development)
+        - MySQL: mysql+pymysql://user:pass@host:port/dbname
+        - PostgreSQL: postgresql://user:pass@host:port/dbname
+
+        Or set individual DB_* environment variables and DB_TYPE.
+    """
 
     # Project root
     BASE_DIR = Path(__file__).parent.parent.parent
 
     # Flask
-    SECRET_KEY = os.getenv(
-        "FLASK_SECRET_KEY", "dev-key-change-in-production-immediately"
-    )
+    SECRET_KEY = os.getenv("FLASK_SECRET_KEY")
+    if not SECRET_KEY:
+        if (
+            os.getenv("FLASK_ENV") == "production"
+            or os.getenv("DEPLOYMENT_TARGET") == "production"
+        ):
+            raise ValueError(
+                "FLASK_SECRET_KEY required in production! "
+                "Generate: python -c 'import secrets; "
+                "print(secrets.token_hex(32))'"
+            )
+        # Dev default (NOT for production)
+        SECRET_KEY = "dev-key-change-in-production-immediately"  # noqa: S105
+
     DEBUG = os.getenv("FLASK_DEBUG", "False").lower() in ("true", "1", "yes")
 
     # Database
@@ -118,6 +169,10 @@ class Config:
     SQLALCHEMY_ENGINE_OPTIONS = {
         "pool_pre_ping": True,  # Verify connections before using
         "pool_recycle": 3600,  # Recycle connections after 1 hour
+        "pool_size": 10,  # Number of connections to maintain
+        "max_overflow": 20,  # Max additional connections when pool full
+        "pool_timeout": 30,  # Timeout waiting for connection (seconds)
+        "echo_pool": False,  # Don't log pool activity (perf)
     }
 
     # Flask-specific
@@ -166,21 +221,86 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
-    """Production environment configuration (generic)."""
+    """Production environment configuration (generic).
+
+    Security Critical: This configuration enforces production-level constraints.
+    All variables must be validated and hardened.
+    """
 
     DEBUG = False
     SQLALCHEMY_ECHO = False
     DEPLOYMENT_TARGET = "production"
 
-    # Ensure critical variables are set
-    @staticmethod
-    def validate_production_config() -> None:
-        """Validate that all required production variables are set."""
-        required_vars = ["FLASK_SECRET_KEY"]
-        missing = [var for var in required_vars if not os.getenv(var)]
+    # SECURITY: Force HTTPS in production
+    PREFERRED_URL_SCHEME = "https"
+    SESSION_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
 
-        if missing:
-            raise ValueError(f"Production configuration missing: {', '.join(missing)}")
+    # SECURITY: Strict session cookies
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = "Strict"
+
+    @staticmethod
+    def validate_production_config() -> dict:
+        """Validate that all required production variables are set.
+
+        Returns:
+            dict: Validation result with keys:
+                - valid (bool): Whether config is valid
+                - errors (list): List of error messages
+                - warnings (list): List of warning messages
+        """
+        errors = []
+        warnings = []
+
+        # CRITICAL: Secret key
+        secret_key = os.getenv("FLASK_SECRET_KEY")
+        if not secret_key:
+            errors.append("FLASK_SECRET_KEY not set")
+        elif len(secret_key) < 32:
+            errors.append(f"FLASK_SECRET_KEY too short ({len(secret_key)} chars, min 32)")
+        elif secret_key == "dev-key-change-in-production-immediately":
+            errors.append("FLASK_SECRET_KEY is still development default")
+
+        # CRITICAL: Debug must be False
+        debug_value = os.getenv("FLASK_DEBUG", "False").lower()
+        if debug_value in ("true", "1", "yes"):
+            errors.append("FLASK_DEBUG must be False in production")
+
+        # CRITICAL: Environment
+        flask_env = os.getenv("FLASK_ENV", "").lower()
+        if flask_env != "production":
+            errors.append(f"FLASK_ENV must be 'production', got '{flask_env}'")
+
+        # CRITICAL: Database
+        db_uri = os.getenv("SQLALCHEMY_DATABASE_URI")
+        if not db_uri:
+            db_type = os.getenv("DB_TYPE", "sqlite").lower()
+            if db_type not in ("postgresql", "mysql"):
+                warnings.append("Using SQLite - NOT recommended for production")
+        elif "sqlite" in db_uri.lower():
+            warnings.append("SQLite database detected - NOT recommended for production")
+
+        # CRITICAL: Email config for verification
+        smtp_server = os.getenv("SMTP_SERVER", "").strip()
+        if not smtp_server or "example.com" in smtp_server:
+            warnings.append("SMTP_SERVER not properly configured for email features")
+
+        # CRITICAL: HTTPS
+        url_scheme = os.getenv("PREFERRED_URL_SCHEME", "http")
+        if url_scheme != "https":
+            warnings.append("PREFERRED_URL_SCHEME should be 'https' in production")
+
+        # SECURITY: Session cookies
+        secure_cookies = os.getenv("SESSION_COOKIE_SECURE", "true").lower()
+        if secure_cookies not in ("true", "1", "yes"):
+            errors.append("SESSION_COOKIE_SECURE must be True in production")
+
+        return {
+            "valid": len(errors) == 0,
+            "errors": errors,
+            "warnings": warnings
+        }
 
 
 class CPanelConfig(ProductionConfig):

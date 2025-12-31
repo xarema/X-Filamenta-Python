@@ -181,28 +181,54 @@ def update_preferences() -> Any:
 
     Returns:
         JSON: Success/error response
-        HTTP 200 or 401
+        HTTP 200 or 400/401
     """
     from backend.src.services.preferences_service import PreferencesService
+    from flask_login import current_user
 
-    # For now, use admin user (mock)
-    # TODO: Replace with real current_user in PHASE 4
-    user_id = 1  # Assuming admin user ID is 1
+    try:
+        # Check if user is authenticated
+        if not current_user.is_authenticated:
+            return jsonify({"error": "Non autorisé"}), 401
 
-    data = request.get_json() or request.form
+        user_id = current_user.id
 
-    # Update preferences using service
-    updated = PreferencesService.update(user_id, **data)
+        # Get data from JSON or form (HTMX sends form-data by default)
+        if request.is_json:
+            data = request.get_json()
+        else:
+            data = request.form.to_dict()
 
-    if not updated:
-        return jsonify({"error": "Failed to update preferences"}), 400
+        # Convert notifications from string to boolean if needed
+        if "notifications" in data:
+            if isinstance(data["notifications"], str):
+                data["notifications"] = data["notifications"].lower() in ["true", "1", "on"]
 
-    current_app.logger.info(f"User {user_id} preferences updated")
+        current_app.logger.info(f"Updating preferences for user {user_id}: {data}")
 
-    return jsonify(
-        {
-            "status": "success",
-            "message": "Préférences mises à jour",
-            "preferences": updated.to_dict(),
-        }
-    ), 200
+        # Update preferences using service
+        updated = PreferencesService.update(user_id, **data)
+
+        if not updated:
+            current_app.logger.error(f"Failed to update preferences for user {user_id}")
+            return jsonify({"error": "Échec de la mise à jour des préférences"}), 400
+
+        current_app.logger.info(f"User {user_id} preferences updated successfully")
+
+        # Return HTML for HTMX instead of JSON
+        return f"""
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            ✅ {t('pages.preferences.updated')}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        """, 200
+
+    except Exception as e:
+        current_app.logger.error(f"Error updating preferences: {str(e)}", exc_info=True)
+        return f"""
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            ❌ {t('common.error')}: {str(e)}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        """, 400
+

@@ -27,6 +27,8 @@ from typing import Optional, cast
 
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from flask_login import UserMixin
+
 from backend.src.extensions import db
 
 
@@ -37,11 +39,12 @@ class UserRole(str, Enum):
     ADMIN = "admin"
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     """
     User model
 
     Represents a user in the system with authentication and authorization.
+    Inherits from UserMixin for Flask-Login integration.
     """
 
     __tablename__ = "users"
@@ -231,8 +234,8 @@ class User(db.Model):
 
     def generate_email_verification_token(self) -> str:
         """Generate email verification token with expiry."""
-        from backend.src.services.email_service import EmailToken
         from backend.src.models.settings import Settings
+        from backend.src.services.email_service import EmailToken
 
         token = EmailToken.generate()
         expiry_hours = Settings.get("email_verification_token_expiry_hours", 24)
@@ -261,10 +264,7 @@ class User(db.Model):
         if not self.email_verification_token_expiry:
             return False
 
-        if datetime.utcnow() > self.email_verification_token_expiry:
-            return False
-
-        return True
+        return datetime.utcnow() <= self.email_verification_token_expiry
 
     def mark_email_verified(self) -> None:
         """Mark email as verified and clear token."""
@@ -274,8 +274,8 @@ class User(db.Model):
 
     def generate_password_reset_token(self) -> str:
         """Generate password reset token with expiry."""
-        from backend.src.services.email_service import EmailToken
         from backend.src.models.settings import Settings
+        from backend.src.services.email_service import EmailToken
 
         token = EmailToken.generate()
         expiry_minutes = Settings.get("password_reset_token_expiry_minutes", 60)
@@ -304,10 +304,7 @@ class User(db.Model):
         if not self.password_reset_token_expiry:
             return False
 
-        if datetime.utcnow() > self.password_reset_token_expiry:
-            return False
-
-        return True
+        return datetime.utcnow() <= self.password_reset_token_expiry
 
     def reset_password_with_token(self, token: str, new_password: str) -> bool:
         """
@@ -327,7 +324,6 @@ class User(db.Model):
         self.password_reset_token = None
         self.password_reset_token_expiry = None
         return True
-
 
     def to_dict(self, include_email: bool = False) -> dict:
         """

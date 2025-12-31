@@ -32,13 +32,48 @@ from typing import Any
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
+# ---- Rate Limiter Storage ----
+# Use cache service for distributed rate limiting (Redis) or local (Filesystem/Memory)
+
+
+def get_storage_uri() -> str:
+    """
+    Get storage URI for Flask-Limiter based on cache backend.
+
+    Returns:
+        Storage URI string (redis:// or memory://)
+    """
+    try:
+        from backend.src.services.cache_service import CacheBackend, cache_service
+
+        if cache_service.backend == CacheBackend.REDIS:
+            # Use Redis for distributed rate limiting
+            import os
+
+            host = os.getenv("REDIS_HOST", "localhost")
+            port = os.getenv("REDIS_PORT", "6379")
+            password = os.getenv("REDIS_PASSWORD", "")
+            db = os.getenv("REDIS_DB", "0")
+
+            if password:
+                return f"redis://:{password}@{host}:{port}/{db}"
+            return f"redis://{host}:{port}/{db}"
+        else:
+            # Fallback to memory for Filesystem/Memory backends
+            # (Flask-Limiter doesn't support filesystem directly)
+            return "memory://"
+    except Exception:
+        # If cache service not available, use memory
+        return "memory://"
+
+
 # Initialize limiter (will be configured in app factory)
 # Default limits are DISABLED to avoid blocking dev/test
 # Use explicit decorators on sensitive routes instead
 limiter = Limiter(
     key_func=get_remote_address,
     default_limits=[],  # No default limit - apply explicitly per route
-    storage_uri="memory://",
+    storage_uri=get_storage_uri(),
 )
 
 

@@ -1,0 +1,866 @@
+{
+  "common": {
+    "yes": "Oui",
+    "no": "Non",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "back": "Retour",
+    "next": "Suivant",
+    "coming_soon": "À venir",
+    "loading": "Chargement...",
+    "success": "Succès",
+    "error": "Erreur"
+  },
+
+  "wizard": {
+    "title": "Assistant d'installation",
+    "step":  "Étape",
+    "continue": "Continuer",
+    "back": "Retour",
+    "cancel": "Annuler",
+    "previous": "Précédent",
+    "skip_backup": "Continuer sans backup",
+    "restore_backup": "Restaurer un backup",
+    "retry": "Réessayer",
+    "done_title": "Installation terminée",
+    "done_body": "L'application est configurée.  Vous pouvez vous connecter.",
+    "go_login": "Aller à la connexion",
+    "error_title": "Erreur d'installation",
+    "error_details": "Détails de l'erreur",
+    "error_body": "Une erreur est survenue pendant l'installation.",
+    "error_hint": "Veuillez corriger et réessayer.",
+
+    "language": {
+      "choose": "Choisissez votre langue",
+      "instruction": "Sélectionnez votre langue pour démarrer l'installation"
+    },
+
+    "steps": {
+      "welcome": "Bienvenue",
+      "requirements": "Prérequis",
+      "database": "Base de données",
+      "admin": "Administrateur",
+      "summary": "Résumé"
+    },
+
+    "welcome":  {
+      "title": "Bienvenue dans l'assistant d'installation ! ",
+      "message": "Bienvenue dans l'assistant d'installation ! ",
+      "description": "Nous allons configurer votre application en quelques étapes simples :  base de données, compte administrateur, et c'est terminé !"
+    },
+
+    "requirements": {
+      "title": "Prérequis système",
+      "description": "Vérification de votre environnement",
+      "python": "Python",
+      "version_required": "Version requise",
+      "version_found": "Version détectée",
+      "disk_space": "Espace disque",
+      "available":  "Disponible",
+      "required": "Requis",
+      "permissions": "Permissions d'écriture",
+      "writable": "Autorisé",
+      "not_writable": "Non autorisé",
+      "not_detected": "Non détecté",
+      "all_ok": "Tous les prérequis sont remplis",
+      "some_missing": "Certains prérequis ne sont pas remplis",
+      "environment": "Environnement",
+      "db_clients": "Clients de base de données",
+      "instance_perms": "Dossier instance accessible en écriture",
+      "env_type": "Type d'environnement",
+      "none":  "Aucun détecté"
+    },
+
+    "db":  {
+      "title": "Configuration de la base de données",
+      "description": "Choisissez et configurez votre base de données",
+      "type": "Type de base de données",
+      "host": "Serveur",
+      "port": "Port",
+      "dbname": "Nom de la base de données",
+      "username": "Nom d'utilisateur",
+      "password": "Mot de passe",
+      "test_button": "Tester la connexion",
+      "testing": "Test en cours.. .",
+      "success": "Connexion réussie !  La base de données est prête.",
+      "test_success": "Connexion réussie ! ",
+      "test_error": "Erreur de connexion",
+      "error": "La connexion a échoué.  Vérifiez vos paramètres.",
+      "error_empty_field": "Ce champ est requis",
+      "error_empty_host": "Le serveur est requis",
+      "error_empty_port": "Le port est requis",
+      "error_empty_dbname": "Le nom de la base de données est requis",
+      "error_empty_username": "Le nom d'utilisateur est requis",
+      "continue_no_backup": "Continuer sans backup",
+      "or_restore": "ou restaurer un backup",
+      "uri_label": "URI de connexion",
+      "uri_placeholder": "Ex: sqlite:///instance/app.db",
+      "examples": "Exemples",
+      "sqlite_example": "SQLite (local)",
+      "mysql_example":  "MySQL",
+      "postgresql_example": "PostgreSQL"
+    },
+
+    "backup": {
+      "title": "Restauration d'un backup",
+      "description": "Importez vos données existantes",
+      "upload": "Sélectionner un fichier",
+      "upload_button": "Téléverser le backup",
+      "choose_file": "Choisir un fichier",
+      "no_file": "Aucun fichier",
+      "file":  "Fichier (. tar.gz)",
+      "formats": "Formats acceptés :  .sql, .tar.gz, .zip",
+      "limit": "Limite 50MB, tar.gz/tgz",
+      "validating": "Validation en cours...",
+      "validate":  "Restaurer le backup",
+      "valid": "Backup valide",
+      "ok": "Backup valide.",
+      "invalid": "Fichier invalide",
+      "error_empty":  "Le fichier est vide",
+      "error_format": "Format de fichier non supporté",
+      "error_size": "Fichier trop volumineux",
+      "size":  "Taille",
+      "checksum": "Empreinte",
+      "remove": "Retirer le backup"
+    },
+
+    "admin":  {
+      "title": "Compte administrateur",
+      "subtitle": "Identifiants pour la connexion après installation",
+      "description": "Créez le compte administrateur principal",
+      "username": "Nom d'utilisateur",
+      "username_label": "Nom d'utilisateur",
+      "username_placeholder": "admin",
+      "email": "Adresse email",
+      "email_label": "Adresse email",
+      "email_placeholder":  "admin@example.com",
+      "password": "Mot de passe",
+      "password_label": "Mot de passe",
+      "password_confirm":  "Confirmer le mot de passe",
+      "password_hint": "Au moins 8 caractères, avec majuscules, minuscules et chiffres",
+      "password_help": "Min 8 caractères, 1 majuscule, 1 symbole",
+      "error_username_empty": "Le nom d'utilisateur est requis",
+      "error_username_invalid": "Le nom d'utilisateur doit contenir entre 3 et 50 caractères alphanumériques",
+      "error_email_empty": "L'adresse email est requise",
+      "error_email_invalid": "Format d'email invalide",
+      "error_password_empty": "Le mot de passe est requis",
+      "error_password_weak": "Le mot de passe est trop faible",
+      "error_password_mismatch": "Les mots de passe ne correspondent pas",
+      "required": "Champ requis",
+      "submit": "Créer l'administrateur"
+    },
+
+    "summary": {
+      "title": "Résumé de l'installation",
+      "review": "Vérifiez les informations ci-dessous",
+      "database": "Base de données",
+      "db_type": "Type",
+      "db_file": "Fichier de base de données",
+      "db_host": "Hôte",
+      "db_name": "Base de données",
+      "db_user": "Utilisateur",
+      "db_uri": "URI de connexion",
+      "admin_account": "Compte administrateur",
+      "admin_user": "Administrateur",
+      "username": "Nom d'utilisateur",
+      "email": "Email",
+      "password": "Mot de passe",
+      "password_hidden": "(masqué pour la sécurité)",
+      "backup":  "Restauration de backup",
+      "backup_restore": "Restauration de backup",
+      "backup_file": "Fichier",
+      "backup_checksum": "Empreinte",
+      "yes": "Oui",
+      "no": "Non",
+      "finalize": "Finaliser l'installation"
+    },
+
+    "done": {
+      "title": "Installation terminée avec succès !",
+      "body": "L'application est configurée. Vous pouvez vous connecter.",
+      "install_summary": "Résumé de l'installation",
+      "database":  "Base de données",
+      "tables_created": "Tables créées",
+      "admin_account": "Compte administrateur",
+      "username": "Utilisateur",
+      "email": "Email",
+      "install_marker": "Marqueur d'installation",
+      "backup_restored": "Backup restauré",
+      "backup_tables": "Tables importées du backup",
+      "backup_records": "Enregistrements restaurés",
+      "done_next": "Prochaine étape",
+      "done_hint": "Connectez-vous avec votre compte administrateur pour accéder au tableau de bord.",
+      "goto_login": "Se connecter",
+      "view_db": "Voir les données de la BD"
+    },
+
+    "verify_db": {
+      "title": "Vérification de la Base de Données",
+      "connection_success": "Connexion réussie",
+      "connection_failed": "Erreur de connexion",
+      "tables":  "Tables créées",
+      "table_name": "Table",
+      "record_count": "Nb d'enregistrements",
+      "users_title": "Utilisateurs",
+      "user_id": "ID",
+      "user_username": "Username",
+      "user_email":  "Email",
+      "user_admin": "Admin",
+      "user_created": "Créé le",
+      "close": "Fermer",
+      "back_home": "Retour à l'accueil"
+    },
+
+    "errors": {
+      "generic": "Une erreur est survenue",
+      "db_connection": "Impossible de se connecter à la base de données",
+      "db_creation": "Erreur lors de la création des tables",
+      "backup_invalid": "Le fichier de backup est invalide",
+      "admin_creation": "Erreur lors de la création du compte administrateur",
+      "finalize":  "Erreur lors de la finalisation"
+    },
+
+    "form": {
+      "required": "Champ requis"
+    }
+  },
+
+  "auth": {
+    "login": {
+      "title": "Connexion",
+      "subtitle": "Connectez-vous à votre compte",
+      "username": "Nom d'utilisateur ou email",
+      "password": "Mot de passe",
+      "remember":  "Se souvenir de moi",
+      "forgot": "Mot de passe oublié ?",
+      "submit": "Se connecter",
+      "no_account": "Pas encore de compte ?",
+      "register_link": "S'inscrire",
+      "register": "Créer un compte",
+      "first_time": "Première utilisation ? ",
+      "install_link": "Installer X-Filamenta",
+      "success": "Connexion réussie",
+      "error": {
+        "credentials": "Identifiants invalides",
+        "inactive": "Compte désactivé",
+        "locked":  "Compte verrouillé.  Réessayez plus tard.",
+        "required": "Nom d'utilisateur et mot de passe requis"
+      }
+    },
+    "logout": {
+      "title": "Déconnexion",
+      "confirm": "Êtes-vous sûr de vouloir vous déconnecter ?",
+      "success": "Déconnexion réussie"
+    },
+    "register": {
+      "title": "Inscription",
+      "subtitle": "Créer un nouveau compte",
+      "username": "Nom d'utilisateur",
+      "username_hint": "3-50 caractères, lettres, chiffres, tirets et underscores uniquement",
+      "email": "Adresse email",
+      "password": "Mot de passe",
+      "password_hint":  "Au moins 8 caractères, avec majuscules, minuscules et chiffres",
+      "password_confirm": "Confirmer le mot de passe",
+      "confirm_password": "Confirmer le mot de passe",
+      "agree_terms": "J'accepte les <a href='/legal' target='_blank'>conditions d'utilisation</a>",
+      "have_account": "Déjà inscrit ?",
+      "submit": "S'inscrire",
+      "have_account": "Déjà inscrit ?",
+      "login_link": "Se connecter",
+      "success": "Inscription réussie !  Vérifiez votre email.",
+      "error": {
+        "username_taken": "Nom d'utilisateur déjà utilisé",
+        "email_taken": "Email déjà utilisé",
+        "weak_password": "Mot de passe trop faible"
+      }
+    },
+    "2fa": {
+      "title":  "Authentification à deux facteurs",
+      "subtitle":  "Entrez le code de votre application",
+      "code": "Code de vérification",
+      "submit":  "Vérifier",
+      "backup":  "Utiliser un code de secours",
+      "backup_code": "Utiliser un code de secours",
+      "error": {
+        "invalid_code": "Code invalide",
+        "expired":  "Code expiré"
+      }
+    },
+    "setup_2fa": {
+      "title":  "Configurer 2FA",
+      "subtitle":  "Sécurisez votre compte",
+      "scan":  "Scannez ce QR code avec votre application d'authentification",
+      "code": "Code de vérification",
+      "backup_codes": "Codes de secours",
+      "submit": "Activer 2FA",
+      "success": "2FA activé avec succès"
+    },
+    "forgot_password": {
+      "title": "Mot de passe oublié",
+      "subtitle":  "Réinitialisez votre mot de passe",
+      "email":  "Adresse email",
+      "submit": "Envoyer le lien",
+      "back_to_login": "Retour à la connexion",
+      "success": "Email de réinitialisation envoyé",
+      "error": {
+        "email_not_found": "Email introuvable",
+        "rate_limit": "Trop de demandes.  Réessayez plus tard."
+      }
+    },
+    "forgot":  {
+      "title": "Mot de passe oublié",
+      "subtitle": "Réinitialisez votre mot de passe",
+      "email": "Adresse email",
+      "submit": "Envoyer le lien",
+      "back":  "Retour à la connexion",
+      "success":  "Email envoyé avec succès",
+      "error": {
+        "email_required": "L'adresse email est requise",
+        "email_not_found": "Email introuvable",
+        "rate_limit": "Trop de demandes. Réessayez plus tard.",
+        "generic": "Erreur lors de l'envoi"
+      }
+    },
+    "reset_password": {
+      "title": "Réinitialiser le mot de passe",
+      "subtitle": "Créez un nouveau mot de passe",
+      "new_password": "Nouveau mot de passe",
+      "confirm_password": "Confirmer le mot de passe",
+      "submit":  "Réinitialiser",
+      "success": "Mot de passe réinitialisé avec succès",
+      "error": {
+        "invalid_token": "Lien invalide ou expiré",
+        "mismatch": "Les mots de passe ne correspondent pas"
+      }
+    },
+    "reset":  {
+      "title": "Réinitialiser le mot de passe",
+      "subtitle": "Choisissez un nouveau mot de passe",
+      "password": "Nouveau mot de passe",
+      "password_confirm": "Confirmer le mot de passe",
+      "submit": "Réinitialiser",
+      "success": "Mot de passe réinitialisé",
+      "success_connect": "Mot de passe réinitialisé avec succès.  Veuillez vous connecter.",
+      "error": {
+        "all_required": "Tous les champs sont requis",
+        "mismatch": "Les mots de passe ne correspondent pas",
+        "password_short": "Le mot de passe doit contenir au moins 8 caractères",
+        "invalid":  "Lien de réinitialisation invalide ou expiré",
+        "generic": "Erreur lors de la réinitialisation"
+      }
+    },
+    "verify_email": {
+      "title": "Vérification d'email",
+      "success": "Email vérifié avec succès",
+      "error": "Lien de vérification invalide",
+      "expired": "Lien de vérification expiré"
+    },
+    "email_sent": {
+      "title": "Email envoyé",
+      "body": "Un email de vérification a été envoyé à votre adresse",
+      "check":  "Vérifiez votre boîte de réception"
+    }
+  },
+
+  "admin": {
+    "users": {
+      "title": "Gestion des utilisateurs",
+      "create_new": "Nouvel utilisateur",
+      "no_users": "Aucun utilisateur trouvé",
+      "total": "Total",
+      "verified": "Email vérifié",
+
+      "filter": {
+        "status": "Statut",
+        "all": "Tous",
+        "active_only": "Actifs uniquement",
+        "inactive_only": "Inactifs uniquement"
+      },
+
+      "table": {
+        "id": "ID",
+        "username": "Nom d'utilisateur",
+        "email": "Email",
+        "role": "Rôle",
+        "status": "Statut",
+        "created": "Créé le",
+        "created_at": "Créé le",
+        "date_created": "Date de création",
+        "name": "Nom",
+        "actions": "Actions"
+      },
+
+      "role": {
+        "admin": "Admin",
+        "user": "Utilisateur"
+      },
+
+      "status": {
+        "active": "Actif",
+        "inactive": "Inactif"
+      },
+
+      "actions": {
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "save": "Enregistrer",
+        "cancel": "Annuler"
+      },
+
+      "form": {
+        "name": "Nom complet",
+        "email": "Adresse email",
+        "username": "Nom d'utilisateur",
+        "password": "Mot de passe",
+        "role": "Rôle",
+        "status": "Statut"
+      },
+
+      "create": {
+        "title": "Créer un utilisateur",
+        "username": "Nom d'utilisateur",
+        "username_hint": "Lettres, chiffres, tirets et underscores uniquement",
+        "email": "Adresse email",
+        "password": "Mot de passe",
+        "password_hint": "Minimum 8 caractères",
+        "is_admin": "Administrateur",
+        "is_admin_hint": "L'utilisateur aura accès au panneau d'administration",
+        "is_active": "Compte actif",
+        "send_email": "Envoyer un email de bienvenue",
+        "send_email_hint": "Envoie un email avec les identifiants",
+        "submit": "Créer l'utilisateur",
+        "cancel": "Annuler",
+        "success": "Utilisateur {username} créé avec succès",
+        "error": {
+          "required": "Tous les champs requis doivent être remplis",
+          "password_short": "Le mot de passe doit contenir au moins 8 caractères"
+        }
+      },
+
+      "edit": {
+        "title": "Modifier l'utilisateur",
+        "user_id": "ID utilisateur",
+        "created_at": "Créé le",
+        "last_login": "Dernière connexion",
+        "email_verified": "Email vérifié",
+        "never":  "Jamais",
+        "yes": "Oui",
+        "no": "Non",
+        "username":  "Nom d'utilisateur",
+        "username_readonly": "Le nom d'utilisateur ne peut pas être modifié",
+        "email": "Adresse email",
+        "password": "Nouveau mot de passe",
+        "password_hint": "Laissez vide pour conserver le mot de passe actuel",
+        "is_admin": "Administrateur",
+        "is_active": "Compte actif",
+        "submit": "Enregistrer les modifications",
+        "cancel": "Annuler",
+        "success": "Utilisateur {username} modifié avec succès",
+        "error": {
+          "password_short": "Le mot de passe doit contenir au moins 8 caractères"
+        }
+      },
+
+      "delete":  {
+        "title": "Supprimer l'utilisateur",
+        "confirm": "Voulez-vous vraiment supprimer l'utilisateur",
+        "warning": "Cette action peut être irréversible selon l'option choisie.",
+        "soft":  "Suppression douce (recommandé)",
+        "soft_desc": "Désactive le compte.  Peut être réactivé ultérieurement.",
+        "hard": "Suppression définitive",
+        "hard_desc": "Supprime définitivement toutes les données.  Irréversible.",
+        "cancel": "Annuler",
+        "confirm_btn": "Confirmer la suppression",
+        "success_soft": "Utilisateur désactivé avec succès",
+        "success_hard": "Utilisateur supprimé définitivement"
+      }
+    },
+
+    "dashboard": {
+      "title": "Tableau de Bord",
+      "welcome": "Bienvenue sur le panneau d'administration",
+      "page_title": "Dashboard Administrateur",
+      "page_subtitle": "Vue d'ensemble et statistiques de l'application",
+      "users": {
+        "title": "Utilisateurs",
+        "desc": "Gérer les comptes utilisateurs"
+      },
+      "content": {
+        "title": "Contenu",
+        "desc": "Gérer les articles et pages"
+      },
+      "settings": {
+        "title": "Paramètres",
+        "desc": "Configuration du système"
+      },
+      "stats": {
+        "users": "Utilisateurs",
+        "total_users": "Utilisateurs Total",
+        "admins": "Administrateurs",
+        "admins_desc": "Accès privilégié",
+        "2fa_enabled": "2FA Activé",
+        "2fa_percent": "% des users",
+        "recent_logins": "Connexions 24h",
+        "recent_logins_desc": "Dernières 24 heures",
+        "content": "Contenus",
+        "active":  "actifs",
+        "errors": "Erreurs",
+        "visits": "Visites",
+        "management": "Gestion"
+      },
+      "quick_actions": {
+        "title": "Actions Rapides",
+        "manage_users": "Gérer Utilisateurs",
+        "manage_users_desc": "CRUD users, 2FA, rôles",
+        "settings": "Paramètres",
+        "settings_desc": "Configuration globale",
+        "view_site": "Voir le Site",
+        "view_site_desc": "Vue utilisateur"
+      },
+      "recent_activity": {
+        "title": "Activité Récente",
+        "no_activity": "Aucune activité récente"
+      },
+      "management": {
+        "users": "Gérer Utilisateurs",
+        "users_desc": "Comptes, rôles, permissions",
+        "content": "Gérer Contenus",
+        "content_desc": "Articles, pages, médias",
+        "settings": "Configuration",
+        "settings_desc": "Email, sécurité, personnalisation"
+      }
+    },
+
+    "member_dashboard": {
+      "title": "Tableau de bord",
+      "welcome": "Bienvenue, {username}",
+      "logout": "Déconnexion",
+      "welcome_card_title": "Bienvenue sur X-Filamenta",
+      "welcome_card_text": "Vous êtes connecté en tant que membre.  Explorez les fonctionnalités disponibles.",
+      "stats": {
+        "content": "Contenu",
+        "content_count": "Articles publiés",
+        "activity":  "Activité",
+        "activity_count": "Actions récentes",
+        "preferences_title": "Préférences",
+        "current_theme": "Thème actuel",
+        "default":  "Défaut"
+      },
+      "recent_activity": {
+        "title": "Activité récente",
+        "no_activity": "Aucune activité récente"
+      },
+      "quick_actions": {
+        "title": "Actions rapides",
+        "profile": "Mon profil",
+        "preferences": "Préférences",
+        "content": "Voir le contenu",
+        "admin": "Administration"
+      },
+      "logout_confirm": "Êtes-vous sûr de vouloir vous déconnecter ?",
+      "logout_error": "Erreur lors de la déconnexion",
+      "logout_error_generic": "Une erreur est survenue"
+    },
+
+    "settings": {
+      "title": "Paramètres",
+      "subtitle":  "Configuration du système",
+      "smtp_title": "Configuration SMTP",
+      "smtp_host":  "Serveur SMTP",
+      "smtp_port": "Port SMTP",
+      "smtp_user": "Utilisateur SMTP",
+      "smtp_password":  "Mot de passe SMTP",
+      "smtp_tls": "Activer TLS",
+      "smtp_from_email": "Email expéditeur",
+      "test_smtp": "Tester la connexion",
+      "email_verification_title": "Vérification Email",
+      "email_verification_required": "Vérification email requise",
+      "email_verification_expiry": "Expiration token (heures)",
+      "password_reset_expiry": "Expiration reset password (minutes)",
+      "password_reset_limit": "Demandes reset/heure",
+      "features_title": "Options Fonctionnalités",
+      "registration_enabled": "Inscription utilisateurs activée",
+      "2fa_required": "2FA requis pour tous",
+      "save":  "Sauvegarder les paramètres",
+      "system_info":  "Informations Système",
+      "version": "Version",
+      "api_version": "Version API",
+      "environment": "Environnement",
+      "status": "Statut",
+      "online":  "En ligne",
+      "general": "Général",
+      "security": "Sécurité",
+      "database": "Base de données",
+      "cache": "Cache",
+      "language": "Gestion des langues",
+      "email": {
+        "title": "Configuration Email",
+        "smtp_host": "Serveur SMTP",
+        "smtp_port": "Port SMTP",
+        "smtp_user": "Utilisateur SMTP",
+        "smtp_password": "Mot de passe SMTP",
+        "smtp_tls": "Activer TLS",
+        "from_email": "Email expéditeur",
+        "from_name": "Nom expéditeur",
+        "verification_required": "Vérification email requise",
+        "verification_expiry": "Expiration vérification (heures)",
+        "format": "Format des emails"
+      },
+      "password": {
+        "title": "Réinitialisation Mot de Passe",
+        "reset_expiry": "Expiration reset (minutes)",
+        "reset_rate_limit": "Limite envois/heure"
+      },
+      "security": {
+        "title": "Sécurité",
+        "2fa_required": "2FA requis",
+        "registration_enabled": "Inscription publique"
+      },
+      "site":  {
+        "title": "Site",
+        "name": "Nom du site",
+        "url": "URL du site",
+        "logo": "URL logo",
+        "footer": "Texte pied de page"
+      },
+      "save": "Enregistrer",
+      "success": "Paramètres sauvegardés",
+      "success_flash": "Paramètres sauvegardés avec succès",
+      "error":  "Erreur lors de la sauvegarde",
+      "error_save_details": "Erreur lors de la sauvegarde:  {details}"
+    },
+
+    "pagination": {
+      "previous": "Précédent",
+      "next": "Suivant",
+      "page": "Page"
+    }
+  },
+
+  "pages": {
+    "content": {
+      "title": "Contenu",
+      "description": "Gérer les articles et pages",
+      "list_title": "Liste du contenu",
+      "add_new": "Ajouter",
+      "no_items": "Aucun contenu pour le moment",
+      "table":  {
+        "title": "Titre",
+        "type": "Type",
+        "status": "Statut",
+        "author": "Auteur",
+        "created": "Créé le",
+        "actions": "Actions"
+      },
+      "types": {
+        "article": "Article",
+        "page": "Page",
+        "post": "Publication"
+      },
+      "status": {
+        "draft": "Brouillon",
+        "published": "Publié"
+      },
+      "modal": {
+        "add_title": "Ajouter du contenu",
+        "title": "Titre",
+        "type": "Type",
+        "body": "Contenu",
+        "status": "Statut",
+        "cancel": "Annuler",
+        "save": "Enregistrer"
+      }
+    },
+    "features": {
+      "title": "Fonctionnalités",
+      "lead": "Découvrez toutes les fonctionnalités de X-Filamenta",
+      "architecture": "Architecture moderne",
+      "architecture_desc": "Flask + Bootstrap 5 + HTMX pour une stack simple et performante",
+      "security": "Sécurité renforcée",
+      "security_desc": "CSRF, rate limiting, 2FA, validation des entrées",
+      "database": "Base de données flexible",
+      "database_desc":  "Support SQLite, PostgreSQL, MySQL avec migrations Alembic",
+      "frontend": "Interface intuitive",
+      "frontend_desc": "Design responsive Bootstrap 5 avec composants réutilisables",
+      "tests": "Tests complets",
+      "tests_desc": "pytest avec couverture de code et tests d'intégration",
+      "deploy": "Déploiement simple",
+      "deploy_desc":  "Docker, cPanel, VPS ou production avec un seul script",
+      "details_title": "Détails techniques",
+      "dev_title": "Développement",
+      "dev_item_1": "Python 3.12+ avec type hints",
+      "dev_item_2": "Architecture Blueprint modulaire",
+      "dev_item_3": "Code formaté avec Ruff",
+      "dev_item_4": "Git hooks pour qualité",
+      "dev_item_5": "Documentation complète",
+      "admin_title": "Administration",
+      "admin_item_1": "Dashboard complet",
+      "admin_item_2": "Gestion utilisateurs",
+      "admin_item_3": "Historique d'actions",
+      "admin_item_4": "Paramètres système",
+      "admin_item_5": "Logs et monitoring",
+      "perf_title": "Performance",
+      "perf_item_1": "Cache Redis/Filesystem",
+      "perf_item_2": "Sessions optimisées",
+      "perf_item_3": "Compression GZIP",
+      "perf_item_4": "Assets minifiés",
+      "perf_item_5": "CDN ready",
+      "cta":  "Prêt à commencer ? ",
+      "cta_contact": "Contactez-nous",
+      "cta_features": "Découvrir les fonctionnalités"
+    },
+    "index": {
+      "hero_title": "Bienvenue sur X-Filamenta",
+      "hero_subtitle": "Une application Flask moderne et sécurisée",
+      "cta_primary": "Commencer",
+      "cta_secondary": "En savoir plus"
+    },
+    "about":  {
+      "title": "À propos",
+      "lead": "Découvrez X-Filamenta-Python",
+      "mission": "Notre Mission",
+      "mission_body": "Créer une application web moderne, sécurisée et extensible avec les meilleures pratiques de développement.",
+      "stack": "Technologies",
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "team": "Équipe",
+      "license": "Licence",
+      "license_body": "Ce projet est distribué sous la licence AGPL-3.0-or-later.",
+      "features": "Fonctionnalités",
+      "security": "Sécurité renforcée",
+      "security_desc": "Protection CSRF, limitation de débit, 2FA, validation des entrées",
+      "performance": "Performance élevée",
+      "performance_desc": "Cache optimisé, compression, assets minifiés",
+      "responsive": "Design réactif",
+      "responsive_desc": "Fonctionne sur tous les appareils avec Bootstrap 5",
+      "cta": "Prêt à commencer ?",
+      "cta_features": "Découvrir toutes les fonctionnalités",
+      "cta_contact": "Nous contacter",
+      "cta_source": "Voir le code source sur GitHub",
+      "ctasource": "Open Source"
+    },
+    "contact": {
+      "title":  "Contact",
+      "subtitle":  "Nous vous écoutons",
+      "form_title": "Envoyez-nous un message",
+      "name": "Nom",
+      "email": "Email",
+      "subject": "Sujet",
+      "message": "Message",
+      "submit": "Envoyer",
+      "send": "Envoyer le message",
+      "success": "Message envoyé avec succès ! ",
+      "error": "Erreur lors de l'envoi du message",
+      "other":  "Autres moyens de nous contacter",
+      "email_label": "Email",
+      "github_label": "GitHub",
+      "support_label": "Support",
+      "support_hours": "Support disponible 24/7",
+      "placeholder_name": "Votre nom",
+      "placeholder_email": "votre. email@exemple.com",
+      "placeholder_subject": "Comment pouvons-nous vous aider ? ",
+      "placeholder_message":  "Votre message ici..."
+    },
+    "legal": {
+      "title": "Mentions Légales",
+      "lead": "Informations légales et conditions d'utilisation",
+      "description": "Application X-Filamenta-Python — Licence AGPL-3.0-or-later.",
+      "author": "Auteur",
+      "license": "Licence",
+      "source": "Code source",
+      "license_title": "Licence du Projet",
+      "license_body": "X-Filamenta-Python est distribué sous licence AGPL-3.0-or-later.",
+      "agpl_title": "AGPL-3.0-or-later",
+      "agpl_body": "Cette licence garantit que le code source reste ouvert et accessible.",
+      "terms_title": "Conditions d'Utilisation",
+      "terms_body": "En utilisant cette application, vous acceptez les termes de la licence AGPL-3.0.",
+      "privacy_title": "Confidentialité",
+      "privacy_body": "Vos données personnelles sont protégées selon le RGPD.",
+      "contact_title": "Contact",
+      "contact_body": "Pour toute question, contactez-nous via le formulaire de contact."
+    },
+    "profile": {
+      "title": "Mon Profil",
+      "subtitle": "Gérez vos informations personnelles"
+    },
+    "preferences": {
+      "title": "Préférences",
+      "language_label": "Langue de l'interface",
+      "theme":  "Thème",
+      "theme_light": "Clair",
+      "theme_dark": "Sombre",
+      "theme_auto": "Automatique",
+      "theme_label": "Choisissez l'apparence de l'interface",
+      "language":  "Langue",
+      "notifications": "Notifications",
+      "notifications_desc": "Recevoir des notifications par email",
+      "reset":  "Réinitialiser",
+      "updated": "Préférences mises à jour"
+    }
+  },
+
+  "nav": {
+    "brand": "X-Filamenta",
+    "home": "Accueil",
+    "about": "À propos",
+    "features": "Fonctionnalités",
+    "contact": "Contact",
+    "admin": "Administration",
+    "admin_dashboard": "Tableau de bord",
+    "admin_users": "Utilisateurs",
+    "admin_settings": "Paramètres",
+    "admin_content": "Contenu",
+    "preferences": "Préférences",
+    "profile": "Profil",
+    "logout":  "Déconnexion",
+    "login": "Connexion",
+    "register": "Inscription",
+    "guest": "Invité"
+  },
+
+  "footer":  {
+    "brand": "X-Filamenta",
+    "legal": "Légal",
+    "about": "À propos",
+    "contact": "Contact",
+    "github": "GitHub",
+    "copyright": "© 2025 XAREMA.  Tous droits réservés.",
+    "license": "Sous licence AGPL-3.0",
+    "licensed": "Sous licence"
+  },
+
+  "errors": {
+    "404": {
+      "title": "Page non trouvée",
+      "message": "La page que vous recherchez n'existe pas",
+      "home": "Retour à l'accueil",
+      "back": "Page précédente"
+    },
+    "500":  {
+      "title": "Erreur serveur",
+      "message": "Une erreur est survenue sur le serveur",
+      "home": "Retour à l'accueil",
+      "contact": "Contacter le support"
+    }
+  },
+
+  "app":  {
+    "name": "X-Filamenta",
+    "tagline": "Application web moderne",
+    "version": "0.1.0-Beta",
+    "author": "AleGabMar",
+    "description": "Application Flask moderne et sécurisée",
+    "copyright": "© 2025 XAREMA. Tous droits réservés."
+  },
+
+  "legal": {
+    "title": "Mentions Légales",
+    "description": "Application X-Filamenta-Python — Licence AGPL-3.0-or-later.",
+    "author": "Auteur",
+    "license": "Licence",
+    "source": "Code source"
+  }
+}

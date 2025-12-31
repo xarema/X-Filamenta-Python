@@ -71,8 +71,27 @@ class ContentService:
 
     @staticmethod
     def get_by_id(content_id: int) -> Content | None:
-        """Get content by ID"""
-        return cast(Content | None, Content.query.get(content_id))
+        """
+        Get content by ID with caching.
+
+        Cache TTL: 120 seconds (2 minutes)
+        """
+        from backend.src.services.cache_service import cache_service
+
+        # Try cache first
+        cache_key = f"content:id:{content_id}"
+        cached = cache_service.get(cache_key)
+        if cached:
+            return cached
+
+        # Query database
+        content = cast(Content | None, Content.query.get(content_id))
+
+        # Cache result if found
+        if content:
+            cache_service.set(cache_key, content, ttl=120)
+
+        return content
 
     @staticmethod
     def get_all(
@@ -82,7 +101,9 @@ class ContentService:
         per_page: int = 20,
     ) -> tuple[list[Content], int]:
         """
-        Get all content with filters and pagination
+        Get all content with filters and pagination with caching.
+
+        Cache TTL: 120 seconds (2 minutes)
 
         Args:
             content_type: Filter by type (post, page, article)
@@ -93,6 +114,16 @@ class ContentService:
         Returns:
             Tuple of (content list, total count)
         """
+        from backend.src.services.cache_service import cache_service
+
+        # Build cache key based on filters
+        cache_key = (
+            f"content:all:{content_type or 'all'}:{status or 'all'}:{page}:{per_page}"
+        )
+        cached = cache_service.get(cache_key)
+        if cached:
+            return cached
+
         query = Content.query
 
         if content_type:
@@ -100,6 +131,11 @@ class ContentService:
 
         if status:
             query = query.filter_by(status=status)
+
+        # Eager load author relationship to avoid N+1 queries
+        from sqlalchemy.orm import joinedload
+
+        query = query.options(joinedload(Content.author))
 
         # Order by created_at desc
         query = query.order_by(Content.created_at.desc())
@@ -110,7 +146,30 @@ class ContentService:
         # Paginate
         offset = (page - 1) * per_page
         items = query.limit(per_page).offset(offset).all()
-        return cast(list[Content], items), total
+
+        result = (cast(list[Content], items), total)
+
+        # Cache result
+        cache_service.set(cache_key, result, ttl=120)
+
+        return result
+
+    @staticmethod
+    def invalidate_cache(content_id: int | None = None) -> None:
+        """
+        Invalidate cache for content.
+
+        Args:
+            content_id: Specific content ID to invalidate, or None for all
+        """
+        from backend.src.services.cache_service import cache_service
+
+        if content_id:
+            cache_service.delete(f"content:id:{content_id}")
+
+        # Note: For get_all cache, we'd need to track all possible keys
+        # or use a more sophisticated cache invalidation strategy.
+        # For now, we rely on TTL expiration (120 seconds).
 
     @staticmethod
     def get_published(
@@ -126,7 +185,7 @@ class ContentService:
         author_id: int, page: int = 1, per_page: int = 20
     ) -> tuple[list[Content], int]:
         """
-        Get content by author
+        Get content by author with eager loading.
 
         Args:
             author_id: Author user ID
@@ -136,7 +195,13 @@ class ContentService:
         Returns:
             Tuple of (content list, total count)
         """
+        from sqlalchemy.orm import joinedload
+
         query = Content.query.filter_by(author_id=author_id)
+
+        # Eager load author relationship
+        query = query.options(joinedload(Content.author))
+
         query = query.order_by(Content.created_at.desc())
 
         total = query.count()

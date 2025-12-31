@@ -1,0 +1,161 @@
+<!--
+Purpose: User registration page template
+Description: User registration form with HTMX validation
+
+File: frontend/templates/auth/register.html | Repository: X-Filamenta-Python
+Created: 2025-12-30T14:30:00+00:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.1.0-Beta | File version: 1.0.0
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Stable
+- Classification: Public
+
+Notes:
+- Jinja2 template
+- Bootstrap 5 form styling
+- HTMX validation and submission
+- CSRF protection via hidden field
+-->
+
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ t('auth.register.title') }} - {{ t('app.name') }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <!-- Registration Card -->
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <!-- Header -->
+                    <div class="text-center mb-4">
+                        <h1 class="h3 mb-2">{{ t('auth.register.title') }}</h1>
+                        <p class="text-muted small">{{ t('auth.register.subtitle') }}</p>
+                    </div>
+
+                    <!-- Registration Form -->
+                    <form id="register-form" hx-post="{{ url_for('auth.register') }}" hx-target="#register-message" hx-swap="innerHTML">
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label for="username" class="form-label">{{ t('auth.register.username') }}</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="username"
+                                name="username"
+                                required
+                                autofocus
+                                autocomplete="username"
+                                minlength="3"
+                                placeholder="ex: john_doe"
+                            >
+                            <small class="form-text text-muted">{{ t('auth.register.username_hint') }}</small>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">{{ t('auth.register.email') }}</label>
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="email"
+                                name="email"
+                                required
+                                autocomplete="email"
+                                placeholder="ex: john@example.com"
+                            >
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">{{ t('auth.register.password') }}</label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="password"
+                                name="password"
+                                required
+                                autocomplete="new-password"
+                                minlength="8"
+                            >
+                            <small class="form-text text-muted">{{ t('auth.register.password_hint') }}</small>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="mb-3">
+                            <label for="password_confirm" class="form-label">{{ t('auth.register.password_confirm') }}</label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="password_confirm"
+                                name="password_confirm"
+                                required
+                                autocomplete="new-password"
+                                minlength="8"
+                            >
+                        </div>
+
+                        <!-- Terms (optional) -->
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agree-terms" name="agree_terms">
+                            <label class="form-check-label small" for="agree-terms">
+                                {{ t('auth.register.agree_terms') }}
+                            </label>
+                        </div>
+
+                        <!-- Message area (HTMX target) -->
+                        <div id="register-message" class="mb-3"></div>
+
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary w-100">
+                            {{ t('auth.register.submit') }}
+                        </button>
+                    </form>
+
+                    <!-- Login link -->
+                    <div class="text-center mt-3">
+                        <p class="text-muted small">
+                            {{ t('auth.register.have_account') }}
+                            <a href="{{ url_for('auth.login_page') }}">{{ t('auth.register.login_link') }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- HTMX handling for form response -->
+<script>
+    document.body.addEventListener('htmx:afterSwap', function(event) {
+        if (event.detail.target.id === 'register-message') {
+            const messageDiv = document.getElementById('register-message');
+
+            // Check if there's a success message with redirect
+            if (messageDiv.innerHTML.includes('success')) {
+                try {
+                    const response = JSON.parse(messageDiv.innerHTML);
+                    if (response.redirect) {
+                        setTimeout(() => {
+                            window.location.href = response.redirect;
+                        }, 1500);
+                    }
+                } catch (e) {
+                    // HTML response, not JSON
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}
+

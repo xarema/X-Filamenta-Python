@@ -1,0 +1,144 @@
+<!--
+Purpose: Admin create user form
+Description: Form with email optional checkbox
+
+File: frontend/templates/admin/users_create.html
+Created: 2025-12-30T01:00:00+01:00
+
+License: AGPL-3.0-or-later
+Copyright (c) 2025 XAREMA. All rights reserved.
+-->
+
+{% extends 'layouts/admin.html' %}
+
+{% block title %}{{ t('admin.users.create.title') }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <!-- Header -->
+      <div class="d-flex align-items-center mb-4">
+        <a href="{{ url_for('admin_users.list_users') }}" class="btn btn-outline-secondary me-3">
+          <i class="bi bi-arrow-left"></i>
+        </a>
+        <h1 class="h3 mb-0">{{ t('admin.users.create.title') }}</h1>
+      </div>
+
+      <!-- Form -->
+      <div class="card">
+        <div class="card-body">
+          <form method="POST">
+            <!-- Username -->
+            <div class="mb-3">
+              <label for="username" class="form-label">
+                {{ t('admin.users.create.username') }}
+                <span class="text-danger">*</span>
+              </label>
+              <input type="text"
+                     class="form-control"
+                     id="username"
+                     name="username"
+                     value="{{ username or '' }}"
+                     required
+                     autofocus>
+              <small class="form-text text-muted">
+                {{ t('admin.users.create.username_hint') }}
+              </small>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">
+                {{ t('admin.users.create.email') }}
+                <span class="text-danger">*</span>
+              </label>
+              <input type="email"
+                     class="form-control"
+                     id="email"
+                     name="email"
+                     value="{{ email or '' }}"
+                     required>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="password" class="form-label">
+                {{ t('admin.users.create.password') }}
+                <span class="text-danger">*</span>
+              </label>
+              <input type="password"
+                     class="form-control"
+                     id="password"
+                     name="password"
+                     required
+                     minlength="8">
+              <small class="form-text text-muted">
+                {{ t('admin.users.create.password_hint') }}
+              </small>
+            </div>
+
+            <!-- Role -->
+            <div class="mb-3">
+              <div class="form-check form-switch">
+                <input class="form-check-input"
+                       type="checkbox"
+                       id="is_admin"
+                       name="is_admin">
+                <label class="form-check-label" for="is_admin">
+                  {{ t('admin.users.create.is_admin') }}
+                </label>
+              </div>
+              <small class="form-text text-muted">
+                {{ t('admin.users.create.is_admin_hint') }}
+              </small>
+            </div>
+
+            <!-- Active -->
+            <div class="mb-3">
+              <div class="form-check form-switch">
+                <input class="form-check-input"
+                       type="checkbox"
+                       id="is_active"
+                       name="is_active"
+                       checked>
+                <label class="form-check-label" for="is_active">
+                  {{ t('admin.users.create.is_active') }}
+                </label>
+              </div>
+            </div>
+
+            <!-- Send Email -->
+            <div class="mb-4">
+              <div class="form-check">
+                <input class="form-check-input"
+                       type="checkbox"
+                       id="send_email"
+                       name="send_email">
+                <label class="form-check-label" for="send_email">
+                  {{ t('admin.users.create.send_email') }}
+                </label>
+              </div>
+              <small class="form-text text-muted">
+                {{ t('admin.users.create.send_email_hint') }}
+              </small>
+            </div>
+
+            <!-- Actions -->
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-circle me-1"></i>
+                {{ t('admin.users.create.submit') }}
+              </button>
+              <a href="{{ url_for('admin_users.list_users') }}" class="btn btn-secondary">
+                {{ t('admin.users.create.cancel') }}
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

@@ -1,35 +1,152 @@
+# ==============================================================================
+# Pre-commit Hooks Configuration
+# ==============================================================================
+# Purpose: Automated code quality checks before commits
+# File: .pre-commit-config. yaml | Repository: X-Filamenta-Python
+# 
+# License: AGPL-3.0-or-later
+# SPDX-License-Identifier:  AGPL-3.0-or-later
+# Copyright (c) 2025 XAREMA. All rights reserved. 
+# 
+# Installation:
+#   pip install pre-commit
+#   pre-commit install
+# 
+# Usage:
+#   pre-commit run --all-files    # Test all files
+#   pre-commit autoupdate         # Update hook versions
+#   pre-commit run --hook-stage manual  # Run manual hooks
+# ==============================================================================
+
 repos:
+  # ============================================
+  # Standard Pre-commit Hooks
+  # ============================================
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
+      # File formatting
       - id: end-of-file-fixer
       - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      
+      # Syntax validation
       - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: check-json
+      - id: check-toml
+      
+      # Security
+      - id:  detect-private-key
       - id: check-added-large-files
+        args: ['--maxkb=500']
+      
+      # Git
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      
+      # Code quality
+      - id: check-executables-have-shebangs
 
+  # ============================================
+  # Ruff (Python Linting + Formatting)
+  # ============================================
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.6.9
     hooks:
       - id: ruff
-        args: [--fix]
+        name: Ruff Linter
+        args: [--fix, --exit-non-zero-on-fix]
+        
       - id: ruff-format
+        name: Ruff Formatter
 
+  # ============================================
+  # Mypy (Python Type Checking)
+  # ============================================
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.13.0
     hooks:
       - id: mypy
-        additional_dependencies: []
-        args: ["backend/src"]
+        name:  Mypy Type Checker
+        args: 
+          - --explicit-package-bases
+          - backend/src
+        additional_dependencies: 
+          - types-flask
+          - types-redis
+          - types-requests
+        files: ^backend/src/
 
+  # ============================================
+  # Local Project Checks
+  # ============================================
   - repo: local
     hooks:
+      # Frontend Linting
       - id: frontend-lint
-        name: Frontend lint (eslint/stylelint)
-        entry: npm run -s lint
+        name: Frontend Lint (ESLint + Stylelint)
+        entry: npm
+        args:  [run, -s, lint]
         language: system
         pass_filenames: false
+        files: \.(js|css)$
+        
+      # i18n Translation Validation
+      - id: i18n-check
+        name: i18n Translation Check
+        entry: python
+        args: [scripts/utils/check_i18n.py, --strict]
+        language: system
+        pass_filenames: false
+        files: (backend/src/i18n/.*\.json|backend/src/templates/.*\.html)$
+        
+      # Project Structure Validation
+      - id:  structure-validation
+        name: Project Structure Validation
+        entry: python
+        args: [scripts/utils/validate_structure.py]
+        language: system
+        pass_filenames: false
+        stages: [manual]
+        
+      # Pytest (Unit + Integration Tests)
       - id: pytest
         name: Pytest
-        entry: pytest -q --disable-warnings --maxfail=1
+        entry: pytest
+        args: [-q, --disable-warnings, --maxfail=1, --tb=short]
         language: system
         pass_filenames: false
+        types: [python]
+        files: ^(backend/src/|backend/tests/)
+
+# ============================================
+# Global Configuration
+# ============================================
+# Stop on first failure (set to true for faster feedback)
+fail_fast: false
+
+# Default stages (commit is standard, push/manual for others)
+default_stages: [commit]
+
+# Files to exclude from all hooks
+exclude: |
+  (? x)^(
+      \. git/|
+      \.venv/|
+      venv/|
+      __pycache__/|
+      \.pytest_cache/|
+      \.mypy_cache/|
+      \.ruff_cache/|
+      migrations/versions/.*\.py|
+      docs/HTML/.*|
+      node_modules/|
+      dist/|
+      build/|
+      .*\.egg-info/|
+      instance/.*
+  )$
+
+# Minimum pre-commit version
+minimum_pre_commit_version: '3.0.0'

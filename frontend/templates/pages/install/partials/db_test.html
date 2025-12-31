@@ -43,15 +43,15 @@ Metadata:
 
     {% if ok %}
     <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
-      <!-- Bouton: Passer l'upload (skip backup) -->
+      <!-- Bouton: Continuer vers configuration cache -->
       <form method="POST" action="/install/step"  >
-        <input type="hidden" name="step" value="admin_form" />
+        <input type="hidden" name="step" value="cache_config" />
         <button class="btn btn-primary btn-lg px-4" type="submit">
-          {{ t('wizard.skip_backup') or 'Continuer sans backup' }}
+          {{ t('wizard.continue') or 'Continuer' }}
         </button>
       </form>
 
-      <!-- Bouton optionnel: Upload backup -->
+      <!-- Bouton optionnel: Upload backup (passe aussi par cache) -->
       <form method="POST" action="/install/step"  >
         <input type="hidden" name="step" value="upload_form" />
         <button class="btn btn-outline-secondary btn-lg px-4" type="submit">

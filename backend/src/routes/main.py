@@ -27,7 +27,7 @@ Notes:
 ------------------------------------------------------------------------------
 """
 
-from flask import Blueprint, Response, redirect, render_template, session, url_for
+from flask import Blueprint, Response, redirect, render_template, request, session, url_for
 
 # ---- Blueprint Definition ----
 main = Blueprint("main", __name__)
@@ -48,17 +48,54 @@ def index() -> str | Response:
         Installation check is handled by enforce_installation() middleware
     """
     from flask import current_app
+    from flask_login import current_user
 
     # During tests, render the template so route tests can assert content
     if current_app.config.get("TESTING"):
         return render_template("pages/index.html")
 
-    # Check if user is authenticated
-    if "user_id" in session:
+    # Check if user is authenticated (Flask-Login)
+    if current_user.is_authenticated:
         return redirect(url_for("pages.dashboard"))
     else:
         return redirect(url_for("auth.login_page"))
-        return redirect(url_for("auth.login_page"))
+
+
+@main.route("/login", methods=["GET", "POST"])
+def login_redirect():
+    """
+    Redirect /login to /auth/login (auth blueprint route)
+
+    Returns:
+        Redirect to auth.login_page or auth.login depending on method
+    """
+    if request.method == "POST":
+        return redirect(url_for("auth.login"))
+    return redirect(url_for("auth.login_page"))
+
+
+@main.route("/register", methods=["GET", "POST"])
+def register_redirect():
+    """
+    Redirect /register to /auth/register (auth blueprint route)
+
+    Returns:
+        Redirect to auth.register_page or auth.register depending on method
+    """
+    if request.method == "POST":
+        return redirect(url_for("auth.register"))
+    return redirect(url_for("auth.register_page"))
+
+
+@main.route("/logout", methods=["GET", "POST"])
+def logout_redirect():
+    """
+    Redirect /logout to /auth/logout (auth blueprint route)
+
+    Returns:
+        Redirect to auth.logout
+    """
+    return redirect(url_for("auth.logout"))
 
 
 @main.route("/datagrid")
@@ -97,3 +134,4 @@ def favicon() -> tuple[bytes, int, dict]:
             "Cache-Control": "public, max-age=2592000",  # 30 days
         },
     )
+

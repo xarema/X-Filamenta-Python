@@ -1,10 +1,32 @@
+# ESLint Ignore Patterns
+# ==============================================================================
+# File: .eslintignore | Repository: X-Filamenta-Python
+# License: AGPL-3.0-or-later | Copyright (c) 2025 XAREMA. All rights reserved.
+# ==============================================================================
+
+# Dependencies
 node_modules/
-.venv/
+
+# Python virtual environment
+. venv/
+venv/
+
+# Build outputs
 dist/
 build/
+
+# Backend Python code (not linted by ESLint)
 backend/
+
+# Environment files
 .env
 .env.*
-!.env.example
 
+# Generated files
+coverage/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
+# Documentation builds
+docs/HTML/

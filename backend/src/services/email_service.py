@@ -24,18 +24,16 @@ Notes:
 """
 
 import logging
-from typing import Optional, Dict, Any
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from datetime import datetime, timedelta
 import secrets
-import string
+import smtplib
+from datetime import datetime
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from typing import Any
 
-from flask import render_template, current_app
+from flask import current_app, render_template
 
 from backend.src.models.settings import Settings
-from backend.src.extensions import db
 
 logger = logging.getLogger(__name__)
 
@@ -89,8 +87,8 @@ class EmailService:
         to_email: str,
         subject: str,
         template_name: str,
-        context: Dict[str, Any],
-        reply_to: Optional[str] = None,
+        context: dict[str, Any],
+        reply_to: str | None = None,
     ) -> bool:
         """
         Send email using template.
@@ -189,7 +187,9 @@ class EmailService:
         Returns:
             True if sent successfully
         """
-        site_url = Settings.get("site_url", current_app.config.get("SERVER_NAME", "http://localhost:5000"))
+        site_url = Settings.get(
+            "site_url", current_app.config.get("SERVER_NAME", "http://localhost:5000")
+        )
         verification_link = f"{site_url}/auth/verify-email/{verification_token}"
 
         context = {
@@ -198,10 +198,14 @@ class EmailService:
             "expiry_hours": Settings.get("email_verification_token_expiry_hours", 24),
             "site_name": Settings.get("site_name", "X-Filamenta"),
         }
+        site_name = Settings.get("site_name", "X-Filamenta")
+        subject_key = "auth.email_verification_subject"
+        subject_text = context.get(subject_key, "Email Verification")
+        subject = f"{site_name} — {subject_text}"
 
         return self.send_email(
             to_email=user_email,
-            subject=f"{Settings.get('site_name', 'X-Filamenta')} — {context.get('auth.email_verification_subject', 'Email Verification')}",
+            subject=subject,
             template_name="verification",
             context=context,
         )
@@ -223,7 +227,9 @@ class EmailService:
         Returns:
             True if sent successfully
         """
-        site_url = Settings.get("site_url", current_app.config.get("SERVER_NAME", "http://localhost:5000"))
+        site_url = Settings.get(
+            "site_url", current_app.config.get("SERVER_NAME", "http://localhost:5000")
+        )
         reset_link = f"{site_url}/auth/reset-password/{reset_token}"
 
         context = {
@@ -233,9 +239,14 @@ class EmailService:
             "site_name": Settings.get("site_name", "X-Filamenta"),
         }
 
+        site_name = Settings.get("site_name", "X-Filamenta")
+        subject_key = "auth.password_reset_subject"
+        subject_text = context.get(subject_key, "Password Reset")
+        subject = f"{site_name} — {subject_text}"
+
         return self.send_email(
             to_email=user_email,
-            subject=f"{Settings.get('site_name', 'X-Filamenta')} — {context.get('auth.password_reset_subject', 'Password Reset')}",
+            subject=subject,
             template_name="password_reset",
             context=context,
         )
@@ -271,6 +282,15 @@ class EmailService:
             message = f"Connection error: {str(e)}"
             logger.error(f"SMTP test: {message}")
             return False, message
+
+    def generate_verification_token(self) -> str:
+        """
+        Generate a secure verification token.
+
+        Returns:
+            A secure token string.
+        """
+        return EmailToken.generate()
 
 
 def send_verification_email_task(
@@ -336,4 +356,3 @@ def send_password_reset_email_task(
     except Exception as e:
         logger.error(f"Error sending password reset email: {str(e)}")
         return False
-

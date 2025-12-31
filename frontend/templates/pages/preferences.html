@@ -16,79 +16,75 @@
     <div class="col-lg-8 mx-auto">
       <div class="card border-0 shadow-sm">
         <div class="card-body p-4">
-          <!-- Theme Preference -->
-          <div class="mb-4">
-            <label for="theme" class="form-label fw-bold"
-              >{{ t('pages.preferences.theme') }}</label
-            >
-            <select
-              class="form-select"
-              id="theme"
-              name="theme"
-              hx-post="/api/preferences"
-              hx-target="#settingsMessage"
-              hx-swap="innerHTML"
-            >
-              <option value="light">☀️ {{ t('pages.preferences.theme_light') }}</option>
-              <option value="dark">🌙 {{ t('pages.preferences.theme_dark') }}</option>
-              <option value="auto">🔄 {{ t('pages.preferences.theme_auto') }}</option>
-            </select>
-            <small class="text-muted">{{ t('pages.preferences.theme_label') }}</small>
-          </div>
+          <form id="preferencesForm">
+            <!-- Theme Preference -->
+            <div class="mb-4">
+              <label for="theme" class="form-label fw-bold"
+                >{{ t('pages.preferences.theme') }}</label
+              >
+              <select class="form-select" id="theme" name="theme">
+                <option value="light">☀️ {{ t('pages.preferences.theme_light') }}</option>
+                <option value="dark">🌙 {{ t('pages.preferences.theme_dark') }}</option>
+                <option value="auto">🔄 {{ t('pages.preferences.theme_auto') }}</option>
+              </select>
+              <small class="text-muted">{{ t('pages.preferences.theme_label') }}</small>
+            </div>
 
-          <!-- Language Preference -->
-          <div class="mb-4">
-            <label for="language" class="form-label fw-bold"
-              >{{ t('pages.preferences.language') }}</label
-            >
-            <select
-              class="form-select"
-              id="language"
-              name="language"
-              hx-post="/api/preferences"
-              hx-target="#settingsMessage"
-              hx-swap="innerHTML"
-            >
-              <option value="en">English 🇬🇧</option>
-              <option value="fr">Français 🇫🇷</option>
-              <option value="es">Español 🇪🇸</option>
-            </select>
-            <small class="text-muted"
-              >{{ t('pages.preferences.language_label') }}</small
-            >
-          </div>
+            <!-- Language Preference -->
+            <div class="mb-4">
+              <label for="language" class="form-label fw-bold"
+                >{{ t('pages.preferences.language') }}</label
+              >
+              <select class="form-select" id="language" name="language">
+                <option value="en">English 🇬🇧</option>
+                <option value="fr">Français 🇫🇷</option>
+                <option value="es">Español 🇪🇸</option>
+              </select>
+              <small class="text-muted"
+                >{{ t('pages.preferences.language_label') }}</small
+              >
+            </div>
 
-          <!-- Notifications -->
-          <div class="mb-4">
-            <div class="form-check form-switch">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="notifications"
-                name="notifications"
-                checked
+            <!-- Notifications -->
+            <div class="mb-4">
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="notifications"
+                  name="notifications"
+                  value="true"
+                  checked
+                />
+                <label class="form-check-label" for="notifications">
+                  <strong>{{ t('pages.preferences.notifications') }}</strong>
+                  <span class="text-muted d-block small">
+                    {{ t('pages.preferences.notifications_desc') }}
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Settings Message -->
+            <div id="settingsMessage" class="mt-3"></div>
+
+            <!-- Save & Reset Buttons -->
+            <div class="mt-4 pt-3 border-top d-flex gap-2">
+              <button
+                type="submit"
+                class="btn btn-primary"
                 hx-post="/api/preferences"
+                hx-include="[name='theme'],[name='language'],[name='notifications']"
                 hx-target="#settingsMessage"
                 hx-swap="innerHTML"
-              />
-              <label class="form-check-label" for="notifications">
-                <strong>{{ t('pages.preferences.notifications') }}</strong>
-                <span class="text-muted d-block small">
-                  {{ t('pages.preferences.notifications_desc') }}
-                </span>
-              </label>
+              >
+                <i class="bi bi-check2"></i> {{ t('admin.users.actions.save') }}
+              </button>
+              <button type="button" class="btn btn-outline-secondary">
+                {{ t('pages.preferences.reset') }}
+              </button>
             </div>
-          </div>
-
-          <!-- Settings Message -->
-          <div id="settingsMessage" class="mt-3"></div>
-
-          <!-- Reset Button -->
-          <div class="mt-4 pt-3 border-top">
-            <button type="button" class="btn btn-outline-secondary">
-              {{ t('pages.preferences.reset') }}
-            </button>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -96,15 +92,44 @@
 </div>
 
 <script>
-  document.addEventListener("htmx:afterRequest", function (evt) {
+  // Gestion des réponses HTMX
+  document.body.addEventListener("htmx:afterRequest", function (evt) {
+    const msg = document.getElementById("settingsMessage");
+
     if (evt.detail.xhr.status === 200) {
-      const msg = document.getElementById("settingsMessage");
-      msg.innerHTML = `
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        ✅ {{ t('pages.preferences.updated') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-      </div>
-    `;
+      try {
+        const response = JSON.parse(evt.detail.xhr.responseText);
+        msg.innerHTML = `
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            ✅ ${response.message || '{{ t('pages.preferences.updated') }}'}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        `;
+      } catch (e) {
+        msg.innerHTML = `
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            ✅ {{ t('pages.preferences.updated') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        `;
+      }
+    } else {
+      try {
+        const response = JSON.parse(evt.detail.xhr.responseText);
+        msg.innerHTML = `
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            ❌ ${response.error || 'Une erreur s\'est produite'}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        `;
+      } catch (e) {
+        msg.innerHTML = `
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            ❌ Une erreur s'est produite
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        `;
+      }
     }
   });
 </script>

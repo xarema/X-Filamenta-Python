@@ -1,0 +1,129 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Content list page template
+Description: Display and manage content items
+
+File: frontend/templates/pages/content.html | Repository: X-Filamenta-Python
+Created: 2025-12-29T15:30:00+01:00
+Last modified (Git): TBD | Commit: TBD
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.1.0-Beta | File version: 0.1.0
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Draft
+- Classification: Internal
+
+Notes:
+- Jinja2 template
+- Bootstrap 5 layout
+- Requires authentication
+------------------------------------------------------------------------------
+-->
+
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ t('pages.content.title') }} - {{ t('app.name') }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row mb-4">
+    <div class="col-lg-12">
+      <h1 class="display-5 fw-bold text-primary">{{ t('pages.content.title') }}</h1>
+      <p class="text-muted">{{ t('pages.content.description') }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="card-title mb-0">{{ t('pages.content.list_title') }}</h5>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContentModal">
+              {{ t('pages.content.add_new') }}
+            </button>
+          </div>
+
+          <!-- Content List -->
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>{{ t('pages.content.table.title') }}</th>
+                  <th>{{ t('pages.content.table.type') }}</th>
+                  <th>{{ t('pages.content.table.status') }}</th>
+                  <th>{{ t('pages.content.table.author') }}</th>
+                  <th>{{ t('pages.content.table.created') }}</th>
+                  <th>{{ t('pages.content.table.actions') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Example row - replace with dynamic content -->
+                <tr>
+                  <td colspan="6" class="text-center text-muted py-4">
+                    {{ t('pages.content.no_items') }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Content Modal -->
+<div class="modal fade" id="addContentModal" tabindex="-1" aria-labelledby="addContentModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addContentModalLabel">{{ t('pages.content.modal.add_title') }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="contentTitle" class="form-label">{{ t('pages.content.modal.title') }}</label>
+            <input type="text" class="form-control" id="contentTitle" required>
+          </div>
+          <div class="mb-3">
+            <label for="contentType" class="form-label">{{ t('pages.content.modal.type') }}</label>
+            <select class="form-select" id="contentType">
+              <option value="article">{{ t('pages.content.types.article') }}</option>
+              <option value="page">{{ t('pages.content.types.page') }}</option>
+              <option value="post">{{ t('pages.content.types.post') }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="contentBody" class="form-label">{{ t('pages.content.modal.body') }}</label>
+            <textarea class="form-control" id="contentBody" rows="6" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="contentStatus" class="form-label">{{ t('pages.content.modal.status') }}</label>
+            <select class="form-select" id="contentStatus">
+              <option value="draft">{{ t('pages.content.status.draft') }}</option>
+              <option value="published">{{ t('pages.content.status.published') }}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          {{ t('pages.content.modal.cancel') }}
+        </button>
+        <button type="button" class="btn btn-primary">
+          {{ t('pages.content.modal.save') }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

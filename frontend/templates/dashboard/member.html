@@ -21,15 +21,15 @@ Metadata:
 
 {% extends "layouts/base.html" %}
 
-{% block title %}Tableau de bord - X-Filamenta{% endblock %}
+{% block title %}{{ t('admin.member_dashboard.title') }} - X-Filamenta{% endblock %}
 
 {% block content %}
 <div class="container-fluid mt-4">
     <!-- Header -->
     <div class="row mb-4">
         <div class="col">
-            <h1 class="h3">Tableau de bord</h1>
-            <p class="text-muted">Bienvenue, {{ current_user.username }}</p>
+            <h1 class="h3">{{ t('admin.member_dashboard.title') }}</h1>
+            <p class="text-muted">{{ t('admin.member_dashboard.welcome') }} {{ current_user.username }}</p>
         </div>
         <div class="col-auto">
             <button
@@ -37,7 +37,7 @@ Metadata:
                 class="btn btn-outline-secondary"
                 onclick="logout()"
             >
-                Déconnexion
+                {{ t('admin.member_dashboard.logout') }}
             </button>
         </div>
     </div>
@@ -47,9 +47,9 @@ Metadata:
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Bienvenue sur X-Filamenta</h5>
+                    <h5 class="card-title">{{ t('admin.member_dashboard.welcome_card_title') }}</h5>
                     <p class="card-text">
-                        Vous êtes connecté en tant que membre. Explorez les fonctionnalités disponibles.
+                        {{ t('admin.member_dashboard.welcome_card_text') }}
                     </p>
                 </div>
             </div>
@@ -62,9 +62,9 @@ Metadata:
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted">Contenu</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ t('admin.member_dashboard.stats.content') }}</h6>
                     <h3 class="card-title mb-0">{{ stats.content_count or 0 }}</h3>
-                    <p class="text-muted small mb-0">Articles publiés</p>
+                    <p class="text-muted small mb-0">{{ t('admin.member_dashboard.stats.content_count') }}</p>
                 </div>
             </div>
         </div>
@@ -73,9 +73,9 @@ Metadata:
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted">Activité</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ t('admin.member_dashboard.stats.activity') }}</h6>
                     <h3 class="card-title mb-0">{{ stats.activity_count or 0 }}</h3>
-                    <p class="text-muted small mb-0">Actions récentes</p>
+                    <p class="text-muted small mb-0">{{ t('admin.member_dashboard.stats.activity_count') }}</p>
                 </div>
             </div>
         </div>
@@ -84,13 +84,13 @@ Metadata:
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted">Préférences</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ t('admin.member_dashboard.stats.preferences_title') }}</h6>
                     <h3 class="card-title mb-0">
                         <span class="badge bg-{{ current_user.preferences.theme or 'light' }}">
-                            {{ current_user.preferences.theme or 'Défaut' }}
+                            {{ current_user.preferences.theme or t('admin.member_dashboard.stats.default') }}
                         </span>
                     </h3>
-                    <p class="text-muted small mb-0">Thème actuel</p>
+                    <p class="text-muted small mb-0">{{ t('admin.member_dashboard.stats.current_theme') }}</p>
                 </div>
             </div>
         </div>
@@ -101,7 +101,7 @@ Metadata:
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-0">Activité récente</h5>
+                    <h5 class="mb-0">{{ t('admin.member_dashboard.recent_activity.title') }}</h5>
                 </div>
                 <div class="card-body">
                     {% if recent_activity %}
@@ -117,7 +117,7 @@ Metadata:
                             {% endfor %}
                         </div>
                     {% else %}
-                        <p class="text-muted mb-0">Aucune activité récente</p>
+                        <p class="text-muted mb-0">{{ t('admin.member_dashboard.recent_activity.no_activity') }}</p>
                     {% endif %}
                 </div>
             </div>
@@ -129,22 +129,22 @@ Metadata:
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-0">Actions rapides</h5>
+                    <h5 class="mb-0">{{ t('admin.member_dashboard.quick_actions.title') }}</h5>
                 </div>
                 <div class="card-body">
                     <div class="d-flex gap-2 flex-wrap">
                         <a href="{{ url_for('pages.profile') }}" class="btn btn-outline-primary">
-                            Mon profil
+                            {{ t('admin.member_dashboard.quick_actions.profile') }}
                         </a>
                         <a href="{{ url_for('pages.preferences') }}" class="btn btn-outline-secondary">
-                            Préférences
+                            {{ t('admin.member_dashboard.quick_actions.preferences') }}
                         </a>
                         <a href="{{ url_for('pages.content_list') }}" class="btn btn-outline-info">
-                            Voir le contenu
+                            {{ t('admin.member_dashboard.quick_actions.content') }}
                         </a>
                         {% if current_user.is_admin %}
                             <a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline-success">
-                                Administration
+                                {{ t('admin.member_dashboard.quick_actions.admin') }}
                             </a>
                         {% endif %}
                     </div>
@@ -157,7 +157,7 @@ Metadata:
 <!-- Logout Script -->
 <script>
 function logout() {
-    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+    if (confirm('{{ t('admin.member_dashboard.logout_confirm') }}')) {
         fetch('{{ url_for("auth.logout") }}', {
             method: 'POST',
             headers: {
@@ -169,12 +169,12 @@ function logout() {
             if (result.success) {
                 window.location.href = result.redirect;
             } else {
-                alert('Erreur lors de la déconnexion');
+                alert('{{ t('admin.member_dashboard.logout_error') }}');
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Une erreur est survenue');
+            alert('{{ t('admin.member_dashboard.logout_error_generic') }}');
         });
     }
 }

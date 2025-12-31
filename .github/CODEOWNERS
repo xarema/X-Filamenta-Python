@@ -1,0 +1,34 @@
+# Code Owners for X-Filamenta-Python
+# This file defines who should review pull requests for different parts of the codebase
+
+# Backend
+/backend/src/routes/                @AleGabMar
+/backend/src/services/              @AleGabMar
+/backend/src/models/                @AleGabMar
+/backend/src/utils/                 @AleGabMar
+/backend/src/i18n/                  @AleGabMar
+/backend/tests/                     @AleGabMar
+
+# Frontend
+/frontend/templates/                @AleGabMar
+/frontend/static/                   @AleGabMar
+
+# Configuration & Tooling
+/pyproject.toml                      @AleGabMar
+/package.json                       @AleGabMar
+/.github/workflows/                 @AleGabMar
+/.github/*.md                       @AleGabMar
+
+# Documentation
+/docs/                              @AleGabMar
+/README.md                          @AleGabMar
+/CONTRIBUTING.md                    @AleGabMar
+/CHANGELOG.md                       @AleGabMar
+
+# Security-related
+/SECURITY.md                        @AleGabMar
+/.github/ISSUE_TEMPLATE/            @AleGabMar
+
+# Default owners for everything not explicitly mentioned
+*                                   @AleGabMar
+

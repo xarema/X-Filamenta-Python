@@ -116,20 +116,14 @@ def dashboard() -> str:
     Returns:
         Rendered dashboard/member.html template
     """
-    # Check if user is authenticated
-    if "user_id" not in session:
+    from flask_login import current_user
+
+    # Check if user is authenticated (Flask-Login)
+    if not current_user.is_authenticated:
         return redirect(url_for("auth.login_page"))
 
-    # TODO: Get real user data from database
-    from backend.src.services.user_service import UserService
-
-    user_service = UserService()
-    user = user_service.get_by_id(session["user_id"])
-
-    if not user:
-        # User not found, clear session and redirect
-        session.clear()
-        return redirect(url_for("auth.login_page"))
+    # Get user from Flask-Login (current_user is already loaded)
+    user = current_user
 
     # Mock data for now
     stats = {"content_count": 0, "activity_count": 0}

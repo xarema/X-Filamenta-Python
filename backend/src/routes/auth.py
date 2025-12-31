@@ -26,9 +26,12 @@ Notes:
 ------------------------------------------------------------------------------
 """
 
+from typing import Any
+
 from flask import (
     Blueprint,
     Response,
+    current_app,
     flash,
     jsonify,
     redirect,
@@ -37,13 +40,15 @@ from flask import (
     session,
     url_for,
 )
-from datetime import datetime
+from flask_login import current_user, login_required, login_user, logout_user
 
+from backend.src.decorators import require_admin
+from backend.src.extensions import db
+from backend.src.models.user import User
+from backend.src.services.email_service import EmailService
 from backend.src.services.rate_limiter import login_rate_limit
 from backend.src.services.user_service import UserService
-from backend.src.services.email_service import EmailService
-from backend.src.models.user import User
-from backend.src.extensions import db
+from backend.src.utils.i18n import t
 
 # ---- Blueprint Definition ----
 auth = Blueprint("auth", __name__, url_prefix="/auth")
@@ -52,50 +57,35 @@ auth = Blueprint("auth", __name__, url_prefix="/auth")
 # ---- Helper Functions ----
 
 
-def is_authenticated() -> bool:
+def is_authenticated() -> Any:
     """
-    Check if user is authenticated
+    Check if user is authenticated (Flask-Login)
 
     Returns:
-        True if user_id exists in session
+        True if user is authenticated via Flask-Login
     """
-    return "user_id" in session
+    return current_user.is_authenticated
 
 
-def get_current_user_id() -> int | None:
+def get_current_user_id() -> Any:
     """
-    Get current user ID from session
+    Get current user ID from Flask-Login
 
     Returns:
         User ID if authenticated, None otherwise
     """
-    return session.get("user_id")
+    return current_user.id if current_user.is_authenticated else None
 
 
-def login_user(user_id: int) -> None:
-    """
-    Log in user by setting session
-
-    Args:
-        user_id: User ID to log in
-    """
-    session["user_id"] = user_id
-    session.permanent = True  # Use permanent session (configurable timeout)
-
-
-def logout_user() -> None:
-    """
-    Log out user by clearing session
-    """
-    session.pop("user_id", None)
-    session.clear()
+# Note: login_user() and logout_user() are now provided by flask_login
+# They are imported at the top of this file
 
 
 # ---- Routes ----
 
 
 @auth.route("/login", methods=["GET"])
-def login_page() -> str:
+def login_page() -> Any:
     """
     Display login page
 
@@ -106,12 +96,117 @@ def login_page() -> str:
     if is_authenticated():
         return redirect(url_for("pages.dashboard"))
 
+    # Otherwise, show login form (don't redirect if not authenticated)
     return render_template("auth/login.html")
+
+
+@auth.route("/register", methods=["GET"])
+def register_page() -> Any:
+    """
+    Display registration page
+
+    Returns:
+        Rendered register.html template
+    """
+    # If already authenticated, redirect to dashboard
+    if is_authenticated():
+        return redirect(url_for("pages.dashboard"))
+
+    # Otherwise, show registration form
+    return render_template("auth/register.html")
+
+
+@auth.route("/register", methods=["POST"])
+@login_rate_limit()
+def register() -> Any:
+    """
+    Process user registration (HTMX/JSON)
+
+    Expected JSON:
+        {
+            "username": str,
+            "email": str,
+            "password": str,
+            "password_confirm": str
+        }
+
+    Returns:
+        JSON response with success/error
+        - 201: Registration successful, redirect to login
+        - 400: Invalid input or user exists
+        - 429: Rate limit exceeded
+    """
+    data = request.get_json() or {}
+
+    username = data.get("username", "").strip()
+    email = data.get("email", "").strip()
+    password = data.get("password", "")
+    password_confirm = data.get("password_confirm", "")
+
+    # Validation
+    if not username or not email or not password:
+        return jsonify({"error": "Tous les champs sont requis"}), 400
+
+    if len(username) < 3:
+        return jsonify({"error": "Le nom d'utilisateur doit contenir au moins 3 caractères"}), 400
+
+    if len(password) < 8:
+        return jsonify({"error": "Le mot de passe doit contenir au least 8 caractères"}), 400
+
+    if password != password_confirm:
+        return jsonify({"error": "Les mots de passe ne correspondent pas"}), 400
+
+    # Check if user already exists
+    user_service = UserService()
+    if user_service.get_by_username(username):
+        return jsonify({"error": "Ce nom d'utilisateur est déjà utilisé"}), 400
+
+    if user_service.get_by_email(email):
+        return jsonify({"error": "Cet email est déjà utilisé"}), 400
+
+    # Create new user
+    try:
+        user = User(
+            username=username,
+            email=email,
+            is_active=True,
+            role="user"
+        )
+        user.set_password(password)
+
+        db.session.add(user)
+        db.session.commit()
+
+        # Send verification email if required
+        settings_service = current_app.config.get("SETTINGS_SERVICE")
+        if settings_service and settings_service.get_setting("email_verification_required"):
+            token = user.generate_email_verification_token()
+            db.session.commit()
+
+            email_service = EmailService()
+            email_service.send_verification_email(
+                user_email=user.email,
+                user_name=user.username,
+                verification_token=token,
+            )
+
+        return jsonify(
+            {
+                "success": True,
+                "message": "Inscription réussie. Veuillez vous connecter.",
+                "redirect": url_for("auth.login_page"),
+            }
+        ), 201
+
+    except Exception as e:
+        db.session.rollback()
+        current_app.logger.error(f"Registration error: {str(e)}")
+        return jsonify({"error": "Erreur lors de l'inscription"}), 500
 
 
 @auth.route("/login", methods=["POST"])
 @login_rate_limit()
-def login() -> Response | tuple[Response, int]:
+def login() -> Any:
     """
     Process login form (HTMX)
 
@@ -153,8 +248,8 @@ def login() -> Response | tuple[Response, int]:
     if not user.check_password(password):
         return jsonify({"error": "Identifiants invalides"}), 401
 
-    # Login user
-    login_user(user.id)
+    # Login user with Flask-Login (pass User object, not ID)
+    login_user(user, remember=True)
 
     # TODO: Check if 2FA is enabled, redirect to 2FA verification if needed
 
@@ -168,27 +263,32 @@ def login() -> Response | tuple[Response, int]:
     )
 
 
-@auth.route("/logout", methods=["POST"])
-def logout() -> Response:
+@auth.route("/logout", methods=["GET", "POST"])
+def logout() -> Any:
     """
-    Log out current user (HTMX)
+    Log out current user
 
     Returns:
-        JSON response with redirect to login
+        Redirect to login page or JSON for AJAX requests
     """
     logout_user()
 
-    return jsonify(
-        {
-            "success": True,
-            "message": "Déconnexion réussie",
-            "redirect": url_for("auth.login_page"),
-        }
-    )
+    # If AJAX request, return JSON
+    if request.is_json or request.headers.get("X-Requested-With") == "XMLHttpRequest":
+        return jsonify(
+            {
+                "success": True,
+                "message": "Déconnexion réussie",
+                "redirect": url_for("auth.login_page"),
+            }
+        )
+
+    # Otherwise, redirect directly
+    return redirect(url_for("auth.login_page"))
 
 
 @auth.route("/status", methods=["GET"])
-def status() -> Response:
+def status() -> Any:
     """
     Check authentication status (API endpoint)
 
@@ -227,7 +327,7 @@ def status() -> Response:
 
 @auth.route("/send-verification", methods=["POST"])
 @login_rate_limit()
-def send_verification() -> Response:
+def send_verification() -> Any:
     """
     Send email verification to current logged-in user.
 
@@ -263,7 +363,7 @@ def send_verification() -> Response:
 
 
 @auth.route("/verify-email/<token>", methods=["GET"])
-def verify_email(token: str) -> Response | str:
+def verify_email(token: str) -> Any:
     """
     Verify email using token.
 
@@ -277,12 +377,12 @@ def verify_email(token: str) -> Response | str:
     user = User.query.filter_by(email_verification_token=token).first()
 
     if not user:
-        flash("Lien de vérification invalide", "error")
+        flash(t("auth.verify_email.error"), "error")
         return redirect(url_for("auth.login_page"))
 
     # Verify token
     if not user.verify_email_token(token):
-        flash("Le lien de vérification a expiré", "error")
+        flash(t("auth.verify_email.expired"), "error")
         return redirect(url_for("auth.login_page"))
 
     # Mark email as verified
@@ -296,7 +396,7 @@ def verify_email(token: str) -> Response | str:
 
 
 @auth.route("/forgot-password", methods=["GET"])
-def forgot_password_page() -> str:
+def forgot_password_page() -> Any:
     """
     Display forgot password form.
 
@@ -308,7 +408,7 @@ def forgot_password_page() -> str:
 
 @auth.route("/forgot-password", methods=["POST"])
 @login_rate_limit()
-def forgot_password() -> Response | str:
+def forgot_password() -> Any:
     """
     Send password reset email.
 
@@ -323,7 +423,7 @@ def forgot_password() -> Response | str:
     email = request.form.get("email", "").strip()
 
     if not email:
-        flash("Email requis", "error")
+        flash(t("auth.forgot.error.email_required"), "error")
         return render_template("auth/forgot-password.html")
 
     user = User.get_by_email(email)
@@ -346,7 +446,7 @@ def forgot_password() -> Response | str:
 
 
 @auth.route("/reset-password/<token>", methods=["GET"])
-def reset_password_page(token: str) -> Response | str:
+def reset_password_page(token: str) -> Any:
     """
     Display password reset form.
 
@@ -359,14 +459,14 @@ def reset_password_page(token: str) -> Response | str:
     user = User.query.filter_by(password_reset_token=token).first()
 
     if not user or not user.verify_password_reset_token(token):
-        flash("Lien de réinitialisation invalide ou expiré", "error")
+        flash(t("auth.reset.error.invalid"), "error")
         return redirect(url_for("auth.login_page"))
 
     return render_template("auth/reset-password.html", token=token)
 
 
 @auth.route("/reset-password/<token>", methods=["POST"])
-def reset_password(token: str) -> Response | str:
+def reset_password(token: str) -> Any:
     """
     Process password reset.
 
@@ -382,29 +482,28 @@ def reset_password(token: str) -> Response | str:
     password = request.form.get("password", "")
     password_confirm = request.form.get("password_confirm", "")
 
-    # Validation
     if not password or not password_confirm:
-        flash("Tous les champs sont requis", "error")
+        flash(t("auth.reset.error.all_required"), "error")
         return render_template("auth/reset-password.html", token=token)
 
     if password != password_confirm:
-        flash("Les mots de passe ne correspondent pas", "error")
+        flash(t("auth.reset.error.mismatch"), "error")
         return render_template("auth/reset-password.html", token=token)
 
     if len(password) < 8:
-        flash("Le mot de passe doit contenir au moins 8 caractères", "error")
+        flash(t("auth.reset.error.password_short"), "error")
         return render_template("auth/reset-password.html", token=token)
 
     # Find user and reset password
     user = User.query.filter_by(password_reset_token=token).first()
 
     if not user or not user.reset_password_with_token(token, password):
-        flash("Erreur lors de la réinitialisation du mot de passe", "error")
+        flash(t("auth.reset.error.generic"), "error")
         return redirect(url_for("auth.login_page"))
 
     db.session.commit()
 
-    flash("Mot de passe réinitialisé avec succès. Veuillez vous connecter.", "success")
+    flash(t("auth.reset.success_connect"), "success")
     return redirect(url_for("auth.login_page"))
 
 
@@ -412,7 +511,7 @@ def reset_password(token: str) -> Response | str:
 
 
 @auth.route("/setup-2fa", methods=["GET"])
-def setup_2fa_page() -> str:
+def setup_2fa_page() -> Any:
     """
     Display 2FA setup page
 
@@ -424,7 +523,7 @@ def setup_2fa_page() -> str:
 
 
 @auth.route("/verify-2fa", methods=["POST"])
-def verify_2fa() -> Response | tuple[Response, int]:
+def verify_2fa() -> Any:
     """
     Verify 2FA code (HTMX)
 

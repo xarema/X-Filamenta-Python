@@ -155,11 +155,17 @@ Metadata:
 {% elif effective_step in ['admin_form','admin'] %}
 <!-- Étape 4: Compte admin -->
 {% include 'pages/install/partials/admin_form.html' %}
+{% elif effective_step == 'cache_config' %}
+<!-- Étape 5: Configuration Cache -->
+{% include 'pages/install/partials/cache_config.html' %}
+{% elif effective_step == 'cache_test' %}
+<!-- Étape 5b: Test Cache -->
+{% include 'pages/install/partials/cache_test.html' %}
 {% elif effective_step == 'done' or step == 'done' %}
 <!-- Étape finale: Installation terminée -->
 {% include 'pages/install/partials/done.html' %}
 {% else %}
-<!-- Étape 5: Résumé -->
+<!-- Étape 6: Résumé -->
 {% include 'pages/install/partials/summary.html' %}
 {% endif %}
 

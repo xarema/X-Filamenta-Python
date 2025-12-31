@@ -143,7 +143,14 @@ def install_step() -> Any:
         return render_full_page()
 
     if step == "requirements":
-        return render_full_page()
+        # Detect Redis availability
+        redis_detection = InstallService.detect_redis_standard()
+
+        # Store in state for next steps
+        state["redis_available"] = redis_detection.get("detected", False)
+        state["redis_version"] = redis_detection.get("version")
+
+        return render_full_page({"redis_detection": redis_detection})
 
     if step == "db_form":
         db_uri = state.get("db_uri") or InstallService.default_sqlite_uri(app_root)
@@ -274,6 +281,84 @@ def install_step() -> Any:
             )
         return render_full_page()
 
+    if step == "cache_config":
+        # Get Redis detection result from state
+        redis_available = state.get("redis_available", False)
+        redis_version = state.get("redis_version")
+
+        # Default cache backend based on detection
+        default_backend = "redis" if redis_available else "filesystem"
+
+        return render_full_page(
+            {
+                "redis_available": redis_available,
+                "redis_version": redis_version,
+                "default_backend": default_backend,
+                "cache_backend": state.get("cache_backend", default_backend),
+                "redis_host": state.get("redis_host", "localhost"),
+                "redis_port": state.get("redis_port", "6379"),
+                "redis_password": state.get("redis_password", ""),
+                "redis_db": state.get("redis_db", "0"),
+            }
+        )
+
+    if step == "cache_test":
+        # Save cache configuration to state
+        cache_backend = payload.get("cache_backend", "filesystem")
+        state["cache_backend"] = cache_backend
+
+        if cache_backend == "redis":
+            # Save Redis configuration
+            redis_host = payload.get("redis_host", "localhost")
+            redis_port = int(payload.get("redis_port", 6379))
+            redis_password = payload.get("redis_password", "")
+            redis_db = int(payload.get("redis_db", 0))
+
+            state.update(
+                {
+                    "redis_host": redis_host,
+                    "redis_port": redis_port,
+                    "redis_password": redis_password,
+                    "redis_db": redis_db,
+                }
+            )
+
+            # Test Redis connection (simple ping)
+            from backend.src.services.cache_service import CacheService
+
+            cache_svc = CacheService()
+
+            success, message, info = cache_svc.test_redis_connection(
+                host=redis_host,
+                port=redis_port,
+                password=redis_password or None,
+                db=redis_db,
+            )
+
+            if not success:
+                # Connection failed, fallback to filesystem
+                state["cache_backend"] = "filesystem"
+                state["cache_test_failed"] = True
+                state["cache_test_error"] = message
+
+                return render_full_page(
+                    {
+                        "test_failed": True,
+                        "error_message": message,
+                        "fallback": "filesystem",
+                    }
+                )
+
+            # Connection successful
+            state["cache_test_success"] = True
+            state["cache_test_info"] = info
+
+            return render_full_page({"test_success": True, "redis_info": info})
+        else:
+            # Filesystem backend, no test needed
+            state["cache_backend"] = "filesystem"
+            return render_full_page({"test_success": True, "backend": "filesystem"})
+
     if step == "summary":
         return render_full_page()
 
@@ -286,7 +371,7 @@ def install_step() -> Any:
             errors_list.append("URI de base de données manquante")
         else:
             try:
-                # 1. S'assurer que tous les modèles sont chargés dans metadata AVANT tout
+                # Ensure all models are loaded in metadata
                 from backend.src.models.admin_history import AdminHistory  # noqa: F401
                 from backend.src.models.content import Content  # noqa: F401
                 from backend.src.models.preferences import UserPreferences  # noqa: F401
@@ -360,17 +445,16 @@ def install_step() -> Any:
                     # Sauvegarder la DB URI dans .env pour les redémarrages futurs
                     env_file = os.path.join(app_root, ".env")
                     try:
-                        # Normaliser le chemin pour éviter les problèmes d'échappement Windows
-                        # Convertir les backslashes en slashes (SQLite accepte les deux)
+                        # Normalize path (avoid Windows escaping issues)
                         db_uri_normalized = db_uri.replace("\\", "/")
 
-                        # Lire le fichier .env actuel
+                        # Read current .env file
                         env_content = ""
                         if os.path.exists(env_file):
                             with open(env_file, encoding="utf-8") as f:
                                 env_content = f.read()
 
-                        # Supprimer TOUTES les anciennes lignes SQLALCHEMY_DATABASE_URI (commentées ou non)
+                        # Remove all existing SQLALCHEMY_DATABASE_URI lines
                         import re
 
                         lines = env_content.split("\n")
@@ -378,10 +462,10 @@ def install_step() -> Any:
                         found_db_uri = False
 
                         for line in lines:
-                            # Ignorer toutes les lignes SQLALCHEMY_DATABASE_URI existantes
+                            # Skip existing SQLALCHEMY_DATABASE_URI lines
                             if re.match(r"^\s*#?\s*SQLALCHEMY_DATABASE_URI\s*=", line):
                                 if not found_db_uri:
-                                    # Remplacer la première occurrence par la nouvelle valeur
+                                    # Add new value
                                     new_lines.append(
                                         f"SQLALCHEMY_DATABASE_URI={db_uri_normalized}"
                                     )
@@ -428,7 +512,9 @@ def install_step() -> Any:
             return (
                 render_full_page(
                     {
-                        "error_content": f"<div class='alert alert-danger'>{error_details}</div>",
+                        "error_content": (
+                            f"<div class='alert alert-danger'>{error_details}</div>"
+                        ),
                         "error": error_details,
                     }
                 ),
@@ -436,7 +522,15 @@ def install_step() -> Any:
             )
 
         # Finalisation réussie !
-        InstallService.finalize_install(app_root)
+        # CRITICAL FIX: Mark as installed BEFORE rendering done page
+        # This prevents redirect loop when user navigates after installation
+        InstallService.finalize_install(app_root, app=current_app)
+
+        # Clear wizard session data to prevent conflicts
+        session.pop("wizard_started", None)
+        session.pop("wizard_state", None)
+        session.modified = True
+
         # Afficher la page done avec tous les détails
         env_summary = InstallService.render_env_summary(app_root)
         return render_template(
@@ -474,7 +568,7 @@ def verify_db() -> str:
                 current_app.logger.warning(f"Skipping invalid table name: {table}")
                 continue
             with db.engine.connect() as conn:
-                result = conn.execute(text(f"SELECT COUNT(*) FROM {table}"))
+                result = conn.execute(text(f"SELECT COUNT(*) FROM {table}"))  # noqa: S608
                 count = result.scalar()
                 table_counts[table] = count
 

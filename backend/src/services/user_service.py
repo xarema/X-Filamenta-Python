@@ -60,9 +60,8 @@ class UserService:
         """
         try:
             db_session = session or db.session
-
             # Check if user already exists
-            # Note: We must use the provided session for the query too if we want it to work
+            # Must use provided session for query to work
             existing_user = (
                 db_session.query(User)
                 .filter((User.username == username) | (User.email == email))
@@ -91,18 +90,89 @@ class UserService:
 
     @staticmethod
     def get_by_id(user_id: int) -> User | None:
-        """Get user by ID"""
-        return cast(User | None, User.query.get(user_id))
+        """
+        Get user by ID with caching.
+
+        Cache TTL: 300 seconds (5 minutes)
+        """
+        from backend.src.services.cache_service import cache_service
+
+        # Try cache first
+        cache_key = f"user:id:{user_id}"
+        cached = cache_service.get(cache_key)
+        if cached:
+            return cached
+
+        # Query database
+        user = cast(User | None, User.query.get(user_id))
+
+        # Cache result if found
+        if user:
+            cache_service.set(cache_key, user, ttl=300)
+
+        return user
 
     @staticmethod
     def get_by_username(username: str) -> User | None:
-        """Get user by username"""
-        return User.get_by_username(username)
+        """
+        Get user by username with caching.
+
+        Cache TTL: 300 seconds (5 minutes)
+        """
+        from backend.src.services.cache_service import cache_service
+
+        # Try cache first
+        cache_key = f"user:username:{username}"
+        cached = cache_service.get(cache_key)
+        if cached:
+            return cached
+
+        # Query database
+        user = User.get_by_username(username)
+
+        # Cache result if found
+        if user:
+            cache_service.set(cache_key, user, ttl=300)
+
+        return user
 
     @staticmethod
     def get_by_email(email: str) -> User | None:
-        """Get user by email"""
-        return User.get_by_email(email)
+        """
+        Get user by email with caching.
+
+        Cache TTL: 300 seconds (5 minutes)
+        """
+        from backend.src.services.cache_service import cache_service
+
+        # Try cache first
+        cache_key = f"user:email:{email}"
+        cached = cache_service.get(cache_key)
+        if cached:
+            return cached
+
+        # Query database
+        user = User.get_by_email(email)
+
+        # Cache result if found
+        if user:
+            cache_service.set(cache_key, user, ttl=300)
+
+        return user
+
+    @staticmethod
+    def invalidate_cache(user: User) -> None:
+        """
+        Invalidate all cache entries for a user.
+
+        Call this after user update/delete operations.
+        """
+        from backend.src.services.cache_service import cache_service
+
+        cache_service.delete(f"user:id:{user.id}")
+        cache_service.delete(f"user:username:{user.username}")
+        cache_service.delete(f"user:email:{user.email}")
+
 
     @staticmethod
     def get_all(active_only: bool = True) -> list[User]:

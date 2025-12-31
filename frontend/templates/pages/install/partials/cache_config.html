@@ -1,0 +1,185 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Wizard cache configuration step
+Description: Configure cache backend (Redis/Filesystem/Auto-detect)
+
+File: frontend/templates/pages/install/partials/cache_config.html | Repository: X-Filamenta-Python
+Created: 2025-12-29T19:30:00+01:00
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.1.0-Beta | File version: 0.1.0
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Stable
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+<div class="card shadow-sm mb-3">
+  <div class="card-body">
+    <h5 class="card-title text-center mb-4">{{ t('wizard.cache.title') or 'Cache Configuration' }}</h5>
+
+    {% if redis_available %}
+    <div class="alert alert-success" role="alert">
+      <strong>✅ Redis Available!</strong>
+      <br>
+      Version: {{ redis_version or 'unknown' }}
+      <br>
+      Redis detected on localhost:6379 - Recommended for optimal performance
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+      <strong>ℹ️ Redis Not Detected</strong>
+      <br>
+      Filesystem cache will be used by default (compatible with all hosting environments)
+    </div>
+    {% endif %}
+
+    <form method="POST" action="/install/step">
+      <input type="hidden" name="step" value="cache_test" />
+
+      <!-- Cache Backend Selection -->
+      <div class="mb-4">
+        <label class="form-label fw-bold">{{ t('wizard.cache.backend') or 'Cache Backend' }}</label>
+
+        {% if redis_available %}
+        <!-- Redis Recommended -->
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="radio" name="cache_backend" id="backend_redis"
+                 value="redis" {% if default_backend == 'redis' %}checked{% endif %}>
+          <label class="form-check-label" for="backend_redis">
+            <strong>Redis</strong> ({{ t('wizard.cache.recommended') or 'Recommended' }})
+            ⭐⭐⭐⭐⭐
+            <br>
+            <small class="text-muted">{{ t('wizard.cache.redis_desc') or 'Maximum performance, distributed sessions, multi-instance support' }}</small>
+          </label>
+        </div>
+
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="radio" name="cache_backend" id="backend_filesystem"
+                 value="filesystem">
+          <label class="form-check-label" for="backend_filesystem">
+            <strong>Filesystem</strong> ({{ t('wizard.cache.alternative') or 'Alternative' }})
+            ⭐⭐⭐
+            <br>
+            <small class="text-muted">{{ t('wizard.cache.filesystem_desc') or 'Compatible with all environments, good performance for small-medium sites' }}</small>
+          </label>
+        </div>
+        {% else %}
+        <!-- Redis Manual Configuration -->
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="radio" name="cache_backend" id="backend_filesystem"
+                 value="filesystem" {% if default_backend == 'filesystem' %}checked{% endif %}>
+          <label class="form-check-label" for="backend_filesystem">
+            <strong>Filesystem</strong> ({{ t('wizard.cache.default') or 'Default - Recommended' }})
+            ⭐⭐⭐
+            <br>
+            <small class="text-muted">{{ t('wizard.cache.filesystem_desc') or 'Compatible with all environments including cPanel' }}</small>
+          </label>
+        </div>
+
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="radio" name="cache_backend" id="backend_redis"
+                 value="redis">
+          <label class="form-check-label" for="backend_redis">
+            <strong>Redis</strong> ({{ t('wizard.cache.manual_config') or 'Manual Configuration' }})
+            ⭐⭐⭐⭐⭐
+            <br>
+            <small class="text-muted">{{ t('wizard.cache.redis_manual_desc') or 'If your hosting provider offers Redis on a custom port' }}</small>
+          </label>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Redis Configuration (shown when Redis selected) -->
+      <div id="redis-config" class="mb-4" style="display: none;">
+        <h6 class="fw-bold mb-3">{{ t('wizard.cache.redis_config') or 'Redis Configuration' }}</h6>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="redis_host" class="form-label">{{ t('wizard.cache.host') or 'Host' }}</label>
+            <input type="text" class="form-control" id="redis_host" name="redis_host"
+                   value="{{ redis_host or 'localhost' }}" placeholder="localhost">
+          </div>
+
+          <div class="col-md-6">
+            <label for="redis_port" class="form-label">{{ t('wizard.cache.port') or 'Port' }}</label>
+            <input type="number" class="form-control" id="redis_port" name="redis_port"
+                   value="{{ redis_port or '6379' }}" placeholder="6379">
+          </div>
+
+          <div class="col-md-6">
+            <label for="redis_password" class="form-label">
+              {{ t('wizard.cache.password') or 'Password' }}
+              <small class="text-muted">({{ t('wizard.cache.optional') or 'optional' }})</small>
+            </label>
+            <input type="password" class="form-control" id="redis_password" name="redis_password"
+                   value="{{ redis_password or '' }}" placeholder="">
+          </div>
+
+          <div class="col-md-6">
+            <label for="redis_db" class="form-label">{{ t('wizard.cache.database') or 'Database' }}</label>
+            <input type="number" class="form-control" id="redis_db" name="redis_db"
+                   value="{{ redis_db or '0' }}" placeholder="0" min="0" max="15">
+          </div>
+        </div>
+
+        <div class="alert alert-info mt-3" role="alert">
+          <small>
+            💡 {{ t('wizard.cache.redis_note') or 'Note: Redis connection will be tested before proceeding. If the test fails, Filesystem cache will be used automatically.' }}
+          </small>
+        </div>
+      </div>
+
+      <!-- Note about later configuration -->
+      <div class="alert alert-secondary" role="alert">
+        <small>
+          ℹ️ {{ t('wizard.cache.later_config') or 'You can change the cache backend later in Admin > Settings > Cache' }}
+        </small>
+      </div>
+
+      <!-- Actions -->
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" formaction="/install/step"
+                onclick="this.form.step.value='admin'; return true;"
+                class="btn btn-outline-secondary">
+          ← {{ t('wizard.previous') or 'Back' }}
+        </button>
+
+        <button type="submit" class="btn btn-primary btn-lg px-4">
+          {{ t('wizard.next') or 'Continue' }} →
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+// Show/hide Redis configuration based on selected backend
+document.addEventListener('DOMContentLoaded', function() {
+  const redisRadio = document.getElementById('backend_redis');
+  const filesystemRadio = document.getElementById('backend_filesystem');
+  const redisConfig = document.getElementById('redis-config');
+
+  function updateRedisConfigVisibility() {
+    if (redisRadio.checked) {
+      redisConfig.style.display = 'block';
+    } else {
+      redisConfig.style.display = 'none';
+    }
+  }
+
+  // Initial state
+  updateRedisConfigVisibility();
+
+  // Listen for changes
+  redisRadio.addEventListener('change', updateRedisConfigVisibility);
+  filesystemRadio.addEventListener('change', updateRedisConfigVisibility);
+});
+</script>
+

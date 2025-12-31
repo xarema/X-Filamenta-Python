@@ -42,13 +42,18 @@ def set_language(code: str) -> Any:
     if code not in SUPPORTED_LANGS:
         code = "en"
     session["lang"] = code
+    session.modified = True
+
+    # Log la sélection
+    from flask import current_app
+    current_app.logger.info(f"Language set to: {code}")
 
     # Si start=1 en paramètre, c'est le début du wizard
     if request.args.get("start") == "1":
-        # Réinitialiser tout l'état du wizard pour éviter les boucles et le saut d'étapes
+        # Reset wizard state to avoid loops
         InstallService.clear_wizard_state(session)
         session.pop("wizard_started", None)
-        # Forcer le démarrage sur l'étape de bienvenue
+        # Force start on welcome step
         session["wizard_state"] = {"step": "welcome"}
         session["wizard_started"] = True
         session.modified = True
@@ -57,3 +62,25 @@ def set_language(code: str) -> Any:
     if referrer:
         return redirect(referrer)
     return redirect(url_for("main.index"))
+
+
+@lang_bp.route("/detect")
+def detect_language() -> Any:
+    """Debug route to test automatic language detection"""
+    from backend.src.utils.i18n import _translations
+    from flask import jsonify, current_app
+
+    # Détecte la langue
+    if _translations:
+        detected = _translations.detect_browser_language()
+        current_app.logger.info(f"Auto-detection: {detected}")
+        session["lang"] = detected
+        session.modified = True
+
+        return jsonify({
+            "detected_language": detected,
+            "accept_language_header": request.headers.get("Accept-Language"),
+            "session_lang": session.get("lang")
+        })
+
+    return jsonify({"error": "Translations not initialized"})

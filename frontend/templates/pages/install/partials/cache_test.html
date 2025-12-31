@@ -1,0 +1,106 @@
+<!--
+------------------------------------------------------------------------------
+Purpose: Wizard cache test result step
+Description: Display cache connection test results
+
+File: frontend/templates/pages/install/partials/cache_test.html | Repository: X-Filamenta-Python
+Created: 2025-12-29T19:35:00+01:00
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.1.0-Beta | File version: 0.1.0
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Copyright (c) 2025 XAREMA. All rights reserved.
+
+Metadata:
+- Status: Stable
+- Classification: Public
+------------------------------------------------------------------------------
+-->
+
+<div class="card shadow-sm mb-3">
+  <div class="card-body">
+    <h5 class="card-title text-center mb-4">{{ t('wizard.cache.test_title') or 'Cache Configuration Test' }}</h5>
+
+    {% if test_success %}
+      {% if redis_info %}
+      <!-- Redis Test Success -->
+      <div class="alert alert-success" role="alert">
+        <h6 class="alert-heading">✅ {{ t('wizard.cache.redis_success') or 'Redis Connection Successful!' }}</h6>
+        <hr>
+        <p class="mb-2"><strong>{{ t('wizard.cache.version') or 'Version' }}:</strong> {{ redis_info.version }}</p>
+        <p class="mb-2"><strong>{{ t('wizard.cache.memory') or 'Memory Used' }}:</strong> {{ redis_info.memory_used }}</p>
+        <p class="mb-2"><strong>{{ t('wizard.cache.uptime') or 'Uptime' }}:</strong> {{ redis_info.uptime_days }} {{ t('wizard.cache.days') or 'days' }}</p>
+        <p class="mb-0"><strong>{{ t('wizard.cache.clients') or 'Connected Clients' }}:</strong> {{ redis_info.connected_clients }}</p>
+      </div>
+      {% else %}
+      <!-- Filesystem Success -->
+      <div class="alert alert-success" role="alert">
+        <h6 class="alert-heading">✅ {{ t('wizard.cache.filesystem_success') or 'Filesystem Cache Configured!' }}</h6>
+        <p class="mb-0">{{ t('wizard.cache.filesystem_ready') or 'Filesystem cache is ready to use. No connection test required.' }}</p>
+      </div>
+      {% endif %}
+    {% endif %}
+
+    {% if test_failed %}
+    <!-- Redis Test Failed - Fallback to Filesystem -->
+    <div class="alert alert-warning" role="alert">
+      <h6 class="alert-heading">⚠️ {{ t('wizard.cache.redis_failed') or 'Redis Connection Failed' }}</h6>
+      <p class="mb-2"><strong>{{ t('wizard.cache.error') or 'Error' }}:</strong> {{ error_message }}</p>
+      <hr>
+      <p class="mb-0">
+        <strong>{{ t('wizard.cache.fallback_activated') or 'Automatic Fallback Activated' }}</strong>
+        <br>
+        {{ t('wizard.cache.fallback_message') or 'The system will use Filesystem cache instead. You can configure Redis later in Admin > Settings > Cache if needed.' }}
+      </p>
+    </div>
+
+    <div class="alert alert-info" role="alert">
+      <h6 class="alert-heading">ℹ️ {{ t('wizard.cache.troubleshooting') or 'Troubleshooting' }}</h6>
+      <ul class="mb-0">
+        <li>{{ t('wizard.cache.tip_1') or 'Verify that Redis is running on your server' }}</li>
+        <li>{{ t('wizard.cache.tip_2') or 'Check the host and port are correct' }}</li>
+        <li>{{ t('wizard.cache.tip_3') or 'If using a password, verify it is correct' }}</li>
+        <li>{{ t('wizard.cache.tip_4') or 'Contact your hosting provider for Redis configuration details' }}</li>
+      </ul>
+    </div>
+
+    <form method="POST" action="/install/step">
+      <input type="hidden" name="step" value="cache_config" />
+
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-outline-warning">
+          ← {{ t('wizard.cache.retry') or 'Retry Configuration' }}
+        </button>
+
+        <button type="submit" formaction="/install/step"
+                onclick="this.form.step.value='finalize'; return true;"
+                class="btn btn-primary btn-lg px-4">
+          {{ t('wizard.cache.continue_filesystem') or 'Continue with Filesystem' }} →
+        </button>
+      </div>
+    </form>
+    {% endif %}
+
+    {% if test_success %}
+    <form method="POST" action="/install/step">
+      <input type="hidden" name="step" value="finalize" />
+
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" formaction="/install/step"
+                onclick="this.form.step.value='cache_config'; return true;"
+                class="btn btn-outline-secondary">
+          ← {{ t('wizard.previous') or 'Back' }}
+        </button>
+
+        <button type="submit" class="btn btn-success btn-lg px-4">
+          {{ t('wizard.cache.finalize') or 'Finalize Installation' }} →
+        </button>
+      </div>
+    </form>
+    {% endif %}
+  </div>
+</div>
+

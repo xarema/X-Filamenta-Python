@@ -1,0 +1,798 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Finalisation Phases 1-3 | X-Filamenta-Python</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --success: #16a34a;
+            --warning: #ea580c;
+            --danger: #dc2626;
+            --info: #0891b2;
+            --bg: #f8fafc;
+            --border: #e2e8f0;
+            --text: #1e293b;
+            --text-light: #64748b;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .toc {
+            background: var(--bg);
+            padding: 30px 40px;
+            border-bottom: 3px solid var(--border);
+        }
+        .toc h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .toc ul {
+            list-style: none;
+            columns: 2;
+            column-gap: 30px;
+        }
+        .toc li {
+            margin-bottom: 8px;
+        }
+        .toc a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .toc a:hover {
+            color: var(--warning);
+            text-decoration: underline;
+        }
+        main {
+            padding: 40px;
+        }
+        section {
+            margin-bottom: 50px;
+            scroll-margin-top: 80px;
+        }
+        h2 {
+            color: var(--primary);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary);
+        }
+        h3 {
+            color: var(--primary);
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        h4 {
+            color: var(--text);
+            font-size: 1.1em;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+        .status-box {
+            background: var(--bg);
+            border-left: 5px solid var(--primary);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .status-box.success {
+            border-left-color: var(--success);
+        }
+        .status-box.warning {
+            border-left-color: var(--warning);
+        }
+        .status-box.danger {
+            border-left-color: var(--danger);
+        }
+        .status-box.info {
+            border-left-color: var(--info);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        tr:hover {
+            background: var(--bg);
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+        .badge.success {
+            background: #dcfce7;
+            color: var(--success);
+        }
+        .badge.warning {
+            background: #fed7aa;
+            color: var(--warning);
+        }
+        .badge.info {
+            background: #cffafe;
+            color: var(--info);
+        }
+        .badge.danger {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        .timeline-item {
+            padding-left: 40px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+        .timeline-item:last-child::after {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 25px;
+            width: 4px;
+            height: calc(100% + 15px);
+            background: var(--border);
+        }
+        .timeline-item h4 {
+            margin-top: 0;
+        }
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        .metric {
+            display: inline-block;
+            background: var(--bg);
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin: 10px 10px 10px 0;
+            border-left: 4px solid var(--primary);
+        }
+        .metric strong {
+            color: var(--primary);
+            display: block;
+            font-size: 1.3em;
+        }
+        .metric span {
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+        .task-list {
+            list-style: none;
+        }
+        .task-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        .task-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .task-list li.pending::before {
+            content: '⏳';
+            color: var(--warning);
+        }
+        .task-list li.todo::before {
+            content: '→';
+            color: var(--info);
+        }
+        .footer {
+            background: var(--bg);
+            padding: 30px 40px;
+            text-align: center;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+            font-size: 0.9em;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            .toc ul {
+                columns: 1;
+            }
+            main {
+                padding: 20px;
+            }
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 Plan de Finalisation Phases 1-3</h1>
+            <p>X-Filamenta-Python | Baseline 93.7% → 100%</p>
+        </header>
+        <div class="toc">
+            <h2>Table des matières</h2>
+            <ul>
+                <li><a href="#situation">Situation actuelle</a></li>
+                <li><a href="#phase1">Phase 1 (4h)</a></li>
+                <li><a href="#phase2">Phase 2 (15h)</a></li>
+                <li><a href="#phase3">Phase 3 (28h)</a></li>
+                <li><a href="#timeline">Timeline 7 jours</a></li>
+                <li><a href="#resultats">Résultats attendus</a></li>
+                <li><a href="#criteres">Critères de succès</a></li>
+            </ul>
+        </div>
+        <main>
+            <!-- SITUATION ACTUELLE -->
+            <section id="situation">
+                <h2>📊 Situation Actuelle</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Métrique</th>
+                            <th>Actuel</th>
+                            <th>Cible</th>
+                            <th>Gap</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Phase 1</strong></td>
+                            <td>98%</td>
+                            <td>100%</td>
+                            <td>-2%</td>
+                            <td><span class="badge success">✅ Quasi-complète</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 2</strong></td>
+                            <td>95%</td>
+                            <td>100%</td>
+                            <td>-5%</td>
+                            <td><span class="badge success">✅ Quasi-complète</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 3</strong></td>
+                            <td>88%</td>
+                            <td>100%</td>
+                            <td>-12%</td>
+                            <td><span class="badge warning">⚠️ Gaps</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Test Coverage</strong></td>
+                            <td>70.2%</td>
+                            <td>80%</td>
+                            <td>-9.8%</td>
+                            <td><span class="badge warning">⚠️ À améliorer</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Type Hints</strong></td>
+                            <td>82%</td>
+                            <td>90%</td>
+                            <td>-8%</td>
+                            <td><span class="badge warning">⚠️ À améliorer</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Documentation</strong></td>
+                            <td>75%</td>
+                            <td>90%</td>
+                            <td>-15%</td>
+                            <td><span class="badge warning">⚠️ À améliorer</span></td>
+                        </tr>
+                        <tr style="font-weight: bold; background: var(--bg);">
+                            <td><strong>COMBINÉ</strong></td>
+                            <td>93.7%</td>
+                            <td>100%</td>
+                            <td>-6.3%</td>
+                            <td><span class="badge info">ℹ️ Réalisable</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="status-box success">
+                    <strong>✅ Verdict:</strong> Le projet est en excellent état. Les gaps sont mineurs et clairement identifiés. Plan d'action est réalisable en 7 jours.
+                </div>
+            </section>
+            <!-- PHASE 1 -->
+            <section id="phase1">
+                <h2>🔧 PHASE 1: Infrastructure (4 heures | 1 jour)</h2>
+                <div class="status-box success">
+                    <strong>Status:</strong> <span class="badge success">98% → 100%</span>
+                </div>
+                <h3>Gap à combler: -2% (très mineur)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Effort</th>
+                            <th>Livrable</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1.1: Migration edge cases tests</strong></td>
+                            <td>1.5h</td>
+                            <td>4 tests</td>
+                            <td><span class="badge info">⏳ À faire</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.2: Error handler edge cases tests</strong></td>
+                            <td>1.5h</td>
+                            <td>4 tests</td>
+                            <td><span class="badge info">⏳ À faire</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.3: Documentation completion</strong></td>
+                            <td>1h</td>
+                            <td>Docstrings</td>
+                            <td><span class="badge info">⏳ À faire</span></td>
+                        </tr>
+                        <tr style="font-weight: bold; background: var(--bg);">
+                            <td>TOTAL PHASE 1</td>
+                            <td><strong>4h</strong></td>
+                            <td><strong>8 tests + docs</strong></td>
+                            <td><span class="badge success">✅ 1 jour</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Tests à ajouter:</h4>
+                <ul class="task-list">
+                    <li>test_migration_with_duplicate_table_name()</li>
+                    <li>test_migration_rollback_on_error()</li>
+                    <li>test_404_with_ajax_request()</li>
+                    <li>test_500_with_json_content_type()</li>
+                </ul>
+                <div class="status-box success">
+                    <strong>✅ Résultat:</strong> Phase 1 → 100%
+                </div>
+            </section>
+            <!-- PHASE 2 -->
+            <section id="phase2">
+                <h2>📚 PHASE 2: Backend Routes & Templates (15 heures | 3 jours)</h2>
+                <div class="status-box warning">
+                    <strong>Status:</strong> <span class="badge warning">95% → 100%</span>
+                </div>
+                <h3>Gap à combler: -5% (manageable)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Effort</th>
+                            <th>Livrable</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>2.1: Email verification test suite</strong></td>
+                            <td>5h</td>
+                            <td>15+ tests</td>
+                            <td><span class="badge info">⏳ À faire</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.2: API documentation (Swagger)</strong></td>
+                            <td>6h</td>
+                            <td>7 docs files</td>
+                            <td><span class="badge info">⏳ À faire</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.3: Route edge case tests</strong></td>
+                            <td>3h</td>
+                            <td>8 tests</td>
+                            <td><span class="badge info">⏳ À faire</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.4: Update roadmap (unplanned features)</strong></td>
+                            <td>1h</td>
+                            <td>Roadmap updated</td>
+                            <td><span class="badge info">⏳ À faire</span></td>
+                        </tr>
+                        <tr style="font-weight: bold; background: var(--bg);">
+                            <td>TOTAL PHASE 2</td>
+                            <td><strong>15h</strong></td>
+                            <td><strong>23 tests + API docs</strong></td>
+                            <td><span class="badge success">✅ 3 jours</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Unplanned features à documenter:</h4>
+                <ul class="task-list">
+                    <li>Rate Limiting Service ✅</li>
+                    <li>CSRF Protection ✅</li>
+                    <li>Installation Wizard ✅</li>
+                    <li>Cache Service Multi-Backend ✅</li>
+                    <li>i18n System ✅</li>
+                </ul>
+                <div class="status-box success">
+                    <strong>✅ Résultat:</strong> Phase 2 → 100%
+                </div>
+            </section>
+            <!-- PHASE 3 -->
+            <section id="phase3">
+                <h2>🧪 PHASE 3: Testing & Validation (28 heures | 4 jours)</h2>
+                <div class="status-box danger">
+                    <strong>Status:</strong> <span class="badge danger">88% → 100%</span>
+                </div>
+                <h3>Gap à combler: -12% (nécessite focus)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Effort</th>
+                            <th>Livrable</th>
+                            <th>Coverage</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>3.1: Services test coverage</strong></td>
+                            <td>8h</td>
+                            <td>50 tests</td>
+                            <td>68% → 90%</td>
+                            <td><span class="badge info">⏳ À faire</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.2: Utils test coverage</strong></td>
+                            <td>5h</td>
+                            <td>30 tests</td>
+                            <td>58% → 85%</td>
+                            <td><span class="badge info">⏳ À faire</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.3: Routes error handling</strong></td>
+                            <td>3h</td>
+                            <td>10 tests</td>
+                            <td>72% → 85%</td>
+                            <td><span class="badge info">⏳ À faire</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.4: Type hints</strong></td>
+                            <td>4h</td>
+                            <td>110 annotations</td>
+                            <td>82% → 92%</td>
+                            <td><span class="badge info">⏳ À faire</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.5: Feature docs</strong></td>
+                            <td>6h</td>
+                            <td>4 docs</td>
+                            <td>75% → 90%</td>
+                            <td><span class="badge info">⏳ À faire</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.6: Code cleanup</strong></td>
+                            <td>2h</td>
+                            <td>Refactored</td>
+                            <td>Quality ↑</td>
+                            <td><span class="badge info">⏳ À faire</span></td>
+                        </tr>
+                        <tr style="font-weight: bold; background: var(--bg);">
+                            <td>TOTAL PHASE 3</td>
+                            <td><strong>28h</strong></td>
+                            <td><strong>80+ tests + docs</strong></td>
+                            <td><strong>All → 85%+</strong></td>
+                            <td><span class="badge success">✅ 4 jours</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="status-box success">
+                    <strong>✅ Résultat:</strong> Phase 3 → 100%
+                </div>
+            </section>
+            <!-- TIMELINE -->
+            <section id="timeline">
+                <h2>📅 Timeline: 7 Jours</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Day 1 (Dec 29) — Phase 1 Complete</h4>
+                        <p><strong>Effort:</strong> 4 heures</p>
+                        <p><strong>Tasks:</strong> Migration tests (1.5h) + Error handler tests (1.5h) + Documentation (1h)</p>
+                        <span class="badge success">✅ Phase 1 Done</span>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Day 2-3 (Dec 30-31) — Phase 2 Start & Continue</h4>
+                        <p><strong>Effort:</strong> 15 heures</p>
+                        <p><strong>Tasks:</strong> Email tests (5h) + API docs (6h) + Route tests (3h) + Roadmap (1h)</p>
+                        <span class="badge success">✅ Phase 2 Done</span>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Day 4-6 (Jan 1-3) — Phase 3 Start, Continue & Finalize</h4>
+                        <p><strong>Effort:</strong> 28 heures</p>
+                        <p><strong>Tasks:</strong> Services tests (8h) + Utils tests (5h) + Routes tests (3h) + Type hints (4h) + Docs (6h) + Cleanup (2h)</p>
+                        <span class="badge success">✅ Phase 3 Done</span>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Day 7 (Jan 4-5) — Validation & Final</h4>
+                        <p><strong>Effort:</strong> 4-5 heures</p>
+                        <p><strong>Tasks:</strong> Full test suite + Verification + Final code review</p>
+                        <span class="badge success">✅ All Phases 100%</span>
+                    </div>
+                </div>
+                <div class="status-box info">
+                    <strong>📊 Totaux:</strong><br>
+                    47 heures sur 7 jours (6-7h par jour)
+                </div>
+            </section>
+            <!-- RÉSULTATS -->
+            <section id="resultats">
+                <h2>📈 Résultats Attendus</h2>
+                <h3>Before (Actuel):</h3>
+                <div>
+                    <div class="metric">
+                        <strong>Phase 1</strong>
+                        <span>98% (13/13 features)</span>
+                    </div>
+                    <div class="metric">
+                        <strong>Phase 2</strong>
+                        <span>95% (18/20 features)</span>
+                    </div>
+                    <div class="metric">
+                        <strong>Phase 3</strong>
+                        <span>88% (12/14 items)</span>
+                    </div>
+                    <div class="metric">
+                        <strong>Test Coverage</strong>
+                        <span>70.2%</span>
+                    </div>
+                    <div class="metric">
+                        <strong>Type Hints</strong>
+                        <span>82%</span>
+                    </div>
+                    <div class="metric">
+                        <strong>Documentation</strong>
+                        <span>75%</span>
+                    </div>
+                </div>
+                <h3 style="margin-top: 30px;">After (Après mon plan):</h3>
+                <div>
+                    <div class="metric" style="border-left-color: var(--success);">
+                        <strong>Phase 1</strong>
+                        <span><span class="badge success">100%</span> ✅</span>
+                    </div>
+                    <div class="metric" style="border-left-color: var(--success);">
+                        <strong>Phase 2</strong>
+                        <span><span class="badge success">100%</span> ✅</span>
+                    </div>
+                    <div class="metric" style="border-left-color: var(--success);">
+                        <strong>Phase 3</strong>
+                        <span><span class="badge success">100%</span> ✅</span>
+                    </div>
+                    <div class="metric" style="border-left-color: var(--success);">
+                        <strong>Test Coverage</strong>
+                        <span><span class="badge success">80%+</span> ✅</span>
+                    </div>
+                    <div class="metric" style="border-left-color: var(--success);">
+                        <strong>Type Hints</strong>
+                        <span><span class="badge success">90%+</span> ✅</span>
+                    </div>
+                    <div class="metric" style="border-left-color: var(--success);">
+                        <strong>Documentation</strong>
+                        <span><span class="badge success">90%+</span> ✅</span>
+                    </div>
+                </div>
+                <h3 style="margin-top: 30px;">Ajouts:</h3>
+                <ul class="task-list">
+                    <li>110+ nouveaux tests</li>
+                    <li>110+ type hints annotations</li>
+                    <li>11 fichiers documentation</li>
+                    <li>Code refactorisé (6 areas)</li>
+                    <li>0 critical issues</li>
+                </ul>
+            </section>
+            <!-- CRITÈRES -->
+            <section id="criteres">
+                <h2>✅ Critères de Succès</h2>
+                <h3>Phase 1 ✅ When:</h3>
+                <ul class="task-list">
+                    <li>13 core features verified</li>
+                    <li>8 edge case tests (100% pass)</li>
+                    <li>100% documentation</li>
+                    <li>Test coverage ≥85%</li>
+                </ul>
+                <h3>Phase 2 ✅ When:</h3>
+                <ul class="task-list">
+                    <li>Email verification: tests + 95%+ coverage</li>
+                    <li>API docs complète (Swagger ready)</li>
+                    <li>23 new tests (all pass)</li>
+                    <li>Roadmap updated with unplanned features</li>
+                    <li>0 critical issues</li>
+                </ul>
+                <h3>Phase 3 ✅ When:</h3>
+                <ul class="task-list">
+                    <li>Test coverage: 70% → 80%+</li>
+                    <li>Type hints: 82% → 90%+</li>
+                    <li>Documentation: 75% → 90%+</li>
+                    <li>80+ new tests (all pass)</li>
+                    <li>Code refactored</li>
+                    <li>4 feature docs created</li>
+                </ul>
+                <div class="status-box success">
+                    <strong>OVERALL SUCCESS:</strong><br>
+                    Phases 1-3 @ 100% ✅<br>
+                    Test coverage 80%+ ✅<br>
+                    Type hints 90%+ ✅<br>
+                    Documentation 90%+ ✅
+                </div>
+            </section>
+            <!-- APRÈS FINALISATION -->
+            <section>
+                <h2>🚀 Après Finalisation</h2>
+                <h3>Phases 1-3 seront alors:</h3>
+                <ul class="task-list">
+                    <li>Solid test infrastructure (80%+ coverage)</li>
+                    <li>Clean, typed code (90%+ hints)</li>
+                    <li>Complete documentation (90%+)</li>
+                    <li>Proven patterns established</li>
+                    <li>Ready for Phase 4 FULL SPRINT!</li>
+                </ul>
+                <h3>Phase 4 peut alors:</h3>
+                <ul class="task-list">
+                    <li>Focus 100% sur business features</li>
+                    <li>Ne pas s'occuper de cleanup</li>
+                    <li>Ne pas s'occuper de test coverage</li>
+                    <li>Ne pas s'occuper de documentation gaps</li>
+                </ul>
+            </section>
+            <!-- RÉSUMÉ EXÉCUTIF -->
+            <section>
+                <h2>⏱️ Résumé Exécutif</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Métrique</th>
+                            <th>Valeur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Durée totale</strong></td>
+                            <td>7 jours (29 Dec - 5 Jan)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Effort total</strong></td>
+                            <td>47 heures</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Par jour</strong></td>
+                            <td>6-7 heures</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Difficulté</strong></td>
+                            <td>Élevée mais réalisable</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Confiance</strong></td>
+                            <td><span class="badge success">HAUTE ✅</span></td>
+                        </tr>
+                        <tr style="font-weight: bold; background: var(--bg);">
+                            <td><strong>Résultat final</strong></td>
+                            <td><strong>Phases 1-3 @ 100%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="status-box success">
+                    <strong>🎯 VERDICT:</strong> Plan établi, prêt pour l'exécution immédiate!
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p><strong>Document généré:</strong> 2025-12-29 21:00 UTC</p>
+            <p><strong>Plan de Finalisation Phases 1-3</strong> | X-Filamenta-Python</p>
+            <p style="margin-top: 10px; font-size: 0.85em;">© 2025 XAREMA | License: AGPL-3.0-or-later</p>
+        </footer>
+    </div>
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+    <script>
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

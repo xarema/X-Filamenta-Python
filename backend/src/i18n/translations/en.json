@@ -1,0 +1,866 @@
+{
+  "common": {
+    "yes": "Yes",
+    "no": "No",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "back": "Back",
+    "next": "Next",
+    "coming_soon": "Coming Soon",
+    "loading": "Loading...",
+    "success": "Success",
+    "error": "Error"
+  },
+
+  "wizard": {
+    "title": "Installation Wizard",
+    "step": "Step",
+    "continue": "Continue",
+    "back": "Back",
+    "cancel": "Cancel",
+    "previous": "Previous",
+    "skip_backup": "Continue without backup",
+    "restore_backup": "Restore a backup",
+    "retry": "Retry",
+    "done_title": "Installation completed",
+    "done_body": "The application is configured.  You can now log in.",
+    "go_login": "Go to login",
+    "error_title": "Installation error",
+    "error_details": "Error details",
+    "error_body": "An error occurred during installation.",
+    "error_hint": "Please correct and try again.",
+
+    "language": {
+      "choose":  "Choose your language",
+      "instruction": "Select your language to start the installation"
+    },
+
+    "steps": {
+      "welcome": "Welcome",
+      "requirements": "Requirements",
+      "database": "Database",
+      "admin": "Administrator",
+      "summary": "Summary"
+    },
+
+    "welcome":  {
+      "title": "Welcome to the Installation Wizard! ",
+      "message": "Welcome to the Installation Wizard! ",
+      "description": "We will configure your application in a few simple steps:  database, administrator account, and you're done!"
+    },
+
+    "requirements": {
+      "title": "System Requirements",
+      "description": "Checking your environment",
+      "python": "Python",
+      "version_required": "Required version",
+      "version_found": "Detected version",
+      "disk_space": "Disk space",
+      "available":  "Available",
+      "required": "Required",
+      "permissions": "Write permissions",
+      "writable": "Allowed",
+      "not_writable": "Not allowed",
+      "not_detected": "Not detected",
+      "all_ok": "All requirements are met",
+      "some_missing": "Some requirements are not met",
+      "environment": "Environment",
+      "db_clients": "Database clients",
+      "instance_perms": "Instance folder writable",
+      "env_type": "Environment type",
+      "none":  "None detected"
+    },
+
+    "db": {
+      "title": "Database Configuration",
+      "description": "Choose and configure your database",
+      "type": "Database type",
+      "host": "Server",
+      "port": "Port",
+      "dbname": "Database name",
+      "username": "Username",
+      "password": "Password",
+      "test_button": "Test connection",
+      "testing": "Testing.. .",
+      "success": "Connection successful!  The database is ready.",
+      "test_success": "Connection successful! ",
+      "test_error": "Connection error",
+      "error": "Connection failed.  Check your settings.",
+      "error_empty_field": "This field is required",
+      "error_empty_host": "Server is required",
+      "error_empty_port": "Port is required",
+      "error_empty_dbname": "Database name is required",
+      "error_empty_username": "Username is required",
+      "continue_no_backup": "Continue without backup",
+      "or_restore":  "or restore a backup",
+      "uri_label": "Connection URI",
+      "uri_placeholder": "e.g: sqlite:///instance/app.db",
+      "examples": "Examples",
+      "sqlite_example": "SQLite (local)",
+      "mysql_example":  "MySQL",
+      "postgresql_example": "PostgreSQL"
+    },
+
+    "backup": {
+      "title": "Backup Restoration",
+      "description": "Import your existing data",
+      "upload": "Select a file",
+      "upload_button": "Upload backup",
+      "choose_file": "Choose a file",
+      "no_file": "No file",
+      "file":  "File (. tar.gz)",
+      "formats": "Accepted formats:  .sql, .tar.gz, .zip",
+      "limit": "Limit 50MB, tar.gz/tgz",
+      "validating": "Validating...",
+      "validate":  "Restore backup",
+      "valid": "Valid backup",
+      "ok": "Valid backup.",
+      "invalid": "Invalid file",
+      "error_empty":  "The file is empty",
+      "error_format": "Unsupported file format",
+      "error_size": "File too large",
+      "size":  "Size",
+      "checksum": "Checksum",
+      "remove": "Remove backup"
+    },
+
+    "admin":  {
+      "title": "Administrator Account",
+      "subtitle": "Credentials for logging in after installation",
+      "description": "Create the main administrator account",
+      "username": "Username",
+      "username_label": "Username",
+      "username_placeholder": "admin",
+      "email": "Email address",
+      "email_label":  "Email address",
+      "email_placeholder": "admin@example. com",
+      "password": "Password",
+      "password_label": "Password",
+      "password_confirm": "Confirm password",
+      "password_hint": "At least 8 characters, with uppercase, lowercase and numbers",
+      "password_help": "Min 8 characters, 1 uppercase, 1 symbol",
+      "error_username_empty": "Username is required",
+      "error_username_invalid": "Username must contain between 3 and 50 alphanumeric characters",
+      "error_email_empty": "Email address is required",
+      "error_email_invalid": "Invalid email format",
+      "error_password_empty": "Password is required",
+      "error_password_weak": "Password is too weak",
+      "error_password_mismatch": "Passwords do not match",
+      "required": "Required field",
+      "submit": "Create administrator"
+    },
+
+    "summary": {
+      "title": "Installation Summary",
+      "review": "Review the information below",
+      "database":  "Database",
+      "db_type": "Type",
+      "db_file": "Database file",
+      "db_host": "Host",
+      "db_name": "Database",
+      "db_user": "User",
+      "db_uri": "Connection URI",
+      "admin_account": "Administrator account",
+      "admin_user": "Administrator",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "password_hidden": "(hidden for security)",
+      "backup":  "Backup restoration",
+      "backup_restore": "Backup restoration",
+      "backup_file": "File",
+      "backup_checksum": "Checksum",
+      "yes": "Yes",
+      "no": "No",
+      "finalize": "Finalize installation"
+    },
+
+    "done": {
+      "title": "Installation completed successfully!",
+      "body": "The application is configured. You can now log in.",
+      "install_summary": "Installation summary",
+      "database":  "Database",
+      "tables_created": "Tables created",
+      "admin_account": "Administrator account",
+      "username": "User",
+      "email": "Email",
+      "install_marker": "Installation marker",
+      "backup_restored": "Backup restored",
+      "backup_tables": "Tables imported from backup",
+      "backup_records": "Records restored",
+      "done_next": "Next step",
+      "done_hint": "Log in with your administrator account to access the dashboard.",
+      "goto_login": "Login",
+      "view_db": "View DB data"
+    },
+
+    "verify_db": {
+      "title":  "Database Verification",
+      "connection_success": "Connection successful",
+      "connection_failed": "Connection error",
+      "tables":  "Tables created",
+      "table_name": "Table",
+      "record_count": "Record count",
+      "users_title": "Users",
+      "user_id": "ID",
+      "user_username": "Username",
+      "user_email": "Email",
+      "user_admin": "Admin",
+      "user_created": "Created at",
+      "close": "Close",
+      "back_home": "Back to home"
+    },
+
+    "errors": {
+      "generic": "An error occurred",
+      "db_connection": "Unable to connect to the database",
+      "db_creation": "Error while creating tables",
+      "backup_invalid": "The backup file is invalid",
+      "admin_creation": "Error while creating the administrator account",
+      "finalize":  "Error during finalization"
+    },
+
+    "form": {
+      "required": "Required field"
+    }
+  },
+
+  "auth": {
+    "login": {
+      "title": "Login",
+      "subtitle": "Sign in to your account",
+      "username": "Username or email",
+      "password": "Password",
+      "remember":  "Remember me",
+      "forgot": "Forgot password?",
+      "submit": "Sign in",
+      "no_account": "Don't have an account? ",
+      "register_link": "Sign up",
+      "register": "Create an account",
+      "first_time": "First time? ",
+      "install_link": "Install X-Filamenta",
+      "success": "Login successful",
+      "error": {
+        "credentials": "Invalid credentials",
+        "inactive": "Account disabled",
+        "locked": "Account locked.  Try again later.",
+        "required": "Username and password required"
+      }
+    },
+    "logout": {
+      "title": "Logout",
+      "confirm": "Are you sure you want to log out?",
+      "success": "Logout successful"
+    },
+    "register": {
+      "title": "Inscription",
+      "subtitle": "Créer un nouveau compte",
+      "username": "Nom d'utilisateur",
+      "username_hint": "3-50 caractères, lettres, chiffres, tirets et underscores uniquement",
+      "email": "Adresse email",
+      "password": "Mot de passe",
+      "password_hint":  "Au moins 8 caractères, avec majuscules, minuscules et chiffres",
+      "password_confirm": "Confirmer le mot de passe",
+      "confirm_password": "Confirmer le mot de passe",
+      "agree_terms": "J'accepte les <a href='/legal' target='_blank'>conditions d'utilisation</a>",
+      "have_account": "Déjà inscrit ?",
+      "submit": "S'inscrire",
+      "have_account": "Déjà inscrit ?",
+      "login_link": "Se connecter",
+      "success": "Inscription réussie !  Vérifiez votre email.",
+      "error": {
+        "username_taken": "Nom d'utilisateur déjà utilisé",
+        "email_taken": "Email déjà utilisé",
+        "weak_password": "Mot de passe trop faible"
+      }
+    },
+    "2fa": {
+      "title":  "Two-Factor Authentication",
+      "subtitle": "Enter the code from your app",
+      "code": "Verification code",
+      "submit":  "Verify",
+      "backup":  "Use a backup code",
+      "backup_code": "Use a backup code",
+      "error": {
+        "invalid_code": "Invalid code",
+        "expired": "Code expired"
+      }
+    },
+    "setup_2fa": {
+      "title": "Setup 2FA",
+      "subtitle":  "Secure your account",
+      "scan":  "Scan this QR code with your authentication app",
+      "code": "Verification code",
+      "backup_codes": "Backup codes",
+      "submit": "Enable 2FA",
+      "success": "2FA enabled successfully"
+    },
+    "forgot_password": {
+      "title": "Forgot password",
+      "subtitle": "Reset your password",
+      "email": "Email address",
+      "submit":  "Send reset link",
+      "back_to_login": "Back to login",
+      "success": "Reset email sent",
+      "error": {
+        "email_not_found": "Email not found",
+        "rate_limit": "Too many requests.  Try again later."
+      }
+    },
+    "forgot":  {
+      "title": "Forgot password",
+      "subtitle":  "Reset your password",
+      "email": "Email address",
+      "submit": "Send link",
+      "back":  "Back to login",
+      "success": "Email sent successfully",
+      "error": {
+        "email_required": "Email is required",
+        "email_not_found": "Email not found",
+        "rate_limit": "Too many requests. Try again later.",
+        "generic": "Error while sending"
+      }
+    },
+    "reset_password": {
+      "title": "Reset password",
+      "subtitle": "Create a new password",
+      "new_password": "New password",
+      "confirm_password": "Confirm password",
+      "submit": "Reset",
+      "success": "Password reset successfully",
+      "error": {
+        "invalid_token": "Invalid or expired link",
+        "mismatch": "Passwords do not match"
+      }
+    },
+    "reset":  {
+      "title": "Reset password",
+      "subtitle": "Choose a new password",
+      "password": "New password",
+      "password_confirm": "Confirm password",
+      "submit": "Reset",
+      "success": "Password reset",
+      "success_connect": "Password reset successfully.  Please log in.",
+      "error": {
+        "all_required": "All fields are required",
+        "mismatch": "Passwords do not match",
+        "password_short": "Password must be at least 8 characters",
+        "invalid":  "Invalid or expired reset link",
+        "generic": "Error while resetting"
+      }
+    },
+    "verify_email": {
+      "title": "Email verification",
+      "success": "Email verified successfully",
+      "error": "Invalid verification link",
+      "expired": "Verification link expired"
+    },
+    "email_sent": {
+      "title": "Email sent",
+      "body": "A verification email has been sent to your address",
+      "check":  "Check your inbox"
+    }
+  },
+
+  "admin": {
+    "users": {
+      "title": "User Management",
+      "create_new": "New User",
+      "no_users": "No users found",
+      "total":  "Total",
+      "verified": "Email verified",
+
+      "filter":  {
+        "status": "Status",
+        "all": "All",
+        "active_only": "Active only",
+        "inactive_only": "Inactive only"
+      },
+
+      "table": {
+        "id": "ID",
+        "username": "Username",
+        "email": "Email",
+        "role": "Role",
+        "status": "Status",
+        "created":  "Created",
+        "created_at": "Created at",
+        "date_created": "Date Created",
+        "name": "Name",
+        "actions": "Actions"
+      },
+
+      "role": {
+        "admin": "Admin",
+        "user": "User"
+      },
+
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete",
+        "save": "Save",
+        "cancel": "Cancel"
+      },
+
+      "form": {
+        "name": "Full Name",
+        "email": "Email address",
+        "username": "Username",
+        "password": "Password",
+        "role": "Role",
+        "status": "Status"
+      },
+
+      "create": {
+        "title": "Create User",
+        "username": "Username",
+        "username_hint": "Letters, numbers, dashes and underscores only",
+        "email": "Email address",
+        "password": "Password",
+        "password_hint": "Minimum 8 characters",
+        "is_admin": "Administrator",
+        "is_admin_hint": "User will have access to admin panel",
+        "is_active": "Active account",
+        "send_email": "Send welcome email",
+        "send_email_hint": "Sends an email with credentials",
+        "submit": "Create User",
+        "cancel": "Cancel",
+        "success": "User {username} created successfully",
+        "error": {
+          "required": "All required fields must be filled",
+          "password_short": "Password must be at least 8 characters"
+        }
+      },
+
+      "edit": {
+        "title": "Edit User",
+        "user_id": "User ID",
+        "created_at": "Created at",
+        "last_login": "Last login",
+        "email_verified": "Email verified",
+        "never":  "Never",
+        "yes": "Yes",
+        "no": "No",
+        "username": "Username",
+        "username_readonly": "Username cannot be changed",
+        "email": "Email address",
+        "password": "New password",
+        "password_hint": "Leave blank to keep current password",
+        "is_admin": "Administrator",
+        "is_active": "Active account",
+        "submit": "Save Changes",
+        "cancel": "Cancel",
+        "success": "User {username} updated successfully",
+        "error": {
+          "password_short": "Password must be at least 8 characters"
+        }
+      },
+
+      "delete": {
+        "title": "Delete User",
+        "confirm": "Do you really want to delete user",
+        "warning": "This action may be irreversible depending on the option chosen.",
+        "soft":  "Soft delete (recommended)",
+        "soft_desc": "Deactivates the account.  Can be reactivated later.",
+        "hard": "Permanent delete",
+        "hard_desc": "Permanently deletes all data.  Irreversible.",
+        "cancel": "Cancel",
+        "confirm_btn": "Confirm Deletion",
+        "success_soft": "User deactivated successfully",
+        "success_hard": "User permanently deleted"
+      }
+    },
+
+    "dashboard": {
+      "title": "Dashboard",
+      "welcome": "Welcome to the admin panel",
+      "page_title": "Admin Dashboard",
+      "page_subtitle": "Overview and application statistics",
+      "users": {
+        "title": "Users",
+        "desc": "Manage user accounts"
+      },
+      "content": {
+        "title": "Content",
+        "desc": "Manage articles and pages"
+      },
+      "settings": {
+        "title": "Settings",
+        "desc": "System configuration"
+      },
+      "stats": {
+        "users": "Users",
+        "total_users": "Total Users",
+        "admins": "Administrators",
+        "admins_desc": "Privileged access",
+        "2fa_enabled": "2FA Enabled",
+        "2fa_percent": "% of users",
+        "recent_logins": "24h Logins",
+        "recent_logins_desc": "Last 24 hours",
+        "content": "Contents",
+        "active":  "active",
+        "errors": "Errors",
+        "visits": "Visits",
+        "management": "Management"
+      },
+      "quick_actions": {
+        "title": "Quick Actions",
+        "manage_users": "Manage Users",
+        "manage_users_desc": "CRUD users, 2FA, roles",
+        "settings": "Settings",
+        "settings_desc": "Global configuration",
+        "view_site": "View Site",
+        "view_site_desc": "User view"
+      },
+      "recent_activity": {
+        "title": "Recent Activity",
+        "no_activity": "No recent activity"
+      },
+      "management": {
+        "users": "Manage Users",
+        "users_desc": "Accounts, roles, permissions",
+        "content": "Manage Content",
+        "content_desc": "Articles, pages, media",
+        "settings": "Configuration",
+        "settings_desc": "Email, security, customization"
+      }
+    },
+
+    "member_dashboard": {
+      "title": "Dashboard",
+      "welcome": "Welcome, {username}",
+      "logout": "Logout",
+      "welcome_card_title": "Welcome to X-Filamenta",
+      "welcome_card_text": "You are logged in as a member.  Explore the available features.",
+      "stats": {
+        "content": "Content",
+        "content_count": "Published articles",
+        "activity": "Activity",
+        "activity_count": "Recent actions",
+        "preferences_title": "Preferences",
+        "current_theme": "Current theme",
+        "default":  "Default"
+      },
+      "recent_activity": {
+        "title": "Recent Activity",
+        "no_activity": "No recent activity"
+      },
+      "quick_actions": {
+        "title": "Quick Actions",
+        "profile": "My profile",
+        "preferences": "Preferences",
+        "content": "View content",
+        "admin": "Administration"
+      },
+      "logout_confirm": "Are you sure you want to log out?",
+      "logout_error": "Error logging out",
+      "logout_error_generic": "An error occurred"
+    },
+
+    "settings": {
+      "title": "Settings",
+      "subtitle": "System Configuration",
+      "smtp_title": "SMTP Configuration",
+      "smtp_host": "SMTP Server",
+      "smtp_port": "SMTP Port",
+      "smtp_user": "SMTP User",
+      "smtp_password": "SMTP Password",
+      "smtp_tls": "Enable TLS",
+      "smtp_from_email": "Sender Email",
+      "test_smtp": "Test Connection",
+      "email_verification_title": "Email Verification",
+      "email_verification_required": "Email verification required",
+      "email_verification_expiry": "Token expiry (hours)",
+      "password_reset_expiry": "Password reset expiry (minutes)",
+      "password_reset_limit": "Reset requests/hour",
+      "features_title": "Feature Options",
+      "registration_enabled": "User registration enabled",
+      "2fa_required": "2FA required for all",
+      "save": "Save Settings",
+      "system_info": "System Information",
+      "version": "Version",
+      "api_version": "API Version",
+      "environment": "Environment",
+      "status": "Status",
+      "online": "Online",
+      "general": "General",
+      "security": "Security",
+      "database": "Database",
+      "cache": "Cache",
+      "language": "Language Management",
+      "email": {
+        "title": "Email Configuration",
+        "smtp_host": "SMTP Server",
+        "smtp_port": "SMTP Port",
+        "smtp_user": "SMTP User",
+        "smtp_password": "SMTP Password",
+        "smtp_tls": "Enable TLS",
+        "from_email": "Sender Email",
+        "from_name": "Sender Name",
+        "verification_required": "Email verification required",
+        "verification_expiry": "Verification expiry (hours)",
+        "format": "Email Format"
+      },
+      "password": {
+        "title": "Password Reset",
+        "reset_expiry": "Reset expiry (minutes)",
+        "reset_rate_limit": "Sends limit/hour"
+      },
+      "security": {
+        "title": "Security",
+        "2fa_required": "2FA required",
+        "registration_enabled": "Public registration"
+      },
+      "site": {
+        "title": "Site",
+        "name": "Site name",
+        "url": "Site URL",
+        "logo": "Logo URL",
+        "footer": "Footer text"
+      },
+      "save": "Save",
+      "success": "Settings saved",
+      "success_flash": "Settings saved successfully",
+      "error": "Error saving settings",
+      "error_save_details": "Error saving settings:  {details}"
+    },
+
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page"
+    }
+  },
+
+  "pages": {
+    "content": {
+      "title": "Content",
+      "description": "Manage articles and pages",
+      "list_title": "Content List",
+      "add_new": "Add New",
+      "no_items": "No content yet",
+      "table":  {
+        "title": "Title",
+        "type": "Type",
+        "status": "Status",
+        "author": "Author",
+        "created": "Created",
+        "actions": "Actions"
+      },
+      "types": {
+        "article": "Article",
+        "page": "Page",
+        "post": "Post"
+      },
+      "status": {
+        "draft": "Draft",
+        "published": "Published"
+      },
+      "modal": {
+        "add_title": "Add Content",
+        "title": "Title",
+        "type": "Type",
+        "body": "Content",
+        "status": "Status",
+        "cancel": "Cancel",
+        "save": "Save"
+      }
+    },
+    "features": {
+      "title": "Features",
+      "lead": "Discover all X-Filamenta features",
+      "architecture": "Modern Architecture",
+      "architecture_desc": "Flask + Bootstrap 5 + HTMX for a simple and powerful stack",
+      "security": "Enhanced Security",
+      "security_desc": "CSRF, rate limiting, 2FA, input validation",
+      "database": "Flexible Database",
+      "database_desc": "Support for SQLite, PostgreSQL, MySQL with Alembic migrations",
+      "frontend": "Intuitive Interface",
+      "frontend_desc":  "Responsive Bootstrap 5 design with reusable components",
+      "tests": "Complete Tests",
+      "tests_desc":  "pytest with code coverage and integration tests",
+      "deploy": "Simple Deployment",
+      "deploy_desc": "Docker, cPanel, VPS or production with a single script",
+      "details_title": "Technical Details",
+      "dev_title": "Development",
+      "dev_item_1": "Python 3.12+ with type hints",
+      "dev_item_2": "Modular Blueprint architecture",
+      "dev_item_3": "Code formatted with Ruff",
+      "dev_item_4": "Git hooks for quality",
+      "dev_item_5": "Complete documentation",
+      "admin_title": "Administration",
+      "admin_item_1": "Complete dashboard",
+      "admin_item_2": "User management",
+      "admin_item_3": "Action history",
+      "admin_item_4": "System settings",
+      "admin_item_5": "Logs and monitoring",
+      "perf_title": "Performance",
+      "perf_item_1": "Redis/Filesystem cache",
+      "perf_item_2": "Optimized sessions",
+      "perf_item_3": "GZIP compression",
+      "perf_item_4": "Minified assets",
+      "perf_item_5": "CDN ready",
+      "cta":  "Ready to start? ",
+      "cta_contact": "Contact us",
+      "cta_features": "Explore Features"
+    },
+    "index": {
+      "hero_title": "Welcome to X-Filamenta",
+      "hero_subtitle": "A modern and secure Flask application",
+      "cta_primary": "Get Started",
+      "cta_secondary": "Learn More"
+    },
+    "about": {
+      "title": "About",
+      "lead": "Discover X-Filamenta-Python",
+      "mission": "Our Mission",
+      "mission_body": "Create a modern, secure and extensible web application with best development practices.",
+      "stack": "Technologies",
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "team": "Team",
+      "license": "License",
+      "license_body": "This project is distributed under the AGPL-3.0-or-later license.",
+      "features": "Features",
+      "security": "Enhanced Security",
+      "security_desc": "CSRF protection, rate limiting, 2FA, input validation",
+      "performance": "High Performance",
+      "performance_desc": "Optimized cache, compression, minified assets",
+      "responsive": "Responsive Design",
+      "responsive_desc": "Works on all devices with Bootstrap 5",
+      "cta": "Ready to start?",
+      "cta_features": "Learn all features",
+      "cta_contact": "Contact us",
+      "cta_source": "View source on GitHub",
+      "ctasource": "Open Source"
+    },
+    "contact": {
+      "title": "Contact",
+      "subtitle": "We're listening",
+      "form_title": "Send us a message",
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send",
+      "send":  "Send message",
+      "success": "Message sent successfully! ",
+      "error": "Error sending message",
+      "other":  "Other ways to reach us",
+      "email_label": "Email",
+      "github_label": "GitHub",
+      "support_label": "Support",
+      "support_hours": "Support available 24/7",
+      "placeholder_name": "Your name",
+      "placeholder_email": "your. email@example.com",
+      "placeholder_subject": "How can we help? ",
+      "placeholder_message":  "Your message here..."
+    },
+    "legal": {
+      "title": "Legal Notice",
+      "lead": "Legal information and terms of use",
+      "description": "X-Filamenta-Python Application — AGPL-3.0-or-later License.",
+      "author": "Author",
+      "license": "License",
+      "source": "Source code",
+      "license_title": "Project License",
+      "license_body": "X-Filamenta-Python is distributed under the AGPL-3.0-or-later license.",
+      "agpl_title": "AGPL-3.0-or-later",
+      "agpl_body": "This license ensures that the source code remains open and accessible.",
+      "terms_title": "Terms of Use",
+      "terms_body": "By using this application, you accept the terms of the AGPL-3.0 license.",
+      "privacy_title": "Privacy",
+      "privacy_body": "Your personal data is protected according to GDPR.",
+      "contact_title": "Contact",
+      "contact_body":  "For any questions, contact us via the contact form."
+    },
+    "profile": {
+      "title": "My Profile",
+      "subtitle": "Manage your personal information"
+    },
+    "preferences": {
+      "title": "Preferences",
+      "language_label": "Interface language",
+      "theme":  "Theme",
+      "theme_light": "Light",
+      "theme_dark": "Dark",
+      "theme_auto": "Auto",
+      "theme_label": "Choose the interface appearance",
+      "language":  "Language",
+      "notifications": "Notifications",
+      "notifications_desc": "Receive email notifications",
+      "reset":  "Reset",
+      "updated": "Preferences updated"
+    }
+  },
+
+  "nav": {
+    "brand": "X-Filamenta",
+    "home": "Home",
+    "about": "About",
+    "features": "Features",
+    "contact": "Contact",
+    "admin": "Administration",
+    "admin_dashboard": "Dashboard",
+    "admin_users": "Users",
+    "admin_settings": "Settings",
+    "admin_content": "Content",
+    "preferences": "Preferences",
+    "profile": "Profile",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register",
+    "guest": "Guest"
+  },
+
+  "footer": {
+    "brand": "X-Filamenta",
+    "legal": "Legal",
+    "about": "About",
+    "contact": "Contact",
+    "github": "GitHub",
+    "copyright": "© 2025 XAREMA. All rights reserved.",
+    "license": "Licensed under AGPL-3.0",
+    "licensed": "Licensed under"
+  },
+
+  "errors": {
+    "404": {
+      "title": "Page not found",
+      "message": "The page you are looking for does not exist",
+      "home": "Back to home",
+      "back": "Previous page"
+    },
+    "500": {
+      "title": "Server error",
+      "message": "An error occurred on the server",
+      "home": "Back to home",
+      "contact": "Contact support"
+    }
+  },
+
+  "app":  {
+    "name": "X-Filamenta",
+    "tagline": "Modern web application",
+    "version": "0.1.0-Beta",
+    "author": "AleGabMar",
+    "description": "Modern and secure Flask application",
+    "copyright": "© 2025 XAREMA. All rights reserved."
+  },
+
+  "legal": {
+    "title": "Legal Notice",
+    "description": "X-Filamenta-Python Application — AGPL-3.0-or-later License.",
+    "author": "Author",
+    "license": "License",
+    "source": "Source code"
+  }
+}

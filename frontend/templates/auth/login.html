@@ -25,14 +25,9 @@ Notes:
 - CSRF protection via hidden field
 -->
 
-Metadata:
-- Status: Draft
-- Classification: Public
--->
-
 {% extends "layouts/base.html" %}
 
-{% block title %}Connexion - X-Filamenta{% endblock %}
+{% block title %}{{ t('auth.login.title') }} - {{ t('app.name') }}{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
@@ -43,15 +38,15 @@ Metadata:
                 <div class="card-body p-4">
                     <!-- Header -->
                     <div class="text-center mb-4">
-                        <h1 class="h3 mb-2">Connexion</h1>
-                        <p class="text-muted small">Entrez vos identifiants pour vous connecter</p>
+                        <h1 class="h3 mb-2">{{ t('auth.login.title') }}</h1>
+                        <p class="text-muted small">{{ t('auth.login.subtitle') }}</p>
                     </div>
 
                     <!-- Login Form -->
                     <form id="login-form" hx-post="{{ url_for('auth.login') }}" hx-target="#login-message" hx-swap="innerHTML">
                         <!-- Username -->
                         <div class="mb-3">
-                            <label for="username" class="form-label">Nom d'utilisateur</label>
+                            <label for="username" class="form-label">{{ t('auth.login.username') }}</label>
                             <input
                                 type="text"
                                 class="form-control"
@@ -65,7 +60,7 @@ Metadata:
 
                         <!-- Password -->
                         <div class="mb-3">
-                            <label for="password" class="form-label">Mot de passe</label>
+                            <label for="password" class="form-label">{{ t('auth.login.password') }}</label>
                             <input
                                 type="password"
                                 class="form-control"
@@ -80,7 +75,7 @@ Metadata:
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="remember" name="remember">
                             <label class="form-check-label" for="remember">
-                                Se souvenir de moi
+                                {{ t('auth.login.remember') }}
                             </label>
                         </div>
 
@@ -89,13 +84,13 @@ Metadata:
 
                         <!-- Submit button -->
                         <button type="submit" class="btn btn-primary w-100">
-                            Se connecter
+                            {{ t('auth.login.submit') }}
                         </button>
                     </form>
 
                     <!-- Forgot password link (to be implemented) -->
                     <div class="text-center mt-3">
-                        <a href="#" class="text-muted small">Mot de passe oublié ?</a>
+                        <a href="#" class="text-muted small">{{ t('auth.login.forgot') }}</a>
                     </div>
                 </div>
             </div>
@@ -103,8 +98,8 @@ Metadata:
             <!-- Installation link (if not configured) -->
             <div class="text-center mt-3">
                 <p class="text-muted small">
-                    Première utilisation ?
-                    <a href="{{ url_for('install.install_index') }}">Installer X-Filamenta</a>
+                    {{ t('auth.login.first_time') }}
+                    <a href="{{ url_for('install.install_index') }}">{{ t('auth.login.install_link') }}</a>
                 </p>
             </div>
         </div>

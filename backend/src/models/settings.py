@@ -1,6 +1,6 @@
 """
-Purpose: Settings model for application configuration management
-Description: Key-value store for system settings with encryption support for sensitive values
+Purpose: Settings model for application configuration
+Description: Key-value store with encryption support
 
 File: backend/src/models/settings.py | Repository: X-Filamenta-Python
 Created: 2025-12-29T02:30:00+00:00
@@ -22,11 +22,12 @@ Notes:
 - Uses Fernet symmetric encryption with Flask SECRET_KEY
 """
 
-from typing import Any, Optional
+import base64
 import json
 from datetime import datetime
+from typing import Any
+
 from cryptography.fernet import Fernet
-import base64
 
 from backend.src.extensions import db
 
@@ -56,7 +57,9 @@ class Settings(db.Model):
     encrypted = db.Column(db.Boolean, default=False)
     description = db.Column(db.String(500), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    updated_at = db.Column(
+        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
+    )
 
     # List of fields that should be encrypted
     ENCRYPTED_FIELDS = [
@@ -164,7 +167,8 @@ class Settings(db.Model):
     }
 
     def __repr__(self) -> str:
-        return f"<Settings {self.key}={self.value[:50]}{'...' if len(self.value) > 50 else ''}>"
+        suffix = "..." if len(self.value) > 50 else ""
+        return f"<Settings {self.key}={self.value[:50]}{suffix}>"
 
     @staticmethod
     def _get_fernet_key(app=None) -> Fernet:
@@ -230,10 +234,7 @@ class Settings(db.Model):
             app: Flask app instance (uses current_app if None)
         """
         # Serialize complex types to JSON
-        if isinstance(value, (dict, list)):
-            value_str = json.dumps(value)
-        else:
-            value_str = str(value)
+        value_str = json.dumps(value) if isinstance(value, (dict, list)) else str(value)
 
         # Encrypt if field is in ENCRYPTED_FIELDS
         if self.key in self.ENCRYPTED_FIELDS:
@@ -299,7 +300,6 @@ class Settings(db.Model):
     @classmethod
     def init_defaults(cls) -> None:
         """Initialize default settings in database."""
-        from flask import current_app
 
         for key, config in cls.DEFAULTS.items():
             existing = cls.query.filter_by(key=key).first()
@@ -332,9 +332,13 @@ class Settings(db.Model):
         value = self.get_value()
 
         # Mask encrypted values for security
-        if self.encrypted and not include_encrypted:
-            if isinstance(value, str) and value:
-                value = "*" * min(len(value), 10)
+        if (
+            self.encrypted
+            and not include_encrypted
+            and isinstance(value, str)
+            and value
+        ):
+            value = "*" * min(len(value), 10)
 
         return {
             "id": self.id,
@@ -345,4 +349,3 @@ class Settings(db.Model):
             "created_at": self.created_at.isoformat(),
             "updated_at": self.updated_at.isoformat(),
         }
-

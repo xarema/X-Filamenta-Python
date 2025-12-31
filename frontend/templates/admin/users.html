@@ -92,37 +92,19 @@ t('app.name') }}{% endblock %} {% block content %}
                             <select class="form-select" id="role">
                               <option
                                 value="admin"
-                                {%
-                                if
-                                user.role=""
-                                ="admin"
-                                %}selected{%
-                                endif
-                                %}
+                                {% if user.role == "admin" %}selected{% endif %}
                               >
                                 admin
                               </option>
                               <option
                                 value="moderator"
-                                {%
-                                if
-                                user.role=""
-                                ="moderator"
-                                %}selected{%
-                                endif
-                                %}
+                                {% if user.role == "moderator" %}selected{% endif %}
                               >
                                 moderator
                               </option>
                               <option
                                 value="user"
-                                {%
-                                if
-                                user.role=""
-                                ="user"
-                                %}selected{%
-                                endif
-                                %}
+                                {% if user.role == "user" %}selected{% endif %}
                               >
                                 user
                               </option>

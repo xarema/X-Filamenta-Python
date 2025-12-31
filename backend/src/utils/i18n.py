@@ -41,12 +41,18 @@ class Translations:
         self.load_translations()
 
     def load_translations(self) -> None:
-        """Load all translation files from i18n directory"""
-        # Essayer d'abord le dossier i18n (priorité)
-        trans_dir = os.path.join(self.app_root, "backend", "src", "i18n")
+        """Load all translation files from i18n/translations directory"""
+        # Priorité au nouveau dossier translations dans i18n
+        trans_dir = os.path.join(self.app_root, "backend", "src", "i18n", "translations")
 
-        # Fallback sur translations si i18n n'existe pas
+        # Fallback si le nouveau dossier n'existe pas
         if not os.path.exists(trans_dir):
+            trans_dir = os.path.join(self.app_root, "backend", "src", "i18n")
+
+        # Fallback ultime
+        if not os.path.exists(trans_dir) or not any(
+            f.endswith(".json") for f in os.listdir(trans_dir)
+        ):
             trans_dir = os.path.join(self.app_root, "backend", "src", "translations")
 
         if not os.path.exists(trans_dir):
@@ -66,6 +72,16 @@ class Translations:
                     import logging
 
                     logging.warning(f"Failed to load i18n file {filepath}: {e}")
+
+    def reload(self) -> None:
+        """Clear and reload all translations"""
+        self.translations.clear()
+        self.supported_langs.clear()
+        self.load_translations()
+
+    def get_translations_for_lang(self, lang: str) -> dict[str, Any]:
+        """Get all translations for a specific language"""
+        return self.translations.get(lang, {})
 
     def get_available_languages(self) -> dict[str, str]:
         """Get list of available languages with display names"""
@@ -163,12 +179,38 @@ def get_translation(key: str, default: str = "") -> str:
     if _translations is None:
         return default or key
 
-    return _translations.get(key, None, default)
+    # Récupère la langue ACTUELLEMENT en session/détectée
+    lang: str | None = None
+    try:
+        # En contexte Flask: récupère depuis la session
+        lang = session.get("lang")
+    except (RuntimeError, AttributeError):
+        # Hors contexte Flask (tests, etc.)
+        pass
+
+    # Si pas de langue en session, détecter du navigateur
+    if not lang:
+        lang = _translations.detect_browser_language()
+
+    return _translations.get(key, lang, default)
 
 
 def t(key: str, default: str = "") -> str:
-    """Shortcut for get_translation"""
+    """Shortcut for get_translation - use CURRENT session language"""
     return get_translation(key, default)
+
+
+def reload_translations() -> None:
+    """Reload all translations"""
+    if _translations:
+        _translations.reload()
+
+
+def get_all_translations(lang: str) -> dict[str, Any]:
+    """Get all translations for a language"""
+    if _translations:
+        return _translations.get_translations_for_lang(lang)
+    return {}
 
 
 def get_available_languages() -> dict[str, str]:

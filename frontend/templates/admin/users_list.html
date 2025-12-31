@@ -1,0 +1,240 @@
+<!--
+Purpose: Admin users list with pagination and filters
+Description: HTMX-enabled table with create/edit/delete actions
+
+File: frontend/templates/admin/users_list.html | Repository: X-Filamenta-Python
+Created: 2025-12-30T00:55:00+01:00
+
+Distributed by: XAREMA | Coder: AleGabMar
+App version: 0.1.0-Beta | File version: 1.0.0
+
+License: AGPL-3.0-or-later
+SPDX-License-Identifier: AGPL-3.0-or-later
+Copyright (c) 2025 XAREMA. All rights reserved.
+-->
+
+{% extends 'layouts/admin.html' %}
+
+{% block title %}{{ t('admin.users.title') }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">
+      <i class="bi bi-people-fill me-2"></i>
+      {{ t('admin.users.title') }}
+    </h1>
+    <a href="{{ url_for('admin_users.create_user') }}" class="btn btn-primary">
+      <i class="bi bi-plus-circle me-1"></i>
+      {{ t('admin.users.create_new') }}
+    </a>
+  </div>
+
+  <!-- Filters -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <form method="GET" class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">{{ t('admin.users.filter.status') }}</label>
+          <select name="active" class="form-select" onchange="this.form.submit()">
+            <option value="all" {% if active_filter == 'all' %}selected{% endif %}>
+              {{ t('admin.users.filter.all') }}
+            </option>
+            <option value="active" {% if active_filter == 'active' %}selected{% endif %}>
+              {{ t('admin.users.filter.active_only') }}
+            </option>
+            <option value="inactive" {% if active_filter == 'inactive' %}selected{% endif %}>
+              {{ t('admin.users.filter.inactive_only') }}
+            </option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Users Table -->
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th>{{ t('admin.users.table.id') }}</th>
+              <th>{{ t('admin.users.table.username') }}</th>
+              <th>{{ t('admin.users.table.email') }}</th>
+              <th>{{ t('admin.users.table.role') }}</th>
+              <th>{{ t('admin.users.table.status') }}</th>
+              <th>{{ t('admin.users.table.created_at') }}</th>
+              <th class="text-end">{{ t('admin.users.table.actions') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr>
+              <td>{{ user.id }}</td>
+              <td>
+                <strong>{{ user.username }}</strong>
+                {% if user.email_verified %}
+                <i class="bi bi-patch-check-fill text-success ms-1"
+                   title="{{ t('admin.users.verified') }}"></i>
+                {% endif %}
+              </td>
+              <td>{{ user.email }}</td>
+              <td>
+                {% if user.is_admin %}
+                <span class="badge bg-danger">{{ t('admin.users.role.admin') }}</span>
+                {% else %}
+                <span class="badge bg-secondary">{{ t('admin.users.role.user') }}</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if user.is_active %}
+                <span class="badge bg-success">{{ t('admin.users.status.active') }}</span>
+                {% else %}
+                <span class="badge bg-warning">{{ t('admin.users.status.inactive') }}</span>
+                {% endif %}
+              </td>
+              <td>{{ user.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+              <td class="text-end">
+                <div class="btn-group btn-group-sm">
+                  <a href="{{ url_for('admin_users.edit_user', user_id=user.id) }}"
+                     class="btn btn-outline-primary"
+                     title="{{ t('admin.users.actions.edit') }}">
+                    <i class="bi bi-pencil"></i>
+                  </a>
+                  <button type="button"
+                          class="btn btn-outline-danger"
+                          data-bs-toggle="modal"
+                          data-bs-target="#deleteModal"
+                          data-user-id="{{ user.id }}"
+                          data-username="{{ user.username }}"
+                          title="{{ t('admin.users.actions.delete') }}">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="7" class="text-center py-4">
+                <i class="bi bi-inbox text-muted" style="font-size: 3rem;"></i>
+                <p class="text-muted mt-2">{{ t('admin.users.no_users') }}</p>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      {% if total > per_page %}
+      <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+          {% if page > 1 %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page - 1 }}&active={{ active_filter }}">
+              {{ t('admin.pagination.previous') }}
+            </a>
+          </li>
+          {% endif %}
+
+          <li class="page-item disabled">
+            <span class="page-link">
+              {{ t('admin.pagination.page') }} {{ page }} / {{ (total / per_page)|round(0, 'ceil')|int }}
+            </span>
+          </li>
+
+          {% if page * per_page < total %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page + 1 }}&active={{ active_filter }}">
+              {{ t('admin.pagination.next') }}
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+
+      <p class="text-muted text-center mt-3">
+        {{ t('admin.users.total') }}: {{ total }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ t('admin.users.delete.title') }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ t('admin.users.delete.confirm') }} <strong id="deleteUsername"></strong>?</p>
+
+        <div class="alert alert-warning">
+          <i class="bi bi-exclamation-triangle me-2"></i>
+          {{ t('admin.users.delete.warning') }}
+        </div>
+
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="radio" name="deleteType"
+                 id="softDelete" value="soft" checked>
+          <label class="form-check-label" for="softDelete">
+            <strong>{{ t('admin.users.delete.soft') }}</strong><br>
+            <small class="text-muted">{{ t('admin.users.delete.soft_desc') }}</small>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="deleteType"
+                 id="hardDelete" value="hard">
+          <label class="form-check-label" for="hardDelete">
+            <strong>{{ t('admin.users.delete.hard') }}</strong><br>
+            <small class="text-muted">{{ t('admin.users.delete.hard_desc') }}</small>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          {{ t('admin.users.delete.cancel') }}
+        </button>
+        <form method="POST" id="deleteForm" style="display: inline;">
+          <input type="hidden" name="hard_delete" id="hardDeleteInput" value="false">
+          <button type="submit" class="btn btn-danger">
+            <i class="bi bi-trash me-1"></i>
+            {{ t('admin.users.delete.confirm_btn') }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Delete modal logic
+const deleteModal = document.getElementById('deleteModal');
+if (deleteModal) {
+  deleteModal.addEventListener('show.bs.modal', function (event) {
+    const button = event.relatedTarget;
+    const userId = button.getAttribute('data-user-id');
+    const username = button.getAttribute('data-username');
+
+    document.getElementById('deleteUsername').textContent = username;
+    document.getElementById('deleteForm').action =
+      '{{ url_for("admin_users.delete_user", user_id=0) }}'.replace('0', userId);
+  });
+
+  // Update hidden input on radio change
+  document.querySelectorAll('input[name="deleteType"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      document.getElementById('hardDeleteInput').value =
+        this.value === 'hard' ? 'true' : 'false';
+    });
+  });
+}
+</script>
+{% endblock %}
+

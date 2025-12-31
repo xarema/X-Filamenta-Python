@@ -29,17 +29,21 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import os
 import platform
 import shutil
 import subprocess
 import tarfile
+import time
 from collections.abc import MutableMapping
 from dataclasses import dataclass
 from typing import Any
 
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine
+
+logger = logging.getLogger(__name__)
 
 INSTALL_FLAG = "installed.flag"
 DEFAULT_DB_NAME = "x-filamenta_python.db"
@@ -55,6 +59,8 @@ class EnvCheck:
     has_python: bool
     has_pip: bool
     db_clients: list[str]
+    has_redis: bool = False
+    redis_version: str | None = None
 
 
 class InstallService:
@@ -65,14 +71,75 @@ class InstallService:
         return os.path.join(app_root, "instance", INSTALL_FLAG)
 
     @staticmethod
-    def is_installed(app_root: str) -> bool:
-        return os.path.exists(InstallService._flag_path(app_root))
+    def is_installed(app_root: str, max_retries: int = 3) -> bool:
+        """
+        Check if installation is complete.
+
+        Uses retry logic to handle potential file I/O race conditions
+        where the .installed flag might not be readable immediately after
+        being written.
+
+        Args:
+            app_root: Application root directory
+            max_retries: Maximum number of attempts (default: 3)
+
+        Returns:
+            True if .installed flag exists and is readable, False otherwise
+        """
+        flag_path = InstallService._flag_path(app_root)
+
+        for attempt in range(max_retries):
+            try:
+                if os.path.exists(flag_path):
+                    # Try to read the file to ensure it's accessible
+                    with open(flag_path, "r", encoding="utf-8") as fp:
+                        content = fp.read().strip()
+                        if content:
+                            logger.debug(f"Installation flag found (attempt {attempt + 1}/{max_retries})")
+                            return True
+            except (OSError, IOError) as e:
+                logger.warning(f"Error checking install flag (attempt {attempt + 1}/{max_retries}): {e}")
+                if attempt < max_retries - 1:
+                    time.sleep(0.1)  # Wait 100ms before retry
+                continue
+
+        logger.debug(f"Installation not complete after {max_retries} attempts")
+        return False
 
     @staticmethod
     def mark_installed(app_root: str) -> None:
-        os.makedirs(os.path.join(app_root, "instance"), exist_ok=True)
-        with open(InstallService._flag_path(app_root), "w", encoding="utf-8") as fp:
-            fp.write("installed")
+        """
+        Mark the application as installed by creating the .installed flag file.
+
+        Ensures file is properly written and synced to disk to prevent
+        race conditions where the file isn't readable immediately.
+
+        Args:
+            app_root: Application root directory
+        """
+        instance_dir = os.path.join(app_root, "instance")
+        os.makedirs(instance_dir, exist_ok=True)
+
+        flag_path = InstallService._flag_path(app_root)
+
+        try:
+            # Write flag file
+            with open(flag_path, "w", encoding="utf-8") as fp:
+                fp.write("installed\n")
+                # Force sync to disk
+                fp.flush()
+                os.fsync(fp.fileno())
+
+            logger.info(f"Installation flag created: {flag_path}")
+
+            # Verify file was created
+            if os.path.exists(flag_path):
+                logger.info("Installation flag verified")
+            else:
+                logger.error("Installation flag could not be verified immediately")
+        except OSError as e:
+            logger.error(f"Failed to create installation flag: {e}")
+            raise
 
     @staticmethod
     def detect_environment() -> EnvCheck:
@@ -93,7 +160,9 @@ class InstallService:
     def detect_versions() -> dict[str, str | None]:
         def _run(cmd: list[str]) -> str | None:
             try:
-                out = subprocess.check_output(cmd, stderr=subprocess.STDOUT, text=True)
+                out = subprocess.check_output(  # noqa: S603
+                    cmd, stderr=subprocess.STDOUT, text=True
+                )
                 return out.strip().split("\n", maxsplit=1)[0]
             except Exception:
                 return None
@@ -184,6 +253,8 @@ class InstallService:
             "git": env.has_git,
             "python": env.has_python,
             "pip": env.has_pip,
+            "redis": env.has_redis,
+            "redis_version": env.redis_version,
             "versions": versions,
             "writable": writable_ok,
             "writable_msg": writable_msg,
@@ -322,8 +393,21 @@ class InstallService:
             return False, f"Exception lors de la création: {str(e)}"
 
     @staticmethod
-    def finalize_install(app_root: str) -> None:
+    def finalize_install(app_root: str, app: Any = None) -> None:
+        """
+        Finalize installation by marking it as complete.
+
+        Args:
+            app_root: Application root directory
+            app: Flask app instance (optional) - used to invalidate cache
+        """
         InstallService.mark_installed(app_root)
+
+        # Invalidate installation status cache in Flask app if provided
+        if app and hasattr(app, "_install_status_cache"):
+            app._install_status_cache["installed"] = True
+            app._install_status_cache["timestamp"] = 0  # Force refresh on next check
+            logger.info("Installation cache invalidated in Flask app")
 
     @staticmethod
     def _safe_members(tar: tarfile.TarFile, dest_dir: str) -> Any:
@@ -390,3 +474,83 @@ class InstallService:
 
             tb = traceback.format_exc()
             return False, f"Impossible de créer le schéma: {exc}\n{tb[:300]}"
+
+    @staticmethod
+    def detect_redis_standard() -> dict[str, Any]:
+        """
+        Detect if Redis is available on standard localhost:6379.
+
+        Returns:
+            Dict with keys:
+                - detected: bool
+                - version: str or None
+                - host: str
+                - port: int
+                - message: str
+        """
+        try:
+            import redis
+
+            r = redis.Redis(
+                host="localhost",
+                port=6379,
+                decode_responses=True,
+                socket_connect_timeout=2,
+            )
+            r.ping()
+
+            info = r.info()
+            return {
+                "detected": True,
+                "version": info.get("redis_version", "unknown"),
+                "host": "localhost",
+                "port": 6379,
+                "message": "Redis détecté sur localhost:6379",
+            }
+        except Exception as e:
+            return {
+                "detected": False,
+                "version": None,
+                "host": None,
+                "port": None,
+                "message": f"Redis non détecté: {str(e)}",
+            }
+
+    @staticmethod
+    def detect_redis_custom_port(port: int) -> dict[str, Any]:
+        """
+        Detect if Redis is available on custom port.
+
+        Args:
+            port: Custom port to test
+
+        Returns:
+            Dict with detection result
+        """
+        try:
+            import redis
+
+            r = redis.Redis(
+                host="localhost",
+                port=port,
+                decode_responses=True,
+                socket_connect_timeout=2,
+            )
+            r.ping()
+
+            info = r.info()
+            return {
+                "detected": True,
+                "version": info.get("redis_version", "unknown"),
+                "host": "localhost",
+                "port": port,
+                "message": f"Redis détecté sur localhost:{port}",
+            }
+        except Exception as e:
+            return {
+                "detected": False,
+                "version": None,
+                "host": None,
+                "port": port,
+                "message": f"Aucun Redis détecté sur port {port}: {str(e)}",
+            }

@@ -1,70 +1,61 @@
 """
-Script pour créer un utilisateur admin pour X-Filamenta-Python
+Script pour créer un utilisateur admin initial
 
 Usage:
     python scripts/create_admin.py
 """
 
+import os
 import sys
 from pathlib import Path
 
-# Ajouter le dossier racine au path
-root_dir = Path(__file__).parent.parent
-sys.path.insert(0, str(root_dir))
+# Configuration du path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+os.chdir(project_root)
 
+# Import après configuration du path
 from backend.src.app import create_app
-from backend.src.services.user_service import UserService
+from backend.src.extensions import db
+from backend.src.models.user import User
 
 
 def create_admin_user():
-    """Crée un utilisateur administrateur"""
+    """Créer un utilisateur admin par défaut"""
     app = create_app()
 
     with app.app_context():
-        # Importer db et créer les tables si nécessaire
-        from backend.src.extensions import db
+        # Vérifier si un admin existe déjà
+        existing_admin = User.query.filter_by(username="admin").first()
 
-        # Créer toutes les tables si elles n'existent pas
-        print("📦 Vérification de la base de données...")
-        db.create_all()
-        print("✅ Tables de base de données prêtes")
-        print()
-
-        user_service = UserService()
-
-        # Vérifier si l'admin existe déjà
-        existing = user_service.get_by_username("admin")
-        if existing:
-            print("❌ L'utilisateur 'admin' existe déjà")
-            print(f"   Email: {existing.email}")
-            print(f"   Admin: {existing.is_admin}")
-            print(f"   Actif: {existing.is_active}")
+        if existing_admin:
+            print("✓ Un utilisateur admin existe déjà.")
+            print(f"  Username: {existing_admin.username}")
+            print(f"  Email: {existing_admin.email}")
+            print(f"  Active: {existing_admin.is_active}")
             return
 
-        # Créer l'utilisateur admin
-        try:
-            user = user_service.create(
-                username="admin",
-                email="admin@example.com",
-                password="Admin123!",  # noqa: S106
-                is_admin=True,
-            )
+        # Créer un nouvel utilisateur admin
+        admin = User(
+            username="admin",
+            email="admin@xarema.local",
+            is_admin=True,
+            is_active=True,
+            role="admin",
+        )
+        admin.set_password("Admin123!")  # Mot de passe temporaire à changer
 
-            print("✅ Utilisateur admin créé avec succès!")
-            print(f"   Username: {user.username}")
-            print(f"   Email: {user.email}")
-            print(f"   Admin: {user.is_admin}")
-            print(f"   ID: {user.id}")
-            print()
-            print("🔐 Credentials de connexion:")
-            print("   URL: http://localhost:5000/auth/login")
-            print("   Username: admin")
-            print("   Password: Admin123!")
+        db.session.add(admin)
+        db.session.commit()
 
-        except Exception as e:
-            print(f"❌ Erreur lors de la création: {e}")
-            raise
+        print("✓ Utilisateur admin créé avec succès !")
+        print(f"  Username: {admin.username}")
+        print(f"  Email: {admin.email}")
+        print(f"  Password: Admin123! (À CHANGER IMMÉDIATEMENT)")
+        print()
+        print("⚠️  IMPORTANT: Changez le mot de passe après la première connexion!")
 
 
 if __name__ == "__main__":
     create_admin_user()
+

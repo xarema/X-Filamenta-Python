@@ -1,0 +1,482 @@
+openapi: 3.0.3
+info:
+  title: X-Filamenta API
+  description: |
+    RESTful API for X-Filamenta - Flask + HTMX application with comprehensive
+    authentication, user management, and content management features.
+
+    ## Features
+    - User authentication with JWT
+    - Email verification
+    - 2FA/TOTP support
+    - Password reset
+    - Admin panel
+    - Content management
+    - Multi-language support (i18n)
+    - Installation wizard
+
+    ## Security
+    - CSRF protection on all POST/PUT/DELETE endpoints
+    - Rate limiting on sensitive endpoints
+    - Secure password hashing (bcrypt)
+    - Session-based authentication
+
+    ## Base URL
+    - Development: `http://localhost:5000`
+    - Production: Configure via `SITE_URL` setting
+
+  version: 0.1.0-Beta
+  contact:
+    name: XAREMA
+    email: support@xarema.com
+  license:
+    name: AGPL-3.0-or-later
+    url: https://www.gnu.org/licenses/agpl-3.0.html
+
+servers:
+  - url: http://localhost:5000
+    description: Development server
+  - url: https://api.xarema.com
+    description: Production server (example)
+
+tags:
+  - name: Authentication
+    description: User authentication and session management
+  - name: Users
+    description: User profile and account management
+  - name: Admin
+    description: Administrative functions (admin only)
+  - name: Installation
+    description: First-time setup wizard
+  - name: Settings
+    description: Application settings management
+  - name: Content
+    description: Content creation and management
+  - name: Main
+    description: Public pages and general routes
+
+paths:
+  # ==================== Authentication Endpoints ====================
+
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: User login
+      description: Authenticate user with username/email and password
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  description: Username or email address
+                  example: admin
+                password:
+                  type: string
+                  format: password
+                  description: User password
+                  example: SecurePass123!
+                remember:
+                  type: boolean
+                  description: Remember me (extended session)
+                  default: false
+      responses:
+        '200':
+          description: Login successful
+          content:
+            text/html:
+              schema:
+                type: string
+                description: Redirect to dashboard or requested page
+        '302':
+          description: Redirect after successful login
+          headers:
+            Location:
+              schema:
+                type: string
+                example: /dashboard
+        '400':
+          description: Invalid credentials or validation error
+          content:
+            text/html:
+              schema:
+                type: string
+                description: Login page with error message
+        '403':
+          description: Account locked or email not verified
+          content:
+            text/html:
+              schema:
+                type: string
+                description: Error page with appropriate message
+        '429':
+          description: Too many login attempts (rate limited)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/logout:
+    get:
+      tags:
+        - Authentication
+      summary: User logout
+      description: End user session and clear cookies
+      operationId: logoutUser
+      responses:
+        '302':
+          description: Redirect to login page
+          headers:
+            Location:
+              schema:
+                type: string
+                example: /auth/login
+    post:
+      tags:
+        - Authentication
+      summary: User logout (POST)
+      description: End user session (CSRF protected)
+      operationId: logoutUserPost
+      responses:
+        '302':
+          description: Redirect to login page
+          headers:
+            Location:
+              schema:
+                type: string
+                example: /auth/login
+
+  /auth/register:
+    get:
+      tags:
+        - Authentication
+      summary: Show registration form
+      description: Display user registration page
+      operationId: showRegisterForm
+      responses:
+        '200':
+          description: Registration form displayed
+          content:
+            text/html:
+              schema:
+                type: string
+    post:
+      tags:
+        - Authentication
+      summary: Register new user
+      description: Create new user account with email verification
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+                - password
+                - password_confirm
+              properties:
+                username:
+                  type: string
+                  minLength: 3
+                  maxLength: 50
+                  pattern: '^[a-zA-Z0-9_-]+$'
+                  example: newuser
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                password:
+                  type: string
+                  format: password
+                  minLength: 8
+                  example: SecurePass123!
+                password_confirm:
+                  type: string
+                  format: password
+                  description: Must match password
+                  example: SecurePass123!
+      responses:
+        '302':
+          description: Registration successful, redirect to verify email page
+          headers:
+            Location:
+              schema:
+                type: string
+                example: /auth/verify-email-sent
+        '400':
+          description: Validation error or username/email already exists
+          content:
+            text/html:
+              schema:
+                type: string
+                description: Registration form with error messages
+
+  /auth/verify-email/{token}:
+    get:
+      tags:
+        - Authentication
+      summary: Verify email address
+      description: Verify user email using token from email link
+      operationId: verifyEmail
+      parameters:
+        - name: token
+          in: path
+          required: true
+          schema:
+            type: string
+            format: url-safe-base64
+          description: Email verification token
+      responses:
+        '200':
+          description: Email verified successfully
+          content:
+            text/html:
+              schema:
+                type: string
+                description: Success page with login link
+        '400':
+          description: Invalid or expired token
+          content:
+            text/html:
+              schema:
+                type: string
+                description: Error page with resend option
+
+  /auth/resend-verification:
+    post:
+      tags:
+        - Authentication
+      summary: Resend verification email
+      description: Request new verification email (rate limited)
+      operationId: resendVerification
+      security:
+        - sessionAuth: []
+      responses:
+        '200':
+          description: Verification email sent
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Email already verified or validation error
+        '429':
+          description: Too many requests (rate limited)
+
+  /auth/forgot-password:
+    get:
+      tags:
+        - Authentication
+      summary: Show forgot password form
+      description: Display password reset request page
+      operationId: showForgotPasswordForm
+      responses:
+        '200':
+          description: Forgot password form displayed
+    post:
+      tags:
+        - Authentication
+      summary: Request password reset
+      description: Send password reset email (rate limited)
+      operationId: requestPasswordReset
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+      responses:
+        '200':
+          description: Reset email sent (or message shown for security)
+          content:
+            text/html:
+              schema:
+                type: string
+        '429':
+          description: Too many reset requests (rate limited)
+
+  /auth/reset-password/{token}:
+    get:
+      tags:
+        - Authentication
+      summary: Show password reset form
+      description: Display password reset page with token validation
+      operationId: showResetPasswordForm
+      parameters:
+        - name: token
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Password reset token from email
+      responses:
+        '200':
+          description: Reset form displayed
+        '400':
+          description: Invalid or expired token
+    post:
+      tags:
+        - Authentication
+      summary: Reset password
+      description: Set new password using reset token
+      operationId: resetPassword
+      parameters:
+        - name: token
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - password
+                - password_confirm
+              properties:
+                password:
+                  type: string
+                  format: password
+                  minLength: 8
+                password_confirm:
+                  type: string
+                  format: password
+      responses:
+        '302':
+          description: Password reset successful, redirect to login
+        '400':
+          description: Invalid token or password validation error
+
+  /auth/2fa/setup:
+    get:
+      tags:
+        - Authentication
+      summary: Show 2FA setup page
+      description: Display QR code and backup codes for TOTP setup
+      operationId: show2FASetup
+      security:
+        - sessionAuth: []
+      responses:
+        '200':
+          description: 2FA setup page with QR code
+        '403':
+          description: Not authenticated
+
+  /auth/2fa/verify:
+    post:
+      tags:
+        - Authentication
+      summary: Verify 2FA token
+      description: Verify TOTP token during login
+      operationId: verify2FA
+      security:
+        - sessionAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - token
+              properties:
+                token:
+                  type: string
+                  pattern: '^\d{6}$'
+                  example: '123456'
+      responses:
+        '302':
+          description: 2FA verified, redirect to dashboard
+        '400':
+          description: Invalid token
+
+components:
+  securitySchemes:
+    sessionAuth:
+      type: apiKey
+      in: cookie
+      name: session
+      description: Flask session cookie (HTTP-only, Secure in production)
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: Invalid credentials
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        details:
+          type: object
+          description: Additional error details (optional)
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: admin
+        email:
+          type: string
+          format: email
+          example: admin@example.com
+        is_admin:
+          type: boolean
+          example: true
+        is_active:
+          type: boolean
+          example: true
+        email_verified:
+          type: boolean
+          example: true
+        totp_enabled:
+          type: boolean
+          example: false
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-12-30T00:00:00Z'
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+
+    ValidationError:
+      type: object
+      properties:
+        field:
+          type: string
+          description: Field name with error
+          example: email
+        message:
+          type: string
+          description: Validation error message
+          example: Email address is required
+

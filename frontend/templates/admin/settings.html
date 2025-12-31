@@ -26,16 +26,19 @@ t('app.name') }}{% endblock %} {% block content %}
     <div class="col-lg-8">
       <form method="POST" action="{{ url_for('admin.settings') }}">
 
+        <!-- CSRF Token -->
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
         <!-- SMTP Configuration Section -->
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">{{ t('admin.settings.smtp_title') or 'Configuration SMTP' }}</h5>
+            <h5 class="mb-0">{{ t('admin.settings.email.title') }}</h5>
           </div>
           <div class="card-body p-4">
             <!-- SMTP Host -->
             <div class="mb-3">
               <label for="smtpHost" class="form-label fw-bold">
-                {{ t('admin.settings.smtp_host') or 'Serveur SMTP' }}
+                {{ t('admin.settings.email.smtp_host') }}
               </label>
               <input
                 type="text"
@@ -50,7 +53,7 @@ t('app.name') }}{% endblock %} {% block content %}
             <!-- SMTP Port -->
             <div class="mb-3">
               <label for="smtpPort" class="form-label fw-bold">
-                {{ t('admin.settings.smtp_port') or 'Port SMTP' }}
+                {{ t('admin.settings.email.smtp_port') }}
               </label>
               <input
                 type="number"
@@ -65,7 +68,7 @@ t('app.name') }}{% endblock %} {% block content %}
             <!-- SMTP User -->
             <div class="mb-3">
               <label for="smtpUser" class="form-label fw-bold">
-                {{ t('admin.settings.smtp_user') or 'Utilisateur SMTP' }}
+                {{ t('admin.settings.email.smtp_user') }}
               </label>
               <input
                 type="text"
@@ -80,7 +83,7 @@ t('app.name') }}{% endblock %} {% block content %}
             <!-- SMTP Password -->
             <div class="mb-3">
               <label for="smtpPassword" class="form-label fw-bold">
-                {{ t('admin.settings.smtp_password') or 'Mot de passe SMTP' }}
+                {{ t('admin.settings.email.smtp_password') }}
               </label>
               <input
                 type="password"
@@ -102,7 +105,7 @@ t('app.name') }}{% endblock %} {% block content %}
                   {% if settings.get('smtp_tls_enabled', True) %}checked{% endif %}
                 />
                 <label class="form-check-label" for="smtpTLS">
-                  {{ t('admin.settings.smtp_tls') or 'Activer TLS' }}
+                  {{ t('admin.settings.email.smtp_tls') }}
                 </label>
               </div>
             </div>
@@ -110,7 +113,7 @@ t('app.name') }}{% endblock %} {% block content %}
             <!-- SMTP From Email -->
             <div class="mb-3">
               <label for="smtpFromEmail" class="form-label fw-bold">
-                {{ t('admin.settings.smtp_from_email') or 'Email expéditeur' }}
+                {{ t('admin.settings.email.from_email') }}
               </label>
               <input
                 type="email"
@@ -133,7 +136,7 @@ t('app.name') }}{% endblock %} {% block content %}
         <!-- Email Verification Section -->
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-header bg-info text-white">
-            <h5 class="mb-0">{{ t('admin.settings.email_verification_title') or 'Vérification Email' }}</h5>
+            <h5 class="mb-0">{{ t('admin.settings.email.title') }} - {{ t('common.next') }}</h5>
           </div>
           <div class="card-body p-4">
             <!-- Email Verification Required -->
@@ -147,7 +150,7 @@ t('app.name') }}{% endblock %} {% block content %}
                   {% if settings.get('email_verification_required', False) %}checked{% endif %}
                 />
                 <label class="form-check-label" for="emailVerificationRequired">
-                  {{ t('admin.settings.email_verification_required') or 'Vérification email requise' }}
+                  {{ t('admin.settings.email.verification_required') }}
                 </label>
               </div>
             </div>
@@ -155,7 +158,7 @@ t('app.name') }}{% endblock %} {% block content %}
             <!-- Email Verification Expiry -->
             <div class="mb-3">
               <label for="emailVerificationExpiry" class="form-label fw-bold">
-                {{ t('admin.settings.email_verification_expiry') or 'Expiration token (heures)' }}
+                {{ t('admin.settings.email.verification_expiry') }}
               </label>
               <input
                 type="number"
@@ -170,7 +173,7 @@ t('app.name') }}{% endblock %} {% block content %}
             <!-- Password Reset Expiry -->
             <div class="mb-3">
               <label for="passwordResetExpiry" class="form-label fw-bold">
-                {{ t('admin.settings.password_reset_expiry') or 'Expiration reset password (minutes)' }}
+                {{ t('admin.settings.password.reset_expiry') }}
               </label>
               <input
                 type="number"
@@ -185,7 +188,7 @@ t('app.name') }}{% endblock %} {% block content %}
             <!-- Password Reset Rate Limit -->
             <div class="mb-3">
               <label for="passwordResetLimit" class="form-label fw-bold">
-                {{ t('admin.settings.password_reset_limit') or 'Demandes reset/heure' }}
+                {{ t('admin.settings.password.reset_rate_limit') }}
               </label>
               <input
                 type="number"
@@ -202,7 +205,7 @@ t('app.name') }}{% endblock %} {% block content %}
         <!-- Feature Flags Section -->
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-header bg-warning text-dark">
-            <h5 class="mb-0">{{ t('admin.settings.features_title') or 'Options Fonctionnalités' }}</h5>
+            <h5 class="mb-0">{{ t('admin.settings.security.title') }}</h5>
           </div>
           <div class="card-body p-4">
             <!-- Registration Enabled -->
@@ -216,7 +219,7 @@ t('app.name') }}{% endblock %} {% block content %}
                   {% if settings.get('registration_enabled', False) %}checked{% endif %}
                 />
                 <label class="form-check-label" for="registrationEnabled">
-                  {{ t('admin.settings.registration_enabled') or 'Inscription utilisateurs activée' }}
+                  {{ t('admin.settings.security.registration_enabled') }}
                 </label>
               </div>
             </div>
@@ -232,7 +235,7 @@ t('app.name') }}{% endblock %} {% block content %}
                   {% if settings.get('2fa_required', False) %}checked{% endif %}
                 />
                 <label class="form-check-label" for="2faRequired">
-                  {{ t('admin.settings.2fa_required') or '2FA requis pour tous' }}
+                  {{ t('admin.settings.security.2fa_required') }}
                 </label>
               </div>
             </div>
@@ -242,7 +245,7 @@ t('app.name') }}{% endblock %} {% block content %}
         <!-- Submit Button -->
         <div class="d-grid gap-2 mb-4">
           <button type="submit" class="btn btn-primary btn-lg">
-            {{ t('admin.settings.save') or 'Sauvegarder les paramètres' }}
+            {{ t('common.save') }}
           </button>
         </div>
       </form>
@@ -252,21 +255,21 @@ t('app.name') }}{% endblock %} {% block content %}
     <div class="col-lg-4">
       <div class="card border-0 shadow-sm">
         <div class="card-body p-4">
-          <h5 class="card-title fw-bold mb-3">{{ t('admin.settings.system_info') or 'Informations Système' }}</h5>
+          <h5 class="card-title fw-bold mb-3">{{ t('common.loading') }}</h5>
 
           <dl class="row mb-0">
-            <dt class="col-sm-6 text-muted">{{ t('admin.settings.version') }}:</dt>
-            <dd class="col-sm-6"><code>0.1.0-Beta</code></dd>
+            <dt class="col-sm-6 text-muted">{{ t('app.version') }}:</dt>
+            <dd class="col-sm-6"><code>{{ t('app.version') }}</code></dd>
 
-            <dt class="col-sm-6 text-muted">{{ t('admin.settings.api_version') }}:</dt>
+            <dt class="col-sm-6 text-muted">API:</dt>
             <dd class="col-sm-6"><code>1.0</code></dd>
 
-            <dt class="col-sm-6 text-muted">{{ t('admin.settings.environment') }}:</dt>
+            <dt class="col-sm-6 text-muted">{{ t('wizard.requirements.environment') }}:</dt>
             <dd class="col-sm-6">{{ config.ENV or 'production' }}</dd>
 
-            <dt class="col-sm-6 text-muted">{{ t('admin.settings.status') }}:</dt>
+            <dt class="col-sm-6 text-muted">Status:</dt>
             <dd class="col-sm-6">
-              <span class="badge bg-success">{{ t('admin.settings.online') or 'En ligne' }}</span>
+              <span class="badge bg-success">Online</span>
             </dd>
           </dl>
         </div>
@@ -282,7 +285,7 @@ document.getElementById('testSmtpBtn').addEventListener('click', function() {
   const resultDiv = document.getElementById('smtpTestResult');
 
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Test en cours...';
+  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>{{ t("common.loading") }}';
 
   fetch('{{ url_for("admin.test_smtp_settings") }}', {
     method: 'POST',
@@ -296,11 +299,11 @@ document.getElementById('testSmtpBtn').addEventListener('click', function() {
     resultDiv.innerHTML = `<div class="alert ${alertClass}">${data.message}</div>`;
   })
   .catch(error => {
-    resultDiv.innerHTML = `<div class="alert alert-danger">Erreur: ${error}</div>`;
+    resultDiv.innerHTML = `<div class="alert alert-danger">{{ t("common.error") }}: ${error}</div>`;
   })
   .finally(() => {
     btn.disabled = false;
-    btn.innerHTML = '{{ t("admin.settings.test_smtp") or "Tester la connexion" }}';
+    btn.innerHTML = '{{ t("auth.register.test_smtp") }}';
   });
 });
 </script>

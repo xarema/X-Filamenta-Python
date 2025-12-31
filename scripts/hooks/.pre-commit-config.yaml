@@ -1,0 +1,121 @@
+# Pre-commit Hooks Configuration
+# 
+# Purpose: Automated code quality checks before commits
+# File: .pre-commit-config.yaml | Repository: X-Filamenta-Python
+# 
+# License: AGPL-3.0-or-later
+# Copyright (c) 2025 XAREMA. All rights reserved. 
+# 
+# Installation:
+#   pip install pre-commit
+#   pre-commit install
+# 
+# Usage:
+#   pre-commit run --all-files    # Test all files
+#   pre-commit autoupdate         # Update hook versions
+
+repos:
+  # ============================================
+  # Local Project Checks
+  # ============================================
+  - repo: local
+    hooks: 
+      # Ruff Linter
+      - id: ruff-check
+        name: Ruff Linter
+        entry: . venv/Scripts/ruff. exe check .
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [commit]
+        
+      # Ruff Formatter
+      - id:  ruff-format
+        name:  Ruff Formatter Check
+        entry: .venv/Scripts/ruff.exe format --check .
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [commit]
+        
+      # Mypy Type Checker
+      - id: mypy
+        name: Mypy Type Checker
+        entry: .venv/Scripts/mypy.exe backend/src
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages:  [commit]
+        
+      # i18n Translation Validation
+      - id: i18n-check
+        name: i18n Translation Check
+        entry: . venv/Scripts/python.exe scripts/utils/check_i18n.py --strict
+        language: system
+        pass_filenames: false
+        stages: [commit]
+        
+      # Pytest
+      - id: pytest
+        name: Pytest (Unit & Integration Tests)
+        entry: .venv/Scripts/pytest.exe --quiet
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages:  [commit]
+        
+  # ============================================
+  # Standard Pre-commit Hooks
+  # ============================================
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # Check file size
+      - id: check-added-large-files
+        args:  ['--maxkb=500']
+        
+      # Check YAML syntax
+      - id: check-yaml
+        
+      # Check JSON syntax
+      - id: check-json
+        
+      # Check merge conflicts
+      - id: check-merge-conflict
+        
+      # Check executable permissions
+      - id: check-executables-have-shebangs
+        
+      # Trim trailing whitespace
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+        
+      # Fix end of files
+      - id: end-of-file-fixer
+        
+      # Check case conflicts
+      - id: check-case-conflict
+        
+      # Detect private keys
+      - id: detect-private-key
+
+# ============================================
+# Configuration
+# ============================================
+# Fail fast:  stop on first failure
+fail_fast:  false
+
+# Default stages
+default_stages: [commit]
+
+# Exclude patterns
+exclude: |
+  (? x)^(
+      \.git/|
+      \.venv/|
+      __pycache__/|
+      \.pytest_cache/|
+      \.mypy_cache/|
+      migrations/versions/.*\. py|
+      docs/HTML/.*
+  )$

@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added `package.json` for frontend tooling configuration (2025-12-31)
+  - Created package.json with project metadata matching pyproject.toml (v0.1.0-beta)
+  - Added npm scripts mirroring makefile targets: `lint`, `lint:js`, `lint:css`, `fmt`, `fmt:js`, `fmt:css`, `fmt:check`
+  - Declared devDependencies: eslint (^9.17.0), prettier (^3.4.2), stylelint (^16.12.0), and required plugins
+  - Set Node.js version requirement: >=18.0.0 (per README.md)
+  - Included repository, author, and license metadata for npm registry compatibility
+  - Unblocks `npm install` for new contributors and enables proper dependency version management
+
 ### Fixed
 
 - **🚨 CRITICAL BUG - Dashboard 500 Error (2025-12-30 19:05) [BLOCKER]**

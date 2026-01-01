@@ -26,6 +26,7 @@ Metadata:
 {% set req_done = state.get('requirements_checked') %}
 {% set db_done = state.get('db_uri') %}
 {% set admin_done = state.get('admin_username') %}
+{% set cache_done = state.get('cache_backend') %}
 {% set current_step = step or state.get('step') or 'welcome' %}
 
 {% set steps = [
@@ -33,7 +34,8 @@ Metadata:
   {'key': 'requirements', 'label': t('wizard.steps.requirements') or 'Prérequis', 'done': req_done, 'step_target': 'requirements'},
   {'key': 'database', 'label': t('wizard.steps.database') or 'Base de données', 'done': db_done, 'step_target': 'db_form'},
   {'key': 'admin', 'label': t('wizard.steps.admin') or 'Administrateur', 'done': admin_done, 'step_target': 'admin_form'},
-  {'key': 'summary', 'label': t('wizard.steps.summary') or 'Résumé', 'done': admin_done, 'step_target': 'summary'},
+  {'key': 'cache', 'label': t('wizard.steps.cache') or 'Cache', 'done': cache_done, 'step_target': 'cache_config'},
+  {'key': 'summary', 'label': t('wizard.steps.summary') or 'Résumé', 'done': cache_done, 'step_target': 'summary'},
 ] %}
 
 {% set effective_step = current_step %}
@@ -45,7 +47,9 @@ Metadata:
   {% set effective_step = 'db_form' %}
 {% elif not admin_done and current_step not in ['welcome','requirements','db_form','db_test','upload_form','upload','admin_form','admin'] %}
   {% set effective_step = 'admin_form' %}
-{% elif admin_done and current_step not in ['summary','finalize','done'] %}
+{% elif not cache_done and current_step not in ['welcome','requirements','db_form','db_test','upload_form','upload','admin_form','admin','cache_config','cache_test'] %}
+  {% set effective_step = 'cache_config' %}
+{% elif cache_done and current_step not in ['summary','finalize','done'] %}
   {% set effective_step = 'summary' %}
 {% endif %}
 
@@ -60,6 +64,8 @@ Metadata:
       or (effective_step == 'upload_form' and s.key == 'database')
       or (effective_step == 'upload' and s.key == 'database')
       or (effective_step == 'admin_form' and s.key == 'admin')
+      or (effective_step == 'cache_config' and s.key == 'cache')
+      or (effective_step == 'cache_test' and s.key == 'cache')
       or (effective_step == 'summary' and s.key == 'summary')
     ) %}
     {% set can_click = s.done and not is_active %}
@@ -75,6 +81,9 @@ Metadata:
         {% if admin_done %}
           <input type="hidden" name="admin_username" value="{{ state.get('admin_username', '') }}" />
           <input type="hidden" name="admin_email" value="{{ state.get('admin_email', '') }}" />
+        {% endif %}
+        {% if cache_done %}
+          <input type="hidden" name="cache_backend" value="{{ state.get('cache_backend', '') }}" />
         {% endif %}
         <button type="submit" class="wizard-step-button">
           <div class="wizard-step {{ step_class }}">

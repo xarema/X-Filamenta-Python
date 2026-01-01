@@ -90,6 +90,33 @@ Metadata:
       </dl>
     </div>
 
+    <!-- Cache Configuration -->
+    {% if state.get('cache_backend') %}
+    <div class="mb-4">
+      <h6 class="border-bottom pb-2 mb-3">
+        <strong>{{ t('wizard.summary.cache_config') or 'Cache Configuration' }}</strong>
+      </h6>
+      <dl class="row mb-0">
+        <dt class="col-sm-4">{{ t('wizard.summary.cache_backend') or 'Cache Backend' }}:</dt>
+        <dd class="col-sm-8">
+          {% if state.cache_backend == 'redis' %}
+            🚀 {{ t('wizard.summary.cache_redis') or 'Redis' }}
+          {% else %}
+            💾 {{ t('wizard.summary.cache_filesystem') or 'Filesystem' }}
+          {% endif %}
+        </dd>
+
+        {% if state.cache_backend == 'redis' %}
+          <dt class="col-sm-4">{{ t('wizard.summary.cache_redis_host') or 'Redis Server' }}:</dt>
+          <dd class="col-sm-8">{{ state.get('redis_host', 'localhost') }}:{{ state.get('redis_port', '6379') }}</dd>
+
+          <dt class="col-sm-4">{{ t('wizard.summary.cache_redis_db') or 'Redis Database' }}:</dt>
+          <dd class="col-sm-8">{{ state.get('redis_db', '0') }}</dd>
+        {% endif %}
+      </dl>
+    </div>
+    {% endif %}
+
     <!-- Backup (optional) -->
     {% if state.get('backup_ok') %}
     <div class="mb-4">

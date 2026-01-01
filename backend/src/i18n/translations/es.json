@@ -27,6 +27,7 @@
       "requirements": "Requisitos",
       "database": "Base de datos",
       "admin": "Administrador",
+      "cache": "Caché",
       "summary": "Resumen"
     },
 
@@ -153,6 +154,10 @@
       "email": "Correo electrónico",
       "password": "Contraseña",
       "password_hidden": "(oculto por seguridad)",
+      "cache": "Configuración de caché",
+      "cache_backend": "Backend",
+      "cache_host": "Host",
+      "cache_db": "Base de datos",
       "backup":  "Restauración de respaldo",
       "backup_restore": "Restauración de respaldo",
       "backup_file": "Archivo",

@@ -76,7 +76,7 @@ Metadata:
         </button>
 
         <button type="submit" formaction="/install/step"
-                onclick="this.form.step.value='finalize'; return true;"
+                onclick="this.form.step.value='summary'; return true;"
                 class="btn btn-primary btn-lg px-4">
           {{ t('wizard.cache.continue_filesystem') or 'Continue with Filesystem' }} →
         </button>
@@ -86,7 +86,7 @@ Metadata:
 
     {% if test_success %}
     <form method="POST" action="/install/step">
-      <input type="hidden" name="step" value="finalize" />
+      <input type="hidden" name="step" value="summary" />
 
       <div class="d-flex justify-content-between mt-4">
         <button type="submit" formaction="/install/step"
@@ -96,7 +96,7 @@ Metadata:
         </button>
 
         <button type="submit" class="btn btn-success btn-lg px-4">
-          {{ t('wizard.cache.finalize') or 'Finalize Installation' }} →
+          {{ t('wizard.next') or 'Continue' }} →
         </button>
       </div>
     </form>
